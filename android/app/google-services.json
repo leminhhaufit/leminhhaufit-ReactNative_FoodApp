@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "633734479727",
+    "project_id": "foodapp-15ce6",
+    "storage_bucket": "foodapp-15ce6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:633734479727:android:4fc5147d44e3eb18e8f29a",
+        "android_client_info": {
+          "package_name": "com.demorn2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "633734479727-au0r72inm8fg8nug6823raga3e8c1jmm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmshKg32HSIFPnywnxXEGvZvTD0ncw1eQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "633734479727-au0r72inm8fg8nug6823raga3e8c1jmm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
