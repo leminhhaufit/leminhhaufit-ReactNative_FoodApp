@@ -16,7 +16,6 @@ function Header(props) {
     return (
         <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : null}
-
         >
             <View style={styles.container}>
                 <Image style={styles.imghead} source={headerIMG} />
