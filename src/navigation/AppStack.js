@@ -3,15 +3,15 @@ import { View, TouchableOpacity, Text } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import Icon from 'react-native-vector-icons/FontAwesome';
+// import Ionicons from 'react-native-vector-icons/Ionicons';
+// import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { Icon } from 'react-native-elements';
 
 import HomeScreen from '../screens/HomeUser';
 import OrderFood from '../screens/OrderFood';
 import Payment from '../screens/Payment';
 import Profile from '../screens/Profile'
-import Login from '../screens/Login';
+
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -24,26 +24,22 @@ const FeedStack = ({ navigation }) => (
             options={{
                 headerTitleAlign: 'center',
                 headerTitleStyle: {
-                    color: '#FFC75F',
+                    color: '#FFF',
                     fontFamily: 'Kufam-SemiBoldItalic',
                     fontSize: 22,
-                    fontWeight: 'bold'
+                    fontWeight: 'bold',
+
                 },
                 headerStyle: {
                     shadowColor: '#fff',
                     elevation: 0,
+                    backgroundColor: '#FFC75F',
                 },
                 headerRight: () => (
                     <View style={{ marginRight: 10 }}>
-                        {/* <FontAwesome5.Button
-                            name={'plus'}
-                            size={22}
-                            backgroundColor="#fff"
-                            color="#FFC75F"
-                            onPress={() => navigation.navigate('Login')}
-                        /> */}
                         <TouchableOpacity onPress={() => navigation.navigate('Payment')}>
-                            <Text style={{ color: '#FFC75F' }}>Cart</Text>
+                            <Icon color="#FFF" name="payment" />
+                            <Text style={{ color: '#FFF' }}>Cart</Text>
                         </TouchableOpacity>
                     </View>
                 ),
@@ -71,21 +67,17 @@ const OrderFoodStack = ({ navigation }) => (
                 },
                 headerRight: () => (
                     <View style={{ marginRight: 10 }}>
-                        {/* <FontAwesome5.Button
-                            name={'plus'}
-                            size={22}
-                            backgroundColor="#fff"
-                            color="#FFC75F"
-                            onPress={() => navigation.navigate('Login')}
-                        /> */}
+
                         <TouchableOpacity onPress={() => navigation.navigate('Payment')}>
-                            <Text style={{ color: '#FFC75F' }}>Cart</Text>
+                            <Icon color="#FFF" name="payment" />
+                            <Text style={{ color: '#FFF' }}>Cart</Text>
                         </TouchableOpacity>
                     </View>
                 ),
                 headerLeft: () => (
                     <View style={{ marginLeft: 10 }}>
                         <TouchableOpacity onPress={() => navigation.navigate('Dashboard')}>
+
                             <Text>Back</Text>
                         </TouchableOpacity>
                     </View>
@@ -185,11 +177,7 @@ const AppStack = () => {
                     tabBarLabel: 'Home',
                     // tabBarVisible: route.state && route.state.index === 0,
                     tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons
-                            name="home-outline"
-                            color={color}
-                            size={size}
-                        />
+                        <Icon name="home" />
                     ),
                 })}
             />
@@ -200,11 +188,7 @@ const AppStack = () => {
                     tabBarLabel: 'Order',
                     // tabBarVisible: route.state && route.state.index === 0,
                     tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons
-                            name="home-outline"
-                            color={color}
-                            size={size}
-                        />
+                        <Icon name="book" />
                     ),
                 })}
             />
@@ -215,11 +199,7 @@ const AppStack = () => {
                     tabBarLabel: 'Payment',
                     // tabBarVisible: route.state && route.state.index === 0,
                     tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons
-                            name="home-outline"
-                            color={color}
-                            size={size}
-                        />
+                        <Icon name="payment" />
                     ),
                 })}
             />
@@ -230,11 +210,7 @@ const AppStack = () => {
                     tabBarLabel: 'Profile',
                     // tabBarVisible: route.state && route.state.index === 0,
                     tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons
-                            name="home-outline"
-                            color={color}
-                            size={size}
-                        />
+                        <Icon name="info" />
                     ),
                 })}
             />

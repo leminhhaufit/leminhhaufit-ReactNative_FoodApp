@@ -22,13 +22,10 @@ function Header(props) {
                 <View style={styles.container1}>
                     <View style={styles.img}>
                         <Image source={foodImg} style={styles.icon} />
-
                     </View>
-
                     <TextInput style={styles.inputSearch}
                         placeholderStyle={styles.placeholdercustom}
                         placeholder="Search here" />
-
                     <TouchableOpacity style={styles.btnsearch}>
                         <View style={styles.imgsearch}>
                             <Image source={searchIMG} style={styles.iconsearch} />
