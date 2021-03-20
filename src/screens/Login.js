@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Text, Linking, ImageBackground, TouchableOpacity } from 'react-native';
 import AnimatedLoader from "react-native-animated-loader";
-// import Spinner from 'react-native-loading-spinner-overlay';
-
-// import { signIn } from '../config/firebaseAPI';
 import auth from '@react-native-firebase/auth';
 
 import PropTypes from 'prop-types';
@@ -25,8 +22,9 @@ function Login({ navigation }) {
     async function signIn(txtemail, txtpassword) {
         try {
             setIsload(true);
+
             let response = await auth()
-                .signInWithEmailAndPassword(txtemail, txtpassword);
+                .signInWithEmailAndPassword(txtemail, txtpassword)
 
             setIsload(false);
 
@@ -42,6 +40,12 @@ function Login({ navigation }) {
             }
             if (err.code === "auth/user-not-found") {
                 setErrorMessage("User not found!")
+            }
+            if (err.code === "auth/wrong-password") {
+                setErrorMessage("Wrong Password");
+            }
+            if (err.code === "auth/too-many-requests") {
+                setErrorMessage("Too many requests");
             }
         }
     }
@@ -61,7 +65,6 @@ function Login({ navigation }) {
         if (email && password) {
             console.log("setEmail", email);
             console.log("setPass", password);
-
             signIn(email, password);
 
         }
@@ -83,7 +86,7 @@ function Login({ navigation }) {
                 <Username setEmail={setEmail} />
                 <Password setPassword={setPassword} />
                 <TouchableOpacity
-                    onPress={() => handlePress()} //()=>setIsload(true)  ()=> handlepress()
+                    onPress={() => handlePress()}
                 >
                     <View style={styles.btnlogin}>
                         <Text style={styles.textbtn}>
