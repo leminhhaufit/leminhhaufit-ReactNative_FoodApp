@@ -8,10 +8,10 @@ import {
 import PropTypes from 'prop-types';
 
 import ItemFood from './ItemFood';
-FlatListItem.propTypes = {
+FlatListItemFood.propTypes = {
 
 };
-function FlatListItem(props) {
+function FlatListItemFood(props) {
     const [foodlist, setFood] = useState(
         [
             {
@@ -92,4 +92,4 @@ const styles = StyleSheet.create({
     },
 
 })
-export default FlatListItem;
+export default FlatListItemFood;

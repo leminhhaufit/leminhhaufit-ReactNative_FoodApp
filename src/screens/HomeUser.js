@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import Header from '../components/Header';
 import Search from '../components/Search';
-import FlatListItem from '../components/FlatListItem';
+import FlatListItemFood from '../components/FlatListItemFood';
 
 HomeUser.propTypes = {
 
@@ -17,7 +17,7 @@ function HomeUser(props) {
         <SafeAreaView style={styles.container}>
             <Header />
 
-            <FlatListItem />
+            <FlatListItemFood />
         </SafeAreaView>
     );
 }

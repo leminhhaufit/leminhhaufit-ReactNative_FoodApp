@@ -2,10 +2,7 @@ import React from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-// import Ionicons from 'react-native-vector-icons/Ionicons';
-// import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import { Icon } from 'react-native-elements';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 import HomeScreen from '../screens/HomeUser';
 import OrderFood from '../screens/OrderFood';
@@ -19,7 +16,7 @@ const Tab = createBottomTabNavigator();
 const FeedStack = ({ navigation }) => (
     <Stack.Navigator>
         <Stack.Screen
-            name="Dashboard"
+            name="Home"
             component={HomeScreen}
             options={{
                 headerTitleAlign: 'center',
@@ -36,10 +33,10 @@ const FeedStack = ({ navigation }) => (
                     backgroundColor: '#FFC75F',
                 },
                 headerRight: () => (
-                    <View style={{ marginRight: 10 }}>
+                    <View style={{ marginRight: 20 }}>
+
                         <TouchableOpacity onPress={() => navigation.navigate('Payment')}>
-                            <Icon color="#FFF" name="payment" />
-                            <Text style={{ color: '#FFF' }}>Cart</Text>
+                            <FontAwesome5 name="shopping-basket" color="white" size={28} />
                         </TouchableOpacity>
                     </View>
                 ),
@@ -51,12 +48,12 @@ const FeedStack = ({ navigation }) => (
 const OrderFoodStack = ({ navigation }) => (
     <Stack.Navigator>
         <Stack.Screen
-            name="OrderFood"
+            name="Order Food"
             component={OrderFood}
             options={{
                 headerTitleAlign: 'center',
                 headerTitleStyle: {
-                    color: '#FFC75F',
+                    color: '#fff',
                     fontFamily: 'Kufam-SemiBoldItalic',
                     fontSize: 22,
                     fontWeight: 'bold'
@@ -64,21 +61,21 @@ const OrderFoodStack = ({ navigation }) => (
                 headerStyle: {
                     shadowColor: '#fff',
                     elevation: 0,
+                    backgroundColor: '#FFC75F',
                 },
                 headerRight: () => (
-                    <View style={{ marginRight: 10 }}>
+                    <View style={{ marginRight: 20 }}>
 
                         <TouchableOpacity onPress={() => navigation.navigate('Payment')}>
-                            <Icon color="#FFF" name="payment" />
-                            <Text style={{ color: '#FFF' }}>Cart</Text>
+                            <FontAwesome5 name="shopping-basket" color="white" size={28} />
                         </TouchableOpacity>
                     </View>
                 ),
                 headerLeft: () => (
-                    <View style={{ marginLeft: 10 }}>
-                        <TouchableOpacity onPress={() => navigation.navigate('Dashboard')}>
+                    <View style={{ marginLeft: 20 }}>
+                        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+                            <FontAwesome5 name="arrow-left" color="white" size={28} />
 
-                            <Text>Back</Text>
                         </TouchableOpacity>
                     </View>
                 )
@@ -94,7 +91,7 @@ const PaymentStack = ({ navigation }) => (
             options={{
                 headerTitleAlign: 'center',
                 headerTitleStyle: {
-                    color: '#FFC75F',
+                    color: '#fff',
                     fontFamily: 'Kufam-SemiBoldItalic',
                     fontSize: 22,
                     fontWeight: 'bold'
@@ -102,12 +99,13 @@ const PaymentStack = ({ navigation }) => (
                 headerStyle: {
                     shadowColor: '#fff',
                     elevation: 0,
+                    backgroundColor: '#FFC75F',
                 },
-
                 headerLeft: () => (
-                    <View style={{ marginLeft: 10 }}>
-                        <TouchableOpacity onPress={() => navigation.navigate('OrderFood')}>
-                            <Text>Back</Text>
+                    <View style={{ marginLeft: 20 }}>
+                        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+                            <FontAwesome5 name="arrow-left" color="white" size={28} />
+
                         </TouchableOpacity>
                     </View>
                 )
@@ -123,7 +121,7 @@ const ProfileStack = ({ navigation }) => (
             options={{
                 headerTitleAlign: 'center',
                 headerTitleStyle: {
-                    color: '#FFC75F',
+                    color: '#fff',
                     fontFamily: 'Kufam-SemiBoldItalic',
                     fontSize: 22,
                     fontWeight: 'bold'
@@ -131,40 +129,14 @@ const ProfileStack = ({ navigation }) => (
                 headerStyle: {
                     shadowColor: '#fff',
                     elevation: 0,
+                    backgroundColor: '#FFC75F',
                 },
-                headerRight: () => (
-                    <View style={{ marginRight: 10 }}>
-                        {/* <FontAwesome5.Button
-                            name={'plus'}
-                            size={22}
-                            backgroundColor="#fff"
-                            color="#FFC75F"
-                            onPress={() => navigation.navigate('Login')}
-                        /> */}
-                        <Text style={{ color: '#FFC75F' }}>Cart</Text>
-                    </View>
-                ),
-                headerLeft: () => (
-                    <View style={{ marginLeft: 10 }}>
-                        <Text>Back</Text>
-                    </View>
-                )
+
             }}
         />
     </Stack.Navigator>
 );
 const AppStack = () => {
-    // const getTabBarVisibility = (route) => {
-    //     const routeName = route.state
-    //         ? route.state.routes[route.state.index].name
-    //         : '';
-
-    //     if (routeName === 'Chat') {
-    //         return false;
-    //     }
-    //     return true;
-    // };
-
     return (
         <Tab.Navigator
             tabBarOptions={{
@@ -175,9 +147,9 @@ const AppStack = () => {
                 component={FeedStack}
                 options={({ route }) => ({
                     tabBarLabel: 'Home',
-                    // tabBarVisible: route.state && route.state.index === 0,
+
                     tabBarIcon: ({ color, size }) => (
-                        <Icon name="home" />
+                        <FontAwesome5 name="home" color={color} size={28} />
                     ),
                 })}
             />
@@ -185,10 +157,10 @@ const AppStack = () => {
                 name="Order"
                 component={OrderFoodStack}
                 options={({ route }) => ({
-                    tabBarLabel: 'Order',
-                    // tabBarVisible: route.state && route.state.index === 0,
+                    tabBarLabel: 'Food',
+
                     tabBarIcon: ({ color, size }) => (
-                        <Icon name="book" />
+                        <FontAwesome5 name="utensils" color={color} size={28} />
                     ),
                 })}
             />
@@ -197,9 +169,9 @@ const AppStack = () => {
                 component={PaymentStack}
                 options={({ route }) => ({
                     tabBarLabel: 'Payment',
-                    // tabBarVisible: route.state && route.state.index === 0,
+
                     tabBarIcon: ({ color, size }) => (
-                        <Icon name="payment" />
+                        <FontAwesome5 name="shopping-basket" color={color} size={28} />
                     ),
                 })}
             />
@@ -208,13 +180,12 @@ const AppStack = () => {
                 component={ProfileStack}
                 options={({ route }) => ({
                     tabBarLabel: 'Profile',
-                    // tabBarVisible: route.state && route.state.index === 0,
+
                     tabBarIcon: ({ color, size }) => (
-                        <Icon name="info" />
+                        <FontAwesome5 name="user-alt" color={color} size={28} />
                     ),
                 })}
             />
-
         </Tab.Navigator>
     );
 };
