@@ -7,12 +7,12 @@ import {
 
 import PropTypes from 'prop-types';
 
-import ItemFood from './ItemFood';
-FlatListItemFood.propTypes = {
+import ItemTable from './ItemTable';
+FlatListItemTable.propTypes = {
 
 };
-function FlatListItemFood(props) {
-    const [foodlist, setFood] = useState(
+function FlatListItemTable(props) {
+    const [tablelist, setTablelist] = useState(
         [
             {
                 id: 1,
@@ -66,9 +66,9 @@ function FlatListItemFood(props) {
     return (
 
         <View style={styles.container}>
-            <FlatList data={foodlist}
+            <FlatList data={tablelist}
                 numColumns={2}
-                renderItem={({ item }) => <ItemFood foodlist={item} />}
+                renderItem={({ item }) => <ItemTable tablelist={item} />}
                 keyExtractor={item => item.id}
                 style={styles.flatlist}
 
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
         flex: 2,
         flexDirection: 'column',
         alignSelf: 'center',
-        marginTop: 285,
+
 
 
     },
@@ -92,4 +92,4 @@ const styles = StyleSheet.create({
     },
 
 })
-export default FlatListItemFood;
+export default FlatListItemTable;

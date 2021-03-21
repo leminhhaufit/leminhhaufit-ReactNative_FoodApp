@@ -7,14 +7,14 @@ import tableImg from '../assets/table.png';
 import dotredImg from '../assets/dotred.png';
 import dotgreen from '../assets/dotgreen.png';
 
-ItemFood.propTypes = {
+ItemTable.propTypes = {
 
 };
 
-function ItemFood(props) {
-    const { foodlist } = props;
+function ItemTable(props) {
+    const { tablelist } = props;
 
-    const { id, title, status } = foodlist;
+    const { id, title, status } = tablelist;
     let url;
     //status == true đang sử dụng
     //status ==false chưa sử dụng
@@ -28,7 +28,7 @@ function ItemFood(props) {
         <TouchableOpacity >
 
             <View style={styles.container}>
-                <Text style={styles.title}>{foodlist.title}</Text>
+                <Text style={styles.title}>{tablelist.title}</Text>
                 <Image source={tableImg} style={styles.imgtable} />
                 <Image source={url} style={styles.dotImg} />
             </View>
@@ -73,4 +73,4 @@ const styles = StyleSheet.create({
         marginRight: 10,
     }
 })
-export default ItemFood;
+export default ItemTable;
