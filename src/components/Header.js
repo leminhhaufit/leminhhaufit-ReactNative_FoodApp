@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
 
     },
     imghead: {
-        marginTop: 20,
+
         alignSelf: 'stretch',
 
     },

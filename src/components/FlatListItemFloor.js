@@ -54,7 +54,7 @@ function FlatListItemFloor(props) {
 const styles = StyleSheet.create({
     container: {
 
-        marginTop: 285,
+        marginTop: 280,
 
 
     },

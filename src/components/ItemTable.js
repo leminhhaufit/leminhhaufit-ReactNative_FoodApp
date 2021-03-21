@@ -12,7 +12,7 @@ ItemTable.propTypes = {
 };
 
 function ItemTable(props) {
-    const { tablelist } = props;
+    const { tablelist, reserve } = props;
 
     const { id, title, status } = tablelist;
     let url;
@@ -25,10 +25,10 @@ function ItemTable(props) {
     }
 
     return (
-        <TouchableOpacity >
+        <TouchableOpacity onPress={reserve}>
 
-            <View style={styles.container}>
-                <Text style={styles.title}>{tablelist.title}</Text>
+            <View style={styles.container} key={id}>
+                <Text style={styles.title}>{title}</Text>
                 <Image source={tableImg} style={styles.imgtable} />
                 <Image source={url} style={styles.dotImg} />
             </View>
@@ -38,12 +38,14 @@ function ItemTable(props) {
 }
 const styles = StyleSheet.create({
     container: {
-        width: 150,//120
-        height: 150,
+        width: 120,//120
+        height: 120,
         marginBottom: 15,
-        marginRight: 25,
+        marginRight: 5,
+        marginLeft: 10,
+        marginTop: 5,
         alignSelf: 'stretch',
-        borderRadius: 5,
+        borderRadius: 15,
         alignItems: 'center',
         backgroundColor: 'white',
         shadowColor: "#000",
@@ -54,11 +56,11 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.39,
         shadowRadius: 8.30,
         elevation: 13,
-        marginLeft: 15
+
     },
     imgtable: {
-        width: 80,//56
-        height: 80,
+        width: 56,//56
+        height: 56,
     },
     title: {
         marginTop: 15,

@@ -19,27 +19,8 @@ const FeedStack = ({ navigation }) => (
             name="Home"
             component={HomeScreen}
             options={{
-                headerTitleAlign: 'center',
-                headerTitleStyle: {
-                    color: '#FFF',
-                    fontFamily: 'Kufam-SemiBoldItalic',
-                    fontSize: 22,
-                    fontWeight: 'bold',
+                headerShown: false,
 
-                },
-                headerStyle: {
-                    shadowColor: '#fff',
-                    elevation: 0,
-                    backgroundColor: '#FFC75F',
-                },
-                headerRight: () => (
-                    <View style={{ marginRight: 20 }}>
-
-                        <TouchableOpacity onPress={() => navigation.navigate('Payment')}>
-                            <FontAwesome5 name="shopping-basket" color="white" size={28} />
-                        </TouchableOpacity>
-                    </View>
-                ),
 
             }}
         />
@@ -51,26 +32,7 @@ const OrderFoodStack = ({ navigation }) => (
             name="Order Food"
             component={OrderFood}
             options={{
-                headerTitleAlign: 'center',
-                headerTitleStyle: {
-                    color: '#fff',
-                    fontFamily: 'Kufam-SemiBoldItalic',
-                    fontSize: 22,
-                    fontWeight: 'bold'
-                },
-                headerStyle: {
-                    shadowColor: '#fff',
-                    elevation: 0,
-                    backgroundColor: '#FFC75F',
-                },
-                headerRight: () => (
-                    <View style={{ marginRight: 20 }}>
-
-                        <TouchableOpacity onPress={() => navigation.navigate('Payment')}>
-                            <FontAwesome5 name="shopping-basket" color="white" size={28} />
-                        </TouchableOpacity>
-                    </View>
-                ),
+                headerShown: false,
                 headerLeft: () => (
                     <View style={{ marginLeft: 20 }}>
                         <TouchableOpacity onPress={() => navigation.navigate('Home')}>
@@ -89,18 +51,7 @@ const PaymentStack = ({ navigation }) => (
             name="Payment"
             component={Payment}
             options={{
-                headerTitleAlign: 'center',
-                headerTitleStyle: {
-                    color: '#fff',
-                    fontFamily: 'Kufam-SemiBoldItalic',
-                    fontSize: 22,
-                    fontWeight: 'bold'
-                },
-                headerStyle: {
-                    shadowColor: '#fff',
-                    elevation: 0,
-                    backgroundColor: '#FFC75F',
-                },
+                headerShown: false,
                 headerLeft: () => (
                     <View style={{ marginLeft: 20 }}>
                         <TouchableOpacity onPress={() => navigation.navigate('Home')}>
@@ -119,19 +70,7 @@ const ProfileStack = ({ navigation }) => (
             name="Profile"
             component={Profile}
             options={{
-                headerTitleAlign: 'center',
-                headerTitleStyle: {
-                    color: '#fff',
-                    fontFamily: 'Kufam-SemiBoldItalic',
-                    fontSize: 22,
-                    fontWeight: 'bold'
-                },
-                headerStyle: {
-                    shadowColor: '#fff',
-                    elevation: 0,
-                    backgroundColor: '#FFC75F',
-                },
-
+                headerShown: false,
             }}
         />
     </Stack.Navigator>

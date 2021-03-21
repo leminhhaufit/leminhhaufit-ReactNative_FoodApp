@@ -30,10 +30,11 @@ const styles = StyleSheet.create({
     container: {
         width: 150,//120
         height: 30,
-        marginBottom: 15,
-        marginRight: 25,
+        marginBottom: 10,
+        marginLeft: 20,
+        marginTop: 10,
         alignSelf: 'stretch',
-        borderRadius: 5,
+        borderRadius: 25,
         alignItems: 'center',
         backgroundColor: 'pink',
         shadowColor: "#000",
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.39,
         shadowRadius: 8.30,
         elevation: 13,
-        marginLeft: 15
+
     },
 
     title: {

@@ -11,7 +11,7 @@ import ItemTable from './ItemTable';
 FlatListItemTable.propTypes = {
 
 };
-function FlatListItemTable(props) {
+function FlatListItemTable({ navigation }) {
     const [tablelist, setTablelist] = useState(
         [
             {
@@ -59,16 +59,47 @@ function FlatListItemTable(props) {
                 title: "Bàn số 9",
                 status: false,//status == true đang sử dụng
                 //status ==false chưa sử dụng
-            }
+            },
+            {
+                id: 10,
+                title: "Bàn số 10",
+                status: false,
+            },
+            {
+                id: 11,
+                title: "Bàn số 11",
+                status: false,
+            },
+            {
+                id: 12,
+                title: "Bàn số 12",
+                status: false,
+            },
         ]
 
     )
+    function reserve(item) {
+        const status = item.status;
+        const index = tablelist.indexOf(item);
+
+        setTablelist(
+            [
+                ...tablelist.slice(0, index),
+                {
+                    ...item,
+                    status: !status
+                },
+                ...tablelist.slice(index + 1)
+            ])
+
+    }
+
     return (
 
         <View style={styles.container}>
             <FlatList data={tablelist}
-                numColumns={2}
-                renderItem={({ item }) => <ItemTable tablelist={item} />}
+                numColumns={3}
+                renderItem={({ item }) => <ItemTable tablelist={item} reserve={() => reserve(item)} />}
                 keyExtractor={item => item.id}
                 style={styles.flatlist}
 
