@@ -25,7 +25,7 @@ function ItemTable(props) {
     }
 
     return (
-        <TouchableOpacity onPress={reserve}>
+        <TouchableOpacity onPress={reserve} >
 
             <View style={styles.container} key={id}>
                 <Text style={styles.title}>{title}</Text>

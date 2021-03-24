@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Image, StyleSheet, TextInput, TouchableOpacity, KeyboardAvoidingView, Text } from 'react-native';
 
 import PropTypes from 'prop-types';
 
-import Search from './Search';
+
 
 import foodImg from '../assets/food.png';
 import headerIMG from '../assets/header.png';
@@ -13,6 +13,7 @@ Header.propTypes = {
 };
 
 function Header(props) {
+
     return (
         <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : null}
@@ -32,8 +33,10 @@ function Header(props) {
                         </View>
                     </TouchableOpacity>
                 </View>
+
             </View>
             <Text style={styles.labelList}>Table List</Text>
+
         </KeyboardAvoidingView>
     );
 }

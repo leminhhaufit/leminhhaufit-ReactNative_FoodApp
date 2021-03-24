@@ -8,6 +8,7 @@ import {
 import PropTypes from 'prop-types';
 
 import ItemTable from './ItemTable';
+import { TouchableHighlight } from 'react-native-gesture-handler';
 FlatListItemTable.propTypes = {
 
 };
@@ -81,7 +82,6 @@ function FlatListItemTable({ navigation }) {
     function reserve(item) {
         const status = item.status;
         const index = tablelist.indexOf(item);
-
         setTablelist(
             [
                 ...tablelist.slice(0, index),
@@ -94,9 +94,11 @@ function FlatListItemTable({ navigation }) {
 
     }
 
+
     return (
 
         <View style={styles.container}>
+
             <FlatList data={tablelist}
                 numColumns={3}
                 renderItem={({ item }) => <ItemTable tablelist={item} reserve={() => reserve(item)} />}
@@ -104,6 +106,7 @@ function FlatListItemTable({ navigation }) {
                 style={styles.flatlist}
 
             />
+
 
         </View>
 

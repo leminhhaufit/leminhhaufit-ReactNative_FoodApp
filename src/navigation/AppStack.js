@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
+import { View, TouchableOpacity, } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -33,14 +33,7 @@ const OrderFoodStack = ({ navigation }) => (
             component={OrderFood}
             options={{
                 headerShown: false,
-                headerLeft: () => (
-                    <View style={{ marginLeft: 20 }}>
-                        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-                            <FontAwesome5 name="arrow-left" color="white" size={28} />
 
-                        </TouchableOpacity>
-                    </View>
-                )
             }}
         />
     </Stack.Navigator>
@@ -52,14 +45,14 @@ const PaymentStack = ({ navigation }) => (
             component={Payment}
             options={{
                 headerShown: false,
-                headerLeft: () => (
-                    <View style={{ marginLeft: 20 }}>
-                        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-                            <FontAwesome5 name="arrow-left" color="white" size={28} />
+                // headerLeft: () => (
+                //     <View style={{ marginLeft: 20 }}>
+                //         <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+                //             <FontAwesome5 name="arrow-left" color="white" size={28} />
 
-                        </TouchableOpacity>
-                    </View>
-                )
+                //         </TouchableOpacity>
+                //     </View>
+                // )
             }}
         />
     </Stack.Navigator>

@@ -5,10 +5,12 @@ import 'react-native-gesture-handler';
 
 import Providers from './src/navigation/Index';
 
+
 export class App extends Component {
   render() {
     return (
       <Providers />
+
     )
   }
 }
