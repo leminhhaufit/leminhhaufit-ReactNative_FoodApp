@@ -1,50 +1,132 @@
 import React, { useState } from 'react';
-import { View, Image, StyleSheet, TextInput, TouchableOpacity, KeyboardAvoidingView, Text } from 'react-native';
-
-import PropTypes from 'prop-types';
-
-
+import { View, Image, StyleSheet, TextInput, TouchableOpacity, Text, SafeAreaView } from 'react-native';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import Carousel from 'react-native-snap-carousel';
+import { Overlay } from 'react-native-elements';
+import MultiSelect from 'react-native-multiple-select';
 
 import foodImg from '../assets/food.png';
-import headerIMG from '../assets/header.png';
+import header1IMG from '../assets/header.png';
+import header2IMG from '../assets/header2.png';
+import header3IMG from '../assets/header3.png';
+import header4IMG from '../assets/header4.png';
+import header5IMG from '../assets/header5.png';
 import searchIMG from '../assets/loupe.png';
-Header.propTypes = {
 
-};
+import FlatListFilterTable from '../components/FlatListFilterTable';
 
 function Header(props) {
 
+    const [visible, setVisible] = useState(false);
+    const [activeIndex, setActiveIndex] = useState(0);
+    const [carouselItems, setCarouselItems] = useState(
+        [
+            {
+                title: "Item 1",
+                text: "Text 1",
+                url: header1IMG,
+            },
+            {
+                title: "Item 2",
+                text: "Text 2",
+                url: header2IMG,
+            },
+            {
+                title: "Item 3",
+                text: "Text 3",
+                url: header3IMG,
+            },
+            {
+                title: "Item 4",
+                text: "Text 4",
+                url: header4IMG,
+            },
+            {
+                title: "Item 5",
+                text: "Text 5",
+                url: header5IMG,
+            },
+        ]);
+    function renderItem({ item, index }) {
+        return (
+            <View style={{
+                borderRadius: 15,
+                height: 250,
+                padding: 10,
+                marginLeft: 15,
+                marginRight: 5,
+            }}>
+                <Image source={item.url} style={{ width: 400, height: 250 }} />
+            </View>
+        )
+    }
+    const toggleOverlay = () => {
+        setVisible(!visible);
+    };
+
     return (
-        <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "padding" : null}
-        >
-            <View style={styles.container}>
-                <Image style={styles.imghead} source={headerIMG} />
-                <View style={styles.container1}>
-                    <View style={styles.img}>
-                        <Image source={foodImg} style={styles.icon} />
-                    </View>
-                    <TextInput style={styles.inputSearch}
-                        placeholderStyle={styles.placeholdercustom}
-                        placeholder="Search here" />
-                    <TouchableOpacity style={styles.btnsearch}>
-                        <View style={styles.imgsearch}>
-                            <Image source={searchIMG} style={styles.iconsearch} />
+        <SafeAreaView style={{ flex: 2, paddingTop: 5 }}>
+            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', }}>
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', }}>
+                    <Carousel
+                        layout={"default"}
+                        // ref={ref => this.carousel = ref}
+                        data={carouselItems}
+                        sliderWidth={300}
+                        itemWidth={400}
+                        renderItem={renderItem}
+                        onSnapToItem={index => setActiveIndex(index)} />
+                    <View style={styles.container1}>
+                        <View style={styles.img}>
+                            <Image source={foodImg} style={styles.icon} />
                         </View>
-                    </TouchableOpacity>
+                        <TextInput style={styles.inputSearch}
+                            placeholderStyle={styles.placeholdercustom}
+                            placeholder="Search here" />
+                        <TouchableOpacity style={styles.btnsearch}>
+                            <View style={styles.imgsearch}>
+                                <Image source={searchIMG} style={styles.iconsearch} />
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+
                 </View>
 
-            </View>
-            <Text style={styles.labelList}>Table List</Text>
+                <View style={styles.labelList}>
+                    <Text style={styles.textlist}>Table List</Text>
+                    <TouchableOpacity onPress={toggleOverlay}>
+                        <View style={styles.filter}>
+                            <Text style={styles.textfilter}>Filter</Text>
+                            <FontAwesome5 name="sort-amount-down-alt" size={30} color="white" />
+                        </View>
+                    </TouchableOpacity>
+                    <Overlay isVisible={visible} overlayStyle={styles.overlay} onBackdropPress={toggleOverlay}>
+                        <View style={styles.labelfilter}>
+                            <Text style={styles.textfilteroverlay}>Filter by:</Text>
+                            <TouchableOpacity onPress={toggleOverlay} style={styles.iconoverlay}>
+                                <FontAwesome5 size={26} name="times" />
+                            </TouchableOpacity>
+                        </View>
+                        {/* <View style={styles.containerflatlist}> */}
+                        <FlatListFilterTable />
+                        {/* </View> */}
 
-        </KeyboardAvoidingView>
+
+                    </Overlay>
+                </View>
+            </View>
+        </SafeAreaView >
     );
 }
 const styles = StyleSheet.create({
+    carousel: {
+
+
+    },
     container: {
-        flex: 1,
+
         alignSelf: 'center',
-        alignItems: 'stretch',
+        //alignItems: 'stretch',
 
     },
     imghead: {
@@ -53,15 +135,15 @@ const styles = StyleSheet.create({
 
     },
     container1: {
-        flex: 1,
+
         flexDirection: 'row',
         alignSelf: 'center',
         alignItems: 'stretch',
         borderRadius: 5,
         position: 'absolute',
-        top: 200,
+        top: 230,
         bottom: 0,
-        left: 10,
+        left: 60,
         right: 0,
         height: 40,
         width: 280,
@@ -103,6 +185,10 @@ const styles = StyleSheet.create({
         shadowRadius: 10,
         shadowOffset: { width: 0, height: 0 },
     },
+    closeoverlay: {
+
+        marginLeft: 100,
+    },
     img: {
         height: 40,
         width: 50,
@@ -141,13 +227,8 @@ const styles = StyleSheet.create({
         color: '#FFC75F'
     },
     labelList: {
-
+        flexDirection: "row",
         alignSelf: 'center',
-        justifyContent: 'center',
-        textTransform: 'uppercase',
-        fontSize: 20,
-        fontWeight: '800',
-        color: '#FFC75F',
         position: 'absolute',
         top: 250,
         bottom: 0,
@@ -156,7 +237,65 @@ const styles = StyleSheet.create({
         height: 40,
         marginBottom: 5,
         marginLeft: 50,
+        marginTop: 50,
 
+    },
+    labelfilter: {
+        flexDirection: 'row',
+
+    },
+    textlist: {
+        textTransform: 'uppercase',
+        fontSize: 20,
+        fontWeight: '800',
+        color: '#FFC75F',
+    },
+    filter: {
+        flexDirection: 'row',
+        width: 90,
+        height: 35,
+        backgroundColor: '#FFC75F',
+        textAlign: 'center',
+        marginLeft: 100,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 6,
+        },
+        shadowOpacity: 0.39,
+        shadowRadius: 8.30,
+        elevation: 13,
+        borderRadius: 8,
+    },
+    textfilter: {
+        color: '#fff',
+        fontWeight: '300',
+        fontSize: 13,
+        textTransform: 'uppercase',
+        paddingLeft: 5,
+        paddingTop: 10,
+        paddingRight: 10,
+    },
+    overlay: {
+        position: 'absolute',
+        alignSelf: 'stretch',
+        top: 340,
+        right: 60,
+        backgroundColor: '#F4F4F4',
+        height: 400,
+    },
+    textfilteroverlay: {
+        color: '#000',
+        fontWeight: '600',
+        fontSize: 16,
+        textTransform: 'uppercase',
+        paddingTop: 10,
+        paddingRight: 70,
+        paddingBottom: 10,
+
+    },
+    containerflatlist: {
+        flex: 1,
     }
 })
 

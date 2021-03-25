@@ -29,6 +29,37 @@ function FlatListItemFloor(props) {
                 title: "Tầng 1",
 
             },
+            {
+                id: 4,
+                title: "Tầng Trệt",
+
+            },
+            {
+                id: 5,
+                title: "Tầng Lững",
+
+            },
+            {
+                id: 6,
+                title: "Tầng 1",
+
+            },
+            {
+                id: 7,
+                title: "Tầng Trệt",
+
+            },
+            {
+                id: 8,
+                title: "Tầng Lững",
+
+            },
+            {
+                id: 9,
+                title: "Tầng 1",
+
+            },
+
 
 
 
@@ -53,7 +84,7 @@ function FlatListItemFloor(props) {
 }
 const styles = StyleSheet.create({
     container: {
-        marginTop: 280,
+        // marginTop: 280,
     },
     flatlist: {
 

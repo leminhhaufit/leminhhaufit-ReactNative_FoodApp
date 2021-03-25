@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableHighlight, TouchableOpacity } from 'react-native';
 
 import PropTypes from 'prop-types';
 
 import tableImg from '../assets/table.png';
 import dotredImg from '../assets/dotred.png';
 import dotgreen from '../assets/dotgreen.png';
+
 
 ItemTable.propTypes = {
 

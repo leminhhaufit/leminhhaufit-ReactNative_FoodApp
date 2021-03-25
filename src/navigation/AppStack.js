@@ -6,6 +6,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 import HomeScreen from '../screens/HomeUser';
 import OrderFood from '../screens/OrderFood';
+import FoodDetail from '../screens/FoodDetail';
 import Payment from '../screens/Payment';
 import Profile from '../screens/Profile'
 
@@ -30,7 +31,7 @@ const OrderFoodStack = ({ navigation }) => (
     <Stack.Navigator>
         <Stack.Screen
             name="Order Food"
-            component={OrderFood}
+            component={FoodDetail}
             options={{
                 headerShown: false,
 
