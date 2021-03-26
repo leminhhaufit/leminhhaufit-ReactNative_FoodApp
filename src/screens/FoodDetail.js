@@ -31,7 +31,7 @@ export default function FoodDetail({ navigation }) {
 
                 </View>
                 <View style={{ position: 'absolute', top: 10, }}>
-                    <TouchableOpacity>
+                    <TouchableOpacity >
                         <FontAwesome5 style={styles.plus} name="chevron-circle-left" size={36} color="#FFF" />
                     </TouchableOpacity>
 

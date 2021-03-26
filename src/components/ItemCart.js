@@ -3,8 +3,7 @@ import { View, Text, Image, StyleSheet, TouchableHighlight, TouchableOpacity, Bu
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import detail1IMG from '../assets/detail1.png';
 function ItemCart(props) {
-    const { foodlist } = props;
-
+    const { foodlist, onChangeQuantityPlus, onChangeQuantityMinus, deleteItem } = props;
     const { id, title, note, price, quantity } = foodlist;
 
     return (
@@ -18,15 +17,15 @@ function ItemCart(props) {
                 <Text style={styles.price}>{price}</Text>
             </View>
             <View style={styles.quantity}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={onChangeQuantityPlus}>
                     <FontAwesome5 name="plus-circle" size={36} color="#FFC75F" />
                 </TouchableOpacity>
                 <Text style={styles.quantitytext}>{quantity}</Text>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={onChangeQuantityMinus}>
                     <FontAwesome5 name="minus-circle" size={36} color="#FFC75F" />
                 </TouchableOpacity>
             </View>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={deleteItem}>
                 <View style={styles.delete}>
                     <FontAwesome5 style={styles.icondel} name="trash" size={36} color="#FFF" />
                 </View>
@@ -60,13 +59,13 @@ const styles = StyleSheet.create({
         paddingTop: 5,
         fontSize: 16,
         fontWeight: 'bold',
-        width: 110,
+        width: 100,
     },
     note: {
         fontSize: 12,
         fontWeight: '400',
         opacity: 0.5,
-        width: 110,
+        width: 100,
         height: 60,
     },
     price: {
@@ -81,13 +80,12 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 26,
         color: 'black',
-        paddingLeft: 10,
-        paddingRight: 10,
+        textAlign: 'center',
         opacity: 0.5,
-
+        width: 50,
     }, quantity: {
         flexDirection: 'row',
-        paddingLeft: 5,
+
         alignItems: 'center',
         backgroundColor: '#FFF',
         paddingRight: 5,

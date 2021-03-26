@@ -69,6 +69,14 @@ const ProfileStack = ({ navigation }) => (
         />
     </Stack.Navigator>
 );
+const FoodDetailStack = ({ navigation }) => (
+    <Stack.Navigator>
+        <Stack.Screen
+            name="FoodDetail"
+            component={FoodDetail}
+        />
+    </Stack.Navigator>
+);
 const AppStack = () => {
     return (
         <Tab.Navigator
@@ -119,6 +127,7 @@ const AppStack = () => {
                     ),
                 })}
             />
+
         </Tab.Navigator>
     );
 };

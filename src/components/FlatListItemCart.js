@@ -103,14 +103,62 @@ function FlatListItemCart({ navigation }) {
 
     )
 
+    function onChangeQuantityPlus(item) {
+        const quantity = item.quantity;
+        const index = foodlist.indexOf(item);
+        setFoodList([
+            ...foodlist.slice(0, index),
+            {
+                ...item,
+                quantity: quantity + 1
+            },
+            ...foodlist.slice(index + 1),
+        ]);
 
+    };
+    function onChangeQuantityMinus(item) {
+        const quantity = item.quantity;
+        const index = foodlist.indexOf(item);
+        let sl = quantity - 1;
+        if (sl <= 0) {
+            setFoodList([
+                ...foodlist.slice(0, index),
+                {
+                    ...item,
+                    quantity: 0
+                },
+                ...foodlist.slice(index + 1),
+            ]);
+        } else {
+            setFoodList([
+                ...foodlist.slice(0, index),
+                {
+                    ...item,
+                    quantity: quantity - 1
+                },
+                ...foodlist.slice(index + 1),
+            ]);
+        }
+    };
+    function deleteItem(item) {
+        const index = foodlist.indexOf(item);
+        console.log(index);
+        foodlist.splice(index, 1);
+        setFoodList([
+            ...foodlist
+        ])
+    }
     return (
 
 
 
         <FlatList data={foodlist}
             numColumns={1}
-            renderItem={({ item }) => <ItemCart foodlist={item} />}
+            renderItem={({ item }) => <ItemCart foodlist={item}
+                onChangeQuantityPlus={() => onChangeQuantityPlus(item)}
+                onChangeQuantityMinus={() => onChangeQuantityMinus(item)}
+                deleteItem={() => deleteItem(item)}
+            />}
             keyExtractor={item => item.id}
             style={styles.foodlist}
 

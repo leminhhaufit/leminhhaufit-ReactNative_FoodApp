@@ -36,13 +36,13 @@ export default function MoreProfiles() {
                 <TouchableOpacity>
                     <View style={styles.settingmid}>
                         <FontAwesome5 name="info-circle" size={80} color="#FFC75F" />
-                        <Text style={styles.label1}>Profiles</Text>
+                        <Text style={styles.label1}>Information</Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => signOut()}>
                     <View style={styles.settingend}>
                         <FontAwesome5 name="sign-out-alt" size={80} color="#FFC75F" />
-                        <Text style={styles.label1}>Profiles</Text>
+                        <Text style={styles.label1}>Sign Out</Text>
                     </View>
                 </TouchableOpacity>
             </View>

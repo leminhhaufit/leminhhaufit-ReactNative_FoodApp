@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
 import { Button } from 'react-native-elements';
 import FlatListItemCart from '../components/FlatListItemCart';
-export default function Payment() {
+export default function Payment({ navigation }) {
     return (
 
         <View style={styles.container}>
@@ -39,7 +39,10 @@ export default function Payment() {
 
                     <Text style={styles.titletotal}>1999999999$</Text>
 
-                    <Button buttonStyle={styles.pay} titleStyle={styles.titleadd} title="Payment" />
+                    <Button buttonStyle={styles.pay} titleStyle={styles.titleadd}
+                        title="Payment"
+                        onPress={() => navigation.navigate('FoodDetail')}
+                    />
                 </View>
             </View>
         </View>
@@ -102,7 +105,7 @@ const styles = StyleSheet.create({
     },
     details: {
         flexDirection: 'row',
-        justifyContent: 'flex-start',
+
         alignSelf: 'stretch',
 
     },
@@ -121,13 +124,14 @@ const styles = StyleSheet.create({
     pay: {
         flex: 3,
         backgroundColor: "#FFC75F",
-        //marginTop: 10,
+        marginTop: 10,
         width: 200,
+
         alignItems: 'stretch'
     },
     titleadd: {
         fontWeight: 'bold',
-        fontSize: 22,
+        fontSize: 20,
         color: '#FFF',
 
     },
