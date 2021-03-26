@@ -37,7 +37,7 @@ export default function Payment() {
             <View style={styles.payment}>
                 <View style={styles.details}>
 
-                    <Text style={styles.titletotal}>199$</Text>
+                    <Text style={styles.titletotal}>1999999999$</Text>
 
                     <Button buttonStyle={styles.pay} titleStyle={styles.titleadd} title="Payment" />
                 </View>
@@ -82,24 +82,29 @@ const styles = StyleSheet.create({
         fontSize: 22,
         fontWeight: 'bold',
         padding: 10,
+        flex: 7,
 
     },
     content: {
         fontSize: 18,
         fontWeight: '300',
         padding: 5,
+
     },
     price: {
         fontSize: 18,
         fontWeight: '300',
         padding: 5,
         alignSelf: 'stretch',
-        textAlign: 'right'
+        textAlign: 'right',
+        position: 'absolute',
+        right: 0,
     },
     details: {
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignSelf: 'stretch',
+
     },
     promotion: {
         color: '#FFC75F',
@@ -114,8 +119,11 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
     },
     pay: {
+        flex: 3,
         backgroundColor: "#FFC75F",
-        marginTop: 10,
+        //marginTop: 10,
+        width: 200,
+        alignItems: 'stretch'
     },
     titleadd: {
         fontWeight: 'bold',

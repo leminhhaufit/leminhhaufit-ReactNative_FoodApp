@@ -96,8 +96,6 @@ function FlatListFilterTable(props) {
 
     )
     return (
-
-
         <FlatList data={filter}
             numColumns={1}
             renderItem={({ item }) => <ItemFilterTable filter={item} />}
@@ -109,11 +107,9 @@ function FlatListFilterTable(props) {
     );
 }
 const styles = StyleSheet.create({
-    container: {
-
-    },
     flatlist: {
         flex: 1,
+        backgroundColor: '#F4F4F4',
     },
 
 })

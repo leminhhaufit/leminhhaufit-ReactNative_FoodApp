@@ -104,14 +104,10 @@ function Header(props) {
                         <View style={styles.labelfilter}>
                             <Text style={styles.textfilteroverlay}>Filter by:</Text>
                             <TouchableOpacity onPress={toggleOverlay} style={styles.iconoverlay}>
-                                <FontAwesome5 size={26} name="times" />
+                                <FontAwesome5 size={26} name="times" color="#FFC75F" />
                             </TouchableOpacity>
                         </View>
-                        {/* <View style={styles.containerflatlist}> */}
                         <FlatListFilterTable />
-                        {/* </View> */}
-
-
                     </Overlay>
                 </View>
             </View>
@@ -285,7 +281,7 @@ const styles = StyleSheet.create({
         height: 400,
     },
     textfilteroverlay: {
-        color: '#000',
+        color: '#FFC75F',
         fontWeight: '600',
         fontSize: 16,
         textTransform: 'uppercase',

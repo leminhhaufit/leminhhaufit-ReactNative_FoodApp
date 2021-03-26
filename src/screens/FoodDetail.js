@@ -7,7 +7,21 @@ import detail1IMG from '../assets/header5.png';
 
 export default function FoodDetail({ navigation }) {
     const [loading, setLoading] = useState(false);
+    const [quantity, setQuantity] = useState(0);
+    const [price, setPrice] = useState(199);
 
+    function onChangeQuantityPlus() {
+        setQuantity(quantity + 1);
+
+
+    }
+    function onChangeQuantityMinus() {
+        setQuantity(quantity - 1);
+        if (quantity === 0) {
+            setQuantity(0);
+        }
+
+    }
 
     return (
         <View style={styles.container}>
@@ -31,14 +45,14 @@ export default function FoodDetail({ navigation }) {
                 </View>
 
                 <View style={styles.quantity}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => onChangeQuantityPlus()}>
                         <FontAwesome5 style={styles.plus} name="plus-circle" size={36} color="#FFC75F" />
                     </TouchableOpacity>
-                    <Text style={styles.quantitytext}>10</Text>
-                    <TouchableOpacity>
+                    <Text style={styles.quantitytext}>{quantity}</Text>
+                    <TouchableOpacity onPress={() => onChangeQuantityMinus()}>
                         <FontAwesome5 name="minus-circle" size={36} color="#FFC75F" />
                     </TouchableOpacity>
-                    <Text style={styles.price}>100$</Text>
+                    <Text style={styles.price}>{price * quantity}$</Text>
                 </View>
                 <View>
                     <Text style={styles.descriptionlabel}>Description</Text>

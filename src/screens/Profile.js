@@ -1,24 +1,21 @@
 import React from 'react'
 import { StyleSheet, Text, View, Button } from 'react-native'
-import { signOut } from '../config/firebaseAPI';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+
+import HeaderProfiles from '../components/HeaderProfiles';
+import MoreProfiles from '../components/MoreProfiles';
 export default function Profile() {
     return (
-        <View>
-
-            <FontAwesome5.Button
-                name="sign-out-alt"
-                color={'white'}
-                size={28}
-                onPress={() => signOut()}
-
-            >
-                <Text color={'white'}
-                    size={28}>Sign out</Text>
-            </FontAwesome5.Button>
-
+        <View style={styles.container}>
+            <HeaderProfiles />
+            <MoreProfiles />
         </View>
     )
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: '#F4F4F4',
+        flex: 1,
+
+    }
+})
