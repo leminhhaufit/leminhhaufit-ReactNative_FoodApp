@@ -1,26 +1,25 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import { Button, Overlay } from 'react-native-elements';
-import FlatListItemTable from '../components/FlatListItemTable';
+import Header from '../components/Header';
+import FlatListItemFood from '../components/FlatListItemFood';
+
 
 export default function OrderFood() {
-    const [visible, setVisible] = useState(false);
 
-    const toggleOverlay = () => {
-        setVisible(!visible);
-    };
     return (
-        <View>
-            <Button title="Open Overlay" onPress={toggleOverlay} />
-
-            <Overlay isVisible={visible} onBackdropPress={toggleOverlay}>
-                <Text>Hello from Overlay!</Text>
-                <Button title="Filter" />
-                <Button title="Dismiss" onPress={toggleOverlay} />
-                <FlatListItemTable />
-            </Overlay>
+        <View style={styles.container}>
+            <Header title="Food List" />
+            <FlatListItemFood />
         </View>
     )
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'stretch',
+        backgroundColor: '#FFF',
+        justifyContent: 'center',
+
+    },
+})

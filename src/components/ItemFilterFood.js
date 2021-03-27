@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 
 
-export default function ItemFilterTable(props) {
+export default function ItemFilterFood(props) {
     const { filter } = props;
 
     const { id, title } = filter;
@@ -19,7 +19,7 @@ export default function ItemFilterTable(props) {
 
 const styles = StyleSheet.create({
     container: {
-        width: 200,//120
+        width: 250,
         height: 30,
         marginBottom: 5,
         marginLeft: 10,

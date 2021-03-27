@@ -14,9 +14,10 @@ import header5IMG from '../assets/header5.png';
 import searchIMG from '../assets/loupe.png';
 
 import FlatListFilterTable from '../components/FlatListFilterTable';
+import FlatListFilterFood from './FlatListFilterFood';
 
 function Header(props) {
-
+    const { title } = props;
     const [visible, setVisible] = useState(false);
     const [activeIndex, setActiveIndex] = useState(0);
     const [carouselItems, setCarouselItems] = useState(
@@ -65,7 +66,7 @@ function Header(props) {
     };
 
     return (
-        <SafeAreaView style={{ flex: 2, paddingTop: 5 }}>
+        <SafeAreaView style={{ flex: 1, paddingTop: 5 }}>
             <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', }}>
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', }}>
                     <Carousel
@@ -93,7 +94,7 @@ function Header(props) {
                 </View>
 
                 <View style={styles.labelList}>
-                    <Text style={styles.textlist}>Table List</Text>
+                    <Text style={styles.textlist}>{title}</Text>
                     <TouchableOpacity onPress={toggleOverlay}>
                         <View style={styles.filter}>
                             <Text style={styles.textfilter}>Filter</Text>
@@ -106,8 +107,15 @@ function Header(props) {
                             <TouchableOpacity onPress={toggleOverlay} style={styles.iconoverlay}>
                                 <FontAwesome5 size={26} name="times" color="#FFC75F" />
                             </TouchableOpacity>
+
                         </View>
-                        <FlatListFilterTable />
+                        {
+                            title === "Table List" && <FlatListFilterTable />
+
+                        }
+                        {
+                            title === "Food List" && <FlatListFilterFood />
+                        }
                     </Overlay>
                 </View>
             </View>
@@ -116,22 +124,14 @@ function Header(props) {
 }
 const styles = StyleSheet.create({
     carousel: {
-
-
     },
     container: {
-
         alignSelf: 'center',
-        //alignItems: 'stretch',
-
     },
     imghead: {
-
         alignSelf: 'stretch',
-
     },
     container1: {
-
         flexDirection: 'row',
         alignSelf: 'center',
         alignItems: 'stretch',
@@ -151,7 +151,6 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.30,
         shadowRadius: 4.65,
-
         elevation: 8,
     },
     inputSearch: {
@@ -167,8 +166,6 @@ const styles = StyleSheet.create({
         borderTopWidth: 1,
         fontSize: 18,
         fontWeight: '600',
-
-
     },
     icon: {
         alignSelf: 'center',
@@ -182,14 +179,12 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 0 },
     },
     closeoverlay: {
-
         marginLeft: 100,
     },
     img: {
         height: 40,
         width: 50,
         backgroundColor: '#FFC75F',
-
     },
     placeholdercustom: {
         opacity: 0.3,
@@ -204,7 +199,6 @@ const styles = StyleSheet.create({
         borderTopWidth: 1,
         borderColor: '#FFC75F',
         backgroundColor: '#FFC75F',
-
     },
     iconsearch: {
         alignSelf: 'center',
@@ -212,13 +206,10 @@ const styles = StyleSheet.create({
         width: 30,
         marginTop: 5,
         borderRadius: 10,
-
-
     },
     label: {
         fontWeight: '600',
         fontSize: 18,
-
         textTransform: 'uppercase',
         color: '#FFC75F'
     },
@@ -234,9 +225,9 @@ const styles = StyleSheet.create({
         marginBottom: 5,
         marginLeft: 50,
         marginTop: 50,
-
     },
     labelfilter: {
+        flex: 0.1,
         flexDirection: 'row',
 
     },
@@ -273,6 +264,7 @@ const styles = StyleSheet.create({
         paddingRight: 10,
     },
     overlay: {
+        flex: 1,
         position: 'absolute',
         alignSelf: 'stretch',
         top: 340,
@@ -281,18 +273,14 @@ const styles = StyleSheet.create({
         height: 400,
     },
     textfilteroverlay: {
+        flex: 8,
         color: '#FFC75F',
         fontWeight: '600',
         fontSize: 16,
         textTransform: 'uppercase',
-        paddingTop: 10,
-        paddingRight: 70,
-        paddingBottom: 10,
-
+        margin: 5,
     },
-    containerflatlist: {
-        flex: 1,
-    }
+
 })
 
 export default Header;

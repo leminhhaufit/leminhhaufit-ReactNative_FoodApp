@@ -9,61 +9,62 @@ import {
 import PropTypes from 'prop-types';
 
 import ItemFilterTable from './ItemFilterTable';
+import ItemFilterFood from './ItemFilterFood';
 
-FlatListFilterTable.propTypes = {
+FlatListFilterFood.propTypes = {
 
 };
-function FlatListFilterTable(props) {
+function FlatListFilterFood(props) {
     const [filter, setFilter] = useState(
         [
             {
                 id: 1,
-                title: "Bàn Chưa đặt",
+                title: "Món Á",
 
             },
             {
                 id: 2,
-                title: "Bàn Đã đặt",
+                title: "Món Âu",
 
             },
             {
                 id: 3,
-                title: "Bàn Còn trống",
+                title: "Món Chiên",
 
             },
             {
                 id: 4,
-                title: "Bàn Đang sử dụng",
+                title: "Món Xào",
 
             },
             {
                 id: 5,
-                title: "Bàn 4 người",
+                title: "Món Nướng",
 
             },
             {
                 id: 6,
-                title: "Bàn 8 người",
+                title: "Món Đặc Biệt",
 
             },
             {
                 id: 7,
-                title: "Bàn VIP",
+                title: "Món Bán Chạy nhất",
 
             },
             {
                 id: 8,
-                title: "Bàn Premium",
+                title: "Món còn hoạt động",
 
             },
             {
                 id: 9,
-                title: "Bàn Gold",
+                title: "Món ngừng hoạt động",
 
             },
             {
                 id: 10,
-                title: "Bàn Diamond",
+                title: "Món mới",
 
             },
 
@@ -75,7 +76,7 @@ function FlatListFilterTable(props) {
     return (
         <FlatList data={filter}
             numColumns={1}
-            renderItem={({ item }) => <ItemFilterTable filter={item} />}
+            renderItem={({ item }) => <ItemFilterFood filter={item} />}
             keyExtractor={item => item.id}
             style={styles.flatlist}
         />
@@ -90,4 +91,4 @@ const styles = StyleSheet.create({
     },
 
 })
-export default FlatListFilterTable;
+export default FlatListFilterFood;

@@ -1,5 +1,4 @@
 import React from 'react';
-import { View, TouchableOpacity, } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -21,8 +20,6 @@ const FeedStack = ({ navigation }) => (
             component={HomeScreen}
             options={{
                 headerShown: false,
-
-
             }}
         />
     </Stack.Navigator>
@@ -31,10 +28,9 @@ const OrderFoodStack = ({ navigation }) => (
     <Stack.Navigator>
         <Stack.Screen
             name="Order Food"
-            component={FoodDetail}
+            component={OrderFood}
             options={{
                 headerShown: false,
-
             }}
         />
     </Stack.Navigator>
