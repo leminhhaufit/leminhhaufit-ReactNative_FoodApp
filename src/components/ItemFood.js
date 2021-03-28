@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import tableImg from '../assets/table.png';
 import dotredImg from '../assets/dotred.png';
 import dotgreen from '../assets/dotgreen.png';
+import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 
 
 ItemFood.propTypes = {
@@ -35,8 +36,10 @@ function ItemFood(props) {
                     <Text style={styles.price}>{price}$</Text>
                     <Image source={urlstatus} style={styles.dotImg} />
                 </View>
+                <TouchableOpacity style={styles.iconplus} onPress={() => console.log("vCLicked")}>
+                    <FontAwesome5Icon name="plus-circle" size={50} color="#FFC75F" />
+                </TouchableOpacity>
             </View>
-
         </TouchableOpacity>
     );
 }
@@ -44,10 +47,10 @@ const styles = StyleSheet.create({
     container: {
         width: 180,
         height: 180,
-        marginBottom: 10,
-        marginRight: 5,
-        marginLeft: 15,
-        marginTop: 5,
+        marginBottom: 20,
+        marginRight: 10,
+        marginLeft: 10,
+        marginTop: 30,
         alignSelf: 'stretch',
         borderRadius: 15,
         alignItems: 'center',
@@ -93,6 +96,11 @@ const styles = StyleSheet.create({
     content: {
         flex: 1,
         flexDirection: 'row',
+    },
+    iconplus: {
+        position: 'absolute',
+        right: -20,
+        top: -20,
     },
 })
 export default ItemFood;
