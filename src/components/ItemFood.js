@@ -27,27 +27,30 @@ function ItemFood(props) {
     }
 
     return (
-        <TouchableOpacity onPress={reserve} >
-            <View style={styles.container} key={id}>
+        <View>
+            <TouchableOpacity onPress={reserve}>
+                <View style={styles.container} key={id}>
 
-                <Image source={url} style={styles.imgtable} />
-                <Text style={styles.title}>{title}</Text>
-                <View style={styles.content}>
-                    <Text style={styles.price}>{price}$</Text>
-                    <Image source={urlstatus} style={styles.dotImg} />
+                    <Image source={url} style={styles.imgtable} />
+                    <Text style={styles.title}>{title}</Text>
+                    <View style={styles.content}>
+                        <Text style={styles.price}>{price}$</Text>
+                        <Image source={urlstatus} style={styles.dotImg} />
+                    </View>
+
                 </View>
-                <TouchableOpacity style={styles.iconplus} onPress={() => console.log("vCLicked")}>
-                    <FontAwesome5Icon name="plus-circle" size={50} color="#FFC75F" />
-                </TouchableOpacity>
-            </View>
-        </TouchableOpacity>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.iconplus} onPress={() => console.log("vCLicked")}>
+                <FontAwesome5Icon name="plus-circle" size={50} color="#FFC75F" />
+            </TouchableOpacity>
+        </View>
     );
 }
 const styles = StyleSheet.create({
     container: {
         width: 180,
         height: 180,
-        marginBottom: 20,
+        marginBottom: 10,
         marginRight: 10,
         marginLeft: 10,
         marginTop: 30,
@@ -99,8 +102,8 @@ const styles = StyleSheet.create({
     },
     iconplus: {
         position: 'absolute',
-        right: -20,
-        top: -20,
+        right: -5,
+        top: 5,
     },
 })
 export default ItemFood;
