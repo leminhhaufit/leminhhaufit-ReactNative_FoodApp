@@ -227,11 +227,10 @@ const styles = StyleSheet.create({
         marginTop: 50,
     },
     labelfilter: {
-        flex: 0.1,
         flexDirection: 'row',
-
     },
     textlist: {
+        flex: 0.8,
         textTransform: 'uppercase',
         fontSize: 20,
         fontWeight: '800',
@@ -243,7 +242,7 @@ const styles = StyleSheet.create({
         height: 35,
         backgroundColor: '#FFC75F',
         textAlign: 'center',
-        marginLeft: 100,
+
         shadowColor: "#000",
         shadowOffset: {
             width: 0,

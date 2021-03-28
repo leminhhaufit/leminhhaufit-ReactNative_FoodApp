@@ -30,14 +30,12 @@ function ItemFood(props) {
         <View>
             <TouchableOpacity onPress={reserve}>
                 <View style={styles.container} key={id}>
-
                     <Image source={url} style={styles.imgtable} />
                     <Text style={styles.title}>{title}</Text>
                     <View style={styles.content}>
                         <Text style={styles.price}>{price}$</Text>
                         <Image source={urlstatus} style={styles.dotImg} />
                     </View>
-
                 </View>
             </TouchableOpacity>
             <TouchableOpacity style={styles.iconplus} onPress={() => console.log("vCLicked")}>
@@ -103,7 +101,7 @@ const styles = StyleSheet.create({
     iconplus: {
         position: 'absolute',
         right: -5,
-        top: 5,
+        top: 0,
     },
 })
 export default ItemFood;
