@@ -171,8 +171,8 @@ function FlatListItemCart({ navigation }) {
 }
 const styles = StyleSheet.create({
     foodlist: {
+        height: 340,
 
-        height: 400,
     }
 
 })

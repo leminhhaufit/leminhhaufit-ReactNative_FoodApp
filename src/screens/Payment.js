@@ -6,7 +6,7 @@ export default function Payment({ navigation }) {
     return (
 
         <View style={styles.container}>
-
+            <Text style={styles.title2}>Food Cart</Text>
             <FlatListItemCart />
 
             <View style={styles.infor}>
@@ -79,6 +79,16 @@ const styles = StyleSheet.create({
         borderBottomColor: '#FFC75F',
         borderBottomWidth: 0.8,
         borderStyle: 'solid',
+    },
+    title2: {
+        fontSize: 32,
+        fontWeight: 'bold',
+        width: 350,
+        alignSelf: 'flex-start',
+        alignItems: 'stretch',
+        paddingTop: 20,
+        paddingLeft: 20,
+        paddingBottom: 10,
     },
     titletotal: {
         fontSize: 22,

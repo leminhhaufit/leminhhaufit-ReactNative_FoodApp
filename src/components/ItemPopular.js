@@ -14,15 +14,15 @@ export default function ItemPopular(props) {
                 <Text style={styles.title}>{title}</Text>
                 <Text style={styles.content}>{material} </Text>
                 <Image style={styles.image} source={url} />
+                <View style={styles.price}>
 
+                    <Text style={styles.txtprice}>{price} <FontAwesome5Icon name="dollar-sign" size={20} color="black" /> </Text>
+                </View>
             </TouchableOpacity>
             <TouchableOpacity style={styles.btnadd}>
                 <FontAwesome5Icon name="plus" size={16} color="black" style={styles.iconplus} />
             </TouchableOpacity>
-            <View style={styles.price}>
 
-                <Text style={styles.txtprice}>{price} <FontAwesome5Icon name="dollar-sign" size={20} color="black" /> </Text>
-            </View>
         </View >
     )
 }
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
         opacity: 0.5
     },
     btnadd: {
-        backgroundColor: "#F59507",
+        backgroundColor: "#FFC75F",
         width: 100,
         height: 50,
         borderBottomLeftRadius: 25,

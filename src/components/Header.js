@@ -178,7 +178,6 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.39,
         shadowRadius: 8.30,
         elevation: 13,
-        borderRadius: 8,
         borderRadius: 25,
     },
     textfilter: {

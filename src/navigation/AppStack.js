@@ -9,6 +9,7 @@ import FoodDetail from '../screens/FoodDetail';
 import Payment from '../screens/Payment';
 import Profile from '../screens/Profile'
 import HomeKitchen from '../screens/HomeKitchen';
+import Information from '../screens/Information';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -17,7 +18,7 @@ const FeedStack = ({ navigation }) => (
     <Stack.Navigator>
         <Stack.Screen
             name="Home"
-            component={HomeKitchen}
+            component={HomeScreen}
             options={{
                 headerShown: false,
             }}
@@ -28,7 +29,7 @@ const OrderFoodStack = ({ navigation }) => (
     <Stack.Navigator>
         <Stack.Screen
             name="Order Food"
-            component={OrderFood}
+            component={HomeKitchen}
             options={{
                 headerShown: false,
             }}

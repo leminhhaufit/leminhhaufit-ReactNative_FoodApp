@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         borderRadius: 25,
         alignItems: 'center',
-        backgroundColor: "#F59507",
+        backgroundColor: "#FFC75F",
         shadowColor: "#000",
         shadowOffset: {
             width: 0,

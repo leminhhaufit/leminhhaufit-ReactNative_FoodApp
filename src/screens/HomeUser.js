@@ -7,6 +7,7 @@ import Header from '../components/Header';
 import FlatListItemTable from '../components/FlatListItemTable';
 import FlatListItemFloor from '../components/FlatListItemFloor';
 import HeaderHome from '../components/HeaderHome';
+import { ScrollView } from 'react-native';
 
 HomeUser.propTypes = {
 
@@ -15,12 +16,12 @@ HomeUser.propTypes = {
 
 function HomeUser(props) {
     return (
-        <SafeAreaView style={styles.container}>
+        <ScrollView >
             {/* <Header title="Table List" />
             <FlatListItemFloor />
             <FlatListItemTable /> */}
             <HeaderHome />
-        </SafeAreaView>
+        </ScrollView>
     );
 }
 const styles = StyleSheet.create({
