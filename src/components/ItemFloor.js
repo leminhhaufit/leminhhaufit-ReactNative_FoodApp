@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, } from 'react-native';
 
 import PropTypes from 'prop-types';
@@ -12,7 +12,7 @@ ItemFloor.propTypes = {
 function ItemFloor(props) {
     const { floorlist } = props;
 
-    const { id, title } = floorlist;
+    const { id, title, status } = floorlist;
 
     return (
         <TouchableOpacity >
@@ -21,7 +21,7 @@ function ItemFloor(props) {
                 <Text style={styles.title}>{floorlist.title}</Text>
             </View>
 
-        </TouchableOpacity>
+        </TouchableOpacity >
     );
 }
 const styles = StyleSheet.create({
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         borderRadius: 25,
         alignItems: 'center',
-        backgroundColor: 'pink',
+        backgroundColor: "#F59507",
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     },
 
     title: {
-        color: 'white',
+        color: '#4D3826',
         textTransform: 'uppercase',
         fontSize: 22,
         fontWeight: '200',

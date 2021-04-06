@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableHighlight, TouchableOpacity } from 'react-native';
-
+import { Overlay } from 'react-native-elements';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import PropTypes from 'prop-types';
 
 import tableImg from '../assets/table.png';
@@ -13,8 +14,7 @@ ItemTable.propTypes = {
 };
 
 function ItemTable(props) {
-    const { tablelist, reserve } = props;
-
+    const { tablelist, reserve, isActive } = props;
     const { id, title, status } = tablelist;
     let url;
     //status == true đang sử dụng
@@ -25,6 +25,7 @@ function ItemTable(props) {
         url = dotgreen;
     }
 
+    console.log(isActive + " isActive");
     return (
         <TouchableOpacity onPress={reserve} >
 
@@ -33,7 +34,6 @@ function ItemTable(props) {
                 <Image source={tableImg} style={styles.imgtable} />
                 <Image source={url} style={styles.dotImg} />
             </View>
-
         </TouchableOpacity>
     );
 }
@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
         height: 18,
         alignSelf: 'flex-end',
         marginRight: 10,
-    }
+    },
+
 })
 export default ItemTable;

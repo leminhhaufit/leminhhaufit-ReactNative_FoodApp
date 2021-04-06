@@ -16,52 +16,24 @@ function FlatListItemFloor(props) {
         [
             {
                 id: 1,
-                title: "Tầng Trệt",
-
+                title: "All",
+                status: true,
             },
             {
                 id: 2,
-                title: "Tầng Lững",
-
+                title: "Seafood",
+                status: false,
             },
             {
                 id: 3,
-                title: "Tầng 1",
-
+                title: "Chicken",
+                status: false,
             },
             {
                 id: 4,
-                title: "Tầng Trệt",
-
+                title: "Beef",
+                status: false,
             },
-            {
-                id: 5,
-                title: "Tầng Lững",
-
-            },
-            {
-                id: 6,
-                title: "Tầng 1",
-
-            },
-            {
-                id: 7,
-                title: "Tầng Trệt",
-
-            },
-            {
-                id: 8,
-                title: "Tầng Lững",
-
-            },
-            {
-                id: 9,
-                title: "Tầng 1",
-
-            },
-
-
-
 
         ]
 

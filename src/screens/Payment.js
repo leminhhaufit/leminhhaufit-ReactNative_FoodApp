@@ -69,7 +69,6 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.22,
         shadowRadius: 2.22,
-
         elevation: 3,
         marginBottom: 30,
     },
@@ -92,7 +91,6 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: '300',
         padding: 5,
-
     },
     price: {
         fontSize: 18,
@@ -105,18 +103,14 @@ const styles = StyleSheet.create({
     },
     details: {
         flexDirection: 'row',
-
         alignSelf: 'stretch',
-
     },
     promotion: {
         color: '#FFC75F',
         fontSize: 22,
         textAlign: 'center',
-
     },
     payment: {
-
         borderTopColor: '#FFC75F',
         borderTopWidth: 0.8,
         borderStyle: 'solid',
@@ -124,15 +118,13 @@ const styles = StyleSheet.create({
     pay: {
         flex: 3,
         backgroundColor: "#FFC75F",
-        marginTop: 10,
         width: 200,
-
         alignItems: 'stretch'
     },
     titleadd: {
         fontWeight: 'bold',
         fontSize: 20,
         color: '#FFF',
-
+        padding: 10,
     },
 })

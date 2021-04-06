@@ -51,13 +51,12 @@ function Header(props) {
     function renderItem({ item, index }) {
         return (
             <View style={{
-                borderRadius: 15,
-                height: 250,
+
                 padding: 10,
                 marginLeft: 15,
                 marginRight: 5,
             }}>
-                <Image source={item.url} style={{ width: 400, height: 250 }} />
+                <Image source={item.url} style={{ width: 350, height: 200 }} />
             </View>
         )
     }
@@ -73,8 +72,8 @@ function Header(props) {
                         layout={"default"}
                         // ref={ref => this.carousel = ref}
                         data={carouselItems}
-                        sliderWidth={300}
-                        itemWidth={400}
+                        sliderWidth={400}
+                        itemWidth={300}
                         renderItem={renderItem}
                         onSnapToItem={index => setActiveIndex(index)} />
                     <View style={styles.container1}>
@@ -242,7 +241,6 @@ const styles = StyleSheet.create({
         height: 35,
         backgroundColor: '#FFC75F',
         textAlign: 'center',
-
         shadowColor: "#000",
         shadowOffset: {
             width: 0,

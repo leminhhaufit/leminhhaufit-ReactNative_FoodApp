@@ -79,26 +79,30 @@ function FlatListItemTable({ navigation }) {
         ]
 
     )
+    const [isActive, setIsActive] = useState(false);
     function reserve(item) {
         const status = item.status;
         const index = tablelist.indexOf(item);
-        setTablelist(
-            [
-                ...tablelist.slice(0, index),
-                {
-                    ...item,
-                    status: !status
-                },
-                ...tablelist.slice(index + 1)
-            ])
-
+        if (status) {
+            setIsActive(true);
+        } else {
+            setTablelist(
+                [
+                    ...tablelist.slice(0, index),
+                    {
+                        ...item,
+                        status: true //status
+                    },
+                    ...tablelist.slice(index + 1)
+                ])
+        }
     }
 
 
     return (
         <FlatList data={tablelist}
             numColumns={3}
-            renderItem={({ item }) => <ItemTable tablelist={item} reserve={() => reserve(item)} />}
+            renderItem={({ item }) => <ItemTable tablelist={item} reserve={() => reserve(item)} isActive={isActive} />}
             keyExtractor={item => item.id}
             style={styles.flatlist}
 

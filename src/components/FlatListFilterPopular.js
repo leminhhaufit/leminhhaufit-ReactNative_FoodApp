@@ -1,18 +1,9 @@
-import React, { useState } from 'react';
-import {
-    View,
-    StyleSheet,
-    FlatList,
-} from 'react-native';
-
-import PropTypes from 'prop-types';
-import food1IMG from '../assets/detail1.png';
-import ItemFood from './ItemFood';
-
-FlatListItemFood.propTypes = {
-
-};
-function FlatListItemFood(props) {
+import React, { useState } from 'react'
+import { StyleSheet, Text, View } from 'react-native'
+import ItemPopular from './ItemPopular';
+import food1IMG from '../assets/detail1trans.png';
+import { FlatList } from 'react-native';
+export default function FlatListFilterPopular() {
     const [foodlist, setFoodlist] = useState(
         [
             {
@@ -126,37 +117,20 @@ function FlatListItemFood(props) {
         ]
 
     )
-    function reserve(item) {
-        const status = item.status;
-        const index = foodlist.indexOf(item);
-        setFoodlist(
-            [
-                ...foodlist.slice(0, index),
-                {
-                    ...item,
-                    status: true
-                },
-                ...foodlist.slice(index + 1)
-            ])
-    }
-
-
     return (
         <FlatList data={foodlist}
-            numColumns={2}
-            renderItem={({ item }) => <ItemFood foodlist={item} reserve={() => reserve(item)} />}
+            numColumns={1}
+            renderItem={({ item }) => <ItemPopular foodlist={item} />}
             keyExtractor={item => item.id}
             style={styles.flatlist}
 
         />
-    );
+    )
 }
+
 const styles = StyleSheet.create({
     flatlist: {
         flex: 1,
-        alignSelf: 'stretch',
 
     },
-
 })
-export default FlatListItemFood;
