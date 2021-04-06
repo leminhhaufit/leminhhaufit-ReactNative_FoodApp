@@ -10,6 +10,7 @@ import Payment from '../screens/Payment';
 import Profile from '../screens/Profile'
 import HomeKitchen from '../screens/HomeKitchen';
 import Information from '../screens/Information';
+import HomeAdmin from '../screens/HomeAdmin';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -18,7 +19,7 @@ const FeedStack = ({ navigation }) => (
     <Stack.Navigator>
         <Stack.Screen
             name="Home"
-            component={HomeScreen}
+            component={HomeAdmin}
             options={{
                 headerShown: false,
             }}
@@ -29,7 +30,7 @@ const OrderFoodStack = ({ navigation }) => (
     <Stack.Navigator>
         <Stack.Screen
             name="Order Food"
-            component={HomeKitchen}
+            component={OrderFood}
             options={{
                 headerShown: false,
             }}

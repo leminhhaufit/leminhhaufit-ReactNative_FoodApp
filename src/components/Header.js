@@ -4,7 +4,6 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Carousel from 'react-native-snap-carousel';
 import { Overlay } from 'react-native-elements';
 import MultiSelect from 'react-native-multiple-select';
-
 import foodImg from '../assets/food.png';
 import header1IMG from '../assets/header.png';
 import header2IMG from '../assets/header2.png';
@@ -13,12 +12,10 @@ import header4IMG from '../assets/header4.png';
 import header5IMG from '../assets/header5.png';
 import searchIMG from '../assets/loupe.png';
 
-import FlatListFilterTable from '../components/FlatListFilterTable';
-import FlatListFilterFood from './FlatListFilterFood';
+import Filters from './Filters';
 
 function Header(props) {
     const { title } = props;
-    const [visible, setVisible] = useState(false);
     const [activeIndex, setActiveIndex] = useState(0);
     const [carouselItems, setCarouselItems] = useState(
         [
@@ -60,9 +57,6 @@ function Header(props) {
             </View>
         )
     }
-    const toggleOverlay = () => {
-        setVisible(!visible);
-    };
 
     return (
         <SafeAreaView style={{ flex: 1, paddingTop: 5 }}>
@@ -94,23 +88,9 @@ function Header(props) {
 
                 <View style={styles.labelList}>
                     <Text style={styles.textlist}>{title}</Text>
-                    <TouchableOpacity onPress={toggleOverlay}>
-                        <View style={styles.filter}>
-                            <Text style={styles.textfilter}>Filter</Text>
-                            <FontAwesome5 name="sort-amount-down-alt" size={30} color="white" />
-                        </View>
-                    </TouchableOpacity>
-                    <Overlay isVisible={visible} overlayStyle={styles.overlay} onBackdropPress={toggleOverlay}>
-                        <View style={styles.labelfilter}>
-                            <Text style={styles.textfilteroverlay}>Filter by:</Text>
-                            <TouchableOpacity onPress={toggleOverlay} style={styles.iconoverlay}>
-                                <FontAwesome5 size={26} name="times" color="#FFC75F" />
-                            </TouchableOpacity>
-                        </View>
-                        {
-                            title === "Food List" && <FlatListFilterFood />
-                        }
-                    </Overlay>
+                    {
+                        title === "Food List" && <Filters />
+                    }
                 </View>
             </View>
         </SafeAreaView >
