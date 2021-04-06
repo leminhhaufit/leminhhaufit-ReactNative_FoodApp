@@ -116,10 +116,12 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
     },
     pay: {
+        marginTop: 5,
         flex: 3,
         backgroundColor: "#FFC75F",
         width: 200,
-        alignItems: 'stretch'
+        alignItems: 'stretch',
+        borderRadius: 25,
     },
     titleadd: {
         fontWeight: 'bold',

@@ -3,25 +3,25 @@ import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 
-export default function ItemPopular(props) {
-    const { foodlist } = props;
+export default function ItemKitchen(props) {
+    const { foodlist, reserve } = props;
 
-    const { id, title, description, price, material, status, url } = foodlist;
+    const { id, title, description, note, price, quantity, material, status, url } = foodlist;
     return (
         <View style={styles.container}>
-            <TouchableOpacity style={styles.container2}>
-                <Text style={styles.award}><FontAwesome5Icon name="pizza-slice" size={16} color="#F59507" /> Top 1 week</Text>
-                <Text style={styles.title}>{title}</Text>
-                <Text style={styles.content}>{material} </Text>
-                <Image style={styles.image} source={url} />
-
+            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.content}>{note} </Text>
+            <Image style={styles.image} source={url} />
+            <TouchableOpacity style={styles.btnadd} onPress={reserve}>
+                <FontAwesome5Icon name="check-circle" size={30} color="white" style={styles.iconplus} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.btnadd}>
-                <FontAwesome5Icon name="plus" size={16} color="black" style={styles.iconplus} />
-            </TouchableOpacity>
+            {status &&
+                <TouchableOpacity style={styles.btnadd}>
+                    <FontAwesome5Icon name="check-circle" size={30} color="white" solid style={styles.iconplus} />
+                </TouchableOpacity>
+            }
             <View style={styles.price}>
-
-                <Text style={styles.txtprice}>{price} <FontAwesome5Icon name="dollar-sign" size={20} color="black" /> </Text>
+                <Text style={styles.txtprice}>{quantity}  piece</Text>
             </View>
         </View >
     )
@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
         paddingLeft: 20,
         paddingTop: 5,
         width: 240,
+
     },
     content: {
         fontSize: 16,
@@ -82,10 +83,12 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         paddingLeft: 20,
         paddingTop: 5,
-        opacity: 0.5
+        opacity: 0.5,
+        width: 240,
+        height: 50,
     },
     btnadd: {
-        backgroundColor: "#F59507",
+        backgroundColor: "#FFC75F",
         width: 100,
         height: 50,
         borderBottomLeftRadius: 25,
@@ -97,7 +100,7 @@ const styles = StyleSheet.create({
     },
     iconplus: {
         alignSelf: 'center',
-        paddingTop: 15,
+        paddingTop: 10,
     },
     price: {
         position: 'absolute',
