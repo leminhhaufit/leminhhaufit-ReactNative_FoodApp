@@ -125,7 +125,7 @@ function FlatListItemCart({ navigation }) {
                 ...foodlist.slice(0, index),
                 {
                     ...item,
-                    quantity: 0
+                    quantity: 1
                 },
                 ...foodlist.slice(index + 1),
             ]);
