@@ -106,12 +106,7 @@ function Header(props) {
                             <TouchableOpacity onPress={toggleOverlay} style={styles.iconoverlay}>
                                 <FontAwesome5 size={26} name="times" color="#FFC75F" />
                             </TouchableOpacity>
-
                         </View>
-                        {
-                            title === "Table List" && <FlatListFilterTable />
-
-                        }
                         {
                             title === "Food List" && <FlatListFilterFood />
                         }
@@ -184,6 +179,7 @@ const styles = StyleSheet.create({
         shadowRadius: 8.30,
         elevation: 13,
         borderRadius: 8,
+        borderRadius: 25,
     },
     textfilter: {
         color: '#fff',
@@ -202,6 +198,7 @@ const styles = StyleSheet.create({
         right: 60,
         backgroundColor: '#F4F4F4',
         height: 400,
+        borderRadius: 25,
     },
     textfilteroverlay: {
         flex: 8,
