@@ -59,7 +59,7 @@ function Header(props) {
     }
 
     return (
-        <SafeAreaView style={{ flex: 1, paddingTop: 5 }}>
+        <SafeAreaView style={{ flex: 1, paddingTop: 5, marginBottom: 30 }}>
             <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', }}>
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', }}>
                     <Carousel

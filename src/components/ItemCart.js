@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableHighlight, TouchableOpacity, Button } from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import detail1IMG from '../assets/detail1.png';
+import { Textarea, Form } from "native-base";
 function ItemCart(props) {
     const { foodlist, onChangeQuantityPlus, onChangeQuantityMinus, deleteItem } = props;
     const { id, title, note, price, quantity } = foodlist;
@@ -13,7 +14,9 @@ function ItemCart(props) {
                     style={styles.imgcart} /></View>
             <View style={styles.infor}>
                 <Text style={styles.title}>{title}</Text>
-                <Text style={styles.note}>{note}</Text>
+                <Form>
+                    <Textarea rowSpan={2} placeholder="Note" style={styles.note} value={note} />
+                </Form>
                 <Text style={styles.price}>{price}</Text>
             </View>
             <View style={styles.quantity}>
@@ -67,6 +70,8 @@ const styles = StyleSheet.create({
         opacity: 0.5,
         width: 100,
         height: 60,
+        borderBottomColor: '#FFC75F',
+        borderBottomWidth: 1,
     },
     price: {
         fontSize: 16,
@@ -100,6 +105,7 @@ const styles = StyleSheet.create({
     icondel: {
         alignSelf: 'center',
         paddingTop: 40,
-    }
+    },
+
 })
 export default ItemCart;

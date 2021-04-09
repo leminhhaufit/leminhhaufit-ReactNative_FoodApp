@@ -4,28 +4,36 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 
 export default function ItemFoodManage(props) {
-    const { adminlist } = props;
+    const { foodlist } = props;
 
-    const { id, title, description, status, url, icon } = adminlist;
+    const { id, title, description, price, material, status, url } = foodlist;
     return (
-        <TouchableOpacity style={styles.container}>
-            <View style={styles.container2}>
+        <View style={styles.container}>
+            <TouchableOpacity style={styles.container2}>
                 <Text style={styles.title}>{title}</Text>
-                <Text style={styles.content}>{description} </Text>
+                <Text style={styles.content}>{material} </Text>
                 <Image style={styles.image} source={url} />
-                <View style={styles.btnadd}>
-                    <FontAwesome5Icon name={icon} size={36} color="#FFF" style={{ alignSelf: 'center', paddingTop: 5, }} />
+                <View style={styles.price}>
+                    <Text style={styles.txtprice}>{price} <FontAwesome5Icon name="dollar-sign" size={20} color="black" /> </Text>
                 </View>
+            </TouchableOpacity>
+            <View style={styles.btn}>
+                <TouchableOpacity style={styles.btndel}>
+                    <FontAwesome5Icon name="trash" size={32} color="#FFF" style={styles.iconplus} />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.btndel}>
+                    <FontAwesome5Icon name="pen-alt" size={32} color="#FFF" style={styles.iconplus} />
+                </TouchableOpacity>
             </View>
-        </TouchableOpacity>
+        </View >
     )
 }
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
         alignSelf: 'stretch',
-        marginLeft: 40,
-        //marginTop: 20,
+        marginLeft: 20,
+        marginTop: 40,
         marginRight: 40,
         borderRadius: 25,
         height: 140,
@@ -38,7 +46,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.29,
         shadowRadius: 4.65,
         elevation: 7,
-        marginBottom: 40,
+        marginBottom: 10,
     },
     container2: {
         alignItems: 'center',
@@ -57,10 +65,10 @@ const styles = StyleSheet.create({
     },
     image: {
         position: 'absolute',
-        width: 120,
-        height: 120,
-        right: -35,
-        top: 10,
+        width: 150,
+        height: 150,
+        right: -45,
+        top: -5,
     },
     title: {
         fontSize: 26,
@@ -69,7 +77,7 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         paddingLeft: 20,
         paddingTop: 5,
-        width: 240,
+        width: 250,
     },
     content: {
         fontSize: 16,
@@ -77,12 +85,12 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         alignSelf: 'stretch',
         paddingLeft: 20,
-        paddingTop: 5,
         opacity: 0.5,
         width: 250,
         height: 60,
     },
-    btnadd: {
+    btn: {
+        flexDirection: 'row',
         backgroundColor: "#FFC75F",
         width: 100,
         height: 50,
@@ -92,10 +100,16 @@ const styles = StyleSheet.create({
         position: 'absolute',
         left: 0,
         bottom: 0,
+
+    },
+    btndel: {
+        flex: 1,
+        paddingTop: 5,
     },
     iconplus: {
         alignSelf: 'center',
-        paddingTop: 15,
+        paddingTop: 5,
+
     },
     price: {
         position: 'absolute',

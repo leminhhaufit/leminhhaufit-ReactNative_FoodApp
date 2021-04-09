@@ -16,7 +16,7 @@ ItemFood.propTypes = {
 function ItemFood(props) {
     const [visible, setVisible] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [quantity, setQuantity] = useState(0);
+    const [quantity, setQuantity] = useState(1);
     const { foodlist, reserve } = props;
     const { id, title, description, price, material, status, url } = foodlist;
     let urlstatus;
@@ -37,8 +37,8 @@ function ItemFood(props) {
     }
     function onChangeQuantityMinus() {
         setQuantity(quantity - 1);
-        if (quantity === 0) {
-            setQuantity(0);
+        if (quantity === 1) {
+            setQuantity(1);
         }
 
     }
@@ -120,7 +120,6 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.39,
         shadowRadius: 8.30,
         elevation: 13,
-
     },
     imgtable: {
         width: 100,//56

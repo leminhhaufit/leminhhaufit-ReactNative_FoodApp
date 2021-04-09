@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import ItemAdmin from './ItemAdmin';
-import food1IMG from '../assets/detail1trans.png';
+import staff from '../assets/managestafftrans.png';
+import category from '../assets/managecatetrans.png';
+import food from '../assets/managefoodtrans.png';
+import chart from '../assets/managecharttrans.png';
+import orderdetail from '../assets/managebilltrans.png';
 import { FlatList } from 'react-native';
 export default function FlatListAdmin() {
     const [adminlist, setAdminlist] = useState(
@@ -9,41 +13,41 @@ export default function FlatListAdmin() {
             {
                 id: 1,
                 title: "Manage Staff",
-                description: "Giòn viền, dẻo nhân",
+                description: "Add, delete, update staff",
                 status: true,
-                url: food1IMG,
+                url: staff,
                 icon: "users-cog",
             },
             {
                 id: 2,
                 title: "Manage Category",
-                description: "Giòn viền, dẻo nhân",
+                description: "Add, delete, update category",
                 status: true,
-                url: food1IMG,
+                url: category,
                 icon: "swatchbook",
             },
             {
                 id: 3,
                 title: "Manage Food",
-                description: "Giòn viền, dẻo nhân",
+                description: "Add, delete, update food",
                 status: true,
-                url: food1IMG,
+                url: food,
                 icon: "pizza-slice",
             },
             {
                 id: 4,
                 title: "Statisitc",
-                description: "Giòn viền, dẻo nhân",
+                description: "View revenue, profit",
                 status: true,
-                url: food1IMG,
+                url: chart,
                 icon: "chart-line",
             },
             {
                 id: 5,
                 title: "Orders Details",
-                description: "Giòn viền, dẻo nhân",
+                description: "View information of food purchased by customers",
                 status: true,
-                url: food1IMG,
+                url: orderdetail,
                 icon: "info-circle",
             },
 
