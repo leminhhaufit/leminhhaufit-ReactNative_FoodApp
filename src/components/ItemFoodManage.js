@@ -5,8 +5,12 @@ import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 
 export default function ItemFoodManage(props) {
     const { foodlist } = props;
-
+    //#375A45 green #E35929 red
     const { id, title, description, price, material, status, url } = foodlist;
+    let icon = "#375A45";
+    if (status == true) {
+        icon = "#E35929";
+    }
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.container2}>
@@ -23,6 +27,9 @@ export default function ItemFoodManage(props) {
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.btndel}>
                     <FontAwesome5Icon name="pen-alt" size={32} color="#FFF" style={styles.iconplus} />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.btndel}>
+                    <FontAwesome5Icon name="power-off" size={32} color={icon} style={styles.iconplus} />
                 </TouchableOpacity>
             </View>
         </View >
@@ -92,7 +99,7 @@ const styles = StyleSheet.create({
     btn: {
         flexDirection: 'row',
         backgroundColor: "#FFC75F",
-        width: 100,
+        width: 160,
         height: 50,
         borderBottomLeftRadius: 25,
         borderTopRightRadius: 25,
@@ -119,8 +126,9 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     },
     txtprice: {
-        alignSelf: 'flex-start',
+        alignSelf: 'flex-end',
         paddingTop: 10,
+        paddingLeft: 10,
         fontSize: 22,
         fontWeight: 'bold',
     },

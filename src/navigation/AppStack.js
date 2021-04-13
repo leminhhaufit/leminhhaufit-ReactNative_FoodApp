@@ -12,6 +12,7 @@ import HomeKitchen from '../screens/HomeKitchen';
 import Information from '../screens/Information';
 import HomeAdmin from '../screens/HomeAdmin';
 import ManageFood from '../screens/ManageFood';
+import FormFood from '../screens/FormFood';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -20,7 +21,7 @@ const FeedStack = ({ navigation }) => (
     <Stack.Navigator>
         <Stack.Screen
             name="Home"
-            component={HomeAdmin}
+            component={FormFood}
             options={{
                 headerShown: false,
             }}
