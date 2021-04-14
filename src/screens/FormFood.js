@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, Text, View, Picker, Image, } from 'react-native'
-import { Container, Header, Content, Form, Item, Input, Label, Button, Left, Icon, Title, Right, Body } from 'native-base';
+import { Container, Content, Form, Item, Input, Label, Button, } from 'native-base';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import header2IMG from '../assets/header2.png';
 import ImagePicker from 'react-native-image-crop-picker';
-import Animated from 'react-native-reanimated';
 import BottomSheet from 'reanimated-bottom-sheet';
 import { TouchableOpacity } from 'react-native';
-export default function FormFood() {
+export default function FormFood(props) {
     const [selectedValue, setSelectedValue] = useState("category");
     const [selectedImage, setSelectedImage] = useState(null);
+    const { title } = props
     const selectFile = () => {
         ImagePicker.openPicker({
             width: 300,
@@ -60,7 +59,7 @@ export default function FormFood() {
 
             <Content style={{ backgroundColor: "#F4F4F4" }} >
                 <View style={styles.header}>
-                    <Text style={styles.labelheader}>Add to Food</Text>
+                    <Text style={styles.labelheader}>{title}</Text>
                 </View>
                 <Form style={styles.form}>
                     <Item floatingLabel rounded style={styles.item}>

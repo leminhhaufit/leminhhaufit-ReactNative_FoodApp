@@ -13,7 +13,8 @@ import Information from '../screens/Information';
 import HomeAdmin from '../screens/HomeAdmin';
 import ManageFood from '../screens/ManageFood';
 import FormFood from '../screens/FormFood';
-
+import FormStaff from '../screens/FormStaff';
+import FormCategory from '../screens/FormCategory';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -21,7 +22,7 @@ const FeedStack = ({ navigation }) => (
     <Stack.Navigator>
         <Stack.Screen
             name="Home"
-            component={FormFood}
+            component={FormStaff}
             options={{
                 headerShown: false,
             }}

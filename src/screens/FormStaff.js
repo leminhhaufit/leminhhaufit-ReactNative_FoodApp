@@ -1,41 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, Text, View, Picker, Image, } from 'react-native'
-import { Container, Header, Content, Form, Item, Input, Label, Button, Left, Icon, Title, Right, Body } from 'native-base';
-import header2IMG from '../assets/header2.png';
+import { Container, Content, Form, Item, Input, Label, Button, } from 'native-base';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import ImagePicker from 'react-native-image-crop-picker';
-import Animated from 'react-native-reanimated';
 import BottomSheet from 'reanimated-bottom-sheet';
-export default function FormFood() {
+import SwitchSelector from "react-native-switch-selector";
+import { TouchableOpacity } from 'react-native';
+export default function FormStaff(props) {
     const [selectedValue, setSelectedValue] = useState("category");
-    const [filePath, setFilePath] = useState(null);
-    const [fileData, setFileData] = useState(null);
-    const [fileUri, setFileUri] = useState(null);
-
-    // function renderFileData() {
-    //     if (fileData) {
-    //         return <Image source={{ uri: 'data:image/jpeg;base64,' + fileData }}
-    //             style={styles.images}
-    //         />
-    //     } else {
-    //         return <Image source={header2IMG}
-    //             style={styles.images}
-    //         />
-    //     }
-    // }
-
-    // function renderFileUri() {
-    //     if (fileUri) {
-    //         return <Image
-    //             source={{ uri: fileUri }}
-    //             style={styles.images}
-    //         />
-    //     } else {
-    //         return <Image
-    //             source={header2IMG}
-    //             style={styles.images}
-    //         />
-    //     }
-    // }
+    const [selectedImage, setSelectedImage] = useState(null);
+    const { title } = props;
     const selectFile = () => {
         ImagePicker.openPicker({
             width: 300,
@@ -43,6 +17,7 @@ export default function FormFood() {
             cropping: true
         }).then(image => {
             console.log(image);
+            setSelectedImage(image.path);
         });
     };
     const selectCamera = () => {
@@ -52,6 +27,7 @@ export default function FormFood() {
             cropping: true,
         }).then(image => {
             console.log(image);
+            setSelectedImage(image.path);
         });
     }
     const renderContent = () => (
@@ -84,24 +60,48 @@ export default function FormFood() {
 
             <Content style={{ backgroundColor: "#F4F4F4" }} >
                 <View style={styles.header}>
-                    <Text style={styles.labelheader}>Add to Food</Text>
+                    <Text style={styles.labelheader}>{title}</Text>
                 </View>
                 <Form style={styles.form}>
                     <Item floatingLabel rounded style={styles.item}>
-                        <Label style={styles.label}>Name Food</Label>
+                        <Label style={styles.label}>Full Name</Label>
                         <Input style={styles.input} />
                     </Item>
                     <Item floatingLabel rounded style={styles.item}>
-                        <Label style={styles.label}>Description</Label>
+                        <Label style={styles.label}>Number Phone</Label>
                         <Input style={styles.input} />
                     </Item>
                     <Item floatingLabel rounded style={styles.item}>
-                        <Label style={styles.label}>Ingredient</Label>
+                        <Label style={styles.label}>Address</Label>
+                        <Input style={styles.input} />
+                    </Item>
+                    <SwitchSelector
+                        initial={0}
+                        //onPress={value => this.setState({ gender: value })}
+                        textColor="#FFC75F" //'#7a44cf'
+                        selectedColor="#fff"
+                        buttonColor="#FFC75F"
+                        borderColor="#FFC75F"
+                        borderWidth={1.5}
+                        hasPadding
+                        options={[
+                            { label: "Female", value: "Female", },
+                            { label: "Male", value: "Male", },
+                        ]}
+                        testID="gender-switch-selector"
+                        accessibilityLabel="gender-switch-selector"
+                        style={styles.switch}
+                        selectedTextStyle={styles.switchtextselect}
+                        textStyle={styles.switchtext}
+                        imageStyle={styles.switchimg}
+                    />
+                    <Item floatingLabel rounded style={styles.item}>
+                        <Label style={styles.label}>Email</Label>
                         <Input style={styles.input} />
                     </Item>
                     <Item floatingLabel rounded style={styles.item}>
-                        <Label style={styles.label}>Price</Label>
-                        <Input style={styles.input} />
+                        <Label style={styles.label}>Password</Label>
+                        <Input style={styles.input} secureTextEntry />
                     </Item>
                     <Item rounded style={styles.item}>
                         <Picker
@@ -110,18 +110,27 @@ export default function FormFood() {
                             onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
                             itemStyle={styles.itemStyle}
                         >
-                            <Picker.Item label="Category" value="category" />
+                            <Picker.Item label="Roles" value="Roles" />
                             <Picker.Item label="Java" value="java" />
                             <Picker.Item label="JavaScript" value="js" />
                         </Picker>
                     </Item>
-                    <Button full rounded style={styles.btn}
-                        onPress={() => sheetRef.current.snapTo(0)}
-                    >
-                        <Text style={styles.textbtn}>Add Image</Text>
-                    </Button>
-                    <Button full rounded style={styles.btn}
+                    <View style={styles.viewImage}>
 
+                        <TouchableOpacity onPress={() => sheetRef.current.snapTo(0)}>
+                            {
+                                selectedImage == null &&
+                                <FontAwesome5 name="plus-circle" size={50} color="black" style={styles.iconadd} />
+                            }
+                            {
+                                selectedImage != null &&
+                                <Image source={{ uri: selectedImage }} style={styles.img} />
+                            }
+                        </TouchableOpacity>
+
+
+                    </View>
+                    <Button full rounded style={styles.btn}
                     >
                         <Text style={styles.textbtn}>Success</Text>
                     </Button>
@@ -206,6 +215,7 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         marginRight: 20,
         marginTop: 20,
+        marginBottom: 20,
         height: 70,
         backgroundColor: '#FFC75F',
     },
@@ -213,5 +223,45 @@ const styles = StyleSheet.create({
         fontSize: 28,
         fontWeight: '600',
         color: '#FFF'
-    }
+    },
+
+    viewImage: {
+        alignItems: 'center',
+        width: 120,
+        height: 120,
+        borderWidth: 1,
+        borderStyle: 'dashed',
+        alignSelf: 'stretch',
+        opacity: 0.5,
+        justifyContent: 'center',
+        margin: 10,
+        marginLeft: 30,
+    },
+    img: {
+        width: 120,
+        height: 120,
+    },
+    iconadd: {
+        opacity: 0.5,
+    },
+    switch: {
+        alignSelf: 'stretch',
+        marginLeft: 40,
+        marginRight: 40,
+        marginTop: 20,
+        backgroundColor: '#fff',
+
+    },
+    switchtextselect: {
+        fontWeight: 'bold',
+        fontSize: 18
+    },
+    switchtext: {
+        fontSize: 18
+    },
+    switchimg: {
+        width: 40,
+        height: 40,
+
+    },
 })
