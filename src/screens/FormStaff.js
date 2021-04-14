@@ -1,15 +1,41 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, Picker, Image, } from 'react-native'
 import { Container, Header, Content, Form, Item, Input, Label, Button, Left, Icon, Title, Right, Body } from 'native-base';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import header2IMG from '../assets/header2.png';
 import ImagePicker from 'react-native-image-crop-picker';
 import Animated from 'react-native-reanimated';
 import BottomSheet from 'reanimated-bottom-sheet';
-import { TouchableOpacity } from 'react-native';
 export default function FormFood() {
     const [selectedValue, setSelectedValue] = useState("category");
-    const [selectedImage, setSelectedImage] = useState(null);
+    const [filePath, setFilePath] = useState(null);
+    const [fileData, setFileData] = useState(null);
+    const [fileUri, setFileUri] = useState(null);
+
+    // function renderFileData() {
+    //     if (fileData) {
+    //         return <Image source={{ uri: 'data:image/jpeg;base64,' + fileData }}
+    //             style={styles.images}
+    //         />
+    //     } else {
+    //         return <Image source={header2IMG}
+    //             style={styles.images}
+    //         />
+    //     }
+    // }
+
+    // function renderFileUri() {
+    //     if (fileUri) {
+    //         return <Image
+    //             source={{ uri: fileUri }}
+    //             style={styles.images}
+    //         />
+    //     } else {
+    //         return <Image
+    //             source={header2IMG}
+    //             style={styles.images}
+    //         />
+    //     }
+    // }
     const selectFile = () => {
         ImagePicker.openPicker({
             width: 300,
@@ -17,7 +43,6 @@ export default function FormFood() {
             cropping: true
         }).then(image => {
             console.log(image);
-            setSelectedImage(image.path);
         });
     };
     const selectCamera = () => {
@@ -27,7 +52,6 @@ export default function FormFood() {
             cropping: true,
         }).then(image => {
             console.log(image);
-            setSelectedImage(image.path);
         });
     }
     const renderContent = () => (
@@ -91,22 +115,13 @@ export default function FormFood() {
                             <Picker.Item label="JavaScript" value="js" />
                         </Picker>
                     </Item>
-                    <View style={styles.viewImage}>
-
-                        <TouchableOpacity onPress={() => sheetRef.current.snapTo(0)}>
-                            {
-                                selectedImage == null &&
-                                <FontAwesome5 name="plus-circle" size={50} color="black" style={styles.iconadd} />
-                            }
-                            {
-                                selectedImage != null &&
-                                <Image source={{ uri: selectedImage }} style={styles.img} />
-                            }
-                        </TouchableOpacity>
-
-
-                    </View>
                     <Button full rounded style={styles.btn}
+                        onPress={() => sheetRef.current.snapTo(0)}
+                    >
+                        <Text style={styles.textbtn}>Add Image</Text>
+                    </Button>
+                    <Button full rounded style={styles.btn}
+
                     >
                         <Text style={styles.textbtn}>Success</Text>
                     </Button>
@@ -191,7 +206,6 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         marginRight: 20,
         marginTop: 20,
-        marginBottom: 20,
         height: 70,
         backgroundColor: '#FFC75F',
     },
@@ -199,25 +213,5 @@ const styles = StyleSheet.create({
         fontSize: 28,
         fontWeight: '600',
         color: '#FFF'
-    },
-
-    viewImage: {
-        alignItems: 'center',
-        width: 120,
-        height: 120,
-        borderWidth: 1,
-        borderStyle: 'dashed',
-        alignSelf: 'stretch',
-        opacity: 0.5,
-        justifyContent: 'center',
-        margin: 10,
-        marginLeft: 30,
-    },
-    img: {
-        width: 120,
-        height: 120,
-    },
-    iconadd: {
-        opacity: 0.5,
     }
 })
