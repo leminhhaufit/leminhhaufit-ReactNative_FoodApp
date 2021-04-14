@@ -1,15 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, Picker, Image, } from 'react-native'
 import { Container, Header, Content, Form, Item, Input, Label, Button, Left, Icon, Title, Right, Body } from 'native-base';
-import { launchCamera, launchImageLibrary, } from 'react-native-image-picker';
 import header2IMG from '../assets/header2.png';
-import ImagePicker from 'react-native-image-picker';
+import ImagePicker from 'react-native-image-crop-picker';
+import Animated from 'react-native-reanimated';
+import BottomSheet from 'reanimated-bottom-sheet';
 export default function FormFood() {
     const [selectedValue, setSelectedValue] = useState("category");
     const [filePath, setFilePath] = useState(null);
     const [fileData, setFileData] = useState(null);
     const [fileUri, setFileUri] = useState(null);
-
+    const [bottomSheet, setBottomSheet] = useState(false);
+    const [sheet, setSheet] = useState(null);
 
     // function renderFileData() {
     //     if (fileData) {
@@ -36,12 +38,55 @@ export default function FormFood() {
     //         />
     //     }
     // }
+    const selectFile = () => {
+        ImagePicker.openPicker({
+            width: 300,
+            height: 400,
+            cropping: true
+        }).then(image => {
+            console.log(image);
+        });
+    };
+    const selectCamera = () => {
+        ImagePicker.openCamera({
+            width: 300,
+            height: 400,
+            cropping: true,
+        }).then(image => {
+            console.log(image);
+        });
+    }
+    const renderContent = () => (
+        <View
+            style={{
+                backgroundColor: '#F4F4F4',
+                padding: 16,
+                height: 270,
+            }}
+        >
+            <Text style={styles.labelsheet}>Add Image</Text>
+            <Button full rounded style={styles.btn}
+                onPress={selectCamera}
+            >
+                <Text style={styles.textbtn}>Open Camera</Text>
+            </Button>
+            <Button full rounded style={styles.btn}
+                onPress={selectFile}
+            >
+                <Text style={styles.textbtn}>Select in library</Text>
+            </Button>
+            <Text style={styles.labelclose}>Swipe down to close</Text>
+        </View>
+    );
+
+
+    const sheetRef = React.useRef(null);
     return (
         <Container >
 
             <Content style={{ backgroundColor: "#F4F4F4" }} >
                 <View style={styles.header}>
-                    <Text style={styles.labelheader}>Thêm món ăn</Text>
+                    <Text style={styles.labelheader}>Add to Food</Text>
                 </View>
                 <Form style={styles.form}>
                     <Item floatingLabel rounded style={styles.item}>
@@ -72,34 +117,25 @@ export default function FormFood() {
                             <Picker.Item label="JavaScript" value="js" />
                         </Picker>
                     </Item>
-                    <View style={styles.ImageSections}>
-                        <View>
-                            {() => renderFileData()}
-                            <Text style={{ textAlign: 'center' }}>Base 64 String</Text>
-                        </View>
-                        <View>
-                            {() => renderFileUri()}
-                            <Text style={{ textAlign: 'center' }}>File Uri</Text>
-                        </View>
-                    </View>
-                    <Button full rounded style={styles.btn} onPress={() =>
-                        ImagePicker.launchImageLibrary(
-                            {
-                                mediaType: 'photo',
-                                includeBase64: false,
-                                maxHeight: 200,
-                                maxWidth: 200,
-                            },
-                            (response) => {
-                                console.log(response);
-                                setFilePath(response)
-                            },
-                        )
-                    }>
+                    <Button full rounded style={styles.btn}
+                        onPress={() => sheetRef.current.snapTo(0)}
+                    >
+                        <Text style={styles.textbtn}>Add Image</Text>
+                    </Button>
+                    <Button full rounded style={styles.btn}
+
+                    >
                         <Text style={styles.textbtn}>Success</Text>
                     </Button>
                 </Form>
             </Content>
+            <BottomSheet
+                ref={sheetRef}
+                snapPoints={[270, 200, 0]}
+                borderRadius={50}
+                renderContent={renderContent}
+            />
+
         </Container >
     )
 }
@@ -139,6 +175,20 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
         alignItems: 'stretch',
         padding: 40,
+        color: '#FFC75F'
+    },
+    labelsheet: {
+        fontSize: 32,
+        fontWeight: 'bold',
+        alignSelf: 'center',
+        alignItems: 'stretch',
+        color: '#FFC75F'
+    },
+    labelclose: {
+        paddingTop: 10,
+        fontWeight: 'bold',
+        alignSelf: 'center',
+        alignItems: 'stretch',
         color: '#FFC75F'
     },
     form: {
