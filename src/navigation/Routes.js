@@ -5,13 +5,15 @@ import { AuthContext } from './AuthProvider';
 
 import AuthStack from './AuthStack';
 import AppStack from './AppStack';
-import FoodDetail from '../screens/FoodDetail';
+import AdminStack from './AdminStack';
+import KitchenStack from './KitchenStack';
 
 const Routes = () => {
   const { user, setUser } = useContext(AuthContext);
   const [initializing, setInitializing] = useState(true);
 
   const onAuthStateChanged = (txtuser) => {
+    console.log("txtuser", txtuser);
     setUser(txtuser);
     if (initializing) setInitializing(false);
   };
@@ -25,7 +27,7 @@ const Routes = () => {
 
   return (
     <NavigationContainer>
-      {user ? <AppStack /> : <AuthStack />}
+      {user ? <KitchenStack /> : <AuthStack />}
 
     </NavigationContainer>
   );

@@ -18,7 +18,7 @@ import FormCategory from '../screens/FormCategory';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-const FeedStack = ({ navigation }) => (
+const HomeStack = ({ navigation }) => (
     <Stack.Navigator>
         <Stack.Screen
             name="Home"
@@ -29,32 +29,13 @@ const FeedStack = ({ navigation }) => (
         />
     </Stack.Navigator>
 );
-const OrderFoodStack = ({ navigation }) => (
+const HomeAdminStack = ({ navigation }) => (
     <Stack.Navigator>
         <Stack.Screen
             name="Order Food"
-            component={OrderFood}
+            component={HomeAdmin}
             options={{
                 headerShown: false,
-            }}
-        />
-    </Stack.Navigator>
-);
-const PaymentStack = ({ navigation }) => (
-    <Stack.Navigator>
-        <Stack.Screen
-            name="Payment"
-            component={Payment}
-            options={{
-                headerShown: false,
-                // headerLeft: () => (
-                //     <View style={{ marginLeft: 20 }}>
-                //         <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-                //             <FontAwesome5 name="arrow-left" color="white" size={28} />
-
-                //         </TouchableOpacity>
-                //     </View>
-                // )
             }}
         />
     </Stack.Navigator>
@@ -70,15 +51,7 @@ const ProfileStack = ({ navigation }) => (
         />
     </Stack.Navigator>
 );
-const FoodDetailStack = ({ navigation }) => (
-    <Stack.Navigator>
-        <Stack.Screen
-            name="FoodDetail"
-            component={FoodDetail}
-        />
-    </Stack.Navigator>
-);
-const AppStack = () => {
+const AdminStack = () => {
     return (
         <Tab.Navigator
             tabBarOptions={{
@@ -86,7 +59,7 @@ const AppStack = () => {
             }}>
             <Tab.Screen
                 name="Home"
-                component={FeedStack}
+                component={HomeStack}
                 options={({ route }) => ({
                     tabBarLabel: 'Home',
 
@@ -97,23 +70,12 @@ const AppStack = () => {
             />
             <Tab.Screen
                 name="Order"
-                component={OrderFoodStack}
+                component={HomeAdminStack}
                 options={({ route }) => ({
-                    tabBarLabel: 'Food',
+                    tabBarLabel: 'List Manage',
 
                     tabBarIcon: ({ color, size }) => (
-                        <FontAwesome5 name="utensils" color={color} size={28} />
-                    ),
-                })}
-            />
-            <Tab.Screen
-                name="Payment"
-                component={PaymentStack}
-                options={({ route }) => ({
-                    tabBarLabel: 'Payment',
-
-                    tabBarIcon: ({ color, size }) => (
-                        <FontAwesome5 name="shopping-basket" color={color} size={28} />
+                        <FontAwesome5 name="tasks" color={color} size={28} />
                     ),
                 })}
             />
@@ -133,4 +95,4 @@ const AppStack = () => {
     );
 };
 
-export default AppStack;
+export default AdminStack;
