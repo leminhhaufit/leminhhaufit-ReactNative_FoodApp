@@ -11,7 +11,7 @@ export default function FormFood(props) {
     const { title } = props
     const selectFile = () => {
         ImagePicker.openPicker({
-            width: 300,
+            width: 400,
             height: 400,
             cropping: true
         }).then(image => {
@@ -21,7 +21,7 @@ export default function FormFood(props) {
     };
     const selectCamera = () => {
         ImagePicker.openCamera({
-            width: 300,
+            width: 400,
             height: 400,
             cropping: true,
         }).then(image => {
@@ -204,8 +204,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: 120,
         height: 120,
-        borderWidth: 1,
-        borderStyle: 'dashed',
+        borderWidth: 5,
+        borderStyle: 'dotted',
+        borderRadius: 40,
         alignSelf: 'stretch',
         opacity: 0.5,
         justifyContent: 'center',

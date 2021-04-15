@@ -12,6 +12,8 @@ import HomeKitchen from '../screens/HomeKitchen';
 import Information from '../screens/Information';
 import HomeAdmin from '../screens/HomeAdmin';
 import ManageFood from '../screens/ManageFood';
+import ManageStaff from '../screens/ManageStaff';
+import ManageCategory from '../screens/ManageCategory';
 import FormFood from '../screens/FormFood';
 import FormStaff from '../screens/FormStaff';
 import FormCategory from '../screens/FormCategory';
@@ -22,7 +24,7 @@ const HomeStack = ({ navigation }) => (
     <Stack.Navigator>
         <Stack.Screen
             name="Home"
-            component={HomeScreen}
+            component={ManageCategory}
             options={{
                 headerShown: false,
             }}
@@ -33,7 +35,7 @@ const HomeAdminStack = ({ navigation }) => (
     <Stack.Navigator>
         <Stack.Screen
             name="Order Food"
-            component={HomeAdmin}
+            component={ManageStaff}
             options={{
                 headerShown: false,
             }}

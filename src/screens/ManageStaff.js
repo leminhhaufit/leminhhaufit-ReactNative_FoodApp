@@ -1,23 +1,19 @@
 import React from 'react'
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { Button } from 'react-native-elements';
-import FlatListFoodManage from '../components/FlatListFoodManage';
+import FlatListStaffManage from '../components/FlatListStaffManage';
 import Header from '../components/Header';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-export default function ManageFood() {
+export default function ManageStaff() {
     return (
         <View style={styles.container}>
             <ScrollView style={styles.container2}>
                 <View style={styles.top}>
                     <Header title="List Food" />
-
                 </View>
-
                 <View style={styles.content}>
-                    <FlatListFoodManage />
-
+                    <FlatListStaffManage />
                 </View>
-
             </ScrollView>
             <View style={styles.fixedbutton}>
                 <Button icon={<FontAwesome5 name="plus-circle" size={50} color="#FFF" style={styles.iconadd} />} buttonStyle={styles.btnadd} />

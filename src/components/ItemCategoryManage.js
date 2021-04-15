@@ -3,10 +3,10 @@ import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 
-export default function ItemFoodManage(props) {
-    const { foodlist } = props;
+export default function ItemCategoryManage(props) {
+    const { catelist } = props;
     //#375A45 green #E35929 red
-    const { id, title, description, price, material, status, url } = foodlist;
+    const { id, name, description, status } = catelist;
     let icon = "#375A45";
     if (status == true) {
         icon = "#E35929";
@@ -14,12 +14,8 @@ export default function ItemFoodManage(props) {
     return (
         <View style={styles.container} key={id}>
             <View style={styles.container2}>
-                <Text style={styles.title}>{title}</Text>
-                <Text style={styles.content}>{material} </Text>
-                <Image style={styles.image} source={url} />
-                <View style={styles.price}>
-                    <Text style={styles.txtprice}>{price} <FontAwesome5Icon name="dollar-sign" size={20} color="black" /> </Text>
-                </View>
+                <Text style={styles.title}>{name}</Text>
+                <Text style={styles.content}>{description} </Text>
             </View>
             <View style={styles.btn}>
                 <TouchableOpacity style={styles.btndel}>
@@ -72,10 +68,10 @@ const styles = StyleSheet.create({
     },
     image: {
         position: 'absolute',
-        width: 150,
-        height: 150,
-        right: -45,
-        top: -5,
+        width: 130,
+        height: 130,
+        right: -35,
+        top: 5,
     },
     title: {
         fontSize: 26,
@@ -129,8 +125,8 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end',
         paddingTop: 10,
         paddingLeft: 10,
-        fontSize: 22,
-        fontWeight: 'bold',
+        fontSize: 12,
+        marginLeft: 12,
     },
 
 })
