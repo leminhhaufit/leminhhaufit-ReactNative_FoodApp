@@ -37,19 +37,19 @@ export default function FormStaff(props) {
             style={{
                 backgroundColor: '#F4F4F4',
                 padding: 16,
-                height: 270,
+                height: 300,
             }}
         >
             <Text style={styles.labelsheet}>Add Image</Text>
             <Button full rounded style={styles.btn}
                 onPress={selectCamera}
             >
-                <Text style={styles.textbtn}>Open Camera</Text>
+                <Text style={styles.textbtn}><FontAwesome5 name="camera" size={40} color="#FFF" /> Open Camera</Text>
             </Button>
             <Button full rounded style={styles.btn}
                 onPress={selectFile}
             >
-                <Text style={styles.textbtn}>Select in library</Text>
+                <Text style={styles.textbtn}><FontAwesome5 name="photo-video" size={40} color="#FFF" /> Select in library</Text>
             </Button>
             <Text style={styles.labelclose}>Swipe down to close</Text>
         </View>
@@ -66,17 +66,19 @@ export default function FormStaff(props) {
                 </View>
                 <Form style={styles.form}>
                     <Item floatingLabel rounded style={styles.item}>
-                        <Label style={styles.label}>Full Name</Label>
+
+                        <Label style={styles.label}><FontAwesome5 name="user-tie" size={32} color="#FFC75F" /> Full Name</Label>
                         <Input style={styles.input} />
                     </Item>
                     <Item floatingLabel rounded style={styles.item}>
-                        <Label style={styles.label}>Number Phone</Label>
+                        <Label style={styles.label}><FontAwesome5 name="phone-alt" size={32} color="#FFC75F" /> Number Phone</Label>
                         <Input style={styles.input} />
                     </Item>
                     <Item floatingLabel rounded style={styles.item}>
-                        <Label style={styles.label}>Address</Label>
+                        <Label style={styles.label}><FontAwesome5 name="map-marker-alt" size={32} color="#FFC75F" /> Address</Label>
                         <Input style={styles.input} />
                     </Item>
+                    <Label style={styles.label2}><FontAwesome5 name="venus-mars" size={32} color="#FFC75F" /> Gender</Label>
                     <SwitchSelector
                         initial={0}
                         //onPress={value => this.setState({ gender: value })}
@@ -98,13 +100,14 @@ export default function FormStaff(props) {
                         imageStyle={styles.switchimg}
                     />
                     <Item floatingLabel rounded style={styles.item}>
-                        <Label style={styles.label}>Email</Label>
+                        <Label style={styles.label}><FontAwesome5 name="at" size={32} color="#FFC75F" /> Email</Label>
                         <Input style={styles.input} />
                     </Item>
                     <Item floatingLabel rounded style={styles.item}>
-                        <Label style={styles.label}>Password</Label>
+                        <Label style={styles.label}><FontAwesome5 name="lock" size={32} color="#FFC75F" /> Password</Label>
                         <Input style={styles.input} secureTextEntry />
                     </Item>
+                    <Label style={styles.label2}><FontAwesome5 name="user-tag" size={32} color="#FFC75F" /> Roles</Label>
                     <Item rounded style={styles.item}>
                         <Picker
                             selectedValue={selectedValue}
@@ -117,8 +120,8 @@ export default function FormStaff(props) {
                             <Picker.Item label="JavaScript" value="js" />
                         </Picker>
                     </Item>
+                    <Label style={styles.label2}><FontAwesome5 name="image" size={32} color="#FFC75F" /> Avatar</Label>
                     <View style={styles.viewImage}>
-
                         <TouchableOpacity onPress={() => sheetRef.current.snapTo(0)}>
                             {
                                 selectedImage == null &&
@@ -134,13 +137,13 @@ export default function FormStaff(props) {
                     </View>
                     <Button full rounded style={styles.btn}
                     >
-                        <Text style={styles.textbtn}>Success</Text>
+                        <Text style={styles.textbtn}><FontAwesome5 name="download" size={32} color="#FFF" /> Comfirm</Text>
                     </Button>
                 </Form>
             </Content>
             <BottomSheet
                 ref={sheetRef}
-                snapPoints={[270, 200, 0]}
+                snapPoints={[300, 200, 0]}
                 borderRadius={50}
                 renderContent={renderContent}
             />
@@ -155,6 +158,15 @@ const styles = StyleSheet.create({
         fontSize: 22,
         fontWeight: '500',
 
+    },
+    label2: {
+        marginTop: 20,
+        paddingLeft: 40,
+        fontSize: 22,
+        fontWeight: '500',
+    },
+    iconlabel: {
+        opacity: 1,
     },
     input: {
         paddingLeft: 20,
@@ -194,7 +206,6 @@ const styles = StyleSheet.create({
         color: '#FFC75F'
     },
     labelclose: {
-        paddingTop: 10,
         fontWeight: 'bold',
         alignSelf: 'center',
         alignItems: 'stretch',
@@ -243,6 +254,7 @@ const styles = StyleSheet.create({
     img: {
         width: 120,
         height: 120,
+        borderRadius: 40,
     },
     iconadd: {
         opacity: 0.5,

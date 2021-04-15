@@ -34,19 +34,19 @@ export default function FormFood(props) {
             style={{
                 backgroundColor: '#F4F4F4',
                 padding: 16,
-                height: 270,
+                height: 300,
             }}
         >
             <Text style={styles.labelsheet}>Add Image</Text>
             <Button full rounded style={styles.btn}
                 onPress={selectCamera}
             >
-                <Text style={styles.textbtn}>Open Camera</Text>
+                <Text style={styles.textbtn}><FontAwesome5 name="camera" size={40} color="#FFF" /> Open Camera</Text>
             </Button>
             <Button full rounded style={styles.btn}
                 onPress={selectFile}
             >
-                <Text style={styles.textbtn}>Select in library</Text>
+                <Text style={styles.textbtn}><FontAwesome5 name="photo-video" size={40} color="#FFF" /> Select in library</Text>
             </Button>
             <Text style={styles.labelclose}>Swipe down to close</Text>
         </View>
@@ -63,21 +63,22 @@ export default function FormFood(props) {
                 </View>
                 <Form style={styles.form}>
                     <Item floatingLabel rounded style={styles.item}>
-                        <Label style={styles.label}>Name Food</Label>
+                        <Label style={styles.label}><FontAwesome5 name="pizza-slice" size={32} color="#FFC75F" /> Name Food</Label>
                         <Input style={styles.input} />
                     </Item>
                     <Item floatingLabel rounded style={styles.item}>
-                        <Label style={styles.label}>Description</Label>
+                        <Label style={styles.label}><FontAwesome5 name="file-alt" solid size={32} color="#FFC75F" /> Description</Label>
                         <Input style={styles.input} />
                     </Item>
                     <Item floatingLabel rounded style={styles.item}>
-                        <Label style={styles.label}>Ingredient</Label>
+                        <Label style={styles.label}><FontAwesome5 name="book-open" solid size={32} color="#FFC75F" /> Ingredient</Label>
                         <Input style={styles.input} />
                     </Item>
                     <Item floatingLabel rounded style={styles.item}>
-                        <Label style={styles.label}>Price</Label>
+                        <Label style={styles.label}><FontAwesome5 name="dollar-sign" solid size={32} color="#FFC75F" /> Price</Label>
                         <Input style={styles.input} />
                     </Item>
+                    <Label style={styles.label2}><FontAwesome5 name="tags" solid size={32} color="#FFC75F" /> Category</Label>
                     <Item rounded style={styles.item}>
                         <Picker
                             selectedValue={selectedValue}
@@ -90,6 +91,7 @@ export default function FormFood(props) {
                             <Picker.Item label="JavaScript" value="js" />
                         </Picker>
                     </Item>
+                    <Label style={styles.label2}><FontAwesome5 name="image" size={32} color="#FFC75F" /> Images</Label>
                     <View style={styles.viewImage}>
 
                         <TouchableOpacity onPress={() => sheetRef.current.snapTo(0)}>
@@ -107,13 +109,13 @@ export default function FormFood(props) {
                     </View>
                     <Button full rounded style={styles.btn}
                     >
-                        <Text style={styles.textbtn}>Success</Text>
+                        <Text style={styles.textbtn}><FontAwesome5 name="download" size={32} color="#FFF" /> Comfirm</Text>
                     </Button>
                 </Form>
             </Content>
             <BottomSheet
                 ref={sheetRef}
-                snapPoints={[270, 200, 0]}
+                snapPoints={[300, 200, 0]}
                 borderRadius={50}
                 renderContent={renderContent}
             />
@@ -128,6 +130,12 @@ const styles = StyleSheet.create({
         fontSize: 22,
         fontWeight: '500',
 
+    },
+    label2: {
+        paddingLeft: 40,
+        fontSize: 22,
+        fontWeight: '500',
+        marginTop: 30,
     },
     input: {
         paddingLeft: 20,
@@ -167,7 +175,6 @@ const styles = StyleSheet.create({
         color: '#FFC75F'
     },
     labelclose: {
-        paddingTop: 10,
         fontWeight: 'bold',
         alignSelf: 'center',
         alignItems: 'stretch',

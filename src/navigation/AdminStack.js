@@ -24,7 +24,7 @@ const HomeStack = ({ navigation }) => (
     <Stack.Navigator>
         <Stack.Screen
             name="Home"
-            component={ManageCategory}
+            component={FormCategory}
             options={{
                 headerShown: false,
             }}

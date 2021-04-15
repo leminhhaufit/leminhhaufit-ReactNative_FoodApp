@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, } from 'react-native'
 import { Container, Content, Form, Item, Input, Label, Button, Textarea } from 'native-base';
-
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 export default function FormCategory(props) {
     const { title } = props;
     return (
@@ -12,14 +12,15 @@ export default function FormCategory(props) {
                 </View>
                 <Form style={styles.form}>
                     <Item floatingLabel rounded style={styles.item}>
-                        <Label style={styles.label}>Name Category</Label>
+                        <Label style={styles.label}><FontAwesome5 name="tags" solid size={32} color="#FFC75F" /> Name Category</Label>
                         <Input style={styles.input} />
                     </Item>
-                    <Textarea rowSpan={7} bordered placeholder="Description" style={styles.textarea} />
+                    <Label style={styles.label2}><FontAwesome5 name="file-alt" solid size={32} color="#FFC75F" /> Description</Label>
+                    <Textarea rowSpan={7} bordered placeholder="Description..." style={styles.textarea} />
 
                     <Button full rounded style={styles.btn}
                     >
-                        <Text style={styles.textbtn}>Success</Text>
+                        <Text style={styles.textbtn}><FontAwesome5 name="download" size={32} color="#FFF" /> Comfirm</Text>
                     </Button>
                 </Form>
             </Content>
@@ -33,6 +34,12 @@ const styles = StyleSheet.create({
         fontSize: 22,
         fontWeight: '500',
 
+    },
+    label2: {
+        paddingLeft: 40,
+        fontSize: 22,
+        fontWeight: '500',
+        marginTop: 30,
     },
     input: {
         paddingLeft: 20,
