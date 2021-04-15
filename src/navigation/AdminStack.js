@@ -14,9 +14,11 @@ import HomeAdmin from '../screens/HomeAdmin';
 import ManageFood from '../screens/ManageFood';
 import ManageStaff from '../screens/ManageStaff';
 import ManageCategory from '../screens/ManageCategory';
+import ManageOrders from '../screens/ManageOrders';
 import FormFood from '../screens/FormFood';
 import FormStaff from '../screens/FormStaff';
 import FormCategory from '../screens/FormCategory';
+import Statistical from '../screens/Statistical';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -24,7 +26,7 @@ const HomeStack = ({ navigation }) => (
     <Stack.Navigator>
         <Stack.Screen
             name="Home"
-            component={FormCategory}
+            component={Statistical}
             options={{
                 headerShown: false,
             }}
