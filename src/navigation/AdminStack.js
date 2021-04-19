@@ -94,6 +94,26 @@ const HomeAdminStack = ({ navigation }) => (
                     headerShown: false,
                 }}
             />
+            <Stack.Screen
+                name="FormCategory"
+                component={FormCategory}
+                initialParams={{ title: "Add to Category" }}
+                options={({ route }) => ({ title: route.params.title })}
+            />
+            <Stack.Screen
+                name="FormStaff"
+                component={FormStaff}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name="FormFood"
+                component={FormFood}
+                options={{
+                    headerShown: false,
+                }}
+            />
         </Stack.Navigator>
     </NavContextAdmin.Provider>
 );

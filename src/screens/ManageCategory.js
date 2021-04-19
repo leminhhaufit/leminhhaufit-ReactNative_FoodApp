@@ -4,7 +4,7 @@ import { Button } from 'react-native-elements';
 import FlatListCategoryManage from '../components/FlatListCategoryManage';
 import Header from '../components/Header';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-export default function ManageCategory() {
+export default function ManageCategory({ navigation }) {
     return (
         <View style={styles.container}>
             <ScrollView style={styles.container2}>
@@ -16,7 +16,7 @@ export default function ManageCategory() {
                 </View>
             </ScrollView>
             <View style={styles.fixedbutton}>
-                <Button icon={<FontAwesome5 name="plus-circle" size={50} color="#FFF" style={styles.iconadd} />} buttonStyle={styles.btnadd} />
+                <Button onPress={() => navigation.navigate("FormCategory", { title: "Add New Category" })} icon={<FontAwesome5 name="plus-circle" size={50} color="#FFF" style={styles.iconadd} />} buttonStyle={styles.btnadd} />
             </View>
         </View>
     )

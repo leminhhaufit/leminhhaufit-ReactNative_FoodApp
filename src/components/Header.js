@@ -71,8 +71,6 @@ function Header(props) {
                         renderItem={renderItem}
                         onSnapToItem={index => setActiveIndex(index)}
                         autoplay={true}
-                        scrollInterpolator={scrollInterpolator}
-                        slideInterpolatedStyle={animatedStyles}
                         useScrollView={true}
                     />
                     <View style={styles.container1}>

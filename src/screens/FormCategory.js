@@ -2,13 +2,13 @@ import React from 'react'
 import { StyleSheet, Text, View, } from 'react-native'
 import { Container, Content, Form, Item, Input, Label, Button, Textarea } from 'native-base';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-export default function FormCategory(props) {
-    const { title } = props;
+export default function FormCategory({ props, route }) {
+    const { title, } = props;
     return (
         <Container >
             <Content style={{ backgroundColor: "#F4F4F4" }} >
                 <View style={styles.header}>
-                    <Text style={styles.labelheader}>{title}</Text>
+                    <Text style={styles.labelheader}>{route.params.title}</Text>
                 </View>
                 <Form style={styles.form}>
                     <Item floatingLabel rounded style={styles.item}>
