@@ -136,7 +136,7 @@ export default function Statistical() {
                         style={styles.chartmini2}
                     />
                     <Text style={styles.label}>Sales in Month 2</Text>
-                </View>mi
+                </View>
             </View>
             <View style={styles.chartminiview}>
                 <View style={styles.charmini}>
