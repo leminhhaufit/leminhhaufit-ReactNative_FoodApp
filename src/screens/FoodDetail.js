@@ -8,7 +8,7 @@ import { NavContext } from '../navigation/AppStack';
 
 export default function FoodDetail() {
     const [loading, setLoading] = useState(false);
-    const [quantity, setQuantity] = useState(0);
+    const [quantity, setQuantity] = useState(1);
     const [price, setPrice] = useState(199);
 
     function onChangeQuantityPlus() {
@@ -18,8 +18,8 @@ export default function FoodDetail() {
     }
     function onChangeQuantityMinus() {
         setQuantity(quantity - 1);
-        if (quantity === 0) {
-            setQuantity(0);
+        if (quantity === 1) {
+            setQuantity(1);
         }
 
     }
