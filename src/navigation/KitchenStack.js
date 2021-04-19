@@ -17,22 +17,31 @@ import FormStaff from '../screens/FormStaff';
 import FormCategory from '../screens/FormCategory';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
-
+export const NavContextnew = React.createContext();
 const HomeStack = ({ navigation }) => (
-    <Stack.Navigator>
-        <Stack.Screen
-            name="Home"
-            component={HomeScreen}
-            options={{
-                headerShown: false,
-            }}
-        />
-    </Stack.Navigator>
+    <NavContextnew.Provider value={{ navigation: navigation }}>
+        <Stack.Navigator>
+            <Stack.Screen
+                name="Home"
+                component={HomeScreen}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name="FoodDetail"
+                component={FoodDetail}
+                options={{
+                    headerShown: false,
+                }}
+            />
+        </Stack.Navigator>
+    </NavContextnew.Provider>
 );
 const HomeKitchenStack = ({ navigation }) => (
     <Stack.Navigator>
         <Stack.Screen
-            name="Order Food"
+            name="HomeKitchen"
             component={HomeKitchen}
             options={{
                 headerShown: false,

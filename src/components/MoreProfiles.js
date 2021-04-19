@@ -2,15 +2,17 @@ import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { signOut } from '../config/firebaseAPI';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { NavContext } from '../navigation/AppStack';
 export default function MoreProfiles() {
     return (
+
         <View style={styles.container}>
 
             <View style={styles.row1}>
                 <TouchableOpacity>
                     <View style={styles.settingstart}>
                         <FontAwesome5 name="cog" size={80} color="#FFC75F" />
-                        <Text style={styles.label1}>Profiles</Text>
+                        <Text style={styles.label1}>Settings</Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity>
@@ -33,12 +35,14 @@ export default function MoreProfiles() {
                         <Text style={styles.label1}>Profiles</Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity>
-                    <View style={styles.settingmid}>
-                        <FontAwesome5 name="info-circle" size={80} color="#FFC75F" />
-                        <Text style={styles.label1}>Information</Text>
-                    </View>
-                </TouchableOpacity>
+                <NavContext.Consumer>
+                    {({ navigation }) => <TouchableOpacity onPress={() => navigation.navigate("Information")}>
+                        <View style={styles.settingmid}>
+                            <FontAwesome5 name="info-circle" size={80} color="#FFC75F" />
+                            <Text style={styles.label1}>Information</Text>
+                        </View>
+                    </TouchableOpacity>}
+                </NavContext.Consumer>
                 <TouchableOpacity onPress={() => signOut()}>
                     <View style={styles.settingend}>
                         <FontAwesome5 name="sign-out-alt" size={80} color="#FFC75F" />
@@ -49,6 +53,7 @@ export default function MoreProfiles() {
 
 
         </View>
+
     )
 }
 

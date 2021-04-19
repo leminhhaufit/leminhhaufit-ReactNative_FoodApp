@@ -11,6 +11,7 @@ import {
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { Dimensions } from "react-native";
 const screenWidth = Dimensions.get("window").width;
+import { NavContextAdmin } from '../navigation/AdminStack';
 export default function Statistical() {
     const data = {
         labels: ["January", "February", "March", "April", "May", "June"],
@@ -85,10 +86,16 @@ export default function Statistical() {
         <View style={styles.container}>
             <View style={styles.head}>
                 <Text style={styles.title}>
-                    <TouchableOpacity>
-                        <FontAwesome5 name="chevron-circle-left" size={28} color="#FFC75F" style={styles.iconback} />
-                    </TouchableOpacity>
-                     Statistical</Text>
+                    <NavContextAdmin.Consumer>
+                        {({ navigation }) =>
+                            <TouchableOpacity onPress={() => navigation.goBack()}>
+                                <FontAwesome5 name="chevron-circle-left" size={28} color="#FFC75F" style={styles.iconback} />
+                            </TouchableOpacity>}
+                    </NavContextAdmin.Consumer>
+
+                     Statistical
+
+                     </Text>
             </View>
             <View style={styles.charview}>
                 <LineChart
@@ -159,7 +166,7 @@ export default function Statistical() {
                     <Text style={styles.label}>Sales Total</Text>
                 </View>
             </View>
-        </View>
+        </View >
     )
 }
 

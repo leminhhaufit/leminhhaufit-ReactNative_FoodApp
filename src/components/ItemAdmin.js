@@ -2,22 +2,26 @@ import React from 'react'
 
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
-
+import { NavContextAdmin } from '../navigation/AdminStack';
 export default function ItemFoodManage(props) {
     const { adminlist } = props;
 
     const { id, title, description, status, url, icon } = adminlist;
     return (
-        <TouchableOpacity style={styles.container}>
-            <View style={styles.container2}>
-                <Text style={styles.title}>{title}</Text>
-                <Text style={styles.content}>{description} </Text>
-                <Image style={styles.image} source={url} />
-                <View style={styles.btnadd}>
-                    <FontAwesome5Icon name={icon} size={36} color="#FFF" style={{ alignSelf: 'center', paddingTop: 5, }} />
-                </View>
-            </View>
-        </TouchableOpacity>
+        <NavContextAdmin.Consumer>
+            {({ navigation }) =>
+                <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('Staff')}>
+                    <View style={styles.container2}>
+                        <Text style={styles.title}>{title}</Text>
+                        <Text style={styles.content}>{description} </Text>
+                        <Image style={styles.image} source={url} />
+                        <View style={styles.btnadd}>
+                            <FontAwesome5Icon name={icon} size={36} color="#FFF" style={{ alignSelf: 'center', paddingTop: 5, }} />
+                        </View>
+                    </View>
+                </TouchableOpacity>
+            }
+        </NavContextAdmin.Consumer>
     )
 }
 const styles = StyleSheet.create({

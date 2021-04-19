@@ -9,7 +9,7 @@ export default function ManageFood() {
         <View style={styles.container}>
             <ScrollView style={styles.container2}>
                 <View style={styles.top}>
-                    <Header title="List Food" />
+                    <Header title="List Food" goBack={true} />
 
                 </View>
 

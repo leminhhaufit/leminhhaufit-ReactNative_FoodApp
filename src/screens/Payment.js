@@ -2,13 +2,21 @@ import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
 import { Button } from 'react-native-elements';
 import FlatListItemCart from '../components/FlatListItemCart';
+import { Item, Input, Label } from 'native-base';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 export default function Payment({ navigation }) {
     return (
 
         <View style={styles.container}>
-            <Text style={styles.title2}>Food Cart</Text>
-            <FlatListItemCart />
+            <View style={styles.cartview}>
+                <Text style={styles.title2}>Food Cart</Text>
+                <FlatListItemCart />
+                <Item floatingLabel rounded style={styles.item}>
 
+                    <Label style={styles.label}><FontAwesome5 name="list-ol" size={32} color="#FFC75F" /> Number Table</Label>
+                    <Input style={styles.input} />
+                </Item>
+            </View>
             <View style={styles.infor}>
                 <Text style={styles.title}>Price Details:</Text>
                 <View style={styles.details}>
@@ -39,7 +47,7 @@ export default function Payment({ navigation }) {
 
                     <Text style={styles.titletotal}>1999999999$</Text>
 
-                    <Button buttonStyle={styles.pay} titleStyle={styles.titleadd}
+                    <Button buttonStyle={styles.pay} icon={<FontAwesome5 name="amazon-pay" size={32} color="#FFF" />} titleStyle={styles.titleadd}
                         title="Payment"
                         onPress={() => navigation.navigate('FoodDetail')}
                     />
@@ -51,16 +59,21 @@ export default function Payment({ navigation }) {
 
 const styles = StyleSheet.create({
     container: {
+        flex: 3,
         backgroundColor: '#F4F4F4',
 
     },
+    cartview: {
+        flex: 2,
+    },
     infor: {
+        flex: 1,
         marginLeft: 10,
         marginRight: 10,
+        marginBottom: 10,
         height: 200,
         alignSelf: 'stretch',
         backgroundColor: '#FFF',
-        marginTop: 50,
         borderRadius: 15,
         shadowColor: "#000",
         shadowOffset: {
@@ -70,7 +83,6 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.22,
         shadowRadius: 2.22,
         elevation: 3,
-        marginBottom: 30,
     },
     title: {
         fontSize: 22,
@@ -89,6 +101,7 @@ const styles = StyleSheet.create({
         paddingTop: 20,
         paddingLeft: 20,
         paddingBottom: 10,
+
     },
     titletotal: {
         fontSize: 22,
@@ -138,5 +151,32 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: '#FFF',
         padding: 10,
+    },
+    label: {
+        paddingLeft: 20,
+        fontSize: 22,
+        fontWeight: '500',
+    },
+    input: {
+        paddingLeft: 20,
+        height: 50,
+        fontSize: 22,
+        fontWeight: '600',
+
+    },
+    item: {
+        marginLeft: 20,
+        marginRight: 20,
+        marginTop: 20,
+        marginBottom: 10,
+        backgroundColor: '#FFF',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 1,
+        },
+        shadowOpacity: 0.22,
+        shadowRadius: 2.22,
+        elevation: 3,
     },
 })

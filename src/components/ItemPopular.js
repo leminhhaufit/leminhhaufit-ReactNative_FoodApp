@@ -1,28 +1,29 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
-
+import { NavContext } from '../navigation/AppStack';
+import { NavContextAdmin } from '../navigation/AdminStack';
+import { NavContextKit } from '../navigation/KitchenStack';
 export default function ItemPopular(props) {
     const { foodlist } = props;
-
     const { id, title, description, price, material, status, url } = foodlist;
     return (
         <View style={styles.container}>
-            <TouchableOpacity style={styles.container2}>
-                <Text style={styles.award}><FontAwesome5Icon name="pizza-slice" size={16} color="#F59507" /> Top 1 week</Text>
-                <Text style={styles.title}>{title}</Text>
-                <Text style={styles.content}>{material} </Text>
-                <Image style={styles.image} source={url} />
-                <View style={styles.price}>
-
-                    <Text style={styles.txtprice}>{price} <FontAwesome5Icon name="dollar-sign" size={20} color="black" /> </Text>
-                </View>
-            </TouchableOpacity>
+            <NavContextAdmin.Consumer>
+                {({ navigation }) => <TouchableOpacity style={styles.container2} onPress={() => navigation.navigate("FoodDetail")}>
+                    <Text style={styles.award}><FontAwesome5Icon name="pizza-slice" size={16} color="#F59507" /> Top 1 week</Text>
+                    <Text style={styles.title}>{title}</Text>
+                    <Text style={styles.content}>{material} </Text>
+                    <Image style={styles.image} source={url} />
+                    <View style={styles.price}>
+                        <Text style={styles.txtprice}>{price} <FontAwesome5Icon name="dollar-sign" size={20} color="black" /> </Text>
+                    </View>
+                </TouchableOpacity>}
+            </NavContextAdmin.Consumer>
             <TouchableOpacity style={styles.btnadd}>
                 <FontAwesome5Icon name="plus" size={16} color="black" style={styles.iconplus} />
             </TouchableOpacity>
-
         </View >
     )
 }

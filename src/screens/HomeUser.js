@@ -10,8 +10,7 @@ HomeUser.propTypes = {
 
 };
 
-
-function HomeUser(props) {
+function HomeUser() {
     return (
         <ScrollView >
             <HeaderHome />

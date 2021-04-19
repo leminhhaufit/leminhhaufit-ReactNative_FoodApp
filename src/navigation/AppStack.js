@@ -15,30 +15,55 @@ import ManageFood from '../screens/ManageFood';
 import FormFood from '../screens/FormFood';
 import FormStaff from '../screens/FormStaff';
 import FormCategory from '../screens/FormCategory';
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
-
+export const NavContext = React.createContext();
 const FeedStack = ({ navigation }) => (
-    <Stack.Navigator>
-        <Stack.Screen
-            name="Home"
-            component={HomeScreen}
-            options={{
-                headerShown: false,
-            }}
-        />
-    </Stack.Navigator>
+    <NavContext.Provider value={{
+        navigation: navigation,
+    }}
+    >
+        <Stack.Navigator >
+            <Stack.Screen
+                name="Home"
+                component={HomeScreen}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name="FoodDetail"
+                component={FoodDetail}
+                options={{
+                    headerShown: false,
+                }}
+            />
+        </Stack.Navigator>
+    </NavContext.Provider>
 );
 const OrderFoodStack = ({ navigation }) => (
-    <Stack.Navigator>
-        <Stack.Screen
-            name="Order Food"
-            component={OrderFood}
-            options={{
-                headerShown: false,
-            }}
-        />
-    </Stack.Navigator>
+    <NavContext.Provider value={{
+        navigation: navigation
+    }}
+    >
+        <Stack.Navigator >
+            <Stack.Screen
+                name="Order Food"
+                component={OrderFood}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name="FoodDetail2"
+                component={FoodDetail}
+                options={{
+                    headerShown: false,
+                }}
+            />
+        </Stack.Navigator>
+    </NavContext.Provider>
 );
 const PaymentStack = ({ navigation }) => (
     <Stack.Navigator>
@@ -60,30 +85,36 @@ const PaymentStack = ({ navigation }) => (
     </Stack.Navigator>
 );
 const ProfileStack = ({ navigation }) => (
-    <Stack.Navigator>
-        <Stack.Screen
-            name="Profile"
-            component={Profile}
-            options={{
-                headerShown: false,
-            }}
-        />
-    </Stack.Navigator>
+    <NavContext.Provider value={{
+        navigation: navigation,
+    }}
+    >
+        <Stack.Navigator>
+            <Stack.Screen
+                name="Profile2"
+                component={Profile}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name="Information"
+                component={Information}
+                options={{
+                    headerShown: false,
+                }}
+            />
+        </Stack.Navigator>
+    </NavContext.Provider>
 );
-const FoodDetailStack = ({ navigation }) => (
-    <Stack.Navigator>
-        <Stack.Screen
-            name="FoodDetail"
-            component={FoodDetail}
-        />
-    </Stack.Navigator>
-);
+
 const AppStack = () => {
     return (
         <Tab.Navigator
             tabBarOptions={{
                 activeTintColor: '#FFC75F',
-            }}>
+            }}
+        >
             <Tab.Screen
                 name="Home"
                 component={FeedStack}
