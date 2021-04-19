@@ -20,7 +20,7 @@ export default function ManageFood({ navigation }) {
 
             </ScrollView>
             <View style={styles.fixedbutton}>
-                <Button onPress={() => navigation.navigate("FormFood")} icon={<FontAwesome5 name="plus-circle" size={50} color="#FFF" style={styles.iconadd} />} buttonStyle={styles.btnadd} />
+                <Button onPress={() => navigation.navigate("FormFood", { title: "Add New Food" })} icon={<FontAwesome5 name="plus-circle" size={50} color="#FFF" style={styles.iconadd} />} buttonStyle={styles.btnadd} />
             </View>
         </View>
     )

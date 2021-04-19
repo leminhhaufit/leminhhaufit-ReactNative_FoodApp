@@ -16,7 +16,7 @@ export default function ManageStaff({ navigation }) {
                 </View>
             </ScrollView>
             <View style={styles.fixedbutton}>
-                <Button onPress={() => navigation.navigate("FormStaff")}
+                <Button onPress={() => navigation.navigate("FormStaff", { title: "Add New Staff" })}
                     icon={<FontAwesome5 name="plus-circle" size={50} color="#FFF" style={styles.iconadd} />} buttonStyle={styles.btnadd} />
             </View>
         </View>

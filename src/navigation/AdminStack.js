@@ -97,8 +97,9 @@ const HomeAdminStack = ({ navigation }) => (
             <Stack.Screen
                 name="FormCategory"
                 component={FormCategory}
-                initialParams={{ title: "Add to Category" }}
-                options={({ route }) => ({ title: route.params.title })}
+                options={{
+                    headerShown: false,
+                }}
             />
             <Stack.Screen
                 name="FormStaff"
