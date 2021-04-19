@@ -10,7 +10,7 @@ export default function ItemPopular(props) {
     const { id, title, description, price, material, status, url } = foodlist;
     return (
         <View style={styles.container}>
-            <NavContextAdmin.Consumer>
+            <NavContext.Consumer>
                 {({ navigation }) => <TouchableOpacity style={styles.container2} onPress={() => navigation.navigate("FoodDetail")}>
                     <Text style={styles.award}><FontAwesome5Icon name="pizza-slice" size={16} color="#F59507" /> Top 1 week</Text>
                     <Text style={styles.title}>{title}</Text>
@@ -20,7 +20,7 @@ export default function ItemPopular(props) {
                         <Text style={styles.txtprice}>{price} <FontAwesome5Icon name="dollar-sign" size={20} color="black" /> </Text>
                     </View>
                 </TouchableOpacity>}
-            </NavContextAdmin.Consumer>
+            </NavContext.Consumer>
             <TouchableOpacity style={styles.btnadd}>
                 <FontAwesome5Icon name="plus" size={16} color="black" style={styles.iconplus} />
             </TouchableOpacity>

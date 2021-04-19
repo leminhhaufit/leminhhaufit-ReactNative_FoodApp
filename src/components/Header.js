@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Image, StyleSheet, TextInput, TouchableOpacity, Text, SafeAreaView, Button } from 'react-native';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
-import Carousel from 'react-native-snap-carousel';
+import Carousel, { Pagination } from 'react-native-snap-carousel';
 import { Overlay } from 'react-native-elements';
 import MultiSelect from 'react-native-multiple-select';
 import foodImg from '../assets/food.png';
@@ -72,6 +72,25 @@ function Header(props) {
                         onSnapToItem={index => setActiveIndex(index)}
                         autoplay={true}
                         useScrollView={true}
+                        loop={true}
+                    />
+                    <Pagination
+                        dotsLength={carouselItems.length}
+                        activeDotIndex={activeIndex}
+                        containerStyle={{ position: 'absolute', bottom: 0 }}
+                        dotStyle={{
+                            width: 10,
+                            height: 10,
+                            borderRadius: 5,
+                            marginHorizontal: 8,
+                            backgroundColor: 'black',
+
+                        }}
+                        inactiveDotStyle={{
+                            // Define styles for inactive dots here
+                        }}
+                        inactiveDotOpacity={1}
+                        inactiveDotScale={0.4}
                     />
                     <View style={styles.container1}>
 

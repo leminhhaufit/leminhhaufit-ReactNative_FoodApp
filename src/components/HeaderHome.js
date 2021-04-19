@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native'
 import FlatListItemFloor from '../components/FlatListItemFloor';
-import Carousel from 'react-native-snap-carousel';
+import Carousel, { Pagination } from 'react-native-snap-carousel';
 import header1IMG from '../assets/header.png';
 import header2IMG from '../assets/header2.png';
 import header3IMG from '../assets/header3.png';
@@ -64,8 +64,28 @@ export default function HeaderHome() {
                     sliderWidth={400}
                     itemWidth={300}
                     autoplay={true}
+                    loop={true}
+                    useScrollView={true}
                     renderItem={renderItem}
                     onSnapToItem={index => setActiveIndex(index)} />
+                <Pagination
+                    dotsLength={carouselItems.length}
+                    activeDotIndex={activeIndex}
+                    containerStyle={{ position: 'absolute', bottom: 0 }}
+                    dotStyle={{
+                        width: 10,
+                        height: 10,
+                        borderRadius: 5,
+                        marginHorizontal: 8,
+                        backgroundColor: 'black',
+
+                    }}
+                    inactiveDotStyle={{
+                        // Define styles for inactive dots here
+                    }}
+                    inactiveDotOpacity={1}
+                    inactiveDotScale={0.4}
+                />
             </View>
             <Text style={styles.labelnew}>Popular</Text>
             <FlatListFilterPopular />
