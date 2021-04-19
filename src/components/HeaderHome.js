@@ -63,7 +63,7 @@ export default function HeaderHome() {
                     data={carouselItems}
                     sliderWidth={400}
                     itemWidth={300}
-
+                    autoplay={true}
                     renderItem={renderItem}
                     onSnapToItem={index => setActiveIndex(index)} />
             </View>

@@ -69,7 +69,12 @@ function Header(props) {
                         sliderWidth={400}
                         itemWidth={300}
                         renderItem={renderItem}
-                        onSnapToItem={index => setActiveIndex(index)} />
+                        onSnapToItem={index => setActiveIndex(index)}
+                        autoplay={true}
+                        scrollInterpolator={scrollInterpolator}
+                        slideInterpolatedStyle={animatedStyles}
+                        useScrollView={true}
+                    />
                     <View style={styles.container1}>
 
                         <View style={styles.img}>
