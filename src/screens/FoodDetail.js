@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { Button } from 'react-native-elements';
 import SwitchSelector from "react-native-switch-selector";
 import detail1IMG from '../assets/header5.png';
-import iconpizza from '../assets/pizza.png';
-export default function FoodDetail({ navigation }) {
+import { NavContext } from '../navigation/AppStack';
+
+export default function FoodDetail() {
     const [loading, setLoading] = useState(false);
-    const [quantity, setQuantity] = useState(0);
+    const [quantity, setQuantity] = useState(1);
     const [price, setPrice] = useState(199);
 
     function onChangeQuantityPlus() {
@@ -17,8 +18,8 @@ export default function FoodDetail({ navigation }) {
     }
     function onChangeQuantityMinus() {
         setQuantity(quantity - 1);
-        if (quantity === 0) {
-            setQuantity(0);
+        if (quantity === 1) {
+            setQuantity(1);
         }
 
     }
@@ -31,10 +32,11 @@ export default function FoodDetail({ navigation }) {
 
                 </View>
                 <View style={{ position: 'absolute', top: 10, }}>
-                    <TouchableOpacity >
-                        <FontAwesome5 style={styles.plus} name="chevron-circle-left" size={36} color="#FFF" />
-                    </TouchableOpacity>
-
+                    <NavContext.Consumer>
+                        {({ navigation }) => <TouchableOpacity onPress={() => navigation.goBack()}>
+                            <FontAwesome5 style={styles.plus} name="chevron-circle-left" size={36} color="#FFF" />
+                        </TouchableOpacity>}
+                    </NavContext.Consumer>
                 </View>
             </View>
 
@@ -79,6 +81,10 @@ export default function FoodDetail({ navigation }) {
                     <Text style={styles.descriptionlabel}>Description</Text>
                     <Text style={styles.description}>Description Description Description Description Description Description Description Description Description Description DescriptionDescription </Text>
                     <Button icon={<FontAwesome5 name="shopping-cart" size={22} color="#FFF" />} buttonStyle={styles.add} titleStyle={styles.titleadd} title="Add to cart" loading={loading} onPress={() => setLoading(!loading)}></Button>
+                    {/* CHIA 3 MAN HINH 3 NUT (NUT ADD O USER | NUT THAYDOITRANGTHAIMONAN O KITCHEN | NUT CHINH SUA O ADMIN)
+                    
+                    <Button icon={<FontAwesome5 name="power-off" size={22} color="#FFF" />} buttonStyle={styles.add} titleStyle={styles.titleadd} title="CHANGE STATUS" loading={loading} onPress={() => setLoading(!loading)}></Button>
+                    <Button icon={<FontAwesome5 name="pen-alt" size={22} color="#FFF" />} buttonStyle={styles.add} titleStyle={styles.titleadd} title="UPDATE" loading={loading} onPress={() => setLoading(!loading)}></Button> */}
                 </View>
             </View>
         </View>
