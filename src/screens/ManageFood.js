@@ -4,12 +4,12 @@ import { Button } from 'react-native-elements';
 import FlatListFoodManage from '../components/FlatListFoodManage';
 import Header from '../components/Header';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-export default function ManageFood() {
+export default function ManageFood({ navigation }) {
     return (
         <View style={styles.container}>
             <ScrollView style={styles.container2}>
                 <View style={styles.top}>
-                    <Header title="List Food" />
+                    <Header title="List Food" goBack={true} />
 
                 </View>
 
@@ -20,7 +20,7 @@ export default function ManageFood() {
 
             </ScrollView>
             <View style={styles.fixedbutton}>
-                <Button icon={<FontAwesome5 name="plus-circle" size={50} color="#FFF" style={styles.iconadd} />} buttonStyle={styles.btnadd} />
+                <Button onPress={() => navigation.navigate("FormFood", { title: "Add New Food" })} icon={<FontAwesome5 name="plus-circle" size={50} color="#FFF" style={styles.iconadd} />} buttonStyle={styles.btnadd} />
             </View>
         </View>
     )

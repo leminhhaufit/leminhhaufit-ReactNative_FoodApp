@@ -15,7 +15,7 @@ function ItemCart(props) {
             <View style={styles.infor}>
                 <Text style={styles.title}>{title}</Text>
                 <Form>
-                    <Textarea rowSpan={2} placeholder="Note" style={styles.note} value={note} />
+                    <Textarea rowSpan={2} placeholder="Notes" style={styles.note} value={note} />
                 </Form>
                 <Text style={styles.price}>{price}</Text>
             </View>

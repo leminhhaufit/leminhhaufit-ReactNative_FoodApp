@@ -1,73 +1,169 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import ItemAdmin from './ItemAdmin';
+import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
+import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import staff from '../assets/managestafftrans.png';
 import category from '../assets/managecatetrans.png';
 import food from '../assets/managefoodtrans.png';
 import chart from '../assets/managecharttrans.png';
 import orderdetail from '../assets/managebilltrans.png';
-import { FlatList } from 'react-native';
+
+import { NavContextAdmin } from '../navigation/AdminStack';
+
 export default function FlatListAdmin() {
-    const [adminlist, setAdminlist] = useState(
-        [
-            {
-                id: 1,
-                title: "Manage Staff",
-                description: "Add, delete, update staff",
-                status: true,
-                url: staff,
-                icon: "users-cog",
-            },
-            {
-                id: 2,
-                title: "Manage Category",
-                description: "Add, delete, update category",
-                status: true,
-                url: category,
-                icon: "swatchbook",
-            },
-            {
-                id: 3,
-                title: "Manage Food",
-                description: "Add, delete, update food",
-                status: true,
-                url: food,
-                icon: "pizza-slice",
-            },
-            {
-                id: 4,
-                title: "Statisitc",
-                description: "View revenue, profit",
-                status: true,
-                url: chart,
-                icon: "chart-line",
-            },
-            {
-                id: 5,
-                title: "Orders Details",
-                description: "View information of food purchased by customers",
-                status: true,
-                url: orderdetail,
-                icon: "info-circle",
-            },
 
-        ]
-
-    )
     return (
-        <FlatList data={adminlist}
-            numColumns={1}
-            renderItem={({ item }) => <ItemAdmin adminlist={item} />}
-            keyExtractor={item => item.id}
-            style={styles.flatlist}
+        <NavContextAdmin.Consumer>
+            {({ navigation }) =>
+                <View style={styles.flatlist}>
 
-        />
+                    <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('Staff')}>
+                        <View style={styles.container2}>
+                            <Text style={styles.title}>Manage Staff</Text>
+                            <Text style={styles.content}>Add, delete, update staff </Text>
+                            <Image style={styles.image} source={staff} />
+                            <View style={styles.btnadd}>
+                                <FontAwesome5Icon name="users-cog" size={36} color="#FFF" style={{ alignSelf: 'center', paddingTop: 5, }} />
+                            </View>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('Category')}>
+                        <View style={styles.container2}>
+                            <Text style={styles.title}>Manage Category</Text>
+                            <Text style={styles.content}>Add, delete, update category </Text>
+                            <Image style={styles.image} source={category} />
+                            <View style={styles.btnadd}>
+                                <FontAwesome5Icon name="swatchbook" size={36} color="#FFF" style={{ alignSelf: 'center', paddingTop: 5, }} />
+                            </View>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('Food')}>
+                        <View style={styles.container2}>
+                            <Text style={styles.title}>Manage Food</Text>
+                            <Text style={styles.content}>Add, delete, update food</Text>
+                            <Image style={styles.image} source={food} />
+                            <View style={styles.btnadd}>
+                                <FontAwesome5Icon name="pizza-slice" size={36} color="#FFF" style={{ alignSelf: 'center', paddingTop: 5, }} />
+                            </View>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('Statistical')}>
+                        <View style={styles.container2}>
+                            <Text style={styles.title}>Statistical</Text>
+                            <Text style={styles.content}>View revenue, profit </Text>
+                            <Image style={styles.image} source={chart} />
+                            <View style={styles.btnadd}>
+                                <FontAwesome5Icon name="chart-line" size={36} color="#FFF" style={{ alignSelf: 'center', paddingTop: 5, }} />
+                            </View>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('Orders')}>
+                        <View style={styles.container2}>
+                            <Text style={styles.title}>Orders Details</Text>
+                            <Text style={styles.content}>View information of food purchased by customers </Text>
+                            <Image style={styles.image} source={orderdetail} />
+                            <View style={styles.btnadd}>
+                                <FontAwesome5Icon name="info-circle" size={36} color="#FFF" style={{ alignSelf: 'center', paddingTop: 5, }} />
+                            </View>
+                        </View>
+                    </TouchableOpacity>
+
+                </View>
+            }
+        </NavContextAdmin.Consumer>
     )
 }
-
 const styles = StyleSheet.create({
     flatlist: {
         flex: 1,
         marginTop: 110,
+    },
+    container: {
+        alignItems: 'center',
+        alignSelf: 'stretch',
+        marginLeft: 40,
+        //marginTop: 20,
+        marginRight: 40,
+        borderRadius: 25,
+        height: 140,
+        backgroundColor: "#FFF",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.29,
+        shadowRadius: 4.65,
+        elevation: 7,
+        marginBottom: 40,
+    },
+    container2: {
+        alignItems: 'center',
+        alignSelf: 'stretch',
+        height: 140,
+
+    },
+    award: {
+        fontSize: 16,
+        fontWeight: '400',
+        alignItems: 'flex-start',
+        alignSelf: 'stretch',
+        paddingLeft: 20,
+        paddingTop: 10,
+        width: 200,
+    },
+    image: {
+        position: 'absolute',
+        width: 120,
+        height: 120,
+        right: -35,
+        top: 10,
+    },
+    title: {
+        fontSize: 26,
+        fontWeight: 'bold',
+        alignItems: 'flex-start',
+        alignSelf: 'stretch',
+        paddingLeft: 20,
+        paddingTop: 5,
+        width: 240,
+    },
+    content: {
+        fontSize: 16,
+        fontWeight: '300',
+        alignItems: 'flex-start',
+        alignSelf: 'stretch',
+        paddingLeft: 20,
+        paddingTop: 5,
+        opacity: 0.5,
+        width: 250,
+        height: 60,
+    },
+    btnadd: {
+        backgroundColor: "#FFC75F",
+        width: 100,
+        height: 50,
+        borderBottomLeftRadius: 25,
+        borderTopRightRadius: 25,
+        alignSelf: 'flex-start',
+        position: 'absolute',
+        left: 0,
+        bottom: 0,
+    },
+    iconplus: {
+        alignSelf: 'center',
+        paddingTop: 15,
+    },
+    price: {
+        position: 'absolute',
+        bottom: 0,
+        width: 100,
+        height: 50,
+        alignSelf: 'center',
+    },
+    txtprice: {
+        alignSelf: 'flex-start',
+        paddingTop: 10,
+        fontSize: 22,
+        fontWeight: 'bold',
     },
 })

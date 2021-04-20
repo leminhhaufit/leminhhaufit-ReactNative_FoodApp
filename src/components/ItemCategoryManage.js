@@ -2,7 +2,7 @@ import React from 'react'
 
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
-
+import { NavContextAdmin } from '../navigation/AdminStack';
 export default function ItemCategoryManage(props) {
     const { catelist } = props;
     //#375A45 green #E35929 red
@@ -21,9 +21,13 @@ export default function ItemCategoryManage(props) {
                 <TouchableOpacity style={styles.btndel}>
                     <FontAwesome5Icon name="trash" size={32} color="#FFF" style={styles.iconplus} />
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.btndel}>
-                    <FontAwesome5Icon name="pen-alt" size={32} color="#FFF" style={styles.iconplus} />
-                </TouchableOpacity>
+                <NavContextAdmin.Consumer>
+                    {({ navigation }) =>
+                        <TouchableOpacity onPress={() => navigation.navigate("FormCategory", { title: "Update Category" })}
+                            style={styles.btndel}>
+                            <FontAwesome5Icon name="pen-alt" size={32} color="#FFF" style={styles.iconplus} />
+                        </TouchableOpacity>}
+                </NavContextAdmin.Consumer>
                 <TouchableOpacity style={styles.btndel}>
                     <FontAwesome5Icon name="power-off" size={32} color={icon} style={styles.iconplus} />
                 </TouchableOpacity>

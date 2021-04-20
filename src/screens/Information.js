@@ -2,16 +2,19 @@ import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { Avatar, Input } from 'react-native-elements';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { NavContext } from '../navigation/AppStack';
 export default function Information() {
     return (
         <View style={styles.container}>
 
             <View style={styles.avatar2}>
                 <View style={{ position: 'absolute', top: 10, left: 10 }}>
-                    <TouchableOpacity >
-                        <FontAwesome5 style={styles.plus} name="chevron-circle-left" size={36} color="black" />
-                    </TouchableOpacity>
-
+                    <NavContext.Consumer>
+                        {({ navigation }) =>
+                            <TouchableOpacity onPress={() => navigation.navigate('Profile2')}>
+                                <FontAwesome5 style={styles.plus} name="chevron-circle-left" size={36} color="black" />
+                            </TouchableOpacity>}
+                    </NavContext.Consumer>
                 </View>
                 <Avatar
                     size="large"

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { View, Image, StyleSheet, TextInput, TouchableOpacity, Text, SafeAreaView } from 'react-native';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import Carousel from 'react-native-snap-carousel';
+import { View, Image, StyleSheet, TextInput, TouchableOpacity, Text, SafeAreaView, Button } from 'react-native';
+import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
+import Carousel, { Pagination } from 'react-native-snap-carousel';
 import { Overlay } from 'react-native-elements';
 import MultiSelect from 'react-native-multiple-select';
 import foodImg from '../assets/food.png';
@@ -15,7 +15,7 @@ import searchIMG from '../assets/loupe.png';
 import Filters from './Filters';
 
 function Header(props) {
-    const { title } = props;
+    const { title, goBack } = props;
     const [activeIndex, setActiveIndex] = useState(0);
     const [carouselItems, setCarouselItems] = useState(
         [
@@ -48,11 +48,11 @@ function Header(props) {
     function renderItem({ item, index }) {
         return (
             <View style={{
-
-                padding: 10,
+                marginTop: 10,
                 marginLeft: 15,
                 marginRight: 5,
             }}>
+
                 <Image source={item.url} style={{ width: 350, height: 200 }} />
             </View>
         )
@@ -69,8 +69,31 @@ function Header(props) {
                         sliderWidth={400}
                         itemWidth={300}
                         renderItem={renderItem}
-                        onSnapToItem={index => setActiveIndex(index)} />
+                        onSnapToItem={index => setActiveIndex(index)}
+                        autoplay={true}
+                        useScrollView={true}
+                        loop={true}
+                    />
+                    <Pagination
+                        dotsLength={carouselItems.length}
+                        activeDotIndex={activeIndex}
+                        containerStyle={{ position: 'absolute', bottom: 0 }}
+                        dotStyle={{
+                            width: 10,
+                            height: 10,
+                            borderRadius: 5,
+                            marginHorizontal: 8,
+                            backgroundColor: 'black',
+
+                        }}
+                        inactiveDotStyle={{
+                            // Define styles for inactive dots here
+                        }}
+                        inactiveDotOpacity={1}
+                        inactiveDotScale={0.4}
+                    />
                     <View style={styles.container1}>
+
                         <View style={styles.img}>
                             <Image source={foodImg} style={styles.icon} />
                         </View>
@@ -87,6 +110,7 @@ function Header(props) {
                 </View>
 
                 <View style={styles.labelList}>
+
                     <Text style={styles.textlist}>{title}</Text>
                     {
                         title === "Food List" && <Filters />
@@ -261,6 +285,12 @@ const styles = StyleSheet.create({
         borderRadius: 10,
 
     },
+    backview: {
+        position: 'absolute',
+        top: 20,
+        left: 20,
+
+    }
 })
 
 export default Header;

@@ -9,10 +9,11 @@ import dotgreen from '../assets/dotgreen.png';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import SwitchSelector from "react-native-switch-selector";
 import { Button } from 'react-native-elements';
+import { NavContext } from '../navigation/AppStack';
+import { NavContextAdmin } from '../navigation/AdminStack';
+import { NavContextKit } from '../navigation/KitchenStack';
 ItemFood.propTypes = {
-
 };
-
 function ItemFood(props) {
     const [visible, setVisible] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -32,28 +33,28 @@ function ItemFood(props) {
     };
     function onChangeQuantityPlus() {
         setQuantity(quantity + 1);
-
-
     }
     function onChangeQuantityMinus() {
         setQuantity(quantity - 1);
         if (quantity === 1) {
             setQuantity(1);
         }
-
     }
     return (
         <View>
-            <TouchableOpacity onPress={reserve}>
-                <View style={styles.container} key={id}>
-                    <Image source={url} style={styles.imgtable} />
-                    <Text style={styles.title}>{title}</Text>
-                    <View style={styles.content}>
-                        <Text style={styles.price}>{price}$</Text>
-                        <Image source={urlstatus} style={styles.dotImg} />
+            <NavContext.Consumer>
+                {({ navigation }) => <TouchableOpacity onPress={() => navigation.navigate('FoodDetail')}>
+                    <View style={styles.container} key={id}>
+                        <Image source={url} style={styles.imgtable} />
+                        <Text style={styles.title}>{title}</Text>
+                        <View style={styles.content}>
+                            <Text style={styles.price}>{price}$</Text>
+                            <Image source={urlstatus} style={styles.dotImg} />
+                        </View>
                     </View>
-                </View>
-            </TouchableOpacity>
+                </TouchableOpacity>}
+            </NavContext.Consumer>
+
             <TouchableOpacity style={styles.iconplus} onPress={() => toggleOverlay()}>
                 <FontAwesome5Icon name="plus-circle" size={50} color="#FFC75F" />
             </TouchableOpacity>
@@ -97,7 +98,7 @@ function ItemFood(props) {
                 />
                 <Button icon={<FontAwesome5 name="shopping-cart" size={22} color="#FFF" />} buttonStyle={styles.add} titleStyle={styles.titleadd} title="Add to cart" loading={loading} onPress={() => setLoading(!loading)}></Button>
             </Overlay>
-        </View>
+        </View >
     );
 }
 const styles = StyleSheet.create({

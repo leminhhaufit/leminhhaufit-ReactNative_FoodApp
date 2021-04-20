@@ -9,7 +9,7 @@ import { TouchableOpacity } from 'react-native';
 export default function FormStaff(props) {
     const [selectedValue, setSelectedValue] = useState("category");
     const [selectedImage, setSelectedImage] = useState(null);
-    const { title } = props;
+    const { title, route } = props;
     const selectFile = () => {
         ImagePicker.openPicker({
             width: 400,
@@ -62,7 +62,7 @@ export default function FormStaff(props) {
 
             <Content style={{ backgroundColor: "#F4F4F4" }} >
                 <View style={styles.header}>
-                    <Text style={styles.labelheader}>{title}</Text>
+                    <Text style={styles.labelheader}>{route.params.title}</Text>
                 </View>
                 <Form style={styles.form}>
                     <Item floatingLabel rounded style={styles.item}>

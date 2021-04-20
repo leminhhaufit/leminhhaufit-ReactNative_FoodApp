@@ -1,6 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 import HomeScreen from '../screens/HomeUser';
@@ -21,28 +22,101 @@ import FormCategory from '../screens/FormCategory';
 import Statistical from '../screens/Statistical';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
-
+export const NavContextAdmin = React.createContext();
 const HomeStack = ({ navigation }) => (
-    <Stack.Navigator>
-        <Stack.Screen
-            name="Home"
-            component={Statistical}
-            options={{
-                headerShown: false,
-            }}
-        />
-    </Stack.Navigator>
+    <NavContextAdmin.Provider value={{
+        navigation: navigation,
+    }}
+    >
+        <Stack.Navigator >
+            <Stack.Screen
+                name="Home"
+                component={HomeScreen}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name="FoodDetail"
+                component={FoodDetail}
+                options={{
+                    headerShown: false,
+                }}
+            />
+        </Stack.Navigator>
+    </NavContextAdmin.Provider>
 );
 const HomeAdminStack = ({ navigation }) => (
-    <Stack.Navigator>
-        <Stack.Screen
-            name="Order Food"
-            component={ManageStaff}
-            options={{
-                headerShown: false,
-            }}
-        />
-    </Stack.Navigator>
+    <NavContextAdmin.Provider value={{
+        navigation: navigation,
+    }}
+    >
+        <Stack.Navigator>
+            <Stack.Screen
+                name="HomeAdmin"
+                component={HomeAdmin}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name="Staff"
+                component={ManageStaff}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name="Food"
+                component={ManageFood}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name="Category"
+                component={ManageCategory}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name="Statistical"
+                component={Statistical}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name="Orders"
+                component={ManageOrders}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name="FormCategory"
+                component={FormCategory}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name="FormStaff"
+                component={FormStaff}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name="FormFood"
+                component={FormFood}
+                options={{
+                    headerShown: false,
+                }}
+            />
+        </Stack.Navigator>
+    </NavContextAdmin.Provider>
 );
 const ProfileStack = ({ navigation }) => (
     <Stack.Navigator>
@@ -55,6 +129,7 @@ const ProfileStack = ({ navigation }) => (
         />
     </Stack.Navigator>
 );
+
 const AdminStack = () => {
     return (
         <Tab.Navigator
@@ -73,7 +148,7 @@ const AdminStack = () => {
                 })}
             />
             <Tab.Screen
-                name="Order"
+                name="HomeAdmin"
                 component={HomeAdminStack}
                 options={({ route }) => ({
                     tabBarLabel: 'List Manage',
@@ -96,6 +171,7 @@ const AdminStack = () => {
             />
 
         </Tab.Navigator>
+
     );
 };
 
