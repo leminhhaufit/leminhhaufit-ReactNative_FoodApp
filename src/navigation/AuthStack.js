@@ -3,9 +3,7 @@ import { View } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from '../screens/Login';
 import OnboardingScreen from '../screens/HomeUser';
-
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-
 import AsyncStorage from '@react-native-community/async-storage';
 
 const Stack = createStackNavigator();

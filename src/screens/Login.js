@@ -25,7 +25,6 @@ function Login({ navigation }) {
 
             let response = await auth()
                 .signInWithEmailAndPassword(txtemail, txtpassword)
-
             setIsload(false);
 
             if (response && response.user) {
