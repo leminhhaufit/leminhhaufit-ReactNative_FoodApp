@@ -65,6 +65,10 @@ const KitchenStack = () => {
         <Tab.Navigator
             tabBarOptions={{
                 activeTintColor: '#FFC75F',
+                labelStyle : {
+                    fontSize: 12,
+                    paddingBottom:5
+                }
             }}>
             <Tab.Screen
                 name="Home"

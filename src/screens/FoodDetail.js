@@ -1,10 +1,13 @@
 import React, { useContext, useState } from 'react'
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity,Dimensions } from 'react-native'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { Button } from 'react-native-elements';
 import SwitchSelector from "react-native-switch-selector";
 import detail1IMG from '../assets/header5.png';
 import { NavContext } from '../navigation/AppStack';
+
+const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
 
 export default function FoodDetail() {
     const [loading, setLoading] = useState(false);
@@ -34,7 +37,7 @@ export default function FoodDetail() {
                 <View style={{ position: 'absolute', top: 10, }}>
                     <NavContext.Consumer>
                         {({ navigation }) => <TouchableOpacity onPress={() => navigation.goBack()}>
-                            <FontAwesome5 style={styles.plus} name="chevron-circle-left" size={36} color="#FFF" />
+                            <FontAwesome5 style={styles.plus} name="chevron-circle-left" size={25} color="#FFF" />
                         </TouchableOpacity>}
                     </NavContext.Consumer>
                 </View>
@@ -102,13 +105,13 @@ const styles = StyleSheet.create({
     detail: {
         alignItems: 'center',
         alignSelf: 'stretch',
-        height: 350,
-        width: 420
+        height: 250,
+        width: width
     },
     infor: {
         position: 'absolute',
-        top: 300,
-        height: 1000,
+        top:200,
+        width:width,
         borderTopRightRadius: 60,
         borderTopLeftRadius: 60,
         backgroundColor: '#fff',
@@ -161,7 +164,7 @@ const styles = StyleSheet.create({
         paddingTop: 15,
     },
     plus: {
-        paddingLeft: 40,
+        paddingLeft: 10,
 
     },
     descriptionlabel: {

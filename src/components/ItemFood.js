@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Image, StyleSheet, TouchableHighlight, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableHighlight, TouchableOpacity,Dimensions } from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import PropTypes from 'prop-types';
 import { Overlay } from 'react-native-elements';
@@ -14,6 +14,8 @@ import { NavContextAdmin } from '../navigation/AdminStack';
 import { NavContextKit } from '../navigation/KitchenStack';
 ItemFood.propTypes = {
 };
+
+const width = Dimensions.get('window').width;
 function ItemFood(props) {
     const [visible, setVisible] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -41,8 +43,8 @@ function ItemFood(props) {
         }
     }
     return (
-        <View>
-            <NavContext.Consumer>
+        <View style={{flex:1,alignItems:'center'}}>
+            <NavContext.Consumer >
                 {({ navigation }) => <TouchableOpacity onPress={() => navigation.navigate('FoodDetail')}>
                     <View style={styles.container} key={id}>
                         <Image source={url} style={styles.imgtable} />
@@ -56,7 +58,7 @@ function ItemFood(props) {
             </NavContext.Consumer>
 
             <TouchableOpacity style={styles.iconplus} onPress={() => toggleOverlay()}>
-                <FontAwesome5Icon name="plus-circle" size={50} color="#FFC75F" />
+                <FontAwesome5Icon name="plus-circle" size={40} color="#FFC75F" />
             </TouchableOpacity>
             <Overlay isVisible={visible} overlayStyle={styles.overlay} onBackdropPress={toggleOverlay}>
                 <View style={styles.labelfilter}>
@@ -103,13 +105,10 @@ function ItemFood(props) {
 }
 const styles = StyleSheet.create({
     container: {
-        width: 180,
+        width: width/2 - 20,
         height: 180,
         marginBottom: 10,
-        marginRight: 10,
-        marginLeft: 10,
-        marginTop: 30,
-        alignSelf: 'stretch',
+        marginTop:20,
         borderRadius: 15,
         alignItems: 'center',
         backgroundColor: 'white',
@@ -136,7 +135,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     dotImg: {
-        flex: 1,
         width: 18,
         height: 18,
         marginTop: 5,
@@ -156,7 +154,7 @@ const styles = StyleSheet.create({
     },
     iconplus: {
         position: 'absolute',
-        right: -5,
+        right: 10,
         top: 0,
     },
     labelfilter: {
@@ -177,7 +175,7 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         marginLeft: 40,
         marginRight: 40,
-        borderRadius: 60,
+        borderRadius: 20,
     },
     textfilteroverlay: {
         flex: 8,
@@ -221,8 +219,8 @@ const styles = StyleSheet.create({
     },
     switch: {
         alignSelf: 'stretch',
-        marginLeft: 40,
-        marginRight: 40,
+        marginLeft: 20,
+        marginRight: 20,
         marginTop: 20,
         backgroundColor: '#fff',
 

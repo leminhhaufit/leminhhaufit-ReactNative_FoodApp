@@ -60,8 +60,8 @@ function Header(props) {
 
     return (
         <SafeAreaView style={{ flex: 1, paddingTop: 5, marginBottom: 30 }}>
-            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', }}>
-                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', }}>
+            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
+                <View style={{ flex: 1, flexDirection: 'row',justifyContent: 'center'}}>
                     <Carousel
                         layout={"default"}
                         // ref={ref => this.carousel = ref}
@@ -93,14 +93,13 @@ function Header(props) {
                         inactiveDotScale={0.4}
                     />
                     <View style={styles.container1}>
-
                         <View style={styles.img}>
                             <Image source={foodImg} style={styles.icon} />
                         </View>
                         <TextInput style={styles.inputSearch}
                             placeholderStyle={styles.placeholdercustom}
                             placeholder="Search here" />
-                        <TouchableOpacity style={styles.btnsearch}>
+                        <TouchableOpacity style={styles.btnsearch} activeOpacity={1} onPress={() => console.log('hihi')}>
                             <View style={styles.imgsearch}>
                                 <Image source={searchIMG} style={styles.iconsearch} />
                             </View>
@@ -214,16 +213,14 @@ const styles = StyleSheet.create({
     container1: {
         flexDirection: 'row',
         alignSelf: 'center',
+        width:'80%',
+        margin:10,
         alignItems: 'stretch',
         borderRadius: 25,
         height: 50,
-        width: 330,
         position: 'absolute',
         top: 230,
         bottom: 0,
-        left: 40,
-        right: 0,
-        backgroundColor: '#fff',
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -236,8 +233,8 @@ const styles = StyleSheet.create({
     inputSearch: {
         paddingLeft: 5,
         paddingRight: 5,
-        width: 220,
         height: 50,
+        width:'63%',
         borderStyle: 'solid',
         borderColor: '#FFC75F',
         backgroundColor: '#FFC75F',

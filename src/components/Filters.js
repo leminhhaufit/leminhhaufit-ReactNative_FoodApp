@@ -13,14 +13,14 @@ export default function Filters() {
         <View >
             <TouchableOpacity onPress={toggleOverlay}>
                 <View style={styles.filter}>
-                    <Text style={styles.textfilter}>Filter</Text>
-                    <FontAwesome5 name="sort-amount-down-alt" size={30} color="white" />
+                 
+                    <FontAwesome5 name="sort-amount-down-alt" size={25} color="white" />
                 </View>
             </TouchableOpacity>
             <Overlay isVisible={visible} overlayStyle={styles.overlay} onBackdropPress={toggleOverlay}>
                 <View style={styles.labelfilter}>
                     <Text style={styles.textfilteroverlay}>Filter by:</Text>
-                    <TouchableOpacity onPress={toggleOverlay} style={styles.iconoverlay}>
+                    <TouchableOpacity onPress={toggleOverlay}>
                         <FontAwesome5 size={26} name="times" color="#FFC75F" />
                     </TouchableOpacity>
                 </View>
@@ -34,8 +34,8 @@ const styles = StyleSheet.create({
 
     filter: {
         flexDirection: 'row',
-        width: 90,
-        height: 35,
+        width:30,
+        height: 30,
         backgroundColor: '#FFC75F',
         textAlign: 'center',
         shadowColor: "#000",
@@ -46,7 +46,8 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.39,
         shadowRadius: 8.30,
         elevation: 13,
-        borderRadius: 25,
+        borderRadius:3,
+        justifyContent:'center'
     },
     textfilter: {
         color: '#fff',
@@ -57,39 +58,16 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         paddingRight: 10,
     },
-    overlay: {
-        flex: 1,
-        position: 'absolute',
-        alignSelf: 'stretch',
-        top: 340,
-        right: 60,
-        backgroundColor: '#F4F4F4',
-        height: 400,
-        borderRadius: 25,
-    },
-    textfilteroverlay: {
-        flex: 8,
-        color: '#FFC75F',
-        fontWeight: '600',
-        fontSize: 16,
-        textTransform: 'uppercase',
-        margin: 5,
-    },
     labelfilter: {
         flexDirection: 'row',
     },
     overlay: {
-        flex: 1,
-        position: 'absolute',
-        alignSelf: 'stretch',
-        top: 340,
-        right: 60,
+        height:300,
         backgroundColor: '#F4F4F4',
-        height: 400,
-        borderRadius: 25,
+        borderRadius: 5,
     },
     textfilteroverlay: {
-        flex: 8,
+        flex: 5,
         color: '#FFC75F',
         fontWeight: '600',
         fontSize: 16,
