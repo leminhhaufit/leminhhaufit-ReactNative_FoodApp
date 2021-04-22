@@ -42,7 +42,7 @@ function ItemFood(props) {
     }
     return (
         <View>
-            <NavContext.Consumer>
+            <NavContextAdmin.Consumer>
                 {({ navigation }) => <TouchableOpacity onPress={() => navigation.navigate('FoodDetail')}>
                     <View style={styles.container} key={id}>
                         <Image source={url} style={styles.imgtable} />
@@ -53,7 +53,7 @@ function ItemFood(props) {
                         </View>
                     </View>
                 </TouchableOpacity>}
-            </NavContext.Consumer>
+            </NavContextAdmin.Consumer>
 
             <TouchableOpacity style={styles.iconplus} onPress={() => toggleOverlay()}>
                 <FontAwesome5Icon name="plus-circle" size={50} color="#FFC75F" />

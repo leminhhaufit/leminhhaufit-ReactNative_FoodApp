@@ -17,9 +17,9 @@ import FormStaff from '../screens/FormStaff';
 import FormCategory from '../screens/FormCategory';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
-export const NavContextnew = React.createContext();
+export const NavContextKit = React.createContext();
 const HomeStack = ({ navigation }) => (
-    <NavContextnew.Provider value={{ navigation: navigation }}>
+    <NavContextKit.Provider value={{ navigation: navigation }}>
         <Stack.Navigator>
             <Stack.Screen
                 name="Home"
@@ -36,7 +36,7 @@ const HomeStack = ({ navigation }) => (
                 }}
             />
         </Stack.Navigator>
-    </NavContextnew.Provider>
+    </NavContextKit.Provider>
 );
 const HomeKitchenStack = ({ navigation }) => (
     <Stack.Navigator>
