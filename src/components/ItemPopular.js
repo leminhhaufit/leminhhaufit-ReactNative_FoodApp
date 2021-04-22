@@ -161,12 +161,12 @@ const styles = StyleSheet.create({
     price: {
         position: 'absolute',
         bottom: 0,
-        width: 100,
+        width: 80,
         height: 50,
         alignSelf: 'center',
     },
     txtprice: {
-        alignSelf: 'flex-start',
+        alignSelf: 'flex-end',
         paddingTop: 10,
         fontSize: 22,
         fontWeight: 'bold',

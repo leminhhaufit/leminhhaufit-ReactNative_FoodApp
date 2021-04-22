@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
         bottom: 0,
         width: 100,
         height: 50,
+        paddingLeft:20,
         alignSelf: 'center',
     },
     txtprice: {
