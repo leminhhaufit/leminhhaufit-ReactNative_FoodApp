@@ -13,7 +13,7 @@ export default function Filters() {
         <View >
             <TouchableOpacity onPress={toggleOverlay}>
                 <View style={styles.filter}>
-                 
+
                     <FontAwesome5 name="sort-amount-down-alt" size={25} color="white" />
                 </View>
             </TouchableOpacity>
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
 
     filter: {
         flexDirection: 'row',
-        width:30,
+        width: 60,
         height: 30,
         backgroundColor: '#FFC75F',
         textAlign: 'center',
@@ -46,8 +46,8 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.39,
         shadowRadius: 8.30,
         elevation: 13,
-        borderRadius:3,
-        justifyContent:'center'
+        borderRadius: 30,
+        justifyContent: 'center'
     },
     textfilter: {
         color: '#fff',
@@ -62,9 +62,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     overlay: {
-        height:300,
+        height: 300,
         backgroundColor: '#F4F4F4',
-        borderRadius: 5,
+        borderRadius: 30,
     },
     textfilteroverlay: {
         flex: 5,

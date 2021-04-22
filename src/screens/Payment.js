@@ -59,15 +59,15 @@ export default function Payment({ navigation }) {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 3,
+        flex: 10,
         backgroundColor: '#F4F4F4',
 
     },
     cartview: {
-        flex: 2,
+        flex: 5,
     },
     infor: {
-        flex: 1,
+        flex: 4,
         marginLeft: 10,
         marginRight: 10,
         marginBottom: 10,
@@ -125,6 +125,7 @@ const styles = StyleSheet.create({
         right: 0,
     },
     details: {
+        flex: 1,
         flexDirection: 'row',
         alignSelf: 'stretch',
     },
@@ -134,6 +135,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     payment: {
+        flex: 1,
         borderTopColor: '#FFC75F',
         borderTopWidth: 0.8,
         borderStyle: 'solid',

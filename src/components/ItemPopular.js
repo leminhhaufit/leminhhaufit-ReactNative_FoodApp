@@ -227,10 +227,10 @@ const styles = StyleSheet.create({
     },
     switchtextselect: {
         fontWeight: 'bold',
-        fontSize: 18
+        fontSize: 16
     },
     switchtext: {
-        fontSize: 18
+        fontSize: 14
     },
     switchimg: {
         width: 20,
