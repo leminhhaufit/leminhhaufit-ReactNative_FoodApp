@@ -1,8 +1,10 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity,Dimensions } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import header2IMG from '../assets/header2.png';
+
+const width = Dimensions.get('window').width;
 
 export default function HeaderProfiles() {
     return (
@@ -25,7 +27,6 @@ export default function HeaderProfiles() {
                         overlayContainerStyle={{ backgroundColor: '#FFC75F', opacity: 1, }}
                         onPress={() => console.log("Works!")}
                         activeOpacity={0.7}
-                        containerStyle={{ alignSelf: 'center' }}
                     />
 
                 </View>
@@ -61,16 +62,14 @@ const styles = StyleSheet.create({
         elevation: 3,
     },
     imgcart: {
-        marginLeft: 5,
-        width: 370,
+        width: width,
         height: 150,
         alignSelf: 'stretch',
-        borderRadius: 15,
-        marginTop: 20,
+        borderRadius: 25,
     },
     avatar: {
         position: 'absolute',
-        right: 140,
+        right: width/2 - 50 ,
         top: 110,
         borderRadius: 50,
         padding: 10,
@@ -83,7 +82,7 @@ const styles = StyleSheet.create({
     },
     avatar2: {
         position: 'absolute',
-        right: 140,
+        right: width/2 - 50,
         top: 110,
         borderRadius: 50,
         padding: 10,
@@ -91,8 +90,8 @@ const styles = StyleSheet.create({
     },
     name: {
         position: 'absolute',
-        right: 140,
-        top: 210,
+        right: width/2 -50 ,
+        top: 205,
         fontSize: 22,
         fontWeight: 'bold',
         color: '#FFC75F',
@@ -100,7 +99,7 @@ const styles = StyleSheet.create({
     infor: {
         flexDirection: 'row',
         alignSelf: 'center',
-        paddingTop: 80,
+        paddingTop: 90,
         paddingBottom: 20,
     },
     address: {

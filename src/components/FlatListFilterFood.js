@@ -87,7 +87,8 @@ const styles = StyleSheet.create({
     flatlist: {
         flex: 1,
         backgroundColor: '#F4F4F4',
-        marginTop: 20,
+        marginTop: 0,
+        
     },
 
 })

@@ -28,8 +28,7 @@ export default function ItemPopular(props) {
     }
     return (
         <View style={styles.container}>
-            <NavContext.Consumer>
-                {({ navigation }) => <TouchableOpacity style={styles.container2} onPress={() => navigation.navigate("FoodDetail")}>
+            <TouchableOpacity style={styles.container2}>
                     <Text style={styles.award}><FontAwesome5Icon name="pizza-slice" size={16} color="#F59507" /> Top 1 week</Text>
                     <Text style={styles.title}>{title}</Text>
                     <Text style={styles.content}>{material} </Text>
@@ -37,8 +36,7 @@ export default function ItemPopular(props) {
                     <View style={styles.price}>
                         <Text style={styles.txtprice}>{price} <FontAwesome5Icon name="dollar-sign" size={20} color="black" /> </Text>
                     </View>
-                </TouchableOpacity>}
-            </NavContext.Consumer>
+                </TouchableOpacity>
             <TouchableOpacity style={styles.btnadd} onPress={() => toggleOverlay()}>
                 <FontAwesome5Icon name="plus" size={16} color="black" style={styles.iconplus} />
             </TouchableOpacity>
@@ -120,7 +118,7 @@ const styles = StyleSheet.create({
     },
     image: {
         position: 'absolute',
-        width: 150,
+        width:150,
         height: 150,
         right: -45,
         top: -5,
@@ -161,12 +159,12 @@ const styles = StyleSheet.create({
     price: {
         position: 'absolute',
         bottom: 0,
-        width: 100,
+        width: 80,
         height: 50,
         alignSelf: 'center',
     },
     txtprice: {
-        alignSelf: 'flex-start',
+        alignSelf: 'flex-end',
         paddingTop: 10,
         fontSize: 22,
         fontWeight: 'bold',
