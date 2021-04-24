@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableHighlight, TouchableOpacity, Button } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableHighlight, TouchableOpacity, Button, Dimensions } from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import detail1IMG from '../assets/detail1.png';
 import { Textarea, Form } from "native-base";
+const width = Dimensions.get('window').width;
 function ItemCart(props) {
     const { foodlist, onChangeQuantityPlus, onChangeQuantityMinus, deleteItem } = props;
     const { id, title, note, price, quantity } = foodlist;
@@ -17,9 +18,10 @@ function ItemCart(props) {
                 <Form>
                     <Textarea rowSpan={2} placeholder="Notes" style={styles.note} value={note} />
                 </Form>
-                <Text style={styles.price}>{price}</Text>
+
             </View>
             <View style={styles.quantity}>
+                <Text style={styles.price}>{price}</Text>
                 <TouchableOpacity onPress={onChangeQuantityPlus}>
                     <FontAwesome5 name="plus-circle" size={36} color="#FFC75F" />
                 </TouchableOpacity>
@@ -39,7 +41,7 @@ function ItemCart(props) {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        height: 120,
+        height: 140,
         marginBottom: 15,
         marginRight: 5,
         marginLeft: 10,
@@ -53,8 +55,8 @@ const styles = StyleSheet.create({
     imgcart: {
         alignSelf: 'flex-start',
         marginLeft: 5,
-        width: 100,
-        height: 120,
+        width: 120,
+        height: 140,
         borderBottomLeftRadius: 15,
         borderTopLeftRadius: 15,
     },
@@ -62,20 +64,23 @@ const styles = StyleSheet.create({
         paddingTop: 5,
         fontSize: 16,
         fontWeight: 'bold',
-        width: 100,
+        width: width / 4,
+        height: 60,
     },
     note: {
         fontSize: 12,
         fontWeight: '400',
         opacity: 0.5,
-        width: 100,
+        width: width / 4,
         height: 60,
         borderBottomColor: '#FFC75F',
         borderBottomWidth: 1,
+        marginTop: 10,
     },
     price: {
         fontSize: 16,
         fontWeight: 'bold',
+
     },
     infor: {
         backgroundColor: "#FFF",
@@ -87,18 +92,19 @@ const styles = StyleSheet.create({
         color: 'black',
         textAlign: 'center',
         opacity: 0.5,
-        width: 50,
-    }, quantity: {
-        flexDirection: 'row',
-
+        width: width / 10,
+    },
+    quantity: {
+        flexDirection: 'column',
         alignItems: 'center',
         backgroundColor: '#FFF',
-        paddingRight: 5,
+        paddingRight: 15,
+        paddingLeft: 15,
     },
     delete: {
         backgroundColor: "#FFC75F",
         width: 55,
-        height: 120,
+        height: 140,
         borderTopRightRadius: 15,
         borderBottomRightRadius: 15,
     },

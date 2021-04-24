@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
 import db from '@react-native-firebase/database';
 import { AuthContext } from './AuthProvider';
-import {Text} from 'react-native';
+import { Text } from 'react-native';
 import AuthStack from './AuthStack';
 import AppStack from './AppStack';
 import AdminStack from './AdminStack';
@@ -14,31 +14,31 @@ const Routes = () => {
   const { user, setUser } = useContext(AuthContext);
   const [initializing, setInitializing] = useState(true);
 
-//   async function createNewAccount() {
-//     try {
-//       // 3 types : [0 => admin, 1 => waiter, 2 => chef]
-//         const userAuth = await auth().createUserWithEmailAndPassword("hmq123452@gmail.com", "12345678");
-//         var user = {
-//             name: "Quy Minh Huynh",
-//             phone: "779797329",
-//             address: "474 Mercer Drive",
-//             uid: userAuth.user.uid,
-//             email: userAuth.user.email,
-//             active: true,
-//             type: 2
-//         }
-//         writeUserData(user)
+  // async function createNewAccount() {
+  //   try {
+  //     // 3 types : [0 => admin, 1 => waiter, 2 => chef]
+  //     const userAuth = await auth().createUserWithEmailAndPassword("hmq123450@gmail.com", "12345678");
+  //     var user = {
+  //       name: "Quy Minh Huynh",
+  //       phone: "779797329",
+  //       address: "474 Mercer Drive",
+  //       uid: userAuth.user.uid,
+  //       email: userAuth.user.email,
+  //       active: true,
+  //       type: 2
+  //     }
+  //     writeUserData(user)
 
-//     } catch (error) {
-//         console.log(error.message)
-//     }
-//   }
+  //   } catch (error) {
+  //     console.log(error.message)
+  //   }
+  // }
 
-//   function writeUserData(user) {
-//     db().ref('users/' + user.uid).set(user).catch(error => {
-//         console.log(error.message)
-//     });
-//  }
+  //   function writeUserData(user) {
+  //     db().ref('users/' + user.uid).set(user).catch(error => {
+  //         console.log(error.message)
+  //     });
+  //  }
 
   const getUserData = async (user) => {
     const snapshot = await db().ref('users/' + user.uid).once("value");
@@ -49,7 +49,7 @@ const Routes = () => {
 
   const onAuthStateChanged = (user) => {
     console.log("txtuser", user);
-    if(user !== null)
+    if (user !== null)
       getUserData(user);
     else
       setUser(user);

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Image, StyleSheet, TouchableHighlight, TouchableOpacity,Dimensions } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableHighlight, TouchableOpacity, Dimensions } from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import PropTypes from 'prop-types';
 import { Overlay } from 'react-native-elements';
@@ -43,19 +43,18 @@ function ItemFood(props) {
         }
     }
     return (
-        <View style={{flex:1,alignItems:'center'}}>
-            <NavContext.Consumer >
-                {({ navigation }) => <TouchableOpacity onPress={() => navigation.navigate('FoodDetail')}>
-                    <View style={styles.container} key={id}>
-                        <Image source={url} style={styles.imgtable} />
-                        <Text style={styles.title}>{title}</Text>
-                        <View style={styles.content}>
-                            <Text style={styles.price}>{price}$</Text>
-                            <Image source={urlstatus} style={styles.dotImg} />
-                        </View>
+        <View>
+            <TouchableOpacity onPress={() => navigation.navigate('FoodDetail')}>
+                <View style={styles.container} key={id}>
+                    <Image source={url} style={styles.imgtable} />
+                    <Text style={styles.title}>{title}</Text>
+                    <View style={styles.content}>
+                        <Text style={styles.price}>{price}$</Text>
+                        <Image source={urlstatus} style={styles.dotImg} />
                     </View>
-                </TouchableOpacity>}
-            </NavContext.Consumer>
+                </View>
+            </TouchableOpacity>
+
 
             <TouchableOpacity style={styles.iconplus} onPress={() => toggleOverlay()}>
                 <FontAwesome5Icon name="plus-circle" size={40} color="#FFC75F" />
@@ -105,10 +104,11 @@ function ItemFood(props) {
 }
 const styles = StyleSheet.create({
     container: {
-        width: width/2 - 20,
+        width: width / 2 - 20,
         height: 180,
         marginBottom: 10,
-        marginTop:20,
+        marginTop: 20,
+        marginLeft: 10,
         borderRadius: 15,
         alignItems: 'center',
         backgroundColor: 'white',
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         marginLeft: 40,
         marginRight: 40,
-        borderRadius: 20,
+        borderRadius: 50,
     },
     textfilteroverlay: {
         flex: 8,
