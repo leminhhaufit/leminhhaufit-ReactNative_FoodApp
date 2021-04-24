@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         marginLeft: 40,
         marginRight: 40,
-        borderRadius: 60,
+        borderRadius: 20,
     },
     textfilteroverlay: {
         flex: 8,

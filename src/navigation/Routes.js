@@ -8,6 +8,7 @@ import AuthStack from './AuthStack';
 import AppStack from './AppStack';
 import AdminStack from './AdminStack';
 import KitchenStack from './KitchenStack';
+import LoadingScreen from '../screens/LoadingScreen';
 
 const Routes = () => {
   const { user, setUser } = useContext(AuthContext);
@@ -39,11 +40,11 @@ const Routes = () => {
   //     });
   //  }
 
-  const getUserData = (user) => {
-    db().ref('users/' + user.uid).once("value", snap => {
-      setUser(snap.val());
-      console.log(snap.val())
-    })
+  const getUserData = async (user) => {
+    const snapshot = await db().ref('users/' + user.uid).once("value");
+    setUser(snapshot.val());
+    console.log("Day la datat: " +  snapshot.val());
+
   }
 
   const onAuthStateChanged = (user) => {
@@ -52,24 +53,25 @@ const Routes = () => {
       getUserData(user);
     else
       setUser(user);
-    if (initializing) setInitializing(false);
   };
 
   useEffect(() => {
     //createNewAccount();
+    setUser("loading");
     console.log("Re-run when state children has changed")
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
     return subscriber; // unsubscribe on unmount
   }, []);
 
-  if (initializing) { console.log("chay 1"); return null };
-
+  //if (initializing) {return <LoadingScreen/>};
   return (
     <NavigationContainer>
-      {user === null ? <AuthStack /> :
-        user.active && user.type === 0 ? <AdminStack /> :
-          user.active && user.type === 1 ? <AppStack /> :
-            <KitchenStack />}
+      {user === 'loading' ? <LoadingScreen /> :
+      user === null ? <AuthStack /> :
+      user.active && user.type === 0 ? <AdminStack/> : 
+      user.active && user.type === 1  ? <AppStack/> : 
+      <KitchenStack/>  
+      }
     </NavigationContainer>
   );
 };

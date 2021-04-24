@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View, Image, TouchableOpacity,Dimensions } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import header2IMG from '../assets/header2.png';
+import header2IMG from '../assets/header2.jpg';
 
 const width = Dimensions.get('window').width;
 
