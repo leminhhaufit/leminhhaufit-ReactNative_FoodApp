@@ -154,8 +154,7 @@ function FlatListItemFood(props) {
 const styles = StyleSheet.create({
     flatlist: {
         flex: 1,
-        alignSelf: 'stretch',
-        marginTop: 35,
+        alignSelf: 'stretch'
 
     },
 

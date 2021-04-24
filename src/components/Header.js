@@ -93,8 +93,8 @@ function Header(props) {
     }
 
     return (
-        <SafeAreaView style={{ flex: 1, paddingTop: 5, marginBottom: 50 }}>
-            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
+        <SafeAreaView style={{ flex: 1, paddingTop: 5}}>
+            <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center'}}>
                 <View style={{ flex: 1, flexDirection: 'row',justifyContent: 'center'}}>
                     <Carousel
                         ref={carouselRef}
@@ -126,28 +126,31 @@ function Header(props) {
                         carouselRef={carouselRef}
                       
                     />
-                    <View style={styles.container1}>
-                        <View style={styles.img}>
-                            <Image source={foodImg} style={styles.icon} />
-                        </View>
-                        <TextInput style={styles.inputSearch}
-                            placeholderStyle={styles.placeholdercustom}
-                            placeholder="Search here" />
-                        <TouchableOpacity style={styles.btnsearch} activeOpacity={1} onPress={() => console.log('hihi')}>
-                            <View style={styles.imgsearch}>
-                                <Image source={searchIMG} style={styles.iconsearch} />
-                            </View>
-                        </TouchableOpacity>
-                    </View>
 
                 </View>
 
-                <View style={styles.labelList}>
+                <View>
+                    <View style={styles.container1}>
+                            <View style={styles.img}>
+                                <Image source={foodImg} style={styles.icon} />
+                            </View>
+                            <TextInput style={styles.inputSearch}
+                                placeholderStyle={styles.placeholdercustom}
+                                placeholder="Search here" />
+                            <TouchableOpacity style={styles.btnsearch} activeOpacity={1} onPress={() => console.log('hihi')}>
+                                <View style={styles.imgsearch}>
+                                    <Image source={searchIMG} style={styles.iconsearch} />
+                                </View>
+                            </TouchableOpacity>
+                    </View>
 
-                    <Text style={styles.textlist}>{title}</Text>
-                    {
-                        title === "Food List" && <Filters />
-                    }
+                    <View style={styles.labelList}>
+
+                        <Text style={styles.textlist}>{title}</Text>
+                        {
+                            title === "Food List" && <Filters />
+                        }
+                    </View>
                 </View>
             </View>
         </SafeAreaView >
@@ -180,16 +183,13 @@ const styles = StyleSheet.create({
     },
     labelList: {
         flexDirection: "row",
+        width:'80%',
         alignSelf: 'center',
-        position: 'absolute',
-        top: 250,
-        bottom: 0,
-        left: 10,
-        right: 0,
+        justifyContent:'space-between',
         height: 40,
         marginBottom: 5,
-        marginLeft: 50,
-        marginTop: 50,
+        marginLeft: 0,
+        marginTop: 10,
     },
     labelfilter: {
         flexDirection: 'row',
@@ -252,17 +252,13 @@ const styles = StyleSheet.create({
         alignItems: 'stretch',
         borderRadius: 25,
         height: 50,
-        position: 'absolute',
-        top: 232,
-        bottom: 0,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
-            height: 4,
+            height: 2,
         },
-        shadowOpacity: 0.30,
-        shadowRadius: 4.65,
-        elevation: 8,
+        shadowRadius: 2,
+        elevation: 10,
     },
     inputSearch: {
         paddingLeft: 5,

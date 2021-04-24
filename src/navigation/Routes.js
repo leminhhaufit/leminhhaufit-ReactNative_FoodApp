@@ -66,11 +66,12 @@ const Routes = () => {
   //if (initializing) {return <LoadingScreen/>};
   return (
     <NavigationContainer>
-      {user === null ? <AuthStack /> :
-      user === 'loading' ? <LoadingScreen /> :
+      {user === 'loading' ? <LoadingScreen /> :
+      user === null ? <AuthStack /> :
       user.active && user.type === 0 ? <AdminStack/> : 
       user.active && user.type === 1  ? <AppStack/> : 
-      <KitchenStack/>  }
+      <KitchenStack/>  
+      }
     </NavigationContainer>
   );
 };
