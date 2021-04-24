@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
     flatlist: {
         flex: 1,
         alignSelf: 'stretch',
-        marginTop: 100,
+        marginTop: 35,
 
     },
 

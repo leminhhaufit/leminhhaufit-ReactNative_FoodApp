@@ -32,7 +32,7 @@ function Username({ setEmail }) {
 }
 var styles = StyleSheet.create({
     container: {
-        marginTop: 20,
+        marginTop: 10,
         alignSelf: 'stretch',
         borderRadius: 5,
         alignItems: 'center',

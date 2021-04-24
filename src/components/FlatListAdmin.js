@@ -75,7 +75,7 @@ export default function FlatListAdmin() {
 const styles = StyleSheet.create({
     flatlist: {
         flex: 1,
-        marginTop: 110,
+        marginTop: 40,
     },
     container: {
         alignItems: 'center',

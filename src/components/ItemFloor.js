@@ -35,14 +35,13 @@ const styles = StyleSheet.create({
         borderRadius: 25,
         alignItems: 'center',
         backgroundColor: "#FFC75F",
-        shadowColor: "#000",
         shadowOffset: {
             width: 0,
             height: 6,
         },
-        shadowOpacity: 0.39,
-        shadowRadius: 8.30,
-        elevation: 13,
+        shadowOpacity: 0.2,
+        shadowRadius: 2,
+        elevation: 4,
 
     },
 

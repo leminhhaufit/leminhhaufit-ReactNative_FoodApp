@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity,Dimensions } from 'reac
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { Button } from 'react-native-elements';
 import SwitchSelector from "react-native-switch-selector";
-import detail1IMG from '../assets/header5.png';
+import detail1IMG from '../assets/header5.jpg';
 import { NavContext } from '../navigation/AppStack';
 
 const width = Dimensions.get('window').width;
