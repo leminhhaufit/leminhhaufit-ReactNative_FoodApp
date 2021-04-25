@@ -12,27 +12,27 @@ function ItemCart(props) {
         <View style={styles.container} key={id}>
             <View>
                 <Image source={detail1IMG}
-                    style={styles.imgcart} /></View>
+                    style={styles.imgcart} />
+            </View>
             <View style={styles.infor}>
                 <Text style={styles.title}>{title}</Text>
                 <Form>
                     <Textarea rowSpan={2} placeholder="Notes" style={styles.note} value={note} />
                 </Form>
-
             </View>
             <View style={styles.quantity}>
                 <Text style={styles.price}>{price}</Text>
                 <TouchableOpacity onPress={onChangeQuantityPlus}>
-                    <FontAwesome5 name="plus-circle" size={36} color="#FFC75F" />
+                    <FontAwesome5 name="plus-circle" size={20} color="#FFC75F" />
                 </TouchableOpacity>
                 <Text style={styles.quantitytext}>{quantity}</Text>
                 <TouchableOpacity onPress={onChangeQuantityMinus}>
-                    <FontAwesome5 name="minus-circle" size={36} color="#FFC75F" />
+                    <FontAwesome5 name="minus-circle" size={20} color="#FFC75F" />
                 </TouchableOpacity>
             </View>
             <TouchableOpacity onPress={deleteItem}>
                 <View style={styles.delete}>
-                    <FontAwesome5 style={styles.icondel} name="trash" size={36} color="#FFF" />
+                    <FontAwesome5 style={styles.icondel} name="trash" size={20} color="#FFF" />
                 </View>
             </TouchableOpacity>
         </View>
@@ -41,12 +41,12 @@ function ItemCart(props) {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        height: 140,
+        height: 100,
         marginBottom: 15,
         marginRight: 5,
         marginLeft: 10,
         marginTop: 5,
-        alignSelf: 'stretch',
+        alignSelf: 'center',
         borderRadius: 15,
         backgroundColor: '#F4F4F4',
 
@@ -55,8 +55,8 @@ const styles = StyleSheet.create({
     imgcart: {
         alignSelf: 'flex-start',
         marginLeft: 5,
-        width: 120,
-        height: 140,
+        width: 100,
+        height: 100,
         borderBottomLeftRadius: 15,
         borderTopLeftRadius: 15,
     },
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     },
     quantitytext: {
         fontWeight: 'bold',
-        fontSize: 26,
+        fontSize: 20,
         color: 'black',
         textAlign: 'center',
         opacity: 0.5,
@@ -102,16 +102,15 @@ const styles = StyleSheet.create({
         paddingLeft: 15,
     },
     delete: {
+        display:'flex',
         backgroundColor: "#FFC75F",
         width: 55,
-        height: 140,
+        height: 100,
         borderTopRightRadius: 15,
         borderBottomRightRadius: 15,
-    },
-    icondel: {
-        alignSelf: 'center',
-        paddingTop: 40,
-    },
-
+        flexDirection:'column',
+        alignItems:'center',
+        justifyContent:'center'
+    }
 })
 export default ItemCart;

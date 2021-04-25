@@ -42,63 +42,7 @@ function FlatListItemCart({ navigation }) {
                 note: "",
                 price: "199$",
                 quantity: 2,
-            },
-            {
-                id: 5,
-                title: "Pizza 5",
-                note: "",
-                price: "199$",
-                quantity: 2,
-            },
-            {
-                id: 6,
-                title: "Pizza 6",
-                note: "",
-                price: "199$",
-                quantity: 2,
-            },
-            {
-                id: 7,
-                title: "Pizza 7",
-                note: "",
-                price: "199$",
-                quantity: 2,
-            },
-            {
-                id: 8,
-                title: "Pizza 8",
-                note: "",
-                price: "199$",
-                quantity: 2,
-            },
-            {
-                id: 9,
-                title: "Pizza 9",
-                note: "",
-                price: "199$",
-                quantity: 2,
-            },
-            {
-                id: 10,
-                title: "Pizza 10",
-                note: "",
-                price: "199$",
-                quantity: 2,
-            },
-            {
-                id: 11,
-                title: "Pizza 11",
-                note: "",
-                price: "199$",
-                quantity: 2,
-            },
-            {
-                id: 12,
-                title: "Pizza 12",
-                note: "",
-                price: "199$",
-                quantity: 2,
-            },
+            }
         ]
 
     )
@@ -114,7 +58,6 @@ function FlatListItemCart({ navigation }) {
             },
             ...foodlist.slice(index + 1),
         ]);
-
     };
     function onChangeQuantityMinus(item) {
         const quantity = item.quantity;
@@ -149,9 +92,6 @@ function FlatListItemCart({ navigation }) {
         ])
     }
     return (
-
-
-
         <FlatList data={foodlist}
             numColumns={1}
             renderItem={({ item }) => <ItemCart foodlist={item}
@@ -161,7 +101,8 @@ function FlatListItemCart({ navigation }) {
             />}
             keyExtractor={item => item.id}
             style={styles.foodlist}
-
+            nestedScrollEnabled={true}
+            initialNumToRender='1'
         />
 
 
@@ -171,7 +112,7 @@ function FlatListItemCart({ navigation }) {
 }
 const styles = StyleSheet.create({
     foodlist: {
-        height: 340,
+        height: 230,
 
     }
 

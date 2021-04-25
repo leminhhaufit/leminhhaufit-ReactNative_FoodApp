@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     overlay: {
         height: 300,
         backgroundColor: '#F4F4F4',
-        borderRadius: 30,
+        borderRadius: 10,
     },
     textfilteroverlay: {
         flex: 5,

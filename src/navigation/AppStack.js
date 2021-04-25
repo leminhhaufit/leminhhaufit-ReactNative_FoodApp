@@ -116,6 +116,9 @@ const AppStack = () => {
                 labelStyle : {
                     fontSize: 12,
                     paddingBottom:5
+                },
+                iconStyle : {
+                    marginTop:3
                 }
             }}
         >
@@ -126,7 +129,7 @@ const AppStack = () => {
                     tabBarLabel: 'Home',
 
                     tabBarIcon: ({ color, size }) => (
-                        <FontAwesome5 name="home" color={color} size={28} />
+                        <FontAwesome5 name="home" color={color} size={24} />
                     ),
                 })}
             />
@@ -137,7 +140,7 @@ const AppStack = () => {
                     tabBarLabel: 'Food',
 
                     tabBarIcon: ({ color, size }) => (
-                        <FontAwesome5 name="utensils" color={color} size={28} />
+                        <FontAwesome5 name="utensils" color={color} size={24} />
                     ),
                 })}
             />
@@ -148,7 +151,7 @@ const AppStack = () => {
                     tabBarLabel: 'Payment',
 
                     tabBarIcon: ({ color, size }) => (
-                        <FontAwesome5 name="shopping-basket" color={color} size={28} />
+                        <FontAwesome5 name="shopping-basket" color={color} size={24} />
                     ),
                 })}
             />
@@ -159,7 +162,7 @@ const AppStack = () => {
                     tabBarLabel: 'Profile',
 
                     tabBarIcon: ({ color, size }) => (
-                        <FontAwesome5 name="user-alt" color={color} size={28} />
+                        <FontAwesome5 name="user-alt" color={color} size={24} />
                     ),
                 })}
             />
