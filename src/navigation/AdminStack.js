@@ -138,6 +138,9 @@ const AdminStack = () => {
                 labelStyle : {
                     fontSize: 12,
                     paddingBottom:5
+                },
+                iconStyle : {
+                    marginTop:3
                 }
             }}>
             <Tab.Screen
@@ -147,7 +150,7 @@ const AdminStack = () => {
                     tabBarLabel: 'Home',
 
                     tabBarIcon: ({ color, size }) => (
-                        <FontAwesome5 name="home" color={color} size={28} />
+                        <FontAwesome5 name="home" color={color} size={24} />
                     ),
                 })}
             />
@@ -158,7 +161,7 @@ const AdminStack = () => {
                     tabBarLabel: 'List Manage',
 
                     tabBarIcon: ({ color, size }) => (
-                        <FontAwesome5 name="tasks" color={color} size={28} />
+                        <FontAwesome5 name="tasks" color={color} size={24} />
                     ),
                 })}
             />
@@ -169,7 +172,7 @@ const AdminStack = () => {
                     tabBarLabel: 'Profile',
 
                     tabBarIcon: ({ color, size }) => (
-                        <FontAwesome5 name="user-alt" color={color} size={28} />
+                        <FontAwesome5 name="user-alt" color={color} size={24} />
                     ),
                 })}
             />
