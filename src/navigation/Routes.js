@@ -48,7 +48,7 @@ const Routes = () => {
   const getUserData = async (user) => {
     const snapshot = await db().ref('users/' + user.uid).once("value");
     setUser(snapshot.val());
-    console.log("Day la datat: " +  snapshot.val());
+    console.log("Day la datat: " +  JSON.stringify(snapshot.val()));
 
   }
 

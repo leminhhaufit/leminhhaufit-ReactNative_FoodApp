@@ -8,12 +8,17 @@ import {ActionSheet } from "native-base";
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
 import userData from './DataUser';
+import auth from '@react-native-firebase/auth';
+import db from '@react-native-firebase/database';
 
 const width = Dimensions.get('window').width;
 
+
 export default function HeaderProfiles() {
-    const [av,setAv] = useState();
-    const { user:{name,phone,email,uid}, setUser } = useContext(AuthContext);
+    const [av,setAv] = useState(null);
+    const { user, setUser } = useContext(AuthContext);
+    const {name,phone,email,uid,photoURL} = user;
+    const currentUser = auth().currentUser;
 
     const requestCameraPermission = async () => {
         try {
@@ -45,7 +50,18 @@ export default function HeaderProfiles() {
             launchCamera({mediaType:'photo',cameraType:'back'}, async({uri}) => {
                 setAv(uri);
                 await storage().ref(`${uid}/avatar.png`).putFile(uri);
-            })
+                let imageRef = await storage().ref(`${uid}/avatar.png`);
+                const url = await imageRef.getDownloadURL();
+                currentUser.updateProfile({photoURL:url}).then(async () => {
+                     db().ref('users/' + uid).update({
+                        "photoURL": url
+                      }).then(async () => {
+                        const data = await db().ref('users/' + uid).once("value");
+                        // setUser(data.val());
+                        // setAv(null);
+                      })
+                });
+            }) 
         }
     }
 
@@ -65,8 +81,6 @@ export default function HeaderProfiles() {
             }
         );
     }
-
-
     return (
         <View style={styles.container}>
             <View style={styles.card}>
@@ -77,6 +91,7 @@ export default function HeaderProfiles() {
                         <Avatar
                             size="large"
                             rounded
+                            
                             activeOpacity={0}
                         />
                     </View>
@@ -85,7 +100,7 @@ export default function HeaderProfiles() {
                             size="large"
                             rounded
                             icon={{ name: 'rocket', color: 'orange', type: 'font-awesome' }}
-                            source={{uri:av}}
+                            source={{uri: av ? av : photoURL }}
                             overlayContainerStyle={{ backgroundColor: '#FFC75F'}}
                             onPress={onClickAddImage}
                             activeOpacity={0.95}
@@ -136,25 +151,29 @@ const styles = StyleSheet.create({
     },
     avatarCard: {
         position:'relative',
-        width:100,
+        width:80,
         height:50,
         top:-50
     },
     avatar: {
         position:'absolute',
         borderRadius: 50,
-        padding: 10,
-        backgroundColor: '#FFC75F',
+        padding: 5,
+        backgroundColor: '#FFF',
         borderWidth: 1,
-        borderColor: '#FFC75F',
+        borderColor: '#1a73e8',
         borderStyle: 'solid',
         opacity: 0.5,
+        
 
     },
     avatar2: {
         position:'absolute',
         borderRadius: 50,
-        padding: 10,
+        padding:6
+        
+        
+        
 
     },
     name: {  
