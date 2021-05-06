@@ -9,6 +9,7 @@ import AppStack from './AppStack';
 import AdminStack from './AdminStack';
 import KitchenStack from './KitchenStack';
 import LoadingScreen from '../screens/LoadingScreen';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const Routes = () => {
   const { user, setUser } = useContext(AuthContext);
@@ -40,6 +41,10 @@ const Routes = () => {
   //     });
   //  }
 
+  const saveInfoUser = async (user) => {
+    console.log("Data storage:" + JSON.stringify(user));
+    await AsyncStorage.setItem('user',JSON.stringify(user));
+  }
   const getUserData = async (user) => {
     const snapshot = await db().ref('users/' + user.uid).once("value");
     setUser(snapshot.val());
@@ -49,6 +54,7 @@ const Routes = () => {
 
   const onAuthStateChanged = (user) => {
     console.log("txtuser", user);
+    saveInfoUser(user);
     if (user !== null)
       getUserData(user);
     else

@@ -1,42 +1,104 @@
-import React from 'react'
-import { StyleSheet, Text, View, Image, TouchableOpacity,Dimensions } from 'react-native';
+import React, {useContext,useState} from 'react'
+import { StyleSheet, Text, View, Image, TouchableOpacity,Dimensions,PermissionsAndroid } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import header2IMG from '../assets/header2.jpg';
+import { AuthContext } from '../navigation/AuthProvider';
+import {ActionSheet } from "native-base";
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import storage from '@react-native-firebase/storage';
+import userData from './DataUser';
 
 const width = Dimensions.get('window').width;
 
 export default function HeaderProfiles() {
+    const [av,setAv] = useState();
+    const { user:{name,phone,email,uid}, setUser } = useContext(AuthContext);
+
+    const requestCameraPermission = async () => {
+        try {
+          const granted = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.CAMERA,
+            {
+              title: "Access permission",
+              message:
+                "Access permission to update your avatar",
+                buttonPositive: "Continue"
+              
+            }
+          );
+          if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+            console.log("You can use the camera");
+            checkAndTakePhoto();
+          } else {
+            console.log("Camera permission denied");
+          }
+        } catch (err) {
+          console.warn(err);
+        }
+      };
+
+      const checkAndTakePhoto = async () => {
+        const granted = await PermissionsAndroid.check(
+            PermissionsAndroid.PERMISSIONS.CAMERA);
+        if(granted === true){
+            launchCamera({mediaType:'photo',cameraType:'back'}, async({uri}) => {
+                setAv(uri);
+                await storage().ref(`${uid}/avatar.png`).putFile(uri);
+            })
+        }
+    }
+
+    const onClickAddImage = () => {
+        const BUTTONS = ['Take Photo','Choose Photo Library','Cancel'];
+        ActionSheet.show(
+            {options:BUTTONS,cancelButtonIndex:2,title:'Select a Photo'},(btnSelect) => {
+                console.log(btnSelect);
+                switch (btnSelect) {
+                    case 0:
+                        requestCameraPermission();
+                    case 1:
+                        break;
+                    default:
+                        break;
+                }
+            }
+        );
+    }
+
+
     return (
-        <View style={styles.container} >
-            <View>
+        <View style={styles.container}>
+            <View style={styles.card}>
                 <Image source={header2IMG}
                     style={styles.imgcart} />
-                <View style={styles.avatar}>
-                    <Avatar
-                        size="large"
-                        rounded
-                        activeOpacity={0}
-                    />
-                </View>
-                <View style={styles.avatar2}>
-                    <Avatar
-                        size="large"
-                        rounded
-                        icon={{ name: 'rocket', color: 'orange', type: 'font-awesome' }}
-                        overlayContainerStyle={{ backgroundColor: '#FFC75F', opacity: 1, }}
-                        onPress={() => console.log("Works!")}
-                        activeOpacity={0.7}
-                    />
+                <View style={styles.avatarCard} >
+                    <View style={styles.avatar}>
+                        <Avatar
+                            size="large"
+                            rounded
+                            activeOpacity={0}
+                        />
+                    </View>
+                    <View style={styles.avatar2}>
+                        <Avatar
+                            size="large"
+                            rounded
+                            icon={{ name: 'rocket', color: 'orange', type: 'font-awesome' }}
+                            source={{uri:av}}
+                            overlayContainerStyle={{ backgroundColor: '#FFC75F'}}
+                            onPress={onClickAddImage}
+                            activeOpacity={0.95}
+                        />
 
+                    </View>
                 </View>
-                <Text style={styles.name}>Minh Hậu</Text>
+                <Text style={styles.name}>{name}</Text>
                 <View style={styles.infor}>
                     <FontAwesome5 name="map-marker-alt" size={16} color="#FFC75F" />
                     <Text style={styles.address}>Tp.HCM</Text>
                     <FontAwesome5 name="user-alt" size={16} color="#FFC75F" />
                     <Text style={styles.address}>Age: 22</Text>
-
                     <Text style={styles.roles}>Phục vụ</Text>
                 </View>
             </View>
@@ -61,16 +123,25 @@ const styles = StyleSheet.create({
         marginRight: 5,
         elevation: 3,
     },
+    card : {
+        display:'flex',
+        flexDirection:'column',
+        alignItems:'center',
+    },
     imgcart: {
         width: width,
         height: 150,
         alignSelf: 'stretch',
         borderRadius: 25,
     },
+    avatarCard: {
+        position:'relative',
+        width:100,
+        height:50,
+        top:-50
+    },
     avatar: {
-        position: 'absolute',
-        right: width/2 - 50 ,
-        top: 110,
+        position:'absolute',
         borderRadius: 50,
         padding: 10,
         backgroundColor: '#FFC75F',
@@ -81,17 +152,12 @@ const styles = StyleSheet.create({
 
     },
     avatar2: {
-        position: 'absolute',
-        right: width/2 - 50,
-        top: 110,
+        position:'absolute',
         borderRadius: 50,
         padding: 10,
 
     },
-    name: {
-        position: 'absolute',
-        right: width/2 -50 ,
-        top: 205,
+    name: {  
         fontSize: 22,
         fontWeight: 'bold',
         color: '#FFC75F',
@@ -99,8 +165,8 @@ const styles = StyleSheet.create({
     infor: {
         flexDirection: 'row',
         alignSelf: 'center',
-        paddingTop: 90,
         paddingBottom: 20,
+        paddingTop:10
     },
     address: {
         paddingRight: 10,
