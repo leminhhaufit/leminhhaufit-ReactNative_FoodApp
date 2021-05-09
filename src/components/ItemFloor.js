@@ -15,7 +15,7 @@ function ItemFloor(props) {
     const { id, title, status,des } = floorlist;
 
     return (
-        <TouchableOpacity activeOpacity={1}>
+        <TouchableOpacity activeOpacity={0.7}>
             <View style={styles.container}>
                 <LinearGradient 
                     start={{ x: 0.5, y: 0 }}

@@ -80,7 +80,7 @@ const KitchenStack = () => {
                     tabBarLabel: 'Home',
 
                     tabBarIcon: ({ color, size }) => (
-                        <FontAwesome5 name="home" color={color} size={24} />
+                        <FontAwesome5 name="home" color={color} size={18} />
                     ),
                 })}
             />
@@ -91,7 +91,7 @@ const KitchenStack = () => {
                     tabBarLabel: 'List Orders',
 
                     tabBarIcon: ({ color, size }) => (
-                        <FontAwesome5 name="list-ol" color={color} size={24} />
+                        <FontAwesome5 name="list-ol" color={color} size={18} />
                     ),
                 })}
             />
@@ -102,7 +102,7 @@ const KitchenStack = () => {
                     tabBarLabel: 'Profile',
 
                     tabBarIcon: ({ color, size }) => (
-                        <FontAwesome5 name="user-alt" color={color} size={24} />
+                        <FontAwesome5 name="user-alt" color={color} size={18} />
                     ),
                 })}
             />
