@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, } from 'react-native';
-
+import LinearGradient from 'react-native-linear-gradient'
 import PropTypes from 'prop-types';
 
 
@@ -12,13 +12,21 @@ ItemFloor.propTypes = {
 function ItemFloor(props) {
     const { floorlist } = props;
 
-    const { id, title, status } = floorlist;
+    const { id, title, status,des } = floorlist;
 
     return (
-        <TouchableOpacity >
-
+        <TouchableOpacity activeOpacity={1}>
             <View style={styles.container}>
-                <Text style={styles.title}>{floorlist.title}</Text>
+                <LinearGradient 
+                    start={{ x: 0.5, y: 0 }}
+                    end={{x: 0.7, y: 1 }}
+                    colors={[ '#fdfdfd', '#F4F4F4']}
+                    style={styles.icon}
+                >  
+                    <Text style={styles.title}>{title}</Text>
+       
+                </LinearGradient>
+                <Text style={styles.des}>{des}</Text>
             </View>
 
         </TouchableOpacity >
@@ -26,30 +34,35 @@ function ItemFloor(props) {
 }
 const styles = StyleSheet.create({
     container: {
-        width: 150,//120
-        height: 30,
         marginBottom: 10,
+        display:'flex',
+        flexDirection:'column',
         marginLeft: 20,
-        marginTop: 10,
-        alignSelf: 'stretch',
-        borderRadius: 25,
-        alignItems: 'center',
-        backgroundColor: "#FFC75F",
-        shadowOffset: {
-            width: 0,
-            height: 6,
-        },
-        shadowOpacity: 0.2,
-        shadowRadius: 2,
-        elevation: 4,
+        justifyContent:'center',
+        alignItems:'center'
 
+    },
+    icon: {
+        width: 60,//120
+        height: 60,
+        borderRadius:50,
+        alignSelf: 'stretch',
+        alignItems: 'center', 
+        shadowRadius: 1,
+        display:'flex',
+        justifyContent:'center',
+        alignItems:'center'
     },
 
     title: {
         color: '#4D3826',
         textTransform: 'uppercase',
-        fontSize: 22,
-        fontWeight: '200',
+        fontSize: 30,
+    },
+    des: {
+        paddingRight:8,
+        paddingLeft:5,
+        color:'#8a8989',
     }
 })
 export default ItemFloor;

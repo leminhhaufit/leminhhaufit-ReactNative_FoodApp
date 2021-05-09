@@ -16,24 +16,46 @@ function FlatListItemFloor(props) {
         [
             {
                 id: 1,
-                title: "All",
+                title: "🍔",
                 status: true,
+                des: 'All'
             },
             {
                 id: 2,
-                title: "Seafood",
+                title: "🥘",
                 status: false,
+                des: 'Streetfood'
             },
             {
                 id: 3,
-                title: "Chicken",
+                title: "🍹",
                 status: false,
+                des: 'Drink'
             },
             {
                 id: 4,
-                title: "Beef",
+                title: "🥗",
                 status: false,
+                des: 'Vege'
             },
+            {
+                id: 5,
+                title: "🍜",
+                status: false,
+                des: 'Noodles'
+            },
+            {
+                id: 6,
+                title: "🍱",
+                status: false,
+                des: 'Rice box'
+            },
+            {
+                id: 7,
+                title: "🍕",
+                status: false,
+                des: 'Pizza/Burger'
+            }
 
         ]
 
