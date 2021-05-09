@@ -1,4 +1,4 @@
-import React, {useContext,useState} from 'react'
+import React, {useContext,useState, useEffect} from 'react'
 import { StyleSheet, Text, View, Image, TouchableOpacity,Dimensions,PermissionsAndroid } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -10,6 +10,7 @@ import storage from '@react-native-firebase/storage';
 import userData from './DataUser';
 import auth from '@react-native-firebase/auth';
 import db from '@react-native-firebase/database';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const width = Dimensions.get('window').width;
 
@@ -19,9 +20,13 @@ export default function HeaderProfiles() {
     const { user, setUser } = useContext(AuthContext);
     const {name,phone,email,uid,photoURL} = user;
     const currentUser = auth().currentUser;
+    useEffect(async () => {
+        const avatar = await AsyncStorage.getItem(uid);
+        setAv(avatar);
+    },[av])
 
     const requestCameraPermission = async () => {
-        try {
+        try { 
           const granted = await PermissionsAndroid.request(
             PermissionsAndroid.PERMISSIONS.CAMERA,
             {
@@ -49,7 +54,7 @@ export default function HeaderProfiles() {
         if(granted === true){
             launchCamera({mediaType:'photo',cameraType:'back'}, async({uri}) => {
                 try {
-                    if(uri){
+                    if(uri){ 
                         await uploadPhoto(uri);
                     }
                 } catch (error) {
@@ -61,6 +66,7 @@ export default function HeaderProfiles() {
 
     const uploadPhoto = async (uri) => {
         setAv(uri);
+        await AsyncStorage.setItem(uid,uri);
         await storage().ref(`${uid}/avatar.png`).putFile(uri);
         let imageRef = await storage().ref(`${uid}/avatar.png`);
         const url = await imageRef.getDownloadURL();
