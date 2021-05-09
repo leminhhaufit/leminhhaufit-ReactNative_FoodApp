@@ -48,21 +48,43 @@ export default function HeaderProfiles() {
             PermissionsAndroid.PERMISSIONS.CAMERA);
         if(granted === true){
             launchCamera({mediaType:'photo',cameraType:'back'}, async({uri}) => {
-                setAv(uri);
-                await storage().ref(`${uid}/avatar.png`).putFile(uri);
-                let imageRef = await storage().ref(`${uid}/avatar.png`);
-                const url = await imageRef.getDownloadURL();
-                currentUser.updateProfile({photoURL:url}).then(async () => {
-                     db().ref('users/' + uid).update({
-                        "photoURL": url
-                      }).then(async () => {
-                        const data = await db().ref('users/' + uid).once("value");
-                        // setUser(data.val());
-                        // setAv(null);
-                      })
-                });
+                try {
+                    if(uri){
+                        await uploadPhoto(uri);
+                    }
+                } catch (error) {
+                    
+                }
             }) 
         }
+    }
+
+    const uploadPhoto = async (uri) => {
+        setAv(uri);
+        await storage().ref(`${uid}/avatar.png`).putFile(uri);
+        let imageRef = await storage().ref(`${uid}/avatar.png`);
+        const url = await imageRef.getDownloadURL();
+        currentUser.updateProfile({photoURL:url}).then(async () => {
+             db().ref('users/' + uid).update({
+                "photoURL": url
+              }).then(async () => {
+                const data = await db().ref('users/' + uid).once("value");
+                // setUser(data.val());
+                // setAv(null);
+              })
+        });
+    }
+
+    const choosePhoto = () => {
+        launchImageLibrary({mediaType:'photo'}, async({uri}) => {
+            try {
+                if(uri){
+                    await uploadPhoto(uri);
+                }
+            } catch (error) {
+                
+            }
+        })
     }
 
     const onClickAddImage = () => {
@@ -73,7 +95,9 @@ export default function HeaderProfiles() {
                 switch (btnSelect) {
                     case 0:
                         requestCameraPermission();
+                        break;
                     case 1:
+                        choosePhoto();
                         break;
                     default:
                         break;
