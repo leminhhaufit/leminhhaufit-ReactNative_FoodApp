@@ -4,10 +4,10 @@ import FlatListAdmin from '../components/FlatListAdmin';
 import Header from '../components/Header';
 export default function HomeAdmin() {
     return (
-        <ScrollView style={styles.container}>
+        <View style={styles.container}>
             <Header title="Admin List" />
             <FlatListAdmin />
-        </ScrollView>
+        </View>
     )
 }
 

@@ -7,14 +7,14 @@ import Header from '../components/Header';
 export default function ManageOrders() {
     return (
         <View style={styles.container}>
-            <ScrollView style={styles.container2}>
+            <View style={styles.container2}>
                 <View style={styles.top}>
                     <Header title="List Food" />
                 </View>
                 <View style={styles.content}>
                     <FlatListOrdersManage />
                 </View>
-            </ScrollView>
+            </View>
         </View>
     )
 }
@@ -27,20 +27,13 @@ const styles = StyleSheet.create({
     container2: {
         flex: 1,
     },
-    top: {
-        flex: 1,
-    },
     imgtop: {
         alignSelf: 'stretch',
         alignItems: 'center',
         height: 250,
     },
     content: {
-        marginTop: 20,
-        flex: 2,
-        backgroundColor: "#FFF",
-        borderTopLeftRadius: 50,
-        borderTopRightRadius: 50,
+        flex: 1,
     },
     fab: {
         position: 'absolute',

@@ -47,25 +47,7 @@ export default function FlatListCategoryManage() {
                 name: "Seafood",
                 description: "South Ocean Islands",
                 status: true,
-            },
-            {
-                id: 8,
-                name: "Seafood",
-                description: "South Ocean Islands",
-                status: true,
-            },
-            {
-                id: 9,
-                name: "Seafood",
-                description: "South Ocean Islands",
-                status: true,
-            },
-            {
-                id: 10,
-                name: "Seafood",
-                description: "South Ocean Islands",
-                status: true,
-            },
+            }
         ]
     )
     return (

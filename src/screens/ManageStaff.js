@@ -4,15 +4,13 @@ import { Button } from 'react-native-elements';
 import FlatListStaffManage from '../components/FlatListStaffManage';
 import Header from '../components/Header';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-export default function ManageStaff({ navigation }) {
+export default function ManageStaff({ navigation}) {
     return (
         <View style={styles.container}>
-            <ScrollView style={styles.container2}>
-                <View style={styles.top}>
-                    <Header title="List Food" />
-                </View>
-                <View style={styles.content}>
-                    <FlatListStaffManage />
+            <ScrollView keyboardShouldPersistTaps='always'>
+                <View style={styles.container2}>
+                        <Header title="Manage Staff"/>
+                        <FlatListStaffManage />
                 </View>
             </ScrollView>
             <View style={styles.fixedbutton}>
@@ -20,19 +18,17 @@ export default function ManageStaff({ navigation }) {
                     icon={<FontAwesome5 name="plus-circle" size={50} color="#FFF" style={styles.iconadd} />} buttonStyle={styles.btnadd} />
             </View>
         </View>
+       
     )
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        position: 'relative'
+        
     },
     container2: {
-        flex: 1,
-    },
-    top: {
-        flex: 1,
+        minHeight:200
     },
     imgtop: {
         alignSelf: 'stretch',
@@ -40,11 +36,7 @@ const styles = StyleSheet.create({
         height: 250,
     },
     content: {
-        marginTop: 20,
-        flex: 2,
-        backgroundColor: "#FFF",
-        borderTopLeftRadius: 50,
-        borderTopRightRadius: 50,
+        flex:1
     },
     fab: {
         position: 'absolute',

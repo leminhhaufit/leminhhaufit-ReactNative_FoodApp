@@ -1,8 +1,5 @@
 import React, {useContext,useState, useEffect} from 'react'
 import { StyleSheet, ImageBackground, TextInput , Text, View, Image, TouchableOpacity,Dimensions,PermissionsAndroid } from 'react-native';
-import { Avatar,Button } from 'react-native-elements';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import header2IMG from '../assets/header2.jpg';
 import { AuthContext } from '../navigation/AuthProvider';
 import {ActionSheet } from "native-base";
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
@@ -14,6 +11,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import LinearGradient from 'react-native-linear-gradient';
 import ProfileButton from './ProfileButton';
 import { signOut } from '../config/firebaseAPI';
+import CardUser from './CardUser'
 const width = Dimensions.get('window').width;
 
 
@@ -116,54 +114,7 @@ export default function HeaderProfiles1() {
     return (
         <View style={{backgroundColor:'#FFF',flex:1}}>
             <View style={styles.header}></View>
-            <View style={styles.searchgra}>
-               <View style={styles.card}>
-                   {/* Info */}
-                   <View style={styles.info}>
-                       <Image
-                            style={styles.iconContainer}
-                            source={{
-                                uri: av ? av : photoURL
-                            }}
-                        />
-                        <View style={styles.userContainer}>
-                            <Text style={{fontSize:20,fontWeight:'bold',color:'#505052'}}>{name}</Text>
-                            <Text style={{fontSize:15,fontWeight:'bold',color:'#AAB5BE',marginVertical:4}}>Phục vụ</Text>
-                            <View style={styles.accountContainer}>
-                                <View style={styles.inv}>
-                                    <Text style={styles.title}>📆 Dates</Text>
-                                    <Text style={styles.val}>30/4</Text>
-                                </View>
-                                <View style={styles.inv}>
-                                    <Text style={styles.title}>📇 Serves</Text>
-                                    <Text style={styles.val}>35</Text>
-                                </View>
-                                <View style={styles.inv}>
-                                    <Text style={styles.title}>🌟 Rating</Text>
-                                    <Text style={styles.val}>4.5</Text>
-                                </View>
-                                
-                                
-                            </View>
-                        </View>
-                   </View>
-                   {/* Button */}
-                   <View style={styles.btnInfo}>
-                    <Button
-                        title="👦 Change Avatar"
-                        type="outline"
-                        onPress={onClickAddImage}
-                        titleStyle={{fontSize:13}}
-                    />
-
-                    <Button
-                        title="⚒ Edit Profile"
-                        type="solid"
-                        titleStyle={{fontSize:13}}
-                    />
-                   </View>
-               </View>
-            </View>
+            <CardUser format={false} name={name} avatar={av ? av : photoURL} changeAvatar={onClickAddImage} />
 
             <View style={styles.boxapp}>
                 <ProfileButton text='Order' icon='file-alt' cb={signOut}/>

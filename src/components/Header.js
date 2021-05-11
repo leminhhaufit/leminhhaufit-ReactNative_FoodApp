@@ -93,9 +93,9 @@ function Header(props) {
     }
 
     return (
-        <SafeAreaView style={{ flex: 1, paddingTop: 5}}>
-            <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center'}}>
-                <View style={{ flex: 1, flexDirection: 'row',justifyContent: 'center'}}>
+        <SafeAreaView style={{ paddingTop: 5}}>
+            <View style={{flexDirection: 'column', justifyContent: 'center'}}>
+                {/* <View style={{ flex: 1, flexDirection: 'row',justifyContent: 'center'}}>
                     <Carousel
                         ref={carouselRef}
                         data={carouselItems}
@@ -127,7 +127,7 @@ function Header(props) {
                       
                     />
 
-                </View>
+                </View> */}
 
                 <View>
                     <View style={styles.container1}>
@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
         width:'80%',
         alignSelf: 'center',
         justifyContent:'space-between',
-        height: 40,
+        minHeight: 30,
         marginBottom: 5,
         marginLeft: 0,
         marginTop: 10,
@@ -245,12 +245,12 @@ const styles = StyleSheet.create({
         margin: 5,
     },
     container1: {
+        marginTop:10,
         flexDirection: 'row',
         alignSelf: 'center',
         width:'80%',
         alignItems: 'stretch',
         borderRadius: 25,
-        height: 50,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,

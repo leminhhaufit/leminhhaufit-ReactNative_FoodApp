@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
         width: 350,
         alignSelf: 'flex-start',
         alignItems: 'stretch',
-        padding: 40,
+        padding: 10,
         color: '#FFC75F'
     },
     labelsheet: {

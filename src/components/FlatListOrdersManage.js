@@ -33,49 +33,7 @@ export default function FlatListOrdersManage() {
                 nameStaff: "Minh Hau",
                 createDate: "24-10-1999",
                 price: "199",
-            },
-            {
-                id: 5,
-                ordersid: "HD11115",
-                nameStaff: "Minh Hau",
-                createDate: "24-10-1999",
-                price: "199",
-            },
-            {
-                id: 6,
-                ordersid: "HD11116",
-                nameStaff: "Minh Hau",
-                createDate: "24-10-1999",
-                price: "199",
-            },
-            {
-                id: 7,
-                ordersid: "HD11117",
-                nameStaff: "Minh Hau",
-                createDate: "24-10-1999",
-                price: "199",
-            },
-            {
-                id: 8,
-                ordersid: "HD11118",
-                nameStaff: "Minh Hau",
-                createDate: "24-10-1999",
-                price: "199",
-            },
-            {
-                id: 9,
-                ordersid: "HD11119",
-                nameStaff: "Minh Hau",
-                createDate: "24-10-1999",
-                price: "199",
-            },
-            {
-                id: 10,
-                ordersid: "HD11110",
-                nameStaff: "Minh Hau",
-                createDate: "24-10-1999",
-                price: "199",
-            },
+            }
         ]
     )
     return (

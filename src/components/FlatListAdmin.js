@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useContext } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import staff from '../assets/managestafftrans.png';
@@ -10,7 +10,6 @@ import orderdetail from '../assets/managebilltrans.png';
 import { NavContextAdmin } from '../navigation/AdminStack';
 
 export default function FlatListAdmin() {
-
     return (
         <NavContextAdmin.Consumer>
             {({ navigation }) =>
@@ -75,7 +74,6 @@ export default function FlatListAdmin() {
 const styles = StyleSheet.create({
     flatlist: {
         flex: 1,
-        marginTop: 40,
     },
     container: {
         alignItems: 'center',

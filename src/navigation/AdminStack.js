@@ -63,19 +63,25 @@ const HomeAdminStack = ({ navigation }) => (
                 name="Staff"
                 component={ManageStaff}
                 options={{
-                    headerShown: false,
+                    title: 'Manage Staff',
+                    headerShown: true,
+                    headerStyle:{
+                        elevation:0
+                    }
                 }}
             />
+
             <Stack.Screen
-                name="Food"
-                component={ManageFood}
+                name="Category"
+                component={ManageCategory}
                 options={{
                     headerShown: false,
                 }}
             />
+
             <Stack.Screen
-                name="Category"
-                component={ManageCategory}
+                name="Food"
+                component={ManageFood}
                 options={{
                     headerShown: false,
                 }}
@@ -105,7 +111,7 @@ const HomeAdminStack = ({ navigation }) => (
                 name="FormStaff"
                 component={FormStaff}
                 options={{
-                    headerShown: false,
+                    headerShown: true,
                 }}
             />
             <Stack.Screen
@@ -118,6 +124,7 @@ const HomeAdminStack = ({ navigation }) => (
         </Stack.Navigator>
     </NavContextAdmin.Provider>
 );
+
 const ProfileStack = ({ navigation }) => (
     <Stack.Navigator>
         <Stack.Screen
@@ -132,7 +139,7 @@ const ProfileStack = ({ navigation }) => (
 
 const AdminStack = () => {
     return (
-        <Tab.Navigator
+        <Tab.Navigator 
             tabBarOptions={{
                 activeTintColor: '#FFC75F',
                 labelStyle : {

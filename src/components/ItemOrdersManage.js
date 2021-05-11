@@ -31,7 +31,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         alignSelf: 'stretch',
         marginLeft: 20,
-        marginTop: 40,
         marginRight: 40,
         borderRadius: 25,
         height: 140,

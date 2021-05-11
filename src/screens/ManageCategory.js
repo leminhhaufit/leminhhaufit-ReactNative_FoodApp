@@ -7,14 +7,14 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 export default function ManageCategory({ navigation }) {
     return (
         <View style={styles.container}>
-            <ScrollView style={styles.container2}>
+            <View style={styles.container2}>
                 <View style={styles.top}>
                     <Header title="List Food" />
                 </View>
                 <View style={styles.content}>
                     <FlatListCategoryManage />
                 </View>
-            </ScrollView>
+            </View>
             <View style={styles.fixedbutton}>
                 <Button onPress={() => navigation.navigate("FormCategory", { title: "Add New Category" })} icon={<FontAwesome5 name="plus-circle" size={50} color="#FFF" style={styles.iconadd} />} buttonStyle={styles.btnadd} />
             </View>
@@ -30,20 +30,13 @@ const styles = StyleSheet.create({
     container2: {
         flex: 1,
     },
-    top: {
-        flex: 1,
-    },
     imgtop: {
         alignSelf: 'stretch',
         alignItems: 'center',
         height: 250,
     },
-    content: {
-        marginTop: 20,
-        flex: 2,
-        backgroundColor: "#FFF",
-        borderTopLeftRadius: 50,
-        borderTopRightRadius: 50,
+    content: {  
+        flex: 1
     },
     fab: {
         position: 'absolute',
