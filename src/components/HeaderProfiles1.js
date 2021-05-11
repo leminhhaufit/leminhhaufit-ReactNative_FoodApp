@@ -12,7 +12,8 @@ import auth from '@react-native-firebase/auth';
 import db from '@react-native-firebase/database';
 import AsyncStorage from '@react-native-community/async-storage';
 import LinearGradient from 'react-native-linear-gradient';
-
+import ProfileButton from './ProfileButton';
+import { signOut } from '../config/firebaseAPI';
 const width = Dimensions.get('window').width;
 
 
@@ -163,6 +164,13 @@ export default function HeaderProfiles1() {
                    </View>
                </View>
             </View>
+
+            <View style={styles.boxapp}>
+                <ProfileButton text='Order' icon='file-alt' cb={signOut}/>
+                <ProfileButton text='Settings' icon='info' cb={signOut}/>
+                <ProfileButton text='Settings' icon='cogs' cb={signOut}/>
+                <ProfileButton text='Log out' icon='sign-out-alt' cb={signOut} />
+            </View>
         </View>
     )
 }
@@ -178,8 +186,7 @@ const styles = StyleSheet.create({
     searchgra: {
         left:0,
         right:0,
-        height:90,
-        marginTop:-110
+        marginTop:-140
     },
     card:{
         backgroundColor:"#FFF",
@@ -246,5 +253,35 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
         
+    },
+    boxapp:{
+        flexWrap:'wrap',
+        display:'flex',
+        flexDirection:'row',
+        justifyContent:'center',
+        margin:20
+    },
+    box:{
+        backgroundColor:'#FFF',
+        flexBasis: '40%',
+        margin:5,
+        flexShrink:1,
+        height:100,
+        borderRadius:5,
+        elevation:2,
+        justifyContent:'center',
+        alignItems:'center',
+        borderColor:'#458',
+        borderWidth:0.3
+    },
+    textProfile : {
+        fontSize:15,
+        fontWeight:'bold',
+        color:'#AAB5BE',
+        marginVertical:4
+    },
+    v1:{
+        justifyContent:'center',
+        alignItems:'center',
     }
 })
