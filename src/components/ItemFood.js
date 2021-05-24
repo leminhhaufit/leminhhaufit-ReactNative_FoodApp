@@ -1,34 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, Image, StyleSheet, TouchableHighlight, TouchableOpacity, Dimensions } from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import PropTypes from 'prop-types';
 import { Overlay } from 'react-native-elements';
-import tableImg from '../assets/table.png';
 import dotredImg from '../assets/dotred.png';
 import dotgreen from '../assets/dotgreen.png';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import SwitchSelector from "react-native-switch-selector";
 import { Button } from 'react-native-elements';
-import { NavContext } from '../navigation/AppStack';
-import { NavContextAdmin } from '../navigation/AdminStack';
-import { NavContextKit } from '../navigation/KitchenStack';
-ItemFood.propTypes = {
-};
+import formatter from '../config/Currency';
+import db from '@react-native-firebase/database';
+import Toast from 'react-native-toast-message';
+import { AuthContext } from '../navigation/AuthProvider';
 
 const width = Dimensions.get('window').width;
 function ItemFood(props) {
     const [visible, setVisible] = useState(false);
     const [loading, setLoading] = useState(false);
     const [quantity, setQuantity] = useState(1);
+    const [order, setOrders] = useState([]);
+    const [size, setSize] = useState('small');
     const { foodlist, reserve } = props;
-    const { id, title, description, price, material, status, url } = foodlist;
+    const { id, name, description, price, material, active, photoURL } = foodlist;
+    const { user, setUser } = useContext(AuthContext);
+    const {uid} = user;
+    
     let urlstatus;
-    //status == true đang sử dụng
-    //status ==false chưa sử dụng
-    if (status == true) {
-        urlstatus = dotredImg;
-    } else {
+    if (active == true) {
         urlstatus = dotgreen;
+    } else {
+        urlstatus = dotredImg;
     }
     const toggleOverlay = () => {
         setVisible(!visible);
@@ -42,22 +42,52 @@ function ItemFood(props) {
             setQuantity(1);
         }
     }
+
+    const addOrderTemp = async () => {
+        try {
+            setLoading(true);
+            const curTime = new Date().getTime();
+            const objFood = {
+                uid,
+                name,
+                quantity,
+                price,
+                size,
+                create: curTime,
+                photoURL,
+                id
+            }
+            await db().ref(`order-temp/${uid}|${id}`).set(objFood);
+            setLoading(false);
+            Toast.show({
+                type: 'success',
+                text1: 'Item added successfully 👋'  ,
+                autoHide: true,
+              });
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <View>
-            <TouchableOpacity onPress={() => navigation.navigate('FoodDetail')}>
+            <TouchableOpacity activeOpacity={0.95} onPress={() => navigation.navigate('FoodDetail')}>
                 <View style={styles.container} key={id}>
-                    <Image source={url} style={styles.imgtable} />
-                    <Text style={styles.title}>{title}</Text>
+                    <Image source={{uri:photoURL}} style={styles.imgtable} />
+                    <Text style={styles.title}>{name}</Text>
                     <View style={styles.content}>
-                        <Text style={styles.price}>{price}$</Text>
+                        <Text style={styles.price}>{formatter.format(price)}</Text>
                         <Image source={urlstatus} style={styles.dotImg} />
                     </View>
                 </View>
             </TouchableOpacity>
 
 
-            <TouchableOpacity style={styles.iconplus} onPress={() => toggleOverlay()}>
-                <FontAwesome5Icon name="plus-circle" size={40} color="#FFC75F" />
+            <TouchableOpacity activeOpacity={0.9} style={styles.iconplus} onPress={() => toggleOverlay()}>
+                <View style={{backgroundColor:'#47c0f6',width:40,height:40,borderRadius:20,alignContent:'center',alignItems:'center'}}>
+                    <FontAwesome5Icon name="plus" size={20} color="#FFFFFF" style={{marginTop:'20%',overflow:'hidden'}} />
+                </View>
             </TouchableOpacity>
             <Overlay isVisible={visible} overlayStyle={styles.overlay} onBackdropPress={toggleOverlay}>
                 <View style={styles.labelfilter}>
@@ -74,11 +104,11 @@ function ItemFood(props) {
                     <TouchableOpacity onPress={() => onChangeQuantityMinus()}>
                         <FontAwesome5 name="minus-circle" size={36} color="#FFC75F" />
                     </TouchableOpacity>
-                    <Text style={styles.price}>{price * quantity}$</Text>
+                    <Text style={styles.price}>{formatter.format(price * quantity)}</Text>
                 </View>
                 <SwitchSelector
                     initial={0}
-                    //onPress={value => this.setState({ gender: value })}
+                    onPress={value => setSize(value)}
                     textColor="#FFC75F" //'#7a44cf'
                     selectedColor="#fff"
                     buttonColor="#FFC75F"
@@ -86,9 +116,9 @@ function ItemFood(props) {
                     borderWidth={1.5}
                     hasPadding
                     options={[
-                        { label: "Small", value: "small", },
-                        { label: "Medium", value: "medium", },
-                        { label: "Large", value: "large", },
+                        { label: "Small", value: "Small", },
+                        { label: "Medium", value: "Medium", },
+                        { label: "Large", value: "Large", },
                     ]}
                     testID="gender-switch-selector"
                     accessibilityLabel="gender-switch-selector"
@@ -97,7 +127,7 @@ function ItemFood(props) {
                     textStyle={styles.switchtext}
                     imageStyle={styles.switchimg}
                 />
-                <Button icon={<FontAwesome5 name="shopping-cart" size={22} color="#FFF" />} buttonStyle={styles.add} titleStyle={styles.titleadd} title="Add to cart" loading={loading} onPress={() => setLoading(!loading)}></Button>
+                <Button icon={<FontAwesome5 name="shopping-cart" size={22} color="#FFF" />} buttonStyle={styles.add} titleStyle={styles.titleadd} title="Add to cart" loading={loading} onPress={addOrderTemp}></Button>
             </Overlay>
         </View >
     );
@@ -122,8 +152,10 @@ const styles = StyleSheet.create({
         elevation: 13,
     },
     imgtable: {
-        width: 100,//56
+        width:'100%',
         height: 100,
+        borderTopLeftRadius: 15,
+        borderTopRightRadius:15
 
     },
     title: {

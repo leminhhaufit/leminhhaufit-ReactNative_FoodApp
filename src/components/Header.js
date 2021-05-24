@@ -1,4 +1,4 @@
-import React, { useState,useRef } from 'react';
+import React, { useState,useRef} from 'react';
 import { View, Image, StyleSheet, TextInput, TouchableOpacity, Text, SafeAreaView, Button } from 'react-native';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
@@ -18,37 +18,11 @@ import searchIMG from '../assets/loupe.png';
 import Filters from './Filters';
 
 function Header(props) {
-    const { title, goBack } = props;
+    const { title, goBack,onSearch } = props;
     const carouselRef = useRef(null);
     const [activeIndex, setActiveIndex] = useState(0);
     const [carouselItems, setCarouselItems] = useState(
         [
-            // {
-            //     title: "Item 1",
-            //     text: "Text 1",
-            //     url: header1IMG,
-            // },
-            // {
-            //     title: "Item 2",
-            //     text: "Text 2",
-            //     url: header2IMG,
-            // },
-            // {
-            //     title: "Item 3",
-            //     text: "Text 3",
-            //     url: header3IMG,
-            // },
-            // {
-            //     title: "Item 4",
-            //     text: "Text 4",
-            //     url: header4IMG,
-            // },
-            // {
-            //     title: "Item 5",
-            //     text: "Text 5",
-            //     url: header5IMG,
-            // },
-
             {
                 title: 'Beautiful and dramatic Antelope Canyon',
                 subtitle: 'Lorem ipsum dolor sit amet et nuncat mergitur',
@@ -135,6 +109,7 @@ function Header(props) {
                                 <Image source={foodImg} style={styles.icon} />
                             </View>
                             <TextInput style={styles.inputSearch}
+                                onChangeText={val => onSearch(val)}
                                 placeholderStyle={styles.placeholdercustom}
                                 placeholder="Search here" />
                             <TouchableOpacity style={styles.btnsearch} activeOpacity={1} onPress={() => console.log('hihi')}>

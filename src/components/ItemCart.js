@@ -1,27 +1,27 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableHighlight, TouchableOpacity, Button, Dimensions } from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import detail1IMG from '../assets/detail1.png';
+import formatter from '../config/Currency';
 import { Textarea, Form } from "native-base";
 const width = Dimensions.get('window').width;
 function ItemCart(props) {
     const { foodlist, onChangeQuantityPlus, onChangeQuantityMinus, deleteItem } = props;
-    const { id, title, note, price, quantity } = foodlist;
+    const { id, name, size, price, quantity,photoURL } = foodlist;
 
     return (
         <View style={styles.container} key={id}>
             <View>
-                <Image source={detail1IMG}
+                <Image source={{uri:photoURL}}
                     style={styles.imgcart} />
             </View>
             <View style={styles.infor}>
-                <Text style={styles.title}>{title}</Text>
+                <Text style={styles.title}>{name}</Text>
                 <Form>
-                    <Textarea rowSpan={2} placeholder="Notes" style={styles.note} value={note} />
+                    <Textarea rowSpan={2} placeholder="Notes" style={styles.note} value={size} />
                 </Form>
             </View>
             <View style={styles.quantity}>
-                <Text style={styles.price}>{price}</Text>
+                <Text style={styles.price}>{formatter.format(price)}</Text>
                 <TouchableOpacity onPress={onChangeQuantityPlus}>
                     <FontAwesome5 name="plus-circle" size={20} color="#FFC75F" />
                 </TouchableOpacity>
@@ -43,10 +43,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         height: 100,
         marginBottom: 15,
-        marginRight: 5,
-        marginLeft: 10,
-        marginTop: 5,
+        width:'90%',
         alignSelf: 'center',
+        justifyContent:'center',
         borderRadius: 15,
         backgroundColor: '#F4F4F4',
 

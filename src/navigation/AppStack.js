@@ -7,6 +7,7 @@ import HomeScreen from '../screens/HomeUser';
 import OrderFood from '../screens/OrderFood';
 import FoodDetail from '../screens/FoodDetail';
 import Payment from '../screens/Payment';
+import Status from '../screens/Status';
 import Profile from '../screens/Profile'
 import HomeKitchen from '../screens/HomeKitchen';
 import Information from '../screens/Information';
@@ -82,6 +83,15 @@ const PaymentStack = ({ navigation }) => (
                 // )
             }}
         />
+
+            <Stack.Screen
+                name="StatusPayment"
+                component={Status}
+                options={{
+                    headerShown: true,
+                    title:'Your Orders'
+                }}
+            />
     </Stack.Navigator>
 );
 const ProfileStack = ({ navigation }) => (

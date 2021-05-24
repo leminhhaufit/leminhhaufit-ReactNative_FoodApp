@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Text, Linking, ImageBackground, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, Linking, ImageBackground, TouchableOpacity,Alert } from 'react-native';
 import AnimatedLoader from "react-native-animated-loader";
-import auth from '@react-native-firebase/auth';
+import auth, { firebase } from '@react-native-firebase/auth';
 import Toast from 'react-native-toast-message';
 import Username from '../components/Username';
 import Password from '../components/Password';
 import LabelLogin from '../components/LabelLogin';
 import ImageBackgroundURL from '../assets/angryimg.png';
+// import {
+//     GoogleSigninButton,
+//     GoogleSignin,
+//     statusCodes
+//   } from '@react-native-community/google-signin';
 
-Login.propTypes = {
+  
 
-};
-
+  
 function Login({ navigation }) {
     const [isLoad, setIsload] = useState(false);
     const [email, setEmail] = useState('');
@@ -25,6 +29,13 @@ function Login({ navigation }) {
           autoHide: false,
         });
       },[errorMessage]);
+
+    //   useEffect(() => {
+    //       console.log('da vo day')
+    //     GoogleSignin.configure({
+    //         webClientId: '468522611978-sfjacismqi94qmt7rdvt6lj6fdcoitnc.apps.googleusercontent.com',
+    //       });
+    //   })
     async function signIn(txtemail, txtpassword) {
         try {
             setIsload(true);
@@ -56,6 +67,34 @@ function Login({ navigation }) {
             console.log("State:",errorMessage );
         }
     }
+
+
+    // async function signIn() {
+    //     try {
+    //       await GoogleSignin.hasPlayServices()
+    //       const userInfo = await GoogleSignin.signIn()
+    //       const credential = auth.GoogleAuthProvider.credential(userInfo.idToken);
+    //       console.log(credential);
+    //      const data = await auth().signInWithCredential(credential);
+    //      console.log(data);
+    //     } catch (error) {
+    //       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+    //         // when user cancels sign in process,
+    //         Alert.alert('Process Cancelled')
+    //       } else if (error.code === statusCodes.IN_PROGRESS) {
+    //         // when in progress already
+    //         Alert.alert('Process in progress')
+    //       } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+    //         // when play services not available
+    //         Alert.alert('Play services are not available')
+    //       } else {
+    //         // some other error
+    //         Alert.alert('Something else went wrong... ', error.toString())
+    //       }
+    //     }
+    //   }
+
+
 
     const handlePress = () => {
         setType('error');
@@ -109,6 +148,14 @@ function Login({ navigation }) {
                         <Text style={styles.textload}>Waiting food...</Text>
                     </AnimatedLoader>
                 }
+
+            {/* <GoogleSigninButton
+                style={styles.signInButton}
+                size={GoogleSigninButton.Size.Wide}
+                color={GoogleSigninButton.Color.Dark}
+                
+                onPress={() => signIn()}
+        /> */}
                 <Text style={styles.footer} onPress={() => Linking.openURL('http://google.com')} >
                  Forgotten password?
                 </Text>
@@ -134,6 +181,13 @@ const styles = StyleSheet.create({
         alignItems:'center',
         alignSelf:'center'
 
+    },
+    signInButton: {
+        alignItems:'center',
+        alignSelf:'center',
+        width: '90%',
+        marginTop:10,
+        height: 48
     },
     footer: {
         color: "#458",

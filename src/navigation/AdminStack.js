@@ -75,7 +75,7 @@ const HomeAdminStack = ({ navigation }) => (
                 name="Category"
                 component={ManageCategory}
                 options={{
-                    headerShown: false,
+                    headerShown: true,
                 }}
             />
 
@@ -83,28 +83,28 @@ const HomeAdminStack = ({ navigation }) => (
                 name="Food"
                 component={ManageFood}
                 options={{
-                    headerShown: false,
+                    headerShown: true,
                 }}
             />
             <Stack.Screen
                 name="Statistical"
                 component={Statistical}
                 options={{
-                    headerShown: false,
+                    headerShown: true,
                 }}
             />
             <Stack.Screen
                 name="Orders"
                 component={ManageOrders}
                 options={{
-                    headerShown: false,
+                    headerShown: true,
                 }}
             />
             <Stack.Screen
                 name="FormCategory"
                 component={FormCategory}
                 options={{
-                    headerShown: false,
+                    headerShown: true,
                 }}
             />
             <Stack.Screen
@@ -118,7 +118,7 @@ const HomeAdminStack = ({ navigation }) => (
                 name="FormFood"
                 component={FormFood}
                 options={{
-                    headerShown: false,
+                    headerShown: true,
                 }}
             />
         </Stack.Navigator>

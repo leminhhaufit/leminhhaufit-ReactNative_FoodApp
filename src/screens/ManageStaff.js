@@ -9,13 +9,16 @@ export default function ManageStaff({ navigation}) {
         <View style={styles.container}>
             <ScrollView keyboardShouldPersistTaps='always'>
                 <View style={styles.container2}>
-                        <Header title="Manage Staff"/>
                         <FlatListStaffManage />
                 </View>
             </ScrollView>
             <View style={styles.fixedbutton}>
-                <Button onPress={() => navigation.navigate("FormStaff", { title: "Add New Staff" })}
-                    icon={<FontAwesome5 name="plus-circle" size={50} color="#FFF" style={styles.iconadd} />} buttonStyle={styles.btnadd} />
+                <Button
+                    onPress={() => navigation.navigate("FormStaff", { title: "Add New Staff" })}
+                    type="solid"
+                    buttonStyle={styles.btnadd}
+                    icon={<FontAwesome5 name="plus-circle" size={35} color="#FFF" />}
+                    titleStyle={{ fontSize: 23 }} />
             </View>
         </View>
        
@@ -56,10 +59,7 @@ const styles = StyleSheet.create({
 
     },
     btnadd: {
-        height: 75,
-        width: 75,
-        borderRadius: 40,
-        backgroundColor: '#FFC75F'
+        borderRadius: 40
     },
     iconadd: {
         shadowColor: "#000",

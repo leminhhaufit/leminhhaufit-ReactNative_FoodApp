@@ -52,7 +52,7 @@ export default function HeaderProfiles1() {
         const granted = await PermissionsAndroid.check(
             PermissionsAndroid.PERMISSIONS.CAMERA);
         if(granted === true){
-            launchCamera({mediaType:'photo',cameraType:'back'}, async({uri}) => {
+            launchCamera({mediaType:'photo',cameraType:'back',quality:0.5}, async({uri}) => {
                 try {
                     if(uri){ 
                         await uploadPhoto(uri);

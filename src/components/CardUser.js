@@ -1,22 +1,63 @@
 import React from 'react'
-import { StyleSheet, ImageBackground, TextInput , Text, View, Image, TouchableOpacity,Dimensions,PermissionsAndroid } from 'react-native'
+import { StyleSheet, ImageBackground, TextInput ,Alert, Text, View, Image, TouchableOpacity,Dimensions,PermissionsAndroid } from 'react-native'
 import { Button } from 'react-native-elements';
+import FastImage from 'react-native-fast-image';
+import SecondFirebaseApp from '../config/SecondFirebaseApp';
+import Toast from 'react-native-toast-message';
 
-const CardUser = ({format,name, avatar, changeAvatar}) => {
+
+const CardUser = ({format,name, avatar, changeAvatar,type,active,uid}) => {
+    console.log(type);
+    let position;
+    if(type == 0) position = 'Admin';
+    else if(type == 1) position = 'Waiter';
+    else position = 'Chef';
+
+    const userActivate = () => {
+        Alert.alert(
+            `Do you want to ${active ? 'DEACTIVATE' : 'ACTIVATE'} the account?`,
+            "You can temporarily deactivate account and reactivate it later.s",
+            [
+              {
+                text: "Cancel",
+                onPress: () => console.log("Cancel Pressed"),
+                style: "cancel"
+              },
+              { 
+                  text: "OK", 
+                  onPress: async () => {
+                      console.log('active');
+                    const secondApp = await SecondFirebaseApp();
+                    secondApp.database().ref('users/' + uid).update({
+                        "active": !active
+                    }).then(() => {
+                        Toast.show({
+                            type: 'success',
+                            text1: `${active ? 'Deactivate ' + name : 'Activate ' + name } `  ,
+                            autoHide: true,
+                          });
+                    })
+                  } 
+             }
+            ]
+          );
+    }
+
     return (
         <View style={!format ? styles.searchgra : ''}>
             <View style={styles.card}>
                 {/* Info */}
                 <View style={styles.info}>
-                    <Image
-                        style={styles.iconContainer}
-                        source={{
-                            uri: avatar
-                        }}
+                <FastImage
+                    style={styles.iconContainer}
+                    source={{
+                        uri: avatar
+                    }}
+                        resizeMode={FastImage.resizeMode.center}
                     />
                     <View style={styles.userContainer}>
                         <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#505052' }}>{name}</Text>
-                        <Text style={{ fontSize: 15, fontWeight: 'bold', color: '#AAB5BE', marginVertical: 4 }}>Phục vụ</Text>
+                        <Text style={{ fontSize: 15, fontWeight: 'bold', color: '#AAB5BE', marginVertical: 4 }}>{position}</Text>
                         <View style={styles.accountContainer}>
                             <View style={styles.inv}>
                                 <Text style={styles.title}>📆 Dates</Text>
@@ -49,6 +90,15 @@ const CardUser = ({format,name, avatar, changeAvatar}) => {
                         type="solid"
                         titleStyle={{ fontSize: 13 }}
                     />
+                    {format &&
+                        <Button
+                            onPress={userActivate}
+                            title={active ? '👌' : '❌'}
+                            type="solid"
+                            buttonStyle={{backgroundColor:`${active ? '#5CB85C' : '#CD6B7C'}`}}
+                            titleStyle={{ fontSize: 13 }}
+                        />
+                    }  
                 </View>
             </View>
         </View>
@@ -91,8 +141,7 @@ const styles = StyleSheet.create({
         flex:1,
         marginTop:10, 
         borderRadius:10,
-        backgroundColor:'#f5f5f5'
-        
+        backgroundColor:'#f5f5f5',
     },
     userContainer:{
         display:'flex',

@@ -1,14 +1,49 @@
-import React, { useState } from 'react'
-import { StyleSheet, Text, View, Picker, Image, } from 'react-native'
-import { Container, Content, Form, Item, Input, Label, Button, } from 'native-base';
+import React, { useState,useContext } from 'react'
+import { StyleSheet, Text, View, Image, } from 'react-native'
+import { Container, Content, Form, Item, Input, Label, Button } from 'native-base';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import ImagePicker from 'react-native-image-crop-picker';
 import BottomSheet from 'reanimated-bottom-sheet';
 import { TouchableOpacity } from 'react-native';
+import ProgressLoader from 'rn-progress-loader';
+import SecondFirebaseApp from '../config/SecondFirebaseApp';
+import Toast from 'react-native-toast-message';
+import { AuthContext } from '../navigation/AuthProvider';
+import db from '@react-native-firebase/database';
+import { Dropdown } from 'react-native-material-dropdown-v2';
+
 export default function FormFood(props) {
     const [selectedValue, setSelectedValue] = useState("category");
     const [selectedImage, setSelectedImage] = useState(null);
-    const { title, route } = props
+    const [name, setName] = useState(null);
+    const [des, setDes] = useState(null);
+    const [ingre, setIngre] = useState(null);
+    const [price, setPrice] = useState(null);
+    const [done, setDone] = useState(false);
+    const [category, setCategory] = useState(null);
+    const { user, setUser } = useContext(AuthContext);
+    const {uid} = user;
+
+//     const [data, setDs] = useState([{
+//         value: 'Banana',
+//       }, {
+//         value: 'Mango',
+//       }, {
+//         value: 'Pear',
+//       }
+// ])
+
+const data = [{
+    value: 'Banana',
+  }, {
+    value: 'Mango',
+  }, {
+    value: 'Pear',
+  }
+]
+    
+
+    const { title, route, navigation } = props
     const selectFile = () => {
         ImagePicker.openPicker({
             width: 400,
@@ -53,6 +88,50 @@ export default function FormFood(props) {
     );
 
 
+    const addFood = async (secondaryApp) =>  {
+        try {
+            if(!selectedImage || !name || !des || !ingre || !price){
+                Toast.show({
+                    type: 'error',
+                    text1: 'Something went wrong  👋'  ,
+                    autoHide: true,
+                  });
+                return;
+            }
+            setDone(true);
+          const curTime = new Date().getTime();
+          await secondaryApp.storage().ref(`foods/${uid}/${curTime}.png`).putFile(selectedImage);
+          let imageRef = await secondaryApp.storage().ref(`foods/${uid}/${curTime}.png`);
+          const photoURL = await imageRef.getDownloadURL();
+          const foodObj = {
+            name,
+            description: des,
+            ingredient: ingre,
+            price,
+            photoURL,
+            active: true,
+            date: new Date().getTime(),
+            uid,
+            category,
+            id: `${uid}|${curTime}`
+          }
+          await db().ref(`foods/${uid}|${curTime}`).set(foodObj);
+
+          navigation.navigate('Food');
+        } catch (error) {
+          console.log(error.message)
+          setDone(false);
+        }
+      }
+
+
+      async function initNew(){
+        const secondaryApp = await SecondFirebaseApp();
+        addFood(secondaryApp);    
+    }
+
+
+
     const sheetRef = React.useRef(null);
     return (
         <Container >
@@ -64,33 +143,28 @@ export default function FormFood(props) {
                 <Form style={styles.form}>
                     <Item floatingLabel rounded style={styles.item}>
                         <Label style={styles.label}><FontAwesome5 name="pizza-slice" size={32} color="#FFC75F" /> Name Food</Label>
-                        <Input style={styles.input} />
+                        <Input style={styles.input} value={name} onChangeText={name => setName(name)} />
                     </Item>
                     <Item floatingLabel rounded style={styles.item}>
                         <Label style={styles.label}><FontAwesome5 name="file-alt" solid size={32} color="#FFC75F" /> Description</Label>
-                        <Input style={styles.input} />
+                        <Input style={styles.input} value={des} onChangeText={des => setDes(des)} />
                     </Item>
                     <Item floatingLabel rounded style={styles.item}>
                         <Label style={styles.label}><FontAwesome5 name="book-open" solid size={32} color="#FFC75F" /> Ingredient</Label>
-                        <Input style={styles.input} />
+                        <Input style={styles.input} value={ingre} onChangeText={ingre => setIngre(ingre)} />
                     </Item>
                     <Item floatingLabel rounded style={styles.item}>
                         <Label style={styles.label}><FontAwesome5 name="dollar-sign" solid size={32} color="#FFC75F" /> Price</Label>
-                        <Input style={styles.input} />
+                        <Input style={styles.input} value={price} onChangeText={price => setPrice(price)} />
                     </Item>
                     <Label style={styles.label2}><FontAwesome5 name="tags" solid size={32} color="#FFC75F" /> Category</Label>
-                    <Item rounded style={styles.item}>
-                        <Picker
-                            selectedValue={selectedValue}
-                            style={styles.pickerstyle}
-                            onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-                            itemStyle={styles.itemStyle}
-                        >
-                            <Picker.Item label="Category" value="category" />
-                            <Picker.Item label="Java" value="java" />
-                            <Picker.Item label="JavaScript" value="js" />
-                        </Picker>
-                    </Item>
+                     <Dropdown
+                        containerStyle={{width:'90%',alignSelf:'center'}}
+                        key="d"
+                        onChangeText={data => setCategory(data)}
+                        label='Favorite Fruit'
+                        data={data}
+                    />
                     <Label style={styles.label2}><FontAwesome5 name="image" size={32} color="#FFC75F" /> Images</Label>
                     <View style={styles.viewImage}>
 
@@ -107,7 +181,11 @@ export default function FormFood(props) {
 
 
                     </View>
-                    <Button full rounded style={styles.btn}
+                    <Button 
+                        full 
+                        rounded 
+                        style={styles.btn}
+                        onPress={initNew}
                     >
                         <Text style={styles.textbtn}><FontAwesome5 name="download" size={32} color="#FFF" /> Comfirm</Text>
                     </Button>
@@ -115,10 +193,17 @@ export default function FormFood(props) {
             </Content>
             <BottomSheet
                 ref={sheetRef}
-                snapPoints={[300, 200, 0]}
+                snapPoints={[260, 150, 0]}
                 borderRadius={50}
+                initialSnap={2}
                 renderContent={renderContent}
             />
+
+                        <ProgressLoader
+                            visible={done}
+                            isModal={true} isHUD={true}
+                            hudColor={"#FFFFFF"}
+                            color={"#000000"} />
 
         </Container >
     )
@@ -136,6 +221,8 @@ const styles = StyleSheet.create({
         fontSize: 22,
         fontWeight: '500',
         marginTop: 30,
+        color:'#545455'
+
     },
     input: {
         paddingLeft: 20,
@@ -143,6 +230,7 @@ const styles = StyleSheet.create({
         height: 70,
         fontSize: 22,
         fontWeight: '600',
+        
 
     },
     item: {

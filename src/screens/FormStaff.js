@@ -1,15 +1,26 @@
-import React, { useState } from 'react'
-import { StyleSheet, Text, View, Picker, Image, } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { StyleSheet, Text, View, Picker, Image,TouchableOpacity } from 'react-native'
 import { Container, Content, Form, Item, Input, Label, Button, } from 'native-base';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import ImagePicker from 'react-native-image-crop-picker';
 import BottomSheet from 'reanimated-bottom-sheet';
 import SwitchSelector from "react-native-switch-selector";
-import { TouchableOpacity } from 'react-native';
+import Toast from 'react-native-toast-message';
+import SecondFirebaseApp from '../config/SecondFirebaseApp';
+import ProgressLoader from 'rn-progress-loader';
+
 export default function FormStaff(props) {
-    const [selectedValue, setSelectedValue] = useState("category");
     const [selectedImage, setSelectedImage] = useState(null);
-    const { title, route } = props;
+    const [name, setName] = useState(null);
+    const [phone, setPhone] = useState(null);
+    const [address, setAddress] = useState(null);
+    const [gender, setGender] = useState('Female');
+    const [role, setRole] = useState(0);
+    const [email, setEmail] = useState(null);
+    const [password, setPassword] = useState(null);
+    const [done, setDone] = useState(true);
+    const {route, navigation } = props;
+
     const selectFile = () => {
         ImagePicker.openPicker({
             width: 400,
@@ -32,6 +43,9 @@ export default function FormStaff(props) {
             setSelectedImage(image.path);
         });
     }
+
+    
+    
     const renderContent = () => (
         <View
             style={{
@@ -55,8 +69,58 @@ export default function FormStaff(props) {
         </View>
     );
 
+    const addEmployee = async (secondaryApp) =>  {
+    try {
+        if(!selectedImage || !name || !phone || !address || !email || !phone  ){
+            Toast.show({
+                type: 'error',
+                text1: 'Something went wrong  👋'  ,
+                autoHide: true,
+              });
+            return;
+        }
+        setDone(false);
+      // 3 types : [0 => admin, 1 => waiter, 2 => chef]
+      const userAuth = await secondaryApp.auth().createUserWithEmailAndPassword(email, password);
+      const uid = userAuth.user.uid;
+      await secondaryApp.storage().ref(`${uid}/avatar.png`).putFile(selectedImage);
+      let imageRef = await secondaryApp.storage().ref(`${uid}/avatar.png`);
+      const photoURL = await imageRef.getDownloadURL();
+      var user = {
+        name,
+        phone,
+        address,
+        email,
+        uid,
+        photoURL,
+        active: true,
+        type: role
+      }
+      writeUserData(user,secondaryApp);
 
-    const sheetRef = React.useRef(null);
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
+    async function writeUserData(user,secondaryApp) {
+        try {
+            await secondaryApp.database().ref('users/' + user.uid).set(user);
+            setDone(true);
+            navigation.navigate('Staff');
+        } catch (error) {
+            console.log(error);
+        }
+   }
+
+    async function initNew(){
+        const secondaryApp = await SecondFirebaseApp();
+        addEmployee(secondaryApp);    
+    }
+
+
+
+    const sheetRef = React.useRef(false);
     return (
         <Container >
 
@@ -67,21 +131,21 @@ export default function FormStaff(props) {
                 <Form style={styles.form}>
                     <Item floatingLabel rounded style={styles.item}>
 
-                        <Label style={styles.label}><FontAwesome5 name="user-tie" size={32} color="#FFC75F" /> Full Name</Label>
-                        <Input style={styles.input} />
+                        <Label style={styles.label}><FontAwesome5 name="user-tie" size={30} color="#FFC75F" /> Full Name</Label>
+                        <Input style={styles.input} value={name} onChangeText={name => setName(name)} />
                     </Item>
                     <Item floatingLabel rounded style={styles.item}>
-                        <Label style={styles.label}><FontAwesome5 name="phone-alt" size={32} color="#FFC75F" /> Number Phone</Label>
-                        <Input style={styles.input} />
+                        <Label style={styles.label}><FontAwesome5 name="phone-alt" size={30} color="#FFC75F" /> Number Phone</Label>
+                        <Input style={styles.input} value={phone} onChangeText={phone => setPhone(phone)} />
                     </Item>
                     <Item floatingLabel rounded style={styles.item}>
-                        <Label style={styles.label}><FontAwesome5 name="map-marker-alt" size={32} color="#FFC75F" /> Address</Label>
-                        <Input style={styles.input} />
+                        <Label style={styles.label}><FontAwesome5 name="map-marker-alt" size={30} color="#FFC75F" /> Address</Label>
+                        <Input style={styles.input} value={address} onChangeText={address => setAddress(address)} />
                     </Item>
-                    <Label style={styles.label2}><FontAwesome5 name="venus-mars" size={32} color="#FFC75F" /> Gender</Label>
+                    <Label style={styles.label2}><FontAwesome5 name="venus-mars" size={30} color="#FFC75F" /> Gender</Label>
                     <SwitchSelector
                         initial={0}
-                        //onPress={value => this.setState({ gender: value })}
+                        onPress={gender => setGender(gender)}
                         textColor="#FFC75F" //'#7a44cf'
                         selectedColor="#fff"
                         buttonColor="#FFC75F"
@@ -89,8 +153,8 @@ export default function FormStaff(props) {
                         borderWidth={1.5}
                         hasPadding
                         options={[
-                            { label: "Female", value: "Female", },
-                            { label: "Male", value: "Male", },
+                            { label: "Female", value: 0},
+                            { label: "Male", value: 1},
                         ]}
                         testID="gender-switch-selector"
                         accessibilityLabel="gender-switch-selector"
@@ -99,26 +163,37 @@ export default function FormStaff(props) {
                         textStyle={styles.switchtext}
                         imageStyle={styles.switchimg}
                     />
+
+                    <Label style={styles.label2}><FontAwesome5 name="venus-mars" size={30} color="#FFC75F" /> Role</Label>
+                    <SwitchSelector
+                        initial={0}
+                        onPress={role => {setRole(role);console.log(role)}}
+                        textColor="#FFC75F" //'#7a44cf'
+                        selectedColor="#fff"
+                        buttonColor="#FFC75F"
+                        borderColor="#FFC75F"
+                        borderWidth={1.5}
+                        hasPadding
+                        options={[
+                            { label: "Admin", value: 0},
+                            { label: "Waiter", value: 1},
+                            { label: "Chef", value: 2}
+                        ]}
+                        testID="role-switch-selector"
+                        accessibilityLabel="role-switch-selector"
+                        style={styles.switch}
+                        selectedTextStyle={styles.switchtextselect}
+                        textStyle={styles.switchtext}
+                        imageStyle={styles.switchimg}
+                    />
+
                     <Item floatingLabel rounded style={styles.item}>
-                        <Label style={styles.label}><FontAwesome5 name="at" size={32} color="#FFC75F" /> Email</Label>
-                        <Input style={styles.input} />
+                        <Label style={styles.label}><FontAwesome5 name="at" size={30} color="#FFC75F" /> Email</Label>
+                        <Input style={styles.input} value={email} onChangeText={email => setEmail(email)}/>
                     </Item>
                     <Item floatingLabel rounded style={styles.item}>
-                        <Label style={styles.label}><FontAwesome5 name="lock" size={32} color="#FFC75F" /> Password</Label>
-                        <Input style={styles.input} secureTextEntry />
-                    </Item>
-                    <Label style={styles.label2}><FontAwesome5 name="user-tag" size={32} color="#FFC75F" /> Roles</Label>
-                    <Item rounded style={styles.item}>
-                        <Picker
-                            selectedValue={selectedValue}
-                            style={styles.pickerstyle}
-                            onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-                            itemStyle={styles.itemStyle}
-                        >
-                            <Picker.Item label="Roles" value="Roles" />
-                            <Picker.Item label="Java" value="java" />
-                            <Picker.Item label="JavaScript" value="js" />
-                        </Picker>
+                        <Label style={styles.label}><FontAwesome5 name="lock" size={30} color="#FFC75F" /> Password</Label>
+                        <Input style={styles.input} secureTextEntry value={password} onChangeText={password => setPassword(password)} />
                     </Item>
                     <Label style={styles.label2}><FontAwesome5 name="image" size={32} color="#FFC75F" /> Avatar</Label>
                     <View style={styles.viewImage}>
@@ -132,19 +207,29 @@ export default function FormStaff(props) {
                                 <Image source={{ uri: selectedImage }} style={styles.img} />
                             }
                         </TouchableOpacity>
-
-
                     </View>
-                    <Button full rounded style={styles.btn}
+                    <Button 
+                        full 
+                        rounded 
+                        style={styles.btn}
+                        onPress={initNew}
                     >
+                        {done == false && 
+                        <ProgressLoader
+                            visible={true}
+                            isModal={true} isHUD={true}
+                            hudColor={"#FFFFFF"}
+                            color={"#000000"} />
+                        }
                         <Text style={styles.textbtn}><FontAwesome5 name="download" size={32} color="#FFF" /> Comfirm</Text>
                     </Button>
                 </Form>
             </Content>
             <BottomSheet
                 ref={sheetRef}
-                snapPoints={[300, 200, 0]}
-                borderRadius={50}
+                snapPoints={[260, 150, 0]}
+                borderRadius={50}   
+                initialSnap={2}
                 renderContent={renderContent}
             />
 
@@ -190,7 +275,7 @@ const styles = StyleSheet.create({
         fontSize: 32,
     },
     labelheader: {
-        fontSize: 32,
+        fontSize: 25,
         fontWeight: 'bold',
         width: 350,
         alignSelf: 'flex-start',

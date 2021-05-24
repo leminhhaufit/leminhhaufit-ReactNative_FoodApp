@@ -7,13 +7,13 @@ import CardUser from './CardUser'
 export default function ItemStaffManage(props) {
     const { stafflist } = props;
     //#375A45 green #E35929 red
-    const { uid, name, address, phone, status, photoURL } = stafflist;
+    const { uid, name, address, phone, status, photoURL,type,active } = stafflist;
     let icon = "#375A45";
     if (status == true) {
         icon = "#E35929";
     }
     return (
-            <CardUser format={true} name={name} avatar={photoURL} changeAvatar={()=>{}} />
+            <CardUser uid={uid} format={true} name={name} type={type} avatar={photoURL} active={active} changeAvatar={()=>{}} />
             
             // <View style={styles.btn}>
             //     {/* <TouchableOpacity style={styles.btndel}>

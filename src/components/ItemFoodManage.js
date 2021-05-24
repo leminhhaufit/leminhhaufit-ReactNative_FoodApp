@@ -6,36 +6,36 @@ import { NavContextAdmin } from '../navigation/AdminStack';
 export default function ItemFoodManage(props) {
     const { foodlist } = props;
     //#375A45 green #E35929 red
-    const { id, title, description, price, material, status, url } = foodlist;
+    const { id : uid, name, description, price, material, status, photoURL } = foodlist;
     let icon = "#375A45";
     if (status == true) {
         icon = "#E35929";
     }
     return (
-        <View style={styles.container} key={id}>
+        <View style={styles.container} key={uid}>
             <View style={styles.container2}>
-                <Text style={styles.title}>{title}</Text>
-                <Text style={styles.content}>{material} </Text>
-                <Image style={styles.image} source={url} />
+                <Text style={styles.title}>{name}</Text>
+                <Text style={styles.content}>{description} </Text>
+                <Image style={styles.image} source={{uri:photoURL}} />
                 <View style={styles.price}>
-                    <Text style={styles.txtprice}>{price} <FontAwesome5Icon name="dollar-sign" size={20} color="black" /> </Text>
+                    <Text style={styles.txtprice}>{price} <FontAwesome5Icon name="dollar-sign" size={15} color="black" /> </Text>
                 </View>
             </View>
             <View style={styles.btn}>
                 <TouchableOpacity style={styles.btndel}>
-                    <FontAwesome5Icon name="trash" size={32} color="#FFF" style={styles.iconplus} />
+                    <FontAwesome5Icon name="trash" size={20} color="#FFF" style={styles.iconplus} />
                 </TouchableOpacity>
                 <NavContextAdmin.Consumer>
                     {({ navigation }) =>
                         <TouchableOpacity
                             onPress={() => navigation.navigate("FormFood", { title: "Update Food" })}
                             style={styles.btndel}>
-                            <FontAwesome5Icon name="pen-alt" size={32} color="#FFF" style={styles.iconplus} />
+                            <FontAwesome5Icon name="pen-alt" size={20} color="#FFF" style={styles.iconplus} />
                         </TouchableOpacity>
                     }
                 </NavContextAdmin.Consumer>
                 <TouchableOpacity style={styles.btndel}>
-                    <FontAwesome5Icon name="power-off" size={32} color={icon} style={styles.iconplus} />
+                    <FontAwesome5Icon name="power-off" size={20} color={icon} style={styles.iconplus} />
                 </TouchableOpacity>
             </View>
         </View >
@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
             width: 0,
             height: 3,
         },
+        position:'relative',
         shadowOpacity: 0.29,
         shadowRadius: 4.65,
         elevation: 7,
@@ -77,10 +78,11 @@ const styles = StyleSheet.create({
     },
     image: {
         position: 'absolute',
-        width: 150,
-        height: 150,
-        right: -45,
-        top: -5,
+        width: 130,
+        height: 130,
+        right: -30,
+        marginTop:5,
+        borderRadius:100,
     },
     title: {
         fontSize: 26,
@@ -104,23 +106,24 @@ const styles = StyleSheet.create({
     btn: {
         flexDirection: 'row',
         backgroundColor: "#FFC75F",
-        width: 160,
+        width: 120,
         height: 50,
         borderBottomLeftRadius: 25,
         borderTopRightRadius: 25,
         alignSelf: 'flex-start',
         position: 'absolute',
+        justifyContent:'space-around',
+        alignContent:'space-around',
+        alignItems:'center',
         left: 0,
         bottom: 0,
 
     },
     btndel: {
-        flex: 1,
-        paddingTop: 5,
+       
     },
     iconplus: {
         alignSelf: 'center',
-        paddingTop: 5,
 
     },
     price: {
