@@ -7,7 +7,7 @@ import _ from 'lodash';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { AuthContext } from '../navigation/AuthProvider';
 
-export default function MakeOrder({ item, statusOrder, id,show }) {
+export default function MakeOrderType({ item, statusOrder, id,show }) {
     const { price, quantity, idFood, idOrders, status, notes,key } = item;
     const [food, setFoods] = useState();
     const [same, setSame] = useState();
@@ -19,41 +19,8 @@ export default function MakeOrder({ item, statusOrder, id,show }) {
         })
     }, [])
 
-    useEffect(async () => {
-        if (statusOrder === 'new') {
-            setSame(true);
-        }
-        if (statusOrder === 'progress') {
-            const data = await (await db().ref(`chef/${uid}|${id}`).once('value')).toJSON();
-            if (data) {
-                const realID = _.get(data, 'uid');
-                console.log(realID);
-                if (uid == realID) {
-                    setSame(true);
-                } else {
-                    setSame(false);
-                }
-            } else {
-                setSame(false);
-            }
-        }
 
-        if (statusOrder === 'completed' && show) {
-            setSame(true);
-        }
-    }, [])
-
-    const checkDone = async () => {
-        try {
-            await db().ref(`order-details/${key}`).update({
-                status: 'completed'
-              })
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    if (food != null && same != null) {
+    if (food != null) {
         return (
             <View style={styles.container}>
                 <View style={styles.display}>
@@ -62,8 +29,8 @@ export default function MakeOrder({ item, statusOrder, id,show }) {
                         <Text style={styles.title}>{food.name} - {food.category}</Text>
                         <Text style={styles.description}>{food.ingredient}</Text>
                         <Text style={styles.title}>{formatter.format(price)} ({quantity} item/s)</Text>
-                        {status === 'completed' ?  <Button onPress={checkDone} icon={<FontAwesome5 name="check" size={10} color="#FFF" style={styles.iconadd} />} buttonStyle={{...styles.btnadd,backgroundColor:'#03a9f4'}} /> : 
-                        same ? <Button onPress={checkDone} icon={<FontAwesome5 name="check" size={10} color="#FFF" style={styles.iconadd} />} buttonStyle={styles.btnadd} /> : 
+                        {status === 'completed' ?  <Button icon={<FontAwesome5 name="check" size={10} color="#FFF" style={styles.iconadd} />} buttonStyle={{...styles.btnadd,backgroundColor:'#03a9f4'}} /> : 
+                        status === 'progress' ? <Button icon={<FontAwesome5 name="check" size={10} color="#FFF" style={styles.iconadd} />} buttonStyle={styles.btnadd} /> : 
                             <Button disabled={true} icon={<FontAwesome5 name="lock" size={10} color="#FFF" style={styles.iconadd} />} buttonStyle={styles.btnadd} />}
                     </View>
                 </View>

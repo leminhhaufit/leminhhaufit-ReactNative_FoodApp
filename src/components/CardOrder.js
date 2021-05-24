@@ -8,9 +8,10 @@ import MakeOrder from './MakeOrder';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { AuthContext } from '../navigation/AuthProvider';
 
-const CardOrder = ({foodlist:{id,createDate,total,status,key}}) => {
+const CardOrder = ({foodlist:{id,createDate,total,status,key},show}) => {
     const [orders, setOrders] = useState([]);
     const {user:{uid}} = useContext(AuthContext);
+    const [chef, setChef] = useState();
     const [same, setSame] = useState();
     useEffect(() => {  
         db().ref('/order-details').on('value',async (data) => {
@@ -29,6 +30,22 @@ const CardOrder = ({foodlist:{id,createDate,total,status,key}}) => {
 
     useEffect(async() => {
         try {
+            if (show && status === 'completed') {
+                const data = await (await db().ref(`/chef/${uid}|${id}`).once('value')).toJSON();
+                console.log(data);
+                if (data) {
+                    const realID = _.get(data, 'uid');
+                    console.log(realID);
+                    if (uid == realID) {
+                        setSame(true);
+                        setChef(realID);
+                    } else {
+                        setSame(false);
+                    }
+                } else {
+                    setSame(false);
+                }
+            }
             if (status === 'progress') {
                 const data = await (await db().ref(`/chef/${uid}|${id}`).once('value')).toJSON();
                 console.log(data);
@@ -37,6 +54,7 @@ const CardOrder = ({foodlist:{id,createDate,total,status,key}}) => {
                     console.log(realID);
                     if (uid == realID) {
                         setSame(true);
+                        setChef(realID);
                     } else {
                         setSame(false);
                     }
@@ -83,39 +101,74 @@ const CardOrder = ({foodlist:{id,createDate,total,status,key}}) => {
             console.log(error);
         }
     }
-
-
-    const ItemsOnCard = ({item,statusOrder,id}) => {
+    const ItemsOnCard = ({item,statusOrder,id,show}) => {
         return (
-            <MakeOrder item={item} statusOrder={statusOrder} id={id} />
+            <MakeOrder item={item} statusOrder={statusOrder} id={id} show={show} />
         );
     }
-    return (
-        <View style={styles.container}>
-            <View style={styles.header}>
-                <View style={styles.orderID}>
-                    <Text style={{fontWeight:'bold', color:'#458'}}>Food </Text>
-                    <Text style={styles.textTitle}>#{id}</Text>
-                    {status === 'new' ? <Text onPress={changeStatusOrder} style={styles.status}>Make it</Text> : 
-                    same ?
-                    <Button icon={<FontAwesome5 onPress={checkDone} name="spinner" size={10} color="#FFF" style={styles.iconadd} />} buttonStyle={styles.btnadd} /> : 
-                    <Button disabled={true} icon={<FontAwesome5 name="spinner" size={10} color="#FFF" style={styles.iconadd} />} buttonStyle={styles.btnadd} /> }
+    if (show) {
+        if (uid == chef && chef != null ) {
+            return (
+                <View style={styles.container}>
+                    <View style={styles.header}>
+                        <View style={styles.orderID}>
+                            <Text style={{fontWeight:'bold', color:'#458'}}>Food </Text>
+                            <Text style={styles.textTitle}>#{id}</Text>
+                            {status === 'completed' && show== true ? <Button disabled={true} icon={<FontAwesome5 onPress={checkDone} name="check" size={10} color="#FFF" style={styles.iconadd} />} buttonStyle={styles.btnadd} /> :
+                            status === 'new' ? <Text onPress={changeStatusOrder} style={styles.status}>Make it</Text> : 
+                            same ?
+                            <Button icon={<FontAwesome5 onPress={checkDone} name="spinner" size={10} color="#FFF" style={styles.iconadd} />} buttonStyle={styles.btnadd} /> : 
+                            <Button disabled={true} icon={<FontAwesome5 name="spinner" size={10} color="#FFF" style={styles.iconadd} />} buttonStyle={styles.btnadd} /> }
+                            
+                        </View>
+                        <Text style={styles.textTitle}>{moment(createDate).format('MMM D, HH:mmA')}</Text>
+                    </View>
+                    <View>
+                    <FlatList 
+                        data={orders}
+                        numColumns={1}
+                        renderItem={({ item }) => <ItemsOnCard item={item} statusOrder={status} id={id} show={show} /> }
+                        keyExtractor={item => item.key}
+                        style={styles.flatlist}
+                />
+                    </View>
                     
                 </View>
-                <Text style={styles.textTitle}>{moment(createDate).format('MMM D, HH:mmA')}</Text>
+            ); 
+        }else{
+            return null;
+        }
+        
+    }else{
+        return (
+            <View style={styles.container}>
+                <View style={styles.header}>
+                    <View style={styles.orderID}>
+                        <Text style={{fontWeight:'bold', color:'#458'}}>Food </Text>
+                        <Text style={styles.textTitle}>#{id}</Text>
+                        {status === 'completed' && show== true ? <Button disabled={true} icon={<FontAwesome5 onPress={checkDone} name="check" size={10} color="#FFF" style={styles.iconadd} />} buttonStyle={styles.btnadd} /> :
+                        status === 'new' ? <Text onPress={changeStatusOrder} style={styles.status}>Make it</Text> : 
+                        same ?
+                        <Button icon={<FontAwesome5 onPress={checkDone} name="spinner" size={10} color="#FFF" style={styles.iconadd} />} buttonStyle={styles.btnadd} /> : 
+                        <Button disabled={true} icon={<FontAwesome5 name="spinner" size={10} color="#FFF" style={styles.iconadd} />} buttonStyle={styles.btnadd} /> }
+                        
+                    </View>
+                    <Text style={styles.textTitle}>{moment(createDate).format('MMM D, HH:mmA')}</Text>
+                </View>
+                <View>
+                <FlatList 
+                    data={orders}
+                    numColumns={1}
+                    renderItem={({ item }) => <ItemsOnCard item={item} statusOrder={status} id={id} show={show} /> }
+                    keyExtractor={item => item.key}
+                    style={styles.flatlist}
+            />
+                </View>
+                
             </View>
-            <View>
-            <FlatList 
-                data={orders}
-                numColumns={1}
-                renderItem={({ item }) => <ItemsOnCard item={item} statusOrder={status} id={id} /> }
-                keyExtractor={item => item.key}
-                style={styles.flatlist}
-        />
-            </View>
-            
-        </View>
-    );
+        );
+    }
+    
 }
 export default CardOrder;
 

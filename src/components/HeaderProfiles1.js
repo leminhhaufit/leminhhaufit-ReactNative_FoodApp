@@ -1,7 +1,7 @@
 import React, {useContext,useState, useEffect} from 'react'
-import { StyleSheet, ImageBackground, TextInput , Text, View, Image, TouchableOpacity,Dimensions,PermissionsAndroid } from 'react-native';
+import { StyleSheet, FlatList, TextInput , Text, View, Image,Dimensions,PermissionsAndroid } from 'react-native';
 import { AuthContext } from '../navigation/AuthProvider';
-import {ActionSheet } from "native-base";
+import {ActionSheet, Button } from "native-base";
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
 import userData from './DataUser';
@@ -12,18 +12,71 @@ import LinearGradient from 'react-native-linear-gradient';
 import ProfileButton from './ProfileButton';
 import { signOut } from '../config/firebaseAPI';
 import CardUser from './CardUser'
+import { Overlay } from 'react-native-elements';
+import _ from 'lodash';
+import CardOrder from '../components/CardOrder';
+import WaiterOrder from '../components/WaiterOrder';
 const width = Dimensions.get('window').width;
 
 
 export default function HeaderProfiles1() {
     const [av,setAv] = useState(null);
     const { user, setUser } = useContext(AuthContext);
-    const {name,phone,email,uid,photoURL} = user;
+    const [orders, setOrders] = useState([]);
+    const [ordersWaiter, setOrdersWaiter] = useState([]);
+
+    const {name,phone,email,uid,photoURL,type} = user;
     const currentUser = auth().currentUser;
+
+
+    const [open, setOpen] = useState(false);
     useEffect(async () => {
         const avatar = await AsyncStorage.getItem(uid);
         setAv(avatar);
     },[av])
+
+
+    //  Start Use for Waiter and Chef
+
+    useEffect(() => {   
+        if (type != 1) {
+            db().ref('/orders').on('value',async (data) => {
+                const ordersJson = await data.toJSON();
+                const orders = [];
+                for (const [key, value] of Object.entries(ordersJson)) {     
+                        orders.push({...value,key});
+                  } 
+                  setOrders(orders);
+            })
+        }
+    },[])
+    //  End Use for Waiter and Chef 
+
+
+    //  Start only for Waiter 
+
+    useEffect(() => {   
+            db().ref('/orders').on('value',async (data) => {
+                const ordersJson = await data.toJSON();
+                console.log("Resl",ordersJson);
+                const orders = [];
+                for (const [key, value] of Object.entries(ordersJson)) { 
+                        const realId = _.get(value,'uid');
+                        if(type == 0){
+                            orders.push({...value,key});
+                        }
+                        else if(type == 1){
+                            if(realId == uid) {
+                                orders.push({...value,key});
+                            }
+                        }
+                  } 
+                  setOrdersWaiter(orders);
+            })
+    },[])
+    //  End  only for Waiter 
+
+
 
     const requestCameraPermission = async () => {
         try { 
@@ -63,6 +116,18 @@ export default function HeaderProfiles1() {
             }) 
         }
     }
+
+    // START FOR ORDER CHEF
+    const showOrderChef = () => {
+        setOpen(true);
+    }
+
+
+
+
+    // END FOR ORDER CHEF
+
+
 
     const uploadPhoto = async (uri) => {
         setAv(uri);
@@ -115,13 +180,55 @@ export default function HeaderProfiles1() {
         <View style={{backgroundColor:'#FFF',flex:1}}>
             <View style={styles.header}></View>
             <CardUser format={false} name={name} avatar={av ? av : photoURL} changeAvatar={onClickAddImage} />
-
-            <View style={styles.boxapp}>
+            {type == 0 ? 
+            (<View style={styles.boxapp}>
                 <ProfileButton text='Order' icon='file-alt' cb={signOut}/>
                 <ProfileButton text='Settings' icon='info' cb={signOut}/>
                 <ProfileButton text='Settings' icon='cogs' cb={signOut}/>
                 <ProfileButton text='Log out' icon='sign-out-alt' cb={signOut} />
+            </View>) : type == 1 ? 
+            (<View style={styles.boxapp}>
+                <ProfileButton text='Order' icon='file-alt' cb={showOrderChef}/>
+                <ProfileButton text='Settings' icon='info' cb={signOut}/>
+                <ProfileButton text='Settings' icon='cogs' cb={signOut}/>
+                <ProfileButton text='Log out' icon='sign-out-alt' cb={signOut}
+                 />
+
+            <Overlay visible={open} fullScreen={false} overlayStyle={{height:'70%'}}>
+                <View style={{display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
+                    <Text style={{color:'#458', fontSize:16,fontWeight:'bold'}}>List Of Orders</Text>
+                    <Text onPress={() => setOpen(false) }>❌</Text>
+                </View>
+                <FlatList data={ordersWaiter} showsVerticalScrollIndicator={false}
+                    numColumns={1}
+                    renderItem={({ item }) => <WaiterOrder foodlist={item} show={true} />}
+                    keyExtractor={item => item.id}
+                    style={styles.flatlist}
+                />
+            </Overlay>
+
+            </View>) : 
+            (<>
+            <View style={styles.boxapp}>
+                <ProfileButton text='Cooks' icon='file-alt' cb={showOrderChef}/>
+                <ProfileButton text='Settings' icon='info' cb={signOut}/>
+                <ProfileButton text='Report' icon='cogs' cb={signOut}/>
+                <ProfileButton text='Log out' icon='sign-out-alt' cb={signOut} />
             </View>
+            <Overlay visible={open} fullScreen={false} overlayStyle={{height:'70%'}}>
+                <View style={{display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
+                    <Text style={{color:'#458', fontSize:16,fontWeight:'bold'}}>List Of Meals</Text>
+                    <Text onPress={() => setOpen(false) }>❌</Text>
+                </View>
+                <FlatList data={orders} showsVerticalScrollIndicator={false}
+                    numColumns={1}
+                    renderItem={({ item }) => <CardOrder foodlist={item} show={true} />}
+                    keyExtractor={item => item.id}
+                    style={styles.flatlist}
+                />
+            </Overlay>
+    </>) }
+            
         </View>
     )
 }
@@ -234,5 +341,10 @@ const styles = StyleSheet.create({
     v1:{
         justifyContent:'center',
         alignItems:'center',
+    },
+    flatlist:{
+        width:300,
+        height:500,
+        overflow:'hidden'
     }
 })
