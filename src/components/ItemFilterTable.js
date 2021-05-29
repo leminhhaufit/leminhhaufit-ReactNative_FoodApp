@@ -19,15 +19,15 @@ export default function ItemFilterTable(props) {
 
 const styles = StyleSheet.create({
     container: {
-        width: 150,//120
+        width: 200,//120
         height: 30,
         marginBottom: 5,
         marginLeft: 10,
         marginTop: 5,
         alignSelf: 'stretch',
-        borderRadius: 5,
+        borderRadius: 35,
         alignItems: 'center',
-        backgroundColor: '#fff',
+        backgroundColor: '#ffe5e3',
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -35,14 +35,13 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.22,
         shadowRadius: 2.22,
-        marginLeft: 5,
         marginRight: 5,
         elevation: 3,
 
     },
 
     title: {
-        color: '#000f',
+        color: '#e97067',
         textTransform: 'uppercase',
         fontSize: 18,
         fontWeight: '200',

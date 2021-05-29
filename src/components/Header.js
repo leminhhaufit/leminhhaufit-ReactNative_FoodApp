@@ -1,114 +1,156 @@
-import React, { useState } from 'react';
-import { View, Image, StyleSheet, TextInput, TouchableOpacity, Text, SafeAreaView } from 'react-native';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import Carousel from 'react-native-snap-carousel';
+import React, { useState,useRef } from 'react';
+import { View, Image, StyleSheet, TextInput, TouchableOpacity, Text, SafeAreaView, Button } from 'react-native';
+import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
+import Carousel, { Pagination } from 'react-native-snap-carousel';
+import SliderEntry from './SliderEntry';
+import { sliderWidth, itemWidth } from './SliderEntry.style';
+import styless, { colors } from './index.style';
 import { Overlay } from 'react-native-elements';
 import MultiSelect from 'react-native-multiple-select';
-
 import foodImg from '../assets/food.png';
-import header1IMG from '../assets/header.png';
-import header2IMG from '../assets/header2.png';
-import header3IMG from '../assets/header3.png';
-import header4IMG from '../assets/header4.png';
-import header5IMG from '../assets/header5.png';
+import header1IMG from '../assets/header.jpg';
+import header2IMG from '../assets/header2.jpg';
+import header3IMG from '../assets/header3.jpg';
+import header4IMG from '../assets/header4.jpg';
+import header5IMG from '../assets/header5.jpg';
 import searchIMG from '../assets/loupe.png';
 
-import FlatListFilterTable from '../components/FlatListFilterTable';
+import Filters from './Filters';
 
 function Header(props) {
-
-    const [visible, setVisible] = useState(false);
+    const { title, goBack } = props;
+    const carouselRef = useRef(null);
     const [activeIndex, setActiveIndex] = useState(0);
     const [carouselItems, setCarouselItems] = useState(
         [
+            // {
+            //     title: "Item 1",
+            //     text: "Text 1",
+            //     url: header1IMG,
+            // },
+            // {
+            //     title: "Item 2",
+            //     text: "Text 2",
+            //     url: header2IMG,
+            // },
+            // {
+            //     title: "Item 3",
+            //     text: "Text 3",
+            //     url: header3IMG,
+            // },
+            // {
+            //     title: "Item 4",
+            //     text: "Text 4",
+            //     url: header4IMG,
+            // },
+            // {
+            //     title: "Item 5",
+            //     text: "Text 5",
+            //     url: header5IMG,
+            // },
+
             {
-                title: "Item 1",
-                text: "Text 1",
-                url: header1IMG,
+                title: 'Beautiful and dramatic Antelope Canyon',
+                subtitle: 'Lorem ipsum dolor sit amet et nuncat mergitur',
+                illustration: header1IMG
             },
             {
-                title: "Item 2",
-                text: "Text 2",
-                url: header2IMG,
+                title: 'Earlier this morning, NYC',
+                subtitle: 'Lorem ipsum dolor sit amet',
+                illustration: header2IMG
             },
             {
-                title: "Item 3",
-                text: "Text 3",
-                url: header3IMG,
+                title: 'White Pocket Sunset',
+                subtitle: 'Lorem ipsum dolor sit amet et nuncat ',
+                illustration: header3IMG
             },
             {
-                title: "Item 4",
-                text: "Text 4",
-                url: header4IMG,
+                title: 'Acrocorinth, Greece',
+                subtitle: 'Lorem ipsum dolor sit amet et nuncat mergitur',
+                illustration: header4IMG
             },
             {
-                title: "Item 5",
-                text: "Text 5",
-                url: header5IMG,
+                title: 'The lone tree, majestic landscape of New Zealand',
+                subtitle: 'Lorem ipsum dolor sit amet',
+                illustration: header5IMG
             },
+            {
+                title: 'Middle Earth, Germany',
+                subtitle: 'Lorem ipsum dolor sit amet',
+                illustration: header3IMG
+            }
         ]);
-    function renderItem({ item, index }) {
+
+    function renderItemWithParallax ({item, index}, parallaxProps) {
         return (
-            <View style={{
-                borderRadius: 15,
-                height: 250,
-                padding: 10,
-                marginLeft: 15,
-                marginRight: 5,
-            }}>
-                <Image source={item.url} style={{ width: 400, height: 250 }} />
-            </View>
-        )
+            <SliderEntry
+              data={item}
+              even={(index + 1) % 2 === 0}
+              parallax={true}
+              parallaxProps={parallaxProps}
+            />
+        );
     }
-    const toggleOverlay = () => {
-        setVisible(!visible);
-    };
 
     return (
-        <SafeAreaView style={{ flex: 2, paddingTop: 5 }}>
-            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', }}>
-                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', }}>
+        <SafeAreaView style={{ flex: 1, paddingTop: 5}}>
+            <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center'}}>
+                <View style={{ flex: 1, flexDirection: 'row',justifyContent: 'center'}}>
                     <Carousel
-                        layout={"default"}
-                        // ref={ref => this.carousel = ref}
+                        ref={carouselRef}
                         data={carouselItems}
-                        sliderWidth={300}
-                        itemWidth={400}
-                        renderItem={renderItem}
-                        onSnapToItem={index => setActiveIndex(index)} />
-                    <View style={styles.container1}>
-                        <View style={styles.img}>
-                            <Image source={foodImg} style={styles.icon} />
-                        </View>
-                        <TextInput style={styles.inputSearch}
-                            placeholderStyle={styles.placeholdercustom}
-                            placeholder="Search here" />
-                        <TouchableOpacity style={styles.btnsearch}>
-                            <View style={styles.imgsearch}>
-                                <Image source={searchIMG} style={styles.iconsearch} />
-                            </View>
-                        </TouchableOpacity>
-                    </View>
+                        sliderWidth={sliderWidth}
+                        itemWidth={itemWidth}
+                        hasParallaxImages={true}
+                        inactiveSlideScale={0.94}
+                        inactiveSlideOpacity={0.7}
+                        containerCustomStyle={styless.slider}
+                        contentContainerCustomStyle={styless.sliderContentContainer}
+                        renderItem={renderItemWithParallax}
+                        onSnapToItem={index => setActiveIndex(index)}
+                        loop={true}
+                        loopClonesPerSide={2}
+                        autoplay={true}
+                        autoplayDelay={500}
+                        autoplayInterval={3000}
+                    />
+                    <Pagination
+                        dotsLength={0}
+                        activeDotIndex={activeIndex}
+                        containerStyle={styless.paginationContainer}
+                        dotColor={'rgba(255, 255, 255, 0.92)'}
+                        dotStyle={styless.paginationDot}
+                        inactiveDotColor={colors.black}
+                        inactiveDotOpacity={0.4}
+                        inactiveDotScale={0.6}
+                        carouselRef={carouselRef}
+                      
+                    />
 
                 </View>
 
-                <View style={styles.labelList}>
-                    <Text style={styles.textlist}>Table List</Text>
-                    <TouchableOpacity onPress={toggleOverlay}>
-                        <View style={styles.filter}>
-                            <Text style={styles.textfilter}>Filter</Text>
-                            <FontAwesome5 name="sort-amount-down-alt" size={30} color="white" />
-                        </View>
-                    </TouchableOpacity>
-                    <Overlay isVisible={visible} overlayStyle={styles.overlay} onBackdropPress={toggleOverlay}>
-                        <View style={styles.labelfilter}>
-                            <Text style={styles.textfilteroverlay}>Filter by:</Text>
-                            <TouchableOpacity onPress={toggleOverlay} style={styles.iconoverlay}>
-                                <FontAwesome5 size={26} name="times" color="#FFC75F" />
+                <View>
+                    <View style={styles.container1}>
+                            <View style={styles.img}>
+                                <Image source={foodImg} style={styles.icon} />
+                            </View>
+                            <TextInput style={styles.inputSearch}
+                                placeholderStyle={styles.placeholdercustom}
+                                placeholder="Search here" />
+                            <TouchableOpacity style={styles.btnsearch} activeOpacity={1} onPress={() => console.log('hihi')}>
+                                <View style={styles.imgsearch}>
+                                    <Image source={searchIMG} style={styles.iconsearch} />
+                                </View>
                             </TouchableOpacity>
-                        </View>
-                        <FlatListFilterTable />
-                    </Overlay>
+                    </View>
+
+                    <View style={styles.labelList}>
+
+                        <Text style={styles.textlist}>{title}</Text>
+                        {
+                            title === "Food List" && <Filters />
+                        }
+                    </View>
                 </View>
             </View>
         </SafeAreaView >
@@ -116,131 +158,44 @@ function Header(props) {
 }
 const styles = StyleSheet.create({
     carousel: {
-
-
     },
     container: {
-
         alignSelf: 'center',
-        //alignItems: 'stretch',
-
     },
     imghead: {
-
         alignSelf: 'stretch',
-
     },
-    container1: {
 
-        flexDirection: 'row',
-        alignSelf: 'center',
-        alignItems: 'stretch',
-        borderRadius: 5,
-        position: 'absolute',
-        top: 230,
-        bottom: 0,
-        left: 60,
-        right: 0,
-        height: 40,
-        width: 280,
-        backgroundColor: '#fff',
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 4,
-        },
-        shadowOpacity: 0.30,
-        shadowRadius: 4.65,
-
-        elevation: 8,
-    },
-    inputSearch: {
-        paddingLeft: 5,
-        paddingRight: 5,
-        width: 200,
-        height: 40,
-        borderStyle: 'solid',
-        borderColor: '#FFC75F',
-        backgroundColor: '#FFC75F',
-        borderBottomWidth: 1,
-        borderLeftWidth: 1,
-        borderTopWidth: 1,
-        fontSize: 18,
-        fontWeight: '600',
-
-
-    },
-    icon: {
-        alignSelf: 'center',
-        height: 30,
-        width: 30,
-        marginTop: 5,
-        borderRadius: 10,
-        shadowColor: '#000',
-        shadowOpacity: 0.2,
-        shadowRadius: 10,
-        shadowOffset: { width: 0, height: 0 },
-    },
     closeoverlay: {
-
         marginLeft: 100,
     },
-    img: {
-        height: 40,
-        width: 50,
-        backgroundColor: '#FFC75F',
 
-    },
     placeholdercustom: {
         opacity: 0.3,
         fontWeight: '200'
     },
-    imgsearch: {
-        height: 40,
-        width: 50,
-        borderStyle: 'solid',
-        borderBottomWidth: 1,
-        borderRightWidth: 1,
-        borderTopWidth: 1,
-        borderColor: '#FFC75F',
-        backgroundColor: '#FFC75F',
 
-    },
-    iconsearch: {
-        alignSelf: 'center',
-        height: 30,
-        width: 30,
-        marginTop: 5,
-        borderRadius: 10,
-
-
-    },
     label: {
         fontWeight: '600',
         fontSize: 18,
-
         textTransform: 'uppercase',
         color: '#FFC75F'
     },
     labelList: {
         flexDirection: "row",
+        width:'80%',
         alignSelf: 'center',
-        position: 'absolute',
-        top: 250,
-        bottom: 0,
-        left: 10,
-        right: 0,
+        justifyContent:'space-between',
         height: 40,
         marginBottom: 5,
-        marginLeft: 50,
-        marginTop: 50,
-
+        marginLeft: 0,
+        marginTop: 10,
     },
     labelfilter: {
         flexDirection: 'row',
-
     },
     textlist: {
+        flex: 0.8,
         textTransform: 'uppercase',
         fontSize: 20,
         fontWeight: '800',
@@ -252,7 +207,6 @@ const styles = StyleSheet.create({
         height: 35,
         backgroundColor: '#FFC75F',
         textAlign: 'center',
-        marginLeft: 100,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -261,7 +215,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.39,
         shadowRadius: 8.30,
         elevation: 13,
-        borderRadius: 8,
+        borderRadius: 25,
     },
     textfilter: {
         color: '#fff',
@@ -273,25 +227,95 @@ const styles = StyleSheet.create({
         paddingRight: 10,
     },
     overlay: {
+        flex: 1,
         position: 'absolute',
         alignSelf: 'stretch',
-        top: 340,
+        top: 300,
         right: 60,
         backgroundColor: '#F4F4F4',
         height: 400,
+        borderRadius: 25,
     },
     textfilteroverlay: {
+        flex: 8,
         color: '#FFC75F',
         fontWeight: '600',
         fontSize: 16,
         textTransform: 'uppercase',
-        paddingTop: 10,
-        paddingRight: 70,
-        paddingBottom: 10,
+        margin: 5,
+    },
+    container1: {
+        flexDirection: 'row',
+        alignSelf: 'center',
+        width:'80%',
+        alignItems: 'stretch',
+        borderRadius: 25,
+        height: 50,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowRadius: 2,
+        elevation: 10,
+    },
+    inputSearch: {
+        paddingLeft: 5,
+        paddingRight: 5,
+        height: 50,
+        width:'63%',
+        borderStyle: 'solid',
+        borderColor: '#FFC75F',
+        backgroundColor: '#FFC75F',
+        borderBottomWidth: 1,
+        borderLeftWidth: 1,
+        borderTopWidth: 1,
+        fontSize: 18,
+        fontWeight: '600',
+    },
+    icon: {
+        alignSelf: 'center',
+        height: 35,
+        width: 35,
+        marginTop: 7,
+        borderRadius: 10,
+        shadowColor: '#000',
+        shadowOpacity: 0.2,
+        shadowRadius: 10,
+        shadowOffset: { width: 0, height: 0 },
+    },
+    img: {
+        height: 50,
+        width: 50,
+        backgroundColor: '#FFC75F',
+        borderBottomLeftRadius: 25,
+        borderTopLeftRadius: 25,
+    },
+    imgsearch: {
+        height: 50,
+        width: 60,
+        borderStyle: 'solid',
+        borderBottomWidth: 1,
+        borderRightWidth: 1,
+        borderTopWidth: 1,
+        borderColor: '#FFC75F',
+        backgroundColor: '#FFC75F',
+        borderBottomRightRadius: 25,
+        borderTopRightRadius: 25,
+    },
+    iconsearch: {
+        alignSelf: 'center',
+        height: 35,
+        width: 35,
+        marginTop: 7,
+        borderRadius: 10,
 
     },
-    containerflatlist: {
-        flex: 1,
+    backview: {
+        position: 'absolute',
+        top: 20,
+        left: 20,
+
     }
 })
 

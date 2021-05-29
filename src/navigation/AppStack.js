@@ -1,5 +1,4 @@
 import React from 'react';
-import { View, TouchableOpacity, } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -9,35 +8,62 @@ import OrderFood from '../screens/OrderFood';
 import FoodDetail from '../screens/FoodDetail';
 import Payment from '../screens/Payment';
 import Profile from '../screens/Profile'
-
+import HomeKitchen from '../screens/HomeKitchen';
+import Information from '../screens/Information';
+import HomeAdmin from '../screens/HomeAdmin';
+import ManageFood from '../screens/ManageFood';
+import FormFood from '../screens/FormFood';
+import FormStaff from '../screens/FormStaff';
+import FormCategory from '../screens/FormCategory';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
-
+export const NavContext = React.createContext();
 const FeedStack = ({ navigation }) => (
-    <Stack.Navigator>
-        <Stack.Screen
-            name="Home"
-            component={HomeScreen}
-            options={{
-                headerShown: false,
-
-
-            }}
-        />
-    </Stack.Navigator>
+    <NavContext.Provider value={{
+        navigation: navigation,
+    }}
+    >
+        <Stack.Navigator >
+            <Stack.Screen
+                name="Home"
+                component={HomeScreen}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name="FoodDetail"
+                component={FoodDetail}
+                options={{
+                    headerShown: false,
+                }}
+            />
+        </Stack.Navigator>
+    </NavContext.Provider>
 );
 const OrderFoodStack = ({ navigation }) => (
-    <Stack.Navigator>
-        <Stack.Screen
-            name="Order Food"
-            component={FoodDetail}
-            options={{
-                headerShown: false,
-
-            }}
-        />
-    </Stack.Navigator>
+    <NavContext.Provider value={{
+        navigation: navigation
+    }}
+    >
+        <Stack.Navigator >
+            <Stack.Screen
+                name="Order Food"
+                component={OrderFood}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name="FoodDetail2"
+                component={FoodDetail}
+                options={{
+                    headerShown: false,
+                }}
+            />
+        </Stack.Navigator>
+    </NavContext.Provider>
 );
 const PaymentStack = ({ navigation }) => (
     <Stack.Navigator>
@@ -59,22 +85,43 @@ const PaymentStack = ({ navigation }) => (
     </Stack.Navigator>
 );
 const ProfileStack = ({ navigation }) => (
-    <Stack.Navigator>
-        <Stack.Screen
-            name="Profile"
-            component={Profile}
-            options={{
-                headerShown: false,
-            }}
-        />
-    </Stack.Navigator>
+    <NavContext.Provider value={{
+        navigation: navigation,
+    }}
+    >
+        <Stack.Navigator>
+            <Stack.Screen
+                name="Profile2"
+                component={Profile}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name="Information"
+                component={Information}
+                options={{
+                    headerShown: false,
+                }}
+            />
+        </Stack.Navigator>
+    </NavContext.Provider>
 );
+
 const AppStack = () => {
     return (
         <Tab.Navigator
             tabBarOptions={{
                 activeTintColor: '#FFC75F',
-            }}>
+                labelStyle : {
+                    fontSize: 12,
+                    paddingBottom:5
+                },
+                iconStyle : {
+                    marginTop:3
+                }
+            }}
+        >
             <Tab.Screen
                 name="Home"
                 component={FeedStack}
@@ -82,7 +129,7 @@ const AppStack = () => {
                     tabBarLabel: 'Home',
 
                     tabBarIcon: ({ color, size }) => (
-                        <FontAwesome5 name="home" color={color} size={28} />
+                        <FontAwesome5 name="home" color={color} size={24} />
                     ),
                 })}
             />
@@ -93,7 +140,7 @@ const AppStack = () => {
                     tabBarLabel: 'Food',
 
                     tabBarIcon: ({ color, size }) => (
-                        <FontAwesome5 name="utensils" color={color} size={28} />
+                        <FontAwesome5 name="utensils" color={color} size={24} />
                     ),
                 })}
             />
@@ -104,7 +151,7 @@ const AppStack = () => {
                     tabBarLabel: 'Payment',
 
                     tabBarIcon: ({ color, size }) => (
-                        <FontAwesome5 name="shopping-basket" color={color} size={28} />
+                        <FontAwesome5 name="shopping-basket" color={color} size={24} />
                     ),
                 })}
             />
@@ -115,10 +162,11 @@ const AppStack = () => {
                     tabBarLabel: 'Profile',
 
                     tabBarIcon: ({ color, size }) => (
-                        <FontAwesome5 name="user-alt" color={color} size={28} />
+                        <FontAwesome5 name="user-alt" color={color} size={24} />
                     ),
                 })}
             />
+
         </Tab.Navigator>
     );
 };

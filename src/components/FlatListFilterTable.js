@@ -18,78 +18,55 @@ function FlatListFilterTable(props) {
         [
             {
                 id: 1,
-                title: "Chưa đặt",
+                title: "Bàn Chưa đặt",
 
             },
             {
                 id: 2,
-                title: "Đã đặt",
+                title: "Bàn Đã đặt",
 
             },
             {
                 id: 3,
-                title: "Còn trống",
+                title: "Bàn Còn trống",
 
             },
             {
                 id: 4,
-                title: "Đang sử dụng",
+                title: "Bàn Đang sử dụng",
 
             },
             {
                 id: 5,
-                title: "Tầng Lững",
+                title: "Bàn 4 người",
 
             },
             {
                 id: 6,
-                title: "Tầng 1",
+                title: "Bàn 8 người",
 
             },
             {
                 id: 7,
-                title: "Tầng Trệt",
+                title: "Bàn VIP",
 
             },
             {
                 id: 8,
-                title: "Tầng Lững",
+                title: "Bàn Premium",
 
             },
             {
                 id: 9,
-                title: "Tầng 1",
+                title: "Bàn Gold",
 
             },
             {
                 id: 10,
-                title: "Tầng Trệt",
+                title: "Bàn Diamond",
 
             },
-            {
-                id: 11,
-                title: "Tầng Lững",
 
-            },
-            {
-                id: 12,
-                title: "Tầng 1",
-
-            }, {
-                id: 13,
-                title: "Tầng Trệt",
-
-            },
-            {
-                id: 14,
-                title: "Tầng Lững",
-
-            },
-            {
-                id: 15,
-                title: "Tầng 1",
-
-            },
 
 
         ]
@@ -102,14 +79,14 @@ function FlatListFilterTable(props) {
             keyExtractor={item => item.id}
             style={styles.flatlist}
         />
-
-
     );
 }
 const styles = StyleSheet.create({
+
     flatlist: {
         flex: 1,
         backgroundColor: '#F4F4F4',
+        marginTop: 20,
     },
 
 })

@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Text, Linking, ImageBackground, TouchableOpacity } from 'react-native';
 import AnimatedLoader from "react-native-animated-loader";
 import auth from '@react-native-firebase/auth';
-
-import PropTypes from 'prop-types';
-
+import Toast from 'react-native-toast-message';
 import Username from '../components/Username';
 import Password from '../components/Password';
 import LabelLogin from '../components/LabelLogin';
@@ -19,14 +17,21 @@ function Login({ navigation }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState(null);
+    const [type, setType] = useState('success');
+    useEffect(() => {
+        Toast.show({
+          type: type,
+          text1: errorMessage ? errorMessage + '👋' : 'Welcome, you back! 👋'  ,
+          autoHide: false,
+        });
+      },[errorMessage]);
     async function signIn(txtemail, txtpassword) {
         try {
             setIsload(true);
-
+            setType('success')
             let response = await auth()
                 .signInWithEmailAndPassword(txtemail, txtpassword)
-
-            setIsload(false);
+            
 
             if (response && response.user) {
                 setErrorMessage("Success!");
@@ -34,6 +39,7 @@ function Login({ navigation }) {
 
         } catch (err) {
             setIsload(false);
+            setType('error')
             console.log(err.code)
             if (err.code === "auth/invalid-email") {
                 setErrorMessage("Email Invalid!")
@@ -47,10 +53,12 @@ function Login({ navigation }) {
             if (err.code === "auth/too-many-requests") {
                 setErrorMessage("Too many requests");
             }
+            console.log("State:",errorMessage );
         }
     }
 
     const handlePress = () => {
+        setType('error');
         if (!email) {
             setErrorMessage('Email field is required.');
         }
@@ -75,18 +83,13 @@ function Login({ navigation }) {
     //     return re.test(regex);
     // };
     return (
-
         <View style={styles.container}>
             <ImageBackground source={ImageBackgroundURL} style={styles.image}>
                 <LabelLogin />
-                {errorMessage &&
-                    <Text style={styles.errorMessage}>
-                        {errorMessage}
-                    </Text>}
                 <Username setEmail={setEmail} />
                 <Password setPassword={setPassword} />
                 <TouchableOpacity
-                    onPress={() => handlePress()}
+                    onPress={handlePress}
                 >
                     <View style={styles.btnlogin}>
                         <Text style={styles.textbtn}>
@@ -106,12 +109,8 @@ function Login({ navigation }) {
                         <Text style={styles.textload}>Waiting food...</Text>
                     </AnimatedLoader>
                 }
-                <Text style={styles.footer} >
-                    Forgot password?
-            <Text style={styles.textforgot}
-                        onPress={() => Linking.openURL('http://google.com')}>
-                        Click here!
-            </Text>
+                <Text style={styles.footer} onPress={() => Linking.openURL('http://google.com')} >
+                 Forgotten password?
                 </Text>
             </ImageBackground>
         </View >
@@ -120,39 +119,38 @@ function Login({ navigation }) {
 }
 const styles = StyleSheet.create({
     container: {
-        marginBottom: 100,
-
+        
     },
     btnlogin: {
         backgroundColor: "#FFC75F",
-        alignSelf: "flex-end",
-        alignItems: 'center',
-        textAlign: 'center',
-        borderRadius: 40,
+        borderRadius: 30,
         height: 50,
-        marginTop: 40,
+        marginTop: 30,
         shadowColor: '#000',
         shadowOpacity: 0.2,
         shadowRadius: 10,
-
         padding: 6,
-        marginRight: 20,
+        width:'90%',
+        alignItems:'center',
+        alignSelf:'center'
 
     },
     footer: {
-        color: "#000",
-        marginTop: 150,
-        justifyContent: 'flex-end',
+        color: "#458",
         borderRadius: 5,
-        alignItems: 'stretch',
-        alignSelf: 'center',
-        alignContent: 'center',
         fontWeight: '600',
+        alignSelf:'center',
+        position:'relative',
+        fontSize:14,
+        top:10,
+        padding:10
+        
 
     },
     image: {
-        height: "106%",
-        width: '100%'
+        height: '100%',
+        width: '100%',
+        
     },
     errorMessage: {
         color: 'red',
@@ -165,8 +163,7 @@ const styles = StyleSheet.create({
         height: 250
     },
     textbtn: { color: '#fff', fontWeight: '600', fontSize: 21, padding: 5, paddingLeft: 15, paddingRight: 15, }
-    ,
-    textforgot: { color: "#FFC75F", fontWeight: "800", paddingLeft: 10 }
+    
     ,
     textload: {
         fontSize: 20,
