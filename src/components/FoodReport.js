@@ -1,10 +1,9 @@
 import React, { useState,useEffect } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import ItemFoodManage from './ItemFoodManage';
-import food1IMG from '../assets/detail1trans.png';
+import ItemFoodReport from './ItemFoodReport';
 import { FlatList } from 'react-native';
 import db from '@react-native-firebase/database';
-export default function FlatListFoodManage() {
+export default function FoodReport() {
     const [foodlist, setFoodList] = useState([]);
     
     useEffect(() => {
@@ -13,7 +12,7 @@ export default function FlatListFoodManage() {
             const foods = [];
             if(foodsJson){
                 for (const [key, value] of Object.entries(foodsJson)) {
-                    foods.push({...value,key});
+                    foods.push(value);
                 }
             }
             setFoodList(foods);
@@ -22,11 +21,11 @@ export default function FlatListFoodManage() {
 
     return (
         <FlatList data={foodlist}
+        showsVerticalScrollIndicator={false}
             numColumns={1}
-            renderItem={({ item }) => <ItemFoodManage foodlist={item} />}
+            renderItem={({ item }) => <ItemFoodReport foodlist={item} />}
             keyExtractor={item => item.id}
             style={styles.flatlist}
-
         />
     )
 }

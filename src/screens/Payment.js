@@ -21,6 +21,8 @@ export default function Payment({ navigation }) {
     const [total, setTotal] = useState(0);
     const [tax, setTax] = useState(0);
     const [done, setDone] = useState(false);
+
+    const [notess, setNotess] = useState('');
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
     const { user: { uid } } = useContext(AuthContext);
 
@@ -49,15 +51,17 @@ export default function Payment({ navigation }) {
                 idFood: foodlist[i]['id'],
                 quantity: foodlist[i]['quantity'],
                 price: foodlist[i]['price'],
-                notes : 'abc',
+                size:  foodlist[i]['size'],
+                notes : notess,
                 status : 'new'
             }
-            await db().ref(`order-details/${timeId}|${i}`).set(objItems);
-            await db().ref(`order-temp/${uid}|${foodlist[i]['id']}`).remove();
+          await db().ref(`order-details/${timeId}|${i}`).set(objItems);
+          await db().ref(`order-temp/${uid}|${foodlist[i]['id']}`).remove();
             
         }
         setDone(false);
-        navigation.navigate('StatusPayment')
+        const curIdOrder = `${uid}|${timeId}`;
+        navigation.navigate('StatusPayment',{curIdOrder});
     }
 
 
@@ -98,7 +102,7 @@ export default function Payment({ navigation }) {
                     <Text style={styles.title2}>Food Cart</Text>
                 </View>
                 <ScrollView>
-                    <FlatListItemCart />
+                    <FlatListItemCart setNote={setNotess} />
                     <View style={[styles.infor, { minHeight: 90 }]}>
                         <Text style={styles.title}>Table Details:</Text>
                         <View style={styles.details}>

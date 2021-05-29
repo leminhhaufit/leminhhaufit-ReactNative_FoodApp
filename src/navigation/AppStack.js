@@ -50,7 +50,7 @@ const OrderFoodStack = ({ navigation }) => (
     >
         <Stack.Navigator >
             <Stack.Screen
-                name="Order Food"
+                name="OrderFood"
                 component={OrderFood}
                 options={{
                     headerShown: false,
@@ -60,7 +60,8 @@ const OrderFoodStack = ({ navigation }) => (
                 name="FoodDetail2"
                 component={FoodDetail}
                 options={{
-                    headerShown: false,
+                    headerShown: true,
+                    title:'Food Details'
                 }}
             />
         </Stack.Navigator>
@@ -89,7 +90,8 @@ const PaymentStack = ({ navigation }) => (
                 component={Status}
                 options={{
                     headerShown: true,
-                    title:'Your Orders'
+                    title:'Your Orders',
+                    headerLeft: null
                 }}
             />
     </Stack.Navigator>
@@ -112,6 +114,15 @@ const ProfileStack = ({ navigation }) => (
                 component={Information}
                 options={{
                     headerShown: false,
+                }}
+            />
+
+<Stack.Screen
+                name="FormStaff1"
+                component={FormStaff}
+                options={{
+                    headerShown: true,
+                    title : 'Update Profile'
                 }}
             />
         </Stack.Navigator>

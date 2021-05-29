@@ -12,7 +12,7 @@ import _ from 'lodash';
 import ItemCart from './ItemCart';
 import db from '@react-native-firebase/database';
 
-function FlatListItemCart({ navigation }) {
+function FlatListItemCart({ setNote }) {
     const [foodlist, setFoodList] = useState([]);
     const {user:{uid}} = useContext(AuthContext);
 
@@ -103,6 +103,7 @@ function FlatListItemCart({ navigation }) {
                 numColumns={1}
                 renderItem={({ item }) => <ItemCart foodlist={item}
                     onChangeQuantityPlus={() => onChangeQuantityPlus(item)}
+                    setNote={setNote}
                     onChangeQuantityMinus={() => onChangeQuantityMinus(item)}
                     deleteItem={() => deleteItem(item)}
                 />}

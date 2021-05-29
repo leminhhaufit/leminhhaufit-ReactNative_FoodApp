@@ -15,32 +15,6 @@ const Routes = () => {
   const { user, setUser } = useContext(AuthContext);
   const [initializing, setInitializing] = useState(true);
 
-  // async function createNewAccount() {
-  //   try {
-  //     // 3 types : [0 => admin, 1 => waiter, 2 => chef]
-  //     const userAuth = await auth().createUserWithEmailAndPassword("hmq123450@gmail.com", "12345678");
-  //     var user = {
-  //       name: "Quy Minh Huynh",
-  //       phone: "779797329",
-  //       address: "474 Mercer Drive",
-  //       uid: userAuth.user.uid,
-  //       email: userAuth.user.email,
-  //       active: true,
-  //       type: 2
-  //     }
-  //     writeUserData(user)
-
-  //   } catch (error) {
-  //     console.log(error.message)
-  //   }
-  // }
-
-  //   function writeUserData(user) {
-  //     db().ref('users/' + user.uid).set(user).catch(error => {
-  //         console.log(error.message)
-  //     });
-  //  }
-
   const saveInfoUser = async (user) => {
     console.log("Data storage:" + JSON.stringify(user));
     await AsyncStorage.setItem('user',JSON.stringify(user));

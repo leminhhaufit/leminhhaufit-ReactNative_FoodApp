@@ -13,7 +13,7 @@ export default function ManageFood({ navigation }) {
             </View>
             <View style={styles.fixedbutton}>
                 <Button
-                    onPress={() => navigation.navigate("FormFood", { title: "Add New Food" })}
+                    onPress={() => navigation.navigate("FormFood", { title: "Add New Food", type: 'ADD' })}
                     type="solid"
                     buttonStyle={styles.btnadd}
                     icon={<FontAwesome5 name="plus-circle" size={35} color="#FFF" />}

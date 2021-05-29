@@ -5,7 +5,7 @@ import staff from '../assets/managestafftrans.png';
 import { FlatList } from 'react-native';
 import db from '@react-native-firebase/database';
 import Header from '../components/Header';
-function FlatListFoodManage() {
+function FlatListStaffManage({navigation}) {
     const [stafflist, setStafflist] = useState([])
     const [search, setSearch] = useState('');
     const [filter, setFilter] = useState([])
@@ -31,7 +31,7 @@ function FlatListFoodManage() {
             <Header onSearch={setSearch} title="Manage Staff"/>
             <FlatList data={filter}
                 numColumns={1}
-                renderItem={({ item }) => <ItemStaffManage stafflist={item} />}
+                renderItem={({ item }) => <ItemStaffManage stafflist={item} navigation={navigation} />}
                 keyExtractor={item => item.uid}
                 scrollEnabled={true}
             />
@@ -39,4 +39,4 @@ function FlatListFoodManage() {
         
     )
 }
-export default FlatListFoodManage
+export default FlatListStaffManage

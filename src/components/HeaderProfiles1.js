@@ -16,10 +16,13 @@ import { Overlay } from 'react-native-elements';
 import _ from 'lodash';
 import CardOrder from '../components/CardOrder';
 import WaiterOrder from '../components/WaiterOrder';
+import FoodReport from '../components/FoodReport';
 const width = Dimensions.get('window').width;
 
 
-export default function HeaderProfiles1() {
+export default function HeaderProfiles1({navigation}) {
+
+    console.log('navigation',navigation);
     const [av,setAv] = useState(null);
     const { user, setUser } = useContext(AuthContext);
     const [orders, setOrders] = useState([]);
@@ -30,10 +33,21 @@ export default function HeaderProfiles1() {
 
 
     const [open, setOpen] = useState(false);
+    const [reportPop, setReportPop] = useState(false);
+
     useEffect(async () => {
         const avatar = await AsyncStorage.getItem(uid);
         setAv(avatar);
     },[av])
+
+
+    useEffect(() => {
+        db().ref('/users/'+ uid).on('value',async (data) => {
+            const usersJson = await data.toJSON();
+              setUser(usersJson);
+        })
+    },[])
+
 
 
     //  Start Use for Waiter and Chef
@@ -122,11 +136,11 @@ export default function HeaderProfiles1() {
         setOpen(true);
     }
 
-
-
+    const showCookChef = () => {
+        setReportPop(true);
+    }
 
     // END FOR ORDER CHEF
-
 
 
     const uploadPhoto = async (uri) => {
@@ -176,10 +190,16 @@ export default function HeaderProfiles1() {
             }
         );
     }
+
+
+    const updateInfo = () => {
+        navigation.navigate("FormStaff1", { title: "Update Your Info", type:"UPDATE",stafflist:user ,fromInfo:"Profile"})
+    }
+
     return (
         <View style={{backgroundColor:'#FFF',flex:1}}>
             <View style={styles.header}></View>
-            <CardUser format={false} name={name} avatar={av ? av : photoURL} changeAvatar={onClickAddImage} />
+            <CardUser format={false} name={name} avatar={av ? av : photoURL} changeAvatar={onClickAddImage} updateInfo={updateInfo} />
             {type == 0 ? 
             (<View style={styles.boxapp}>
                 <ProfileButton text='Order' icon='file-alt' cb={signOut}/>
@@ -212,7 +232,16 @@ export default function HeaderProfiles1() {
             <View style={styles.boxapp}>
                 <ProfileButton text='Cooks' icon='file-alt' cb={showOrderChef}/>
                 <ProfileButton text='Settings' icon='info' cb={signOut}/>
-                <ProfileButton text='Report' icon='cogs' cb={signOut}/>
+                <ProfileButton text='Report' icon='cogs' cb={showCookChef}/>
+
+                <Overlay visible={reportPop} fullScreen={false} overlayStyle={{height:'70%'}}>
+                <View style={{display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
+                    <Text style={{color:'#458', fontSize:16,fontWeight:'bold'}}>List Of Foods</Text>
+                    <Text onPress={() => setReportPop(false) }>❌</Text>
+                </View>
+                <FoodReport />
+            </Overlay>
+
                 <ProfileButton text='Log out' icon='sign-out-alt' cb={signOut} />
             </View>
             <Overlay visible={open} fullScreen={false} overlayStyle={{height:'70%'}}>

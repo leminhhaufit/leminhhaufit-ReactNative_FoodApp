@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { Overlay } from 'react-native-elements';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import FlatListFilterFood from './FlatListFilterFood';
-export default function Filters() {
+function Filters({onSearch}) {
     const [visible, setVisible] = useState(false);
     const toggleOverlay = () => {
         setVisible(!visible);
@@ -24,12 +24,13 @@ export default function Filters() {
                         <FontAwesome5 size={26} name="times" color="#FFC75F" />
                     </TouchableOpacity>
                 </View>
-                <FlatListFilterFood />
+                <FlatListFilterFood onSearch={onSearch} />
             </Overlay>
         </View>
     )
 }
 
+export default  React.memo(Filters);
 const styles = StyleSheet.create({
 
     filter: {

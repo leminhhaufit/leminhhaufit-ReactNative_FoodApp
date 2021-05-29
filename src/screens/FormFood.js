@@ -1,4 +1,4 @@
-import React, { useState,useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { StyleSheet, Text, View, Image, } from 'react-native'
 import { Container, Content, Form, Item, Input, Label, Button } from 'native-base';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -12,38 +12,37 @@ import { AuthContext } from '../navigation/AuthProvider';
 import db from '@react-native-firebase/database';
 import { Dropdown } from 'react-native-material-dropdown-v2';
 
-export default function FormFood(props) {
+export default function FormFood({route, navigation}) {
+
+    const { title, foodlist, type } = route.params;
     const [selectedValue, setSelectedValue] = useState("category");
-    const [selectedImage, setSelectedImage] = useState(null);
-    const [name, setName] = useState(null);
-    const [des, setDes] = useState(null);
-    const [ingre, setIngre] = useState(null);
-    const [price, setPrice] = useState(null);
+    const [selectedImage, setSelectedImage] = useState(foodlist?.photoURL);
+    const [name, setName] = useState(foodlist?.name);
+    const [des, setDes] = useState(foodlist?.description);
+    const [ingre, setIngre] = useState(foodlist?.ingredient);
+    const [price, setPrice] = useState(foodlist?.price);
     const [done, setDone] = useState(false);
-    const [category, setCategory] = useState(null);
+    const [category, setCategory] = useState(foodlist?.category);
     const { user, setUser } = useContext(AuthContext);
-    const {uid} = user;
+    const { uid } = user;
+    const [catelist, setCatelist] = useState([])
 
-//     const [data, setDs] = useState([{
-//         value: 'Banana',
-//       }, {
-//         value: 'Mango',
-//       }, {
-//         value: 'Pear',
-//       }
-// ])
 
-const data = [{
-    value: 'Banana',
-  }, {
-    value: 'Mango',
-  }, {
-    value: 'Pear',
-  }
-]
-    
 
-    const { title, route, navigation } = props
+    console.log(name);
+    useEffect(() => {
+        db().ref('/category').on('value', async (data) => {
+            const ordersJson = await data.toJSON();
+            const orders = [];
+            for (const [key, value] of Object.entries(ordersJson)) {
+                if (value.active) {
+                    orders.push({ value: decodeURIComponent(key) });
+                }
+            }
+            setCatelist(orders);
+        })
+    }, [])
+
     const selectFile = () => {
         ImagePicker.openPicker({
             width: 400,
@@ -88,46 +87,55 @@ const data = [{
     );
 
 
-    const addFood = async (secondaryApp) =>  {
+    const addFood = async (secondaryApp) => {
         try {
-            if(!selectedImage || !name || !des || !ingre || !price){
+            if (!selectedImage || !name || !des || !ingre || !price) {
                 Toast.show({
                     type: 'error',
-                    text1: 'Something went wrong  👋'  ,
+                    text1: 'Something went wrong  👋',
                     autoHide: true,
-                  });
+                });
                 return;
             }
             setDone(true);
-          const curTime = new Date().getTime();
-          await secondaryApp.storage().ref(`foods/${uid}/${curTime}.png`).putFile(selectedImage);
-          let imageRef = await secondaryApp.storage().ref(`foods/${uid}/${curTime}.png`);
-          const photoURL = await imageRef.getDownloadURL();
-          const foodObj = {
-            name,
-            description: des,
-            ingredient: ingre,
-            price,
-            photoURL,
-            active: true,
-            date: new Date().getTime(),
-            uid,
-            category,
-            id: `${uid}|${curTime}`
-          }
-          await db().ref(`foods/${uid}|${curTime}`).set(foodObj);
-
-          navigation.navigate('Food');
+            const curTime = new Date().getTime();
+            let photoURL;
+            if(type === 'ADD'){
+                await secondaryApp.storage().ref(`foods/${uid}/${curTime}.png`).putFile(selectedImage);
+                let imageRef = await secondaryApp.storage().ref(`foods/${uid}/${curTime}.png`);
+                photoURL = await imageRef.getDownloadURL();
+            }
+            const foodObj = {
+                name,
+                description: des,
+                ingredient: ingre,
+                price,
+                photoURL,
+                active: true,
+                date: new Date().getTime(),
+                uid,
+                category,
+                id: `${uid}|${curTime}`,
+                notes: 'nothing'
+            }
+            if(type === 'ADD'){
+                await db().ref(`foods/${uid}|${curTime}`).set(foodObj);
+                setDone(false);
+            }else{
+                await db().ref(`foods/${foodlist.key}`).update({...foodObj,photoURL:foodlist.photoURL, id: foodlist.id});
+                setDone(false);
+            }
+            navigation.navigate('Food');
         } catch (error) {
-          console.log(error.message)
-          setDone(false);
+            console.log(error.message)
+            setDone(false);
         }
-      }
+    }
 
 
-      async function initNew(){
+    async function initNew() {
         const secondaryApp = await SecondFirebaseApp();
-        addFood(secondaryApp);    
+        addFood(secondaryApp);
     }
 
 
@@ -138,7 +146,7 @@ const data = [{
 
             <Content style={{ backgroundColor: "#F4F4F4" }} >
                 <View style={styles.header}>
-                    <Text style={styles.labelheader}>{route.params.title}</Text>
+                    <Text style={styles.labelheader}>{title}</Text>
                 </View>
                 <Form style={styles.form}>
                     <Item floatingLabel rounded style={styles.item}>
@@ -155,15 +163,15 @@ const data = [{
                     </Item>
                     <Item floatingLabel rounded style={styles.item}>
                         <Label style={styles.label}><FontAwesome5 name="dollar-sign" solid size={32} color="#FFC75F" /> Price</Label>
-                        <Input style={styles.input} value={price} onChangeText={price => setPrice(price)} />
+                        <Input keyboardType='numeric' style={styles.input} value={price} onChangeText={price => setPrice(price)} />
                     </Item>
                     <Label style={styles.label2}><FontAwesome5 name="tags" solid size={32} color="#FFC75F" /> Category</Label>
-                     <Dropdown
-                        containerStyle={{width:'90%',alignSelf:'center'}}
+                    <Dropdown
+                        containerStyle={{ width: '90%', alignSelf: 'center' }}
                         key="d"
                         onChangeText={data => setCategory(data)}
-                        label='Favorite Fruit'
-                        data={data}
+                        label={category ? category : 'Favorite Fruit'}
+                        data={catelist}
                     />
                     <Label style={styles.label2}><FontAwesome5 name="image" size={32} color="#FFC75F" /> Images</Label>
                     <View style={styles.viewImage}>
@@ -181,9 +189,9 @@ const data = [{
 
 
                     </View>
-                    <Button 
-                        full 
-                        rounded 
+                    <Button
+                        full
+                        rounded
                         style={styles.btn}
                         onPress={initNew}
                     >
@@ -199,11 +207,11 @@ const data = [{
                 renderContent={renderContent}
             />
 
-                        <ProgressLoader
-                            visible={done}
-                            isModal={true} isHUD={true}
-                            hudColor={"#FFFFFF"}
-                            color={"#000000"} />
+            <ProgressLoader
+                visible={done}
+                isModal={true} isHUD={true}
+                hudColor={"#FFFFFF"}
+                color={"#000000"} />
 
         </Container >
     )
@@ -221,7 +229,7 @@ const styles = StyleSheet.create({
         fontSize: 22,
         fontWeight: '500',
         marginTop: 30,
-        color:'#545455'
+        color: '#545455'
 
     },
     input: {
@@ -230,7 +238,7 @@ const styles = StyleSheet.create({
         height: 70,
         fontSize: 22,
         fontWeight: '600',
-        
+
 
     },
     item: {

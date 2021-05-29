@@ -9,12 +9,12 @@ export default function ManageStaff({ navigation}) {
         <View style={styles.container}>
             <ScrollView keyboardShouldPersistTaps='always'>
                 <View style={styles.container2}>
-                        <FlatListStaffManage />
+                        <FlatListStaffManage navigation={navigation} />
                 </View>
             </ScrollView>
             <View style={styles.fixedbutton}>
                 <Button
-                    onPress={() => navigation.navigate("FormStaff", { title: "Add New Staff" })}
+                    onPress={() => navigation.navigate("FormStaff", { title: "Add New Staff", type:"ADD" })}
                     type="solid"
                     buttonStyle={styles.btnadd}
                     icon={<FontAwesome5 name="plus-circle" size={35} color="#FFF" />}

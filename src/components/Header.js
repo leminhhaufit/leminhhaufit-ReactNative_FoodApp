@@ -123,7 +123,7 @@ function Header(props) {
 
                         <Text style={styles.textlist}>{title}</Text>
                         {
-                            title === "Food List" && <Filters />
+                            title === "Food List" && <Filters onSearch={onSearch} />
                         }
                     </View>
                 </View>

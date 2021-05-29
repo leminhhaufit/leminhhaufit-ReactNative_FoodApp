@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect,useContext } from 'react';
 import {
     View,
     StyleSheet,
@@ -10,73 +10,31 @@ import PropTypes from 'prop-types';
 
 import ItemFilterTable from './ItemFilterTable';
 import ItemFilterFood from './ItemFilterFood';
-
+import db from '@react-native-firebase/database';
+import CateData from './CateData';
+import { AuthContext } from '../navigation/AuthProvider';
 FlatListFilterFood.propTypes = {
 
 };
-function FlatListFilterFood(props) {
-    const [filter, setFilter] = useState(
-        [
-            {
-                id: 1,
-                title: "Món Á",
+function FlatListFilterFood({onSearch}) {
+   // const [filter, setFilter] = useState([{key: 'tatca', name: 'Tất cả'}])
+   const [filter, setFilter] = CateData();
+    // useEffect(() => {
+    //     db().ref('/category').on('value',async (data) => {
+    //         const ordersJson = await data.toJSON();
+    //         const orders = [];
+    //         for (const [key, value] of Object.entries(ordersJson)) {
+    //             orders.push({...value,key});
+    //           } 
+    //           setFilter([...filter,...orders]);
+    //     })
+    // },[])
+    const {select, setSelect} = useContext(AuthContext);
 
-            },
-            {
-                id: 2,
-                title: "Món Âu",
-
-            },
-            {
-                id: 3,
-                title: "Món Chiên",
-
-            },
-            {
-                id: 4,
-                title: "Món Xào",
-
-            },
-            {
-                id: 5,
-                title: "Món Nướng",
-
-            },
-            {
-                id: 6,
-                title: "Món Đặc Biệt",
-
-            },
-            {
-                id: 7,
-                title: "Món Bán Chạy nhất",
-
-            },
-            {
-                id: 8,
-                title: "Món còn hoạt động",
-
-            },
-            {
-                id: 9,
-                title: "Món ngừng hoạt động",
-
-            },
-            {
-                id: 10,
-                title: "Món mới",
-
-            },
-
-
-
-        ]
-
-    )
     return (
         <FlatList data={filter}
             numColumns={1}
-            renderItem={({ item }) => <ItemFilterFood filter={item} />}
+            renderItem={({ item }) => <ItemFilterFood filter={item} onSearch={onSearch} setSelect={setSelect} select={select} />}
             keyExtractor={item => item.id}
             style={styles.flatlist}
         />
@@ -92,4 +50,4 @@ const styles = StyleSheet.create({
     },
 
 })
-export default FlatListFilterFood;
+export default FlatListFilterFood = React.memo(FlatListFilterFood);

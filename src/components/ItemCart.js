@@ -1,12 +1,13 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableHighlight, TouchableOpacity, Button, Dimensions } from 'react-native';
+import React, {useState} from 'react';
+import { View, Text, Image, StyleSheet, TouchableHighlight, TouchableOpacity, TextInput, Dimensions } from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import formatter from '../config/Currency';
 import { Textarea, Form } from "native-base";
 const width = Dimensions.get('window').width;
 function ItemCart(props) {
-    const { foodlist, onChangeQuantityPlus, onChangeQuantityMinus, deleteItem } = props;
-    const { id, name, size, price, quantity,photoURL } = foodlist;
+    const { foodlist, onChangeQuantityPlus, onChangeQuantityMinus, deleteItem,setNote } = props;
+    const { id, name,size, price, quantity,photoURL } = foodlist;
+    const [note, setNoteLocal] = useState();
 
     return (
         <View style={styles.container} key={id}>
@@ -16,8 +17,9 @@ function ItemCart(props) {
             </View>
             <View style={styles.infor}>
                 <Text style={styles.title}>{name}</Text>
+                <Text style={{fontSize: 12,fontWeight: '400',marginTop:10}}>{size}</Text>
                 <Form>
-                    <Textarea rowSpan={2} placeholder="Notes" style={styles.note} value={size} />
+                    <TextInput  placeholder="Notes" style={styles.note} value={note} onChangeText={val => {setNoteLocal(val);setNote(val)}} />
                 </Form>
             </View>
             <View style={styles.quantity}>
@@ -64,17 +66,16 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
         width: width / 4,
-        height: 60,
+        height: 30,
     },
     note: {
         fontSize: 12,
         fontWeight: '400',
         opacity: 0.5,
         width: width / 4,
-        height: 60,
-        borderBottomColor: '#FFC75F',
+        height: 40,
+        borderBottomColor: '#FFF',
         borderBottomWidth: 1,
-        marginTop: 10,
     },
     price: {
         fontSize: 16,

@@ -134,6 +134,15 @@ const ProfileStack = ({ navigation }) => (
                 headerShown: false,
             }}
         />
+
+            <Stack.Screen
+                name="FormStaff1"
+                component={FormStaff}
+                options={{
+                    headerShown: true,
+                    title : 'Update Profile'
+                }}
+            />
     </Stack.Navigator>
 );
 

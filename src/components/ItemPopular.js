@@ -42,7 +42,7 @@ export default function ItemPopular(props) {
             </TouchableOpacity>
             <Overlay isVisible={visible} overlayStyle={styles.overlay} onBackdropPress={toggleOverlay}>
                 <View style={styles.labelfilter}>
-                    <Text style={styles.textfilteroverlay}>Order by:</Text>
+                    <Text style={styles.textfilteroverlay}>Add Items:</Text>
                     <TouchableOpacity onPress={toggleOverlay} style={styles.iconoverlay}>
                         <FontAwesome5Icon size={26} name="times" color="#FFC75F" />
                     </TouchableOpacity>

@@ -3,16 +3,20 @@ import { StyleSheet, Text, View, Image, TouchableOpacity,Dimensions } from 'reac
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { Button } from 'react-native-elements';
 import SwitchSelector from "react-native-switch-selector";
-import detail1IMG from '../assets/header5.jpg';
-import { NavContext } from '../navigation/AppStack';
-
+import formatter from '../config/Currency';
+import db from '@react-native-firebase/database';
+import Toast from 'react-native-toast-message';
+import { AuthContext } from '../navigation/AuthProvider';
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 
-export default function FoodDetail() {
+export default function FoodDetail({ route, navigation }) {
     const [loading, setLoading] = useState(false);
     const [quantity, setQuantity] = useState(1);
-    const [price, setPrice] = useState(199);
+    const [size, setSize] = useState('small');
+    const { user, setUser } = useContext(AuthContext);
+    const { uid } = user;
+    const {  foodlist } = route.params;
 
     function onChangeQuantityPlus() {
         setQuantity(quantity + 1);
@@ -27,26 +31,54 @@ export default function FoodDetail() {
 
     }
 
+    const addOrderTemp = async () => {
+        try {
+            setLoading(true);
+            const curTime = new Date().getTime();
+            const objFood = {
+                uid,
+                name: foodlist.name,
+                quantity,
+                price:foodlist.price,
+                size,
+                create: curTime,
+                photoURL: foodlist.photoURL,
+                id: foodlist.id
+            }
+            await db().ref(`order-temp/${uid}|${foodlist.id}`).set(objFood);
+            setLoading(false);
+            Toast.show({
+                type: 'success',
+                text1: 'Item added successfully 👋',
+                autoHide: true,
+            });
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
     return (
         <View style={styles.container}>
             <View style={styles.imgdetails}>
                 <View >
-                    <Image source={detail1IMG} style={styles.detail} />
+                    <Image source={{uri:foodlist.photoURL}} style={styles.detail} />
 
                 </View>
-                <View style={{ position: 'absolute', top: 10, }}>
+                {/* <View style={{ position: 'absolute', top: 10, }}>
                     <NavContext.Consumer>
                         {({ navigation }) => <TouchableOpacity onPress={() => navigation.goBack()}>
                             <FontAwesome5 style={styles.plus} name="chevron-circle-left" size={25} color="#FFF" />
                         </TouchableOpacity>}
                     </NavContext.Consumer>
-                </View>
+                </View> */}
             </View>
 
             <View style={styles.infor}>
                 <View >
-                    <Text style={styles.title}>Title</Text>
-                    <Text style={styles.content}>content</Text>
+                    <Text style={styles.title}>{foodlist.name}</Text>
+                    <Text style={styles.content}>{foodlist.description}</Text>
                 </View>
 
                 <View style={styles.quantity}>
@@ -57,11 +89,11 @@ export default function FoodDetail() {
                     <TouchableOpacity onPress={() => onChangeQuantityMinus()}>
                         <FontAwesome5 name="minus-circle" size={36} color="#FFC75F" />
                     </TouchableOpacity>
-                    <Text style={styles.price}>{price * quantity}$</Text>
+                    <Text style={styles.price}>{formatter.format(foodlist.price * quantity)}</Text>
                 </View>
                 <SwitchSelector
                     initial={0}
-                    //onPress={value => this.setState({ gender: value })}
+                    onPress={value => setSize(value)}
                     textColor="#FFC75F" //'#7a44cf'
                     selectedColor="#fff"
                     buttonColor="#FFC75F"
@@ -80,15 +112,16 @@ export default function FoodDetail() {
                     textStyle={styles.switchtext}
                     imageStyle={styles.switchimg}
                 />
-                <View>
-                    <Text style={styles.descriptionlabel}>Description</Text>
-                    <Text style={styles.description}>Description Description Description Description Description Description Description Description Description Description DescriptionDescription </Text>
-                    <Button icon={<FontAwesome5 name="shopping-cart" size={22} color="#FFF" />} buttonStyle={styles.add} titleStyle={styles.titleadd} title="Add to cart" loading={loading} onPress={() => setLoading(!loading)}></Button>
+                    <View>
+                        <Text style={styles.descriptionlabel}>Ingredient</Text>
+                        <Text style={styles.description}>{foodlist.ingredient}</Text>
+                        <Button icon={<FontAwesome5 name="shopping-cart" size={22} color="#FFF" />} buttonStyle={styles.add} titleStyle={styles.titleadd} title="Add to cart" loading={loading} onPress={addOrderTemp} />
+                    </View>
                     {/* CHIA 3 MAN HINH 3 NUT (NUT ADD O USER | NUT THAYDOITRANGTHAIMONAN O KITCHEN | NUT CHINH SUA O ADMIN)
                     
                     <Button icon={<FontAwesome5 name="power-off" size={22} color="#FFF" />} buttonStyle={styles.add} titleStyle={styles.titleadd} title="CHANGE STATUS" loading={loading} onPress={() => setLoading(!loading)}></Button>
                     <Button icon={<FontAwesome5 name="pen-alt" size={22} color="#FFF" />} buttonStyle={styles.add} titleStyle={styles.titleadd} title="UPDATE" loading={loading} onPress={() => setLoading(!loading)}></Button> */}
-                </View>
+                
             </View>
         </View>
     )
@@ -97,7 +130,7 @@ export default function FoodDetail() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-
+        backgroundColor:'#fff'
     },
     imgdetails: {
         flex: 1,
@@ -180,11 +213,10 @@ const styles = StyleSheet.create({
         fontSize: 14,
         opacity: 0.5,
         paddingLeft: 40,
-
-        height: 130,
+        minHeight: 10,
     },
     add: {
-        marginTop: 40,
+        marginTop: 10,
         backgroundColor: '#FFC75F',
         marginLeft: 10,
         marginRight: 10,

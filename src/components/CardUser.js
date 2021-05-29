@@ -6,7 +6,7 @@ import SecondFirebaseApp from '../config/SecondFirebaseApp';
 import Toast from 'react-native-toast-message';
 
 
-const CardUser = ({format,name, avatar, changeAvatar,type,active,uid}) => {
+const CardUser = ({format,name, avatar, changeAvatar,type,active,uid,updateInfo}) => {
     console.log(type);
     let position;
     if(type == 0) position = 'Admin';
@@ -51,7 +51,7 @@ const CardUser = ({format,name, avatar, changeAvatar,type,active,uid}) => {
                 <FastImage
                     style={styles.iconContainer}
                     source={{
-                        uri: avatar
+                        uri: avatar ? avatar : 'https://anhdep123.com/wp-content/uploads/2020/11/avatar-facebook-mac-dinh-nam.jpeg'
                     }}
                         resizeMode={FastImage.resizeMode.center}
                     />
@@ -88,6 +88,7 @@ const CardUser = ({format,name, avatar, changeAvatar,type,active,uid}) => {
                     <Button
                         title="⚒ Edit Profile"
                         type="solid"
+                        onPress={updateInfo}
                         titleStyle={{ fontSize: 13 }}
                     />
                     {format &&

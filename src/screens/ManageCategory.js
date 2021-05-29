@@ -16,7 +16,7 @@ export default function ManageCategory({ navigation }) {
                 </View>
             </View>
             <View style={styles.fixedbutton}>
-                <Button onPress={() => navigation.navigate("FormCategory", { title: "Add New Category" })} icon={<FontAwesome5 name="plus-circle" size={50} color="#FFF" style={styles.iconadd} />} buttonStyle={styles.btnadd} />
+                <Button onPress={() => navigation.navigate("FormCategory", { title: "Add New Category",type: 'ADD',catelist : {name:'',description:''} })} icon={<FontAwesome5 name="plus-circle" size={50} color="#FFF" style={styles.iconadd} />} buttonStyle={styles.btnadd} />
             </View>
         </View>
     )
