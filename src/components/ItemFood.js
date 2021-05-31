@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
     txtprice: {
         alignSelf: 'flex-end',
         paddingTop: 10,
-        fontSize: 22,
+        fontSize: 16,
         fontWeight: 'bold',
     },
     overlay: {
