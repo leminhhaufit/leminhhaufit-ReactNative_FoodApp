@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../navigation/AuthProvider';
 import {
     View,
     StyleSheet,
     FlatList,
+    Text
 } from 'react-native';
 import Header from '../components/Header';
 import PropTypes from 'prop-types';
@@ -17,6 +19,7 @@ function FlatListItemFood(props) {
     const [foodlist, setFoodlist] = useState([])
     const [filter, setFilter] = useState([])
     const [search, setSearch] = useState('0|tất cả');
+    const { user: { uid, name } } = useContext(AuthContext);
 
     useEffect(() => {
         db().ref('/foods').on('value', async (data) => {
@@ -38,11 +41,16 @@ function FlatListItemFood(props) {
         setFilter(foodlist.filter(food => {
             const splitCate = search.split('|');
             console.log(search);
-            if (splitCate[1].trim().toLowerCase() === 'tất cả')
-                return food;
-            else if (splitCate[0] === '000') {
-                return food.category.toLowerCase().includes(splitCate[1].toLowerCase());
-            } else {
+            if (Array.isArray(splitCate) && splitCate.length >= 2) {
+                if (splitCate[1].trim().toLowerCase() === 'tất cả')
+                    return food;
+                else if (splitCate[0] === '000') {
+                    return food.category.toLowerCase().includes(splitCate[1].toLowerCase());
+                } else {
+                    return food.name.toLowerCase().includes(search.toLowerCase());
+                }
+            }
+            else {
                 return food.name.toLowerCase().includes(search.toLowerCase());
             }
         }));
@@ -66,6 +74,8 @@ function FlatListItemFood(props) {
 
     return (
         <>
+            <Text style={styles.hello}>Hello, {name}</Text>
+            <Text style={styles.title}>Fast & Delicious Food!</Text>
             <Header title="Food List" onSearch={setSearch} />
             <FlatList data={filter}
                 numColumns={1}
@@ -81,6 +91,25 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
         alignSelf: 'center'
+    },
+    title: {
+        fontSize: 30,
+        fontWeight: 'bold',
+        width: 350,
+        alignSelf: 'flex-start',
+        alignItems: 'stretch',
+        paddingLeft: 40,
+        paddingBottom: 20,
+    },
+    hello: {
+        fontSize: 26,
+        opacity: 0.7,
+        fontWeight: 'bold',
+        width: 350,
+        alignSelf: 'flex-start',
+        alignItems: 'stretch',
+        paddingLeft: 40,
+        paddingTop: 40,
 
     },
 

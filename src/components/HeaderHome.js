@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     title: {
-        fontSize: 32,
+        fontSize: 30,
         fontWeight: 'bold',
         width: 350,
         alignSelf: 'flex-start',
