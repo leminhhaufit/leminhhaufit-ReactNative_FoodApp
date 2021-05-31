@@ -19,32 +19,32 @@ export default function HeaderHome() {
         [
             {
                 title: 'Beautiful and dramatic Antelope Canyon',
-                subtitle: 'Lorem ipsum dolor sit amet et nuncat mergitur',
+                subtitle: 'Don’t forget the flavors - sweet, salty, tart, pleasantly bitter.',
                 illustration: header1IMG
             },
             {
                 title: 'Earlier this morning, NYC',
-                subtitle: 'Lorem ipsum dolor sit amet',
+                subtitle: 'Mention the cooking method - Steamed, char-grilled, pan-fried, stir-fried, or slow-cooked',
                 illustration: header2IMG
             },
             {
                 title: 'White Pocket Sunset',
-                subtitle: 'Lorem ipsum dolor sit amet et nuncat ',
+                subtitle: 'Soft textures - smooth, silky, unctuous, coating, tender, and juicy.',
                 illustration: header3IMG
             },
             {
                 title: 'Acrocorinth, Greece',
-                subtitle: 'Lorem ipsum dolor sit amet et nuncat mergitur',
+                subtitle: 'Talk about the overall feel - smoky, spicy, fresh, oily, etc.',
                 illustration: header4IMG
             },
             {
                 title: 'The lone tree, majestic landscape of New Zealand',
-                subtitle: 'Lorem ipsum dolor sit amet',
+                subtitle: 'Don’t forget the flavors - sweet, salty, tart, pleasantly bitter.',
                 illustration: header5IMG
             },
             {
                 title: 'Middle Earth, Germany',
-                subtitle: 'Lorem ipsum dolor sit amet',
+                subtitle: 'Soft textures - smooth, silky, unctuous, coating, tender, and juicy.',
                 illustration: header3IMG
             }
         ]);

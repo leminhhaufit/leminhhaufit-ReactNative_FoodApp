@@ -5,6 +5,7 @@ import food1IMG from '../assets/detail1trans.png';
 import { FlatList } from 'react-native';
 import db from '@react-native-firebase/database';
 import CardOrder from '../components/CardOrder';
+import moment from 'moment';
 import _ from 'lodash';
 export default function FlatListFilterPopular() {
     const [orders, setOrders] = useState(
@@ -30,7 +31,7 @@ export default function FlatListFilterPopular() {
             const orders = [];
             for (const [key, value] of Object.entries(ordersJson)) {
                 const status = _.get(value,'status');
-                if (!(status === 'completed')) {
+                if (!(status === 'completed') && moment(value.createDate).format('DD-MM-YYYY') === moment().format('DD-MM-YYYY') ) {
                     orders.push({...value,key});
                 } 
               } 

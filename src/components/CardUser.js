@@ -7,11 +7,6 @@ import Toast from 'react-native-toast-message';
 
 
 const CardUser = ({format,name, avatar, changeAvatar,type,active,uid,updateInfo}) => {
-    console.log(type);
-    let position;
-    if(type == 0) position = 'Admin';
-    else if(type == 1) position = 'Waiter';
-    else position = 'Chef';
 
     const userActivate = () => {
         Alert.alert(
@@ -57,7 +52,7 @@ const CardUser = ({format,name, avatar, changeAvatar,type,active,uid,updateInfo}
                     />
                     <View style={styles.userContainer}>
                         <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#505052' }}>{name}</Text>
-                        <Text style={{ fontSize: 15, fontWeight: 'bold', color: '#AAB5BE', marginVertical: 4 }}>{position}</Text>
+                        <Text style={{ fontSize: 15, fontWeight: 'bold', color: '#AAB5BE', marginVertical: 4 }}></Text>
                         <View style={styles.accountContainer}>
                             <View style={styles.inv}>
                                 <Text style={styles.title}>📆 Dates</Text>

@@ -22,7 +22,7 @@ export default function FlatListFilterPopular({navigation}) {
                 if (isCurrentWeek(getDateCreate)) {
                     count++;
                     const curFood = await (await db().ref(`/foods/${value.idFood}`).once('value')).toJSON();
-                    if (count <= 5) {
+                    if (count <= 5 && curFood.active) {
                         topFood.push(curFood);
                     } else {
 

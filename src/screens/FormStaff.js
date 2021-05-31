@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect,useContext } from 'react'
 import { StyleSheet, Text, View, Picker, Image, TouchableOpacity } from 'react-native'
 import { Container, Content, Form, Item, Input, Label, Button, } from 'native-base';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -9,6 +9,7 @@ import Toast from 'react-native-toast-message';
 import SecondFirebaseApp from '../config/SecondFirebaseApp';
 import ProgressLoader from 'rn-progress-loader';
 import db from '@react-native-firebase/database';
+import { AuthContext } from '../navigation/AuthProvider';
 
 export default function FormStaff({ route, navigation }) {
     const { title, type, stafflist,fromInfo } = route.params;
@@ -21,6 +22,7 @@ export default function FormStaff({ route, navigation }) {
     const [email, setEmail] = useState(stafflist?.email);
     const [password, setPassword] = useState(null);
     const [done, setDone] = useState(true);
+    const {user:{uid,type: type1}} = useContext(AuthContext);
 
 
     const selectFile = () => {
@@ -191,8 +193,8 @@ export default function FormStaff({ route, navigation }) {
                         imageStyle={styles.switchimg}
                     />
 
-                    {role == 0 && <Label  style={styles.label2}><FontAwesome5 name="venus-mars" size={30} color="#FFC75F" /> Role</Label>}
-                    {role == 0 && <SwitchSelector
+                    {type1==0 && <Label  style={styles.label2}><FontAwesome5 name="venus-mars" size={30} color="#FFC75F" /> Role</Label>}
+                    {type1 == 0 && <SwitchSelector
                         initial={role}
                         onPress={role => { setRole(role); console.log(role) }}
                         textColor="#FFC75F" //'#7a44cf'

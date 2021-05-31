@@ -16,6 +16,8 @@ import ManageFood from '../screens/ManageFood';
 import ManageStaff from '../screens/ManageStaff';
 import ManageCategory from '../screens/ManageCategory';
 import OrderDetailImage from '../components/OrderDetailImage';
+import TopFood from '../components/TopFood';
+import ChefAna from '../components/ChefAna';
 import ManageOrders from '../screens/ManageOrders';
 import FormFood from '../screens/FormFood';
 import FormStaff from '../screens/FormStaff';
@@ -92,6 +94,7 @@ const HomeAdminStack = ({ navigation }) => (
                 component={Statistical}
                 options={{
                     headerShown: true,
+                    title:'Analytics and Statistics'
                 }}
             />
             <Stack.Screen
@@ -132,6 +135,25 @@ const HomeAdminStack = ({ navigation }) => (
                     headerShown: true,
                 }}
             />
+
+            <Stack.Screen
+                name="TopFood"
+                component={TopFood}
+                options={{
+                    headerShown: true,
+                    title: 'Revenue'
+                }}
+            />
+
+            <Stack.Screen
+                name="ChefAna"
+                component={ChefAna}
+                options={{
+                    headerShown: true,
+                    title : 'Active log'
+                }}
+            />
+
         </Stack.Navigator>
     </NavContextAdmin.Provider>
 );

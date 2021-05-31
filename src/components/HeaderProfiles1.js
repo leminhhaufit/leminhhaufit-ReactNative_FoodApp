@@ -202,15 +202,15 @@ export default function HeaderProfiles1({navigation}) {
             <CardUser format={false} name={name} avatar={av ? av : photoURL} changeAvatar={onClickAddImage} updateInfo={updateInfo} />
             {type == 0 ? 
             (<View style={styles.boxapp}>
-                <ProfileButton text='Order' icon='file-alt' cb={signOut}/>
+                {/* <ProfileButton text='Order' icon='file-alt' cb={signOut}/>
                 <ProfileButton text='Settings' icon='info' cb={signOut}/>
-                <ProfileButton text='Settings' icon='cogs' cb={signOut}/>
+                <ProfileButton text='Settings' icon='cogs' cb={signOut}/> */}
                 <ProfileButton text='Log out' icon='sign-out-alt' cb={signOut} />
             </View>) : type == 1 ? 
             (<View style={styles.boxapp}>
                 <ProfileButton text='Order' icon='file-alt' cb={showOrderChef}/>
-                <ProfileButton text='Settings' icon='info' cb={signOut}/>
-                <ProfileButton text='Settings' icon='cogs' cb={signOut}/>
+                {/* <ProfileButton text='Settings' icon='info' cb={signOut}/>
+                <ProfileButton text='Settings' icon='cogs' cb={signOut}/> */}
                 <ProfileButton text='Log out' icon='sign-out-alt' cb={signOut}
                  />
 
@@ -231,7 +231,7 @@ export default function HeaderProfiles1({navigation}) {
             (<>
             <View style={styles.boxapp}>
                 <ProfileButton text='Cooks' icon='file-alt' cb={showOrderChef}/>
-                <ProfileButton text='Settings' icon='info' cb={signOut}/>
+                {/* <ProfileButton text='Settings' icon='info' cb={signOut}/> */}
                 <ProfileButton text='Report' icon='cogs' cb={showCookChef}/>
 
                 <Overlay visible={reportPop} fullScreen={false} overlayStyle={{height:'70%'}}>
@@ -240,7 +240,7 @@ export default function HeaderProfiles1({navigation}) {
                     <Text onPress={() => setReportPop(false) }>❌</Text>
                 </View>
                 <FoodReport />
-            </Overlay>
+                </Overlay>
 
                 <ProfileButton text='Log out' icon='sign-out-alt' cb={signOut} />
             </View>

@@ -1,11 +1,13 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity } from 'react-native'
 import foodImg from '../assets/food.png';
 import searchIMG from '../assets/loupe.png';
+import { AuthContext } from '../navigation/AuthProvider';
 export default function HeaderKitchen() {
+    const {user:{uid,name}} = useContext(AuthContext);
     return (
         <View style={styles.container}>
-            <Text style={styles.hello}>Hello Hau</Text>
+            <Text style={styles.hello}>Hello, {name}</Text>
             <Text style={styles.title}>Fast & Delicious Food!</Text>
             <View style={styles.container1}>
                 <View style={styles.img}>
