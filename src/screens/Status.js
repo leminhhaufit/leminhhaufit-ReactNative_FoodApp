@@ -5,6 +5,7 @@ import WaiterOrder from '../components/WaiterOrder';
 import db from '@react-native-firebase/database';
 import { toString } from 'qrcode';
 import moment from "moment";
+import storage from '@react-native-firebase/storage';
 import { Button } from 'react-native-elements';
 import { SvgXml } from 'react-native-svg';
 import formatter from '../config/Currency';
@@ -37,7 +38,7 @@ function useCapture() {
       }
 
 
-    function onCapture(nav) {
+    function onCapture(nav,orderID) {
       captureRef(captureViewRef, {
         format: "jpg",
         quality: 1
@@ -48,6 +49,7 @@ function useCapture() {
                 .then(nav.navigate('Payment')) 
                 .catch(err => console.log('err:', err))
             }
+            await storage().ref(`orders/${orderID}/order.png`).putFile(uri);
             
         }, 
         error => alert("Oops, snapshot failed", error));
@@ -153,7 +155,7 @@ export default function Status({ route, navigation }) {
                     </View>
                 </View>
 
-                <Button onPress={() => onCapture(navigation)} icon={<FontAwesome5 name="check" size={10} color="#FFF" style={{margin:5}} />} title='Done' buttonStyle={{width:'90%', alignSelf:'center', margin:10}} />
+                <Button onPress={() => onCapture(navigation,curIdOrder)} icon={<FontAwesome5 name="check" size={10} color="#FFF" style={{margin:5}} />} title='Done' buttonStyle={{width:'90%', alignSelf:'center', margin:10}} />
             </ScrollView>
 
         )

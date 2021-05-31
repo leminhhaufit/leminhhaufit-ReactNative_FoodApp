@@ -4,16 +4,20 @@ import { StyleSheet, Text, View, TouchableOpacity, Image, } from 'react-native'
 import { Button } from 'react-native-elements';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import SwitchSelector from "react-native-switch-selector";
-import { NavContext } from '../navigation/AppStack';
-import { NavContextAdmin } from '../navigation/AdminStack';
 import { NavContextKit } from '../navigation/KitchenStack';
+import formatter from '../config/Currency';
+import { AuthContext } from '../navigation/AuthProvider';
+import db from '@react-native-firebase/database';
+import Toast from 'react-native-toast-message';
+import { NavContext } from '../navigation/AppStack';
 export default function ItemPopular(props) {
     const { foodlist } = props;
-    const { id, title, description, price, material, status, url } = foodlist;
+    const { id, name, price,photoURL,description } = foodlist;
     const [visible, setVisible] = useState(false);
     const [quantity, setQuantity] = useState(1);
     const [loading, setLoading] = useState(false);
-
+    const [size, setSize] = useState('small');
+    const { user:{uid} } = useContext(AuthContext);
     const toggleOverlay = () => {
         setVisible(!visible);
     };
@@ -26,17 +30,51 @@ export default function ItemPopular(props) {
             setQuantity(1);
         }
     }
+
+
+    const addOrderTemp = async () => {
+        try {
+            setLoading(true);
+            const curTime = new Date().getTime();
+            const objFood = {
+                uid,
+                name,
+                quantity,
+                price,
+                size,
+                create: curTime,
+                photoURL,
+                id
+            }
+            await db().ref(`order-temp/${uid}|${id}`).set(objFood);
+            setLoading(false);
+            Toast.show({
+                type: 'success',
+                text1: 'Item added successfully 👋',
+                autoHide: true,
+            });
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
     return (
         <View style={styles.container}>
-            <TouchableOpacity style={styles.container2} onPress={() => navigation.navigate("FoodDetail")}>
+             <NavContext.Consumer>
+            {({ navigation }) =>
+            <TouchableOpacity style={styles.container2} onPress={() => navigation.navigate("Order",{screen:'FoodDetail2',params: { foodlist }})}>
                 <Text style={styles.award}><FontAwesome5Icon name="pizza-slice" size={16} color="#F59507" /> Top 1 week</Text>
-                <Text style={styles.title}>{title}</Text>
-                <Text style={styles.content}>{material} </Text>
-                <Image style={styles.image} source={url} />
+                <Text style={styles.title}>{name}</Text>
+                <Text style={styles.content}>{description} </Text>
+                <Image style={styles.image} source={{uri:photoURL}} />
                 <View style={styles.price}>
-                    <Text style={styles.txtprice}>{price} <FontAwesome5Icon name="dollar-sign" size={20} color="black" /> </Text>
+                    <Text style={styles.txtprice}>{formatter.format(price)} </Text>
                 </View>
             </TouchableOpacity>
+            }
+            </NavContext.Consumer>
             <TouchableOpacity style={styles.btnadd} onPress={() => toggleOverlay()}>
                 <FontAwesome5Icon name="plus" size={16} color="black" style={styles.iconplus} />
             </TouchableOpacity>
@@ -55,11 +93,11 @@ export default function ItemPopular(props) {
                     <TouchableOpacity onPress={() => onChangeQuantityMinus()}>
                         <FontAwesome5Icon name="minus-circle" size={36} color="#FFC75F" />
                     </TouchableOpacity>
-                    <Text style={styles.price2}>{price * quantity}$</Text>
+                    <Text style={styles.price2}>{formatter.format(price * quantity)}</Text>
                 </View>
                 <SwitchSelector
                     initial={0}
-                    //onPress={value => this.setState({ gender: value })}
+                    onPress={value => setSize(value)}
                     textColor="#FFC75F" //'#7a44cf'
                     selectedColor="#fff"
                     buttonColor="#FFC75F"
@@ -78,7 +116,7 @@ export default function ItemPopular(props) {
                     textStyle={styles.switchtext}
                     imageStyle={styles.switchimg}
                 />
-                <Button icon={<FontAwesome5Icon name="shopping-cart" size={22} color="#FFF" />} buttonStyle={styles.add} titleStyle={styles.titleadd} title="Add to cart" loading={loading} onPress={() => setLoading(!loading)}></Button>
+                <Button icon={<FontAwesome5Icon name="shopping-cart" size={22} color="#FFF" />} buttonStyle={styles.add} titleStyle={styles.titleadd} title="Add to cart" loading={loading} onPress={addOrderTemp}></Button>
             </Overlay>
         </View >
     )
@@ -118,10 +156,11 @@ const styles = StyleSheet.create({
     },
     image: {
         position: 'absolute',
-        width: 150,
-        height: 150,
-        right: -45,
-        top: -5,
+        width: 125,
+        height: 125,
+        right: -30,
+        top: 7,
+        borderRadius:100
     },
     title: {
         fontSize: 20,
@@ -165,9 +204,10 @@ const styles = StyleSheet.create({
     },
     txtprice: {
         alignSelf: 'flex-end',
-        paddingTop: 10,
-        fontSize: 22,
-        fontWeight: 'bold',
+        paddingTop: 13,
+        fontSize: 17,
+        fontWeight:'bold'
+        
     },
     overlay: {
         backgroundColor: '#fff',

@@ -5,11 +5,13 @@ import db from '@react-native-firebase/database';
 import { AuthContext } from './AuthProvider';
 import { Text } from 'react-native';
 import AuthStack from './AuthStack';
+import Toast from 'react-native-toast-message';
 import AppStack from './AppStack';
 import AdminStack from './AdminStack';
 import KitchenStack from './KitchenStack';
 import LoadingScreen from '../screens/LoadingScreen';
 import AsyncStorage from '@react-native-community/async-storage';
+import { set } from 'lodash';
 
 const Routes = () => {
   const { user, setUser } = useContext(AuthContext);
@@ -21,18 +23,34 @@ const Routes = () => {
   }
   const getUserData = async (user) => {
     const snapshot = await db().ref('users/' + user.uid).once("value");
-    setUser(snapshot.val());
-    console.log("Day la datat: " +  JSON.stringify(snapshot.val()));
+    const data = snapshot.val();
+    if(!data.active){
+      auth()
+      .signOut()
+      .then(() => console.log('User signed out!'));
+
+      Toast.show({
+        type: 'error',
+        text1: 'Your account has been locked'  ,
+        autoHide: true,
+      });
+
+      setUser(null);
+    }else{
+      setUser(data);
+    }
+      
+    
 
   }
 
   const onAuthStateChanged = (user) => {
-    console.log("txtuser", user);
     saveInfoUser(user);
     if (user !== null)
       getUserData(user);
-    else
+    else{
       setUser(user);
+    }
   };
 
   useEffect(() => {
@@ -50,7 +68,7 @@ const Routes = () => {
       user === null ? <AuthStack /> :
       user.active && user.type === 0 ? <AdminStack/> : 
       user.active && user.type === 1  ? <AppStack/> : 
-      <KitchenStack/>  
+      <KitchenStack/> 
       }
     </NavigationContainer>
   );

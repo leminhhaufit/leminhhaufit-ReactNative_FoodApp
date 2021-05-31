@@ -8,9 +8,6 @@ export default function ManageOrders() {
     return (
         <View style={styles.container}>
             <View style={styles.container2}>
-                <View style={styles.top}>
-                    <Header title="List Food" />
-                </View>
                 <View style={styles.content}>
                     <FlatListOrdersManage />
                 </View>

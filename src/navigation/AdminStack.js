@@ -15,6 +15,7 @@ import HomeAdmin from '../screens/HomeAdmin';
 import ManageFood from '../screens/ManageFood';
 import ManageStaff from '../screens/ManageStaff';
 import ManageCategory from '../screens/ManageCategory';
+import OrderDetailImage from '../components/OrderDetailImage';
 import ManageOrders from '../screens/ManageOrders';
 import FormFood from '../screens/FormFood';
 import FormStaff from '../screens/FormStaff';
@@ -100,6 +101,16 @@ const HomeAdminStack = ({ navigation }) => (
                     headerShown: true,
                 }}
             />
+
+            <Stack.Screen
+                name="or-dt"
+                component={OrderDetailImage}
+                options={{
+                    headerShown: true,
+                    title: 'Order Detail'
+                }}
+            />
+
             <Stack.Screen
                 name="FormCategory"
                 component={FormCategory}

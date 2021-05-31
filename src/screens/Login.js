@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, Linking, ImageBackground, TouchableOpacity,Aler
 import AnimatedLoader from "react-native-animated-loader";
 import auth, { firebase } from '@react-native-firebase/auth';
 import Toast from 'react-native-toast-message';
+import db from '@react-native-firebase/database';
 import Username from '../components/Username';
 import Password from '../components/Password';
 import LabelLogin from '../components/LabelLogin';
@@ -26,7 +27,7 @@ function Login({ navigation }) {
         Toast.show({
           type: type,
           text1: errorMessage ? errorMessage + '👋' : 'Welcome, you back! 👋'  ,
-          autoHide: false,
+          autoHide: true,
         });
       },[errorMessage]);
 
@@ -43,8 +44,15 @@ function Login({ navigation }) {
             let response = await auth()
                 .signInWithEmailAndPassword(txtemail, txtpassword)
             
-
-            if (response && response.user) {
+            const userLogin = await (await db().ref(`/users/${response.user.uid}`).once('value')).toJSON();
+            
+            if(!userLogin.active){
+                setType('error');
+                setErrorMessage("Fail!");
+                setIsload(false);
+                return;
+            }
+            if (response && response.user ) {
                 setErrorMessage("Success!");
             }
 

@@ -2,7 +2,8 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-
+import { Button } from 'react-native-elements';
+import { AuthContext } from '../navigation/AuthProvider';
 import HomeScreen from '../screens/HomeUser';
 import OrderFood from '../screens/OrderFood';
 import FoodDetail from '../screens/FoodDetail';
@@ -33,13 +34,13 @@ const FeedStack = ({ navigation }) => (
                     headerShown: false,
                 }}
             />
-            <Stack.Screen
+            {/* <Stack.Screen
                 name="FoodDetail"
                 component={FoodDetail}
                 options={{
                     headerShown: false,
                 }}
-            />
+            /> */}
         </Stack.Navigator>
     </NavContext.Provider>
 );
@@ -61,6 +62,14 @@ const OrderFoodStack = ({ navigation }) => (
                 component={FoodDetail}
                 options={{
                     headerShown: true,
+                    headerLeft: () => (<Button 
+                                    icon={<FontAwesome5 
+                                        name="chevron-left" 
+                                        size={15} 
+                                        color="#BBC0C4" 
+                                        style={{margin:4}} />} 
+                                    buttonStyle={{margin:4,backgroundColor:'#FFF'}}
+                                    onPress={() => navigation.navigate('OrderFood')} />),
                     title:'Food Details'
                 }}
             />
@@ -117,7 +126,7 @@ const ProfileStack = ({ navigation }) => (
                 }}
             />
 
-<Stack.Screen
+        <Stack.Screen
                 name="FormStaff1"
                 component={FormStaff}
                 options={{

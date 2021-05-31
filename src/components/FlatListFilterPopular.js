@@ -1,30 +1,21 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect,useContext } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import ItemPopular from './ItemPopular';
 import food1IMG from '../assets/detail1trans.png';
 import { FlatList } from 'react-native';
 import db from '@react-native-firebase/database';
+import Loader from './Loader';
 import moment from 'moment';
-export default function FlatListFilterPopular() {
-    const [foodlist, setFoodlist] = useState(
-        [
-            {
-                id: 1,
-                title: "Pizza 1",
-                description: "Giòn viền, dẻo nhân",
-                price: "199",
-                material: "Bột cao cấp, Cá hồi",
-                status: true,
-                url: food1IMG,
-            }
-        ]
-
-    )
+import { AuthContext } from '../navigation/AuthProvider';
+export default function FlatListFilterPopular({navigation}) {
+    const [foodlist, setFoodlist] = useState([]);
+    const [template, setTemplate] = useState([{},{},{},{},{}]);
+    const [loading, setLoading] = useState(true);
+    const { user: { type } } = useContext(AuthContext);
     useEffect(() => {
         let count = 0;
         let topFood = [];
         db().ref('/order-details').on('value', async (data) => {
-
             const ordersJson = await data.toJSON();
             for (const [key, value] of Object.entries(ordersJson)) {
                 const getDateCreate = moment(value.idOrders).format('MMM D YYYY');
@@ -41,6 +32,10 @@ export default function FlatListFilterPopular() {
             let unique = [...new Map(topFood.map(item =>
                 [item['id'], item])).values()];
             setFoodlist(unique);
+            if(type == 1){
+                setLoading(false);
+            }
+            
         })
 
         //let unique = [...new Set(topFood.map(item => item.id))];
@@ -67,13 +62,23 @@ export default function FlatListFilterPopular() {
         return days;
     }
     return (
-        <FlatList data={foodlist}
-            numColumns={1}
-            renderItem={({ item }) => <ItemPopular foodlist={item} />}
-            keyExtractor={item => item.id}
-            style={styles.flatlist}
-
-        />
+        <>
+            {type == 1 && <FlatList data={foodlist}
+                numColumns={1}
+                renderItem={({ item }) => <ItemPopular foodlist={item}  />}
+                keyExtractor={item => item.id}
+                style={styles.flatlist}
+            />
+    }
+            {/* {loading  && <FlatList data={template}
+                numColumns={1}
+                renderItem={({ item }) => <Loader  />}
+                keyExtractor={(item,index) => index+""}
+                style={styles.flatlist}
+            />
+            } */}
+        </>
+        
     )
 }
 
