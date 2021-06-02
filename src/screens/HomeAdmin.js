@@ -5,7 +5,7 @@ import Header from '../components/Header';
 export default function HomeAdmin() {
     return (
         <ScrollView style={styles.container}>
-            <Header title="Admin List" />
+            <Header title="Danh sách quản lý" />
             <FlatListAdmin />
         </ScrollView>
     )

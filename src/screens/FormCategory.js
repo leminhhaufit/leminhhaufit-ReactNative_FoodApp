@@ -9,11 +9,11 @@ import Toast from 'react-native-toast-message';
 
 
 export default function FormCategory(props) {
-    const {  route } = props;
-    const {title, type, catelist } = route.params;
+    const { route } = props;
+    const { title, type, catelist } = route.params;
     const [category, setCategory] = useState(catelist);
     const [loading, setLoading] = useState(false);
-    const { user : {uid} } = useContext(AuthContext);
+    const { user: { uid } } = useContext(AuthContext);
     console.log(category);
     const addCategory = async () => {
         setLoading(true);
@@ -39,7 +39,7 @@ export default function FormCategory(props) {
                 await db().ref(`category/${encodeURIComponent(category.name.toLowerCase().trim())}`).set(objChef);
                 Toast.show({
                     type: 'success',
-                    text1: `Add Category Successfully`,
+                    text1: `Thêm thành công danh mục`,
                     autoHide: true,
                 });
                 setLoading(false);
@@ -48,24 +48,24 @@ export default function FormCategory(props) {
                 console.log(error)
                 Toast.show({
                     type: 'error',
-                    text1: `Something went wrong`,
+                    text1: `Đã xảy ra lỗi rồi !!!!`,
                     autoHide: true,
                 });
             }
-            
-        }else{
+
+        } else {
             try {
                 await db().ref(`category/${category.key}`).set(objChef);
                 Toast.show({
                     type: 'success',
-                    text1: `Update Category Successfully`,
+                    text1: `Cập nhật danh mục thành công`,
                     autoHide: true,
                 });
                 setLoading(false);
             } catch (error) {
                 setLoading(false);
             }
-            
+
         }
 
     }
@@ -78,14 +78,14 @@ export default function FormCategory(props) {
                 </View>
                 <Form style={styles.form}>
                     <Item floatingLabel rounded style={styles.item}>
-                        <Label style={styles.label}><FontAwesome5 name="tags" solid size={32} color="#FFC75F" /> Name Category</Label>
-                        <Input style={styles.input} onChangeText={val => setCategory({...category,name: val})} value={category.name} />
+                        <Label style={styles.label}><FontAwesome5 name="tags" solid size={32} color="#FFC75F" /> Tên danh mục</Label>
+                        <Input style={styles.input} onChangeText={val => setCategory({ ...category, name: val })} value={category.name} />
                     </Item>
-                    <Label style={styles.label2}><FontAwesome5 name="file-alt" solid size={32} color="#FFC75F" /> Description</Label>
-                    <Textarea value={category.description} rowSpan={7} bordered placeholder="Description..." style={styles.textarea} onChangeText={val => setCategory({...category,description: val})} />
+                    <Label style={styles.label2}><FontAwesome5 name="file-alt" solid size={32} color="#FFC75F" /> Mô tả</Label>
+                    <Textarea value={category.description} rowSpan={7} bordered placeholder="Description..." style={styles.textarea} onChangeText={val => setCategory({ ...category, description: val })} />
 
                     <Button full rounded style={styles.btn} onPress={addCategory}>
-                        <Text style={styles.textbtn}><FontAwesome5 name="download" size={32} color="#FFF" /> Comfirm</Text>
+                        <Text style={styles.textbtn}><FontAwesome5 name="download" size={32} color="#FFF" /> Xác nhận</Text>
                     </Button>
                 </Form>
             </Content>

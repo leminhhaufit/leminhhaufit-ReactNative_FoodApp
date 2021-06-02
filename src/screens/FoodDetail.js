@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { StyleSheet, Text, View, Image, TouchableOpacity,Dimensions } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions } from 'react-native'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { Button } from 'react-native-elements';
 import SwitchSelector from "react-native-switch-selector";
@@ -16,7 +16,7 @@ export default function FoodDetail({ route, navigation }) {
     const [size, setSize] = useState('small');
     const { user, setUser } = useContext(AuthContext);
     const { uid } = user;
-    const {  foodlist } = route.params;
+    const { foodlist } = route.params;
 
     function onChangeQuantityPlus() {
         setQuantity(quantity + 1);
@@ -39,7 +39,7 @@ export default function FoodDetail({ route, navigation }) {
                 uid,
                 name: foodlist.name,
                 quantity,
-                price:foodlist.price,
+                price: foodlist.price,
                 size,
                 create: curTime,
                 photoURL: foodlist.photoURL,
@@ -49,7 +49,7 @@ export default function FoodDetail({ route, navigation }) {
             setLoading(false);
             Toast.show({
                 type: 'success',
-                text1: 'Item added successfully 👋',
+                text1: 'Thêm thành công món ăn vào giỏ hàng 👋',
                 autoHide: true,
             });
 
@@ -63,7 +63,7 @@ export default function FoodDetail({ route, navigation }) {
         <View style={styles.container}>
             <View style={styles.imgdetails}>
                 <View >
-                    <Image source={{uri:foodlist.photoURL}} style={styles.detail} />
+                    <Image source={{ uri: foodlist.photoURL }} style={styles.detail} />
 
                 </View>
                 {/* <View style={{ position: 'absolute', top: 10, }}>
@@ -101,9 +101,9 @@ export default function FoodDetail({ route, navigation }) {
                     borderWidth={1.5}
                     hasPadding
                     options={[
-                        { label: "Small", value: "small", },
-                        { label: "Medium", value: "medium", },
-                        { label: "Large", value: "large", },
+                        { label: "Nhỏ", value: "small", },
+                        { label: "Vừa", value: "medium", },
+                        { label: "Lớn", value: "large", },
                     ]}
                     testID="gender-switch-selector"
                     accessibilityLabel="gender-switch-selector"
@@ -112,16 +112,16 @@ export default function FoodDetail({ route, navigation }) {
                     textStyle={styles.switchtext}
                     imageStyle={styles.switchimg}
                 />
-                    <View>
-                        <Text style={styles.descriptionlabel}>Ingredient</Text>
-                        <Text style={styles.description}>{foodlist.ingredient}</Text>
-                        <Button icon={<FontAwesome5 name="shopping-cart" size={22} color="#FFF" />} buttonStyle={styles.add} titleStyle={styles.titleadd} title="Add to cart" loading={loading} onPress={addOrderTemp} />
-                    </View>
-                    {/* CHIA 3 MAN HINH 3 NUT (NUT ADD O USER | NUT THAYDOITRANGTHAIMONAN O KITCHEN | NUT CHINH SUA O ADMIN)
+                <View>
+                    <Text style={styles.descriptionlabel}>Nguyên liệu</Text>
+                    <Text style={styles.description}>{foodlist.ingredient}</Text>
+                    <Button icon={<FontAwesome5 name="shopping-cart" size={22} color="#FFF" />} buttonStyle={styles.add} titleStyle={styles.titleadd} title="Thêm vào giỏ hàng" loading={loading} onPress={addOrderTemp} />
+                </View>
+                {/* CHIA 3 MAN HINH 3 NUT (NUT ADD O USER | NUT THAYDOITRANGTHAIMONAN O KITCHEN | NUT CHINH SUA O ADMIN)
                     
                     <Button icon={<FontAwesome5 name="power-off" size={22} color="#FFF" />} buttonStyle={styles.add} titleStyle={styles.titleadd} title="CHANGE STATUS" loading={loading} onPress={() => setLoading(!loading)}></Button>
                     <Button icon={<FontAwesome5 name="pen-alt" size={22} color="#FFF" />} buttonStyle={styles.add} titleStyle={styles.titleadd} title="UPDATE" loading={loading} onPress={() => setLoading(!loading)}></Button> */}
-                
+
             </View>
         </View>
     )
@@ -130,7 +130,7 @@ export default function FoodDetail({ route, navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor:'#fff'
+        backgroundColor: '#fff'
     },
     imgdetails: {
         flex: 1,
@@ -143,8 +143,8 @@ const styles = StyleSheet.create({
     },
     infor: {
         position: 'absolute',
-        top:200,
-        width:width,
+        top: 200,
+        width: width,
         borderTopRightRadius: 60,
         borderTopLeftRadius: 60,
         backgroundColor: '#fff',

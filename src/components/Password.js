@@ -14,13 +14,13 @@ function Password({ setPassword }) {
 
 
             <Text style={styles.label}>
-                Password:
+                Mật khẩu:
             </Text>
             <View style={styles.boxinput}>
 
                 <Image style={styles.emailURL} source={passURL}>
                 </Image>
-                <TextInput onChangeText={(text) => setPassword(text)} style={styles.username} autoCapitalize="none" secureTextEntry placeholderStyle={styles.placeholderStyle} placeholder="Passsword" />
+                <TextInput onChangeText={(text) => setPassword(text)} style={styles.username} autoCapitalize="none" secureTextEntry placeholderStyle={styles.placeholderStyle} placeholder="Mật khẩu" />
             </View>
 
         </View>

@@ -2,10 +2,10 @@ import React from 'react'
 import { StyleSheet, Text, View, Button } from 'react-native'
 
 import HeaderProfiles1 from '../components/HeaderProfiles1';
-export default function Profile({navigation}) {
+export default function Profile({ navigation }) {
     return (
         <View style={styles.container}>
-            <HeaderProfiles1 navigation={navigation} /> 
+            <HeaderProfiles1 navigation={navigation} />
         </View>
     )
 }

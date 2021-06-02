@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { StyleSheet, Text, View, Picker, Image, TouchableOpacity } from 'react-native'
 import { Container, Content, Form, Item, Input, Label, Button, } from 'native-base';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -12,7 +12,7 @@ import db from '@react-native-firebase/database';
 import { AuthContext } from '../navigation/AuthProvider';
 
 export default function FormStaff({ route, navigation }) {
-    const { title, type, stafflist,fromInfo } = route.params;
+    const { title, type, stafflist, fromInfo } = route.params;
     const [selectedImage, setSelectedImage] = useState(stafflist?.photoURL);
     const [name, setName] = useState(stafflist?.name);
     const [phone, setPhone] = useState(stafflist?.phone);
@@ -22,7 +22,7 @@ export default function FormStaff({ route, navigation }) {
     const [email, setEmail] = useState(stafflist?.email);
     const [password, setPassword] = useState(null);
     const [done, setDone] = useState(true);
-    const {user:{uid,type: type1}} = useContext(AuthContext);
+    const { user: { uid, type: type1 } } = useContext(AuthContext);
 
 
     const selectFile = () => {
@@ -58,18 +58,18 @@ export default function FormStaff({ route, navigation }) {
                 height: 300,
             }}
         >
-            <Text style={styles.labelsheet}>Add Image</Text>
+            <Text style={styles.labelsheet}>Thêm hình ảnh</Text>
             <Button full rounded style={styles.btn}
                 onPress={selectCamera}
             >
-                <Text style={styles.textbtn}><FontAwesome5 name="camera" size={40} color="#FFF" /> Open Camera</Text>
+                <Text style={styles.textbtn}><FontAwesome5 name="camera" size={40} color="#FFF" /> Mở máy ảnh</Text>
             </Button>
             <Button full rounded style={styles.btn}
                 onPress={selectFile}
             >
-                <Text style={styles.textbtn}><FontAwesome5 name="photo-video" size={40} color="#FFF" /> Select in library</Text>
+                <Text style={styles.textbtn}><FontAwesome5 name="photo-video" size={40} color="#FFF" /> Chọn trong thư viện</Text>
             </Button>
-            <Text style={styles.labelclose}>Swipe down to close</Text>
+            <Text style={styles.labelclose}>Kéo xuống để đóng</Text>
         </View>
     );
 
@@ -104,8 +104,7 @@ export default function FormStaff({ route, navigation }) {
                 writeUserData(user, secondaryApp);
             } else {
                 let photoURL;
-                if(selectedImage != stafflist.photoURL)
-                {
+                if (selectedImage != stafflist.photoURL) {
                     await secondaryApp.storage().ref(`${stafflist.uid}/avatar.png`).putFile(selectedImage);
                     let imageRef = await secondaryApp.storage().ref(`${stafflist.uid}/avatar.png`);
                     photoURL = await imageRef.getDownloadURL();
@@ -114,13 +113,13 @@ export default function FormStaff({ route, navigation }) {
                     name,
                     phone,
                     address,
-                    photoURL :photoURL  ? photoURL : stafflist.photoURL ,
+                    photoURL: photoURL ? photoURL : stafflist.photoURL,
                     active: true,
                     type: role
                 }
                 await db().ref(`users/${stafflist.uid}`).update(user);
                 setDone(true);
-                if(fromInfo && fromInfo === 'Profile'){
+                if (fromInfo && fromInfo === 'Profile') {
                     navigation.navigate('Profile');
                     return;
                 }
@@ -160,18 +159,18 @@ export default function FormStaff({ route, navigation }) {
                 <Form style={styles.form}>
                     <Item floatingLabel rounded style={styles.item}>
 
-                        <Label style={styles.label}><FontAwesome5 name="user-tie" size={30} color="#FFC75F" /> Full Name</Label>
+                        <Label style={styles.label}><FontAwesome5 name="user-tie" size={30} color="#FFC75F" /> Họ & Tên</Label>
                         <Input style={styles.input} value={name} onChangeText={name => setName(name)} />
                     </Item>
                     <Item floatingLabel rounded style={styles.item}>
-                        <Label style={styles.label}><FontAwesome5 name="phone-alt" size={30} color="#FFC75F" /> Number Phone</Label>
-                        <Input keyboardType='numeric' maxLength={10}  style={styles.input} value={phone} onChangeText={phone => setPhone(phone)} />
+                        <Label style={styles.label}><FontAwesome5 name="phone-alt" size={30} color="#FFC75F" /> Số điện thoại</Label>
+                        <Input keyboardType='numeric' maxLength={10} style={styles.input} value={phone} onChangeText={phone => setPhone(phone)} />
                     </Item>
                     <Item floatingLabel rounded style={styles.item}>
-                        <Label style={styles.label}><FontAwesome5 name="map-marker-alt" size={30} color="#FFC75F" /> Address</Label>
+                        <Label style={styles.label}><FontAwesome5 name="map-marker-alt" size={30} color="#FFC75F" /> Địa chỉ</Label>
                         <Input style={styles.input} value={address} onChangeText={address => setAddress(address)} />
                     </Item>
-                    <Label style={styles.label2}><FontAwesome5 name="venus-mars" size={30} color="#FFC75F" /> Gender</Label>
+                    <Label style={styles.label2}><FontAwesome5 name="venus-mars" size={30} color="#FFC75F" /> Giới tính</Label>
                     <SwitchSelector
                         initial={0}
                         onPress={gender => setGender(gender)}
@@ -182,8 +181,8 @@ export default function FormStaff({ route, navigation }) {
                         borderWidth={1.5}
                         hasPadding
                         options={[
-                            { label: "Female", value: 0 },
-                            { label: "Male", value: 1 },
+                            { label: "Nữ", value: 0 },
+                            { label: "Nam", value: 1 },
                         ]}
                         testID="gender-switch-selector"
                         accessibilityLabel="gender-switch-selector"
@@ -193,7 +192,7 @@ export default function FormStaff({ route, navigation }) {
                         imageStyle={styles.switchimg}
                     />
 
-                    {type1==0 && <Label  style={styles.label2}><FontAwesome5 name="venus-mars" size={30} color="#FFC75F" /> Role</Label>}
+                    {type1 == 0 && <Label style={styles.label2}><FontAwesome5 name="venus-mars" size={30} color="#FFC75F" /> Chức vụ</Label>}
                     {type1 == 0 && <SwitchSelector
                         initial={role}
                         onPress={role => { setRole(role); console.log(role) }}
@@ -204,9 +203,9 @@ export default function FormStaff({ route, navigation }) {
                         borderWidth={1.5}
                         hasPadding
                         options={[
-                            { label: "Admin", value: 0 },
-                            { label: "Waiter", value: 1 },
-                            { label: "Chef", value: 2 }
+                            { label: "Quản lý", value: 0 },
+                            { label: "Phục vụ", value: 1 },
+                            { label: "Nhà bếp", value: 2 }
                         ]}
                         testID="role-switch-selector"
                         accessibilityLabel="role-switch-selector"
@@ -221,10 +220,10 @@ export default function FormStaff({ route, navigation }) {
                         <Input editable={type === 'ADD' ? true : false} style={styles.input} value={email} onChangeText={email => setEmail(email)} />
                     </Item>
                     {type === "ADD" && <Item floatingLabel rounded style={styles.item}>
-                        <Label style={styles.label}><FontAwesome5 name="lock" size={30} color="#FFC75F" /> Password</Label>
+                        <Label style={styles.label}><FontAwesome5 name="lock" size={30} color="#FFC75F" /> Mật khẩu</Label>
                         <Input style={styles.input} secureTextEntry value={password} onChangeText={password => setPassword(password)} />
                     </Item>}
-                    <Label style={styles.label2}><FontAwesome5 name="image" size={32} color="#FFC75F" /> Avatar</Label>
+                    <Label style={styles.label2}><FontAwesome5 name="image" size={32} color="#FFC75F" /> Ảnh đại diện</Label>
                     <View style={styles.viewImage}>
                         <TouchableOpacity onPress={() => sheetRef.current.snapTo(0)}>
                             {
@@ -250,7 +249,7 @@ export default function FormStaff({ route, navigation }) {
                                 hudColor={"#FFFFFF"}
                                 color={"#000000"} />
                         }
-                        <Text style={styles.textbtn}><FontAwesome5 name="download" size={32} color="#FFF" /> Comfirm</Text>
+                        <Text style={styles.textbtn}><FontAwesome5 name="download" size={32} color="#FFF" /> Xác nhận</Text>
                     </Button>
                 </Form>
             </Content>

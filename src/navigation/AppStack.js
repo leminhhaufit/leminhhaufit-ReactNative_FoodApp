@@ -62,15 +62,15 @@ const OrderFoodStack = ({ navigation }) => (
                 component={FoodDetail}
                 options={{
                     headerShown: true,
-                    headerLeft: () => (<Button 
-                                    icon={<FontAwesome5 
-                                        name="chevron-left" 
-                                        size={15} 
-                                        color="#BBC0C4" 
-                                        style={{margin:4}} />} 
-                                    buttonStyle={{margin:4,backgroundColor:'#FFF'}}
-                                    onPress={() => navigation.navigate('OrderFood')} />),
-                    title:'Food Details'
+                    headerLeft: () => (<Button
+                        icon={<FontAwesome5
+                            name="chevron-left"
+                            size={15}
+                            color="#BBC0C4"
+                            style={{ margin: 4 }} />}
+                        buttonStyle={{ margin: 4, backgroundColor: '#FFF' }}
+                        onPress={() => navigation.navigate('OrderFood')} />),
+                    title: 'Chi tiết món ăn'
                 }}
             />
         </Stack.Navigator>
@@ -94,15 +94,15 @@ const PaymentStack = ({ navigation }) => (
             }}
         />
 
-            <Stack.Screen
-                name="StatusPayment"
-                component={Status}
-                options={{
-                    headerShown: true,
-                    title:'Your Orders',
-                    headerLeft: null
-                }}
-            />
+        <Stack.Screen
+            name="StatusPayment"
+            component={Status}
+            options={{
+                headerShown: true,
+                title: 'Your Orders',
+                headerLeft: null
+            }}
+        />
     </Stack.Navigator>
 );
 const ProfileStack = ({ navigation }) => (
@@ -126,12 +126,12 @@ const ProfileStack = ({ navigation }) => (
                 }}
             />
 
-        <Stack.Screen
+            <Stack.Screen
                 name="FormStaff1"
                 component={FormStaff}
                 options={{
                     headerShown: true,
-                    title : 'Update Profile'
+                    title: 'Update Profile'
                 }}
             />
         </Stack.Navigator>
@@ -143,12 +143,12 @@ const AppStack = () => {
         <Tab.Navigator
             tabBarOptions={{
                 activeTintColor: '#5bc1ef',
-                labelStyle : {
+                labelStyle: {
                     fontSize: 12,
-                    paddingBottom:5
+                    paddingBottom: 5
                 },
-                iconStyle : {
-                    marginTop:3,
+                iconStyle: {
+                    marginTop: 3,
                 }
             }}
         >
@@ -156,7 +156,7 @@ const AppStack = () => {
                 name="Home"
                 component={FeedStack}
                 options={({ route }) => ({
-                    tabBarLabel: 'Home',
+                    tabBarLabel: 'Trang chủ',
                     tabBarIcon: ({ color, size }) => (
                         <FontAwesome5 name="home" color={color} size={18} />
                     ),
@@ -166,7 +166,7 @@ const AppStack = () => {
                 name="Order"
                 component={OrderFoodStack}
                 options={({ route }) => ({
-                    tabBarLabel: 'Food',
+                    tabBarLabel: 'Món ăn',
 
                     tabBarIcon: ({ color, size }) => (
                         <FontAwesome5 name="utensils" color={color} size={18} />
@@ -177,7 +177,7 @@ const AppStack = () => {
                 name="Payment"
                 component={PaymentStack}
                 options={({ route }) => ({
-                    tabBarLabel: 'Payment',
+                    tabBarLabel: 'Thanh toán',
 
                     tabBarIcon: ({ color, size }) => (
                         <FontAwesome5 name="shopping-basket" color={color} size={18} />
@@ -188,7 +188,7 @@ const AppStack = () => {
                 name="Profile"
                 component={ProfileStack}
                 options={({ route }) => ({
-                    tabBarLabel: 'Profile',
+                    tabBarLabel: 'Thông tin',
 
                     tabBarIcon: ({ color, size }) => (
                         <FontAwesome5 name="user-alt" color={color} size={18} />

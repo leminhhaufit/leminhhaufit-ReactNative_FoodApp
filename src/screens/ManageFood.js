@@ -8,12 +8,12 @@ export default function ManageFood({ navigation }) {
     return (
         <View style={styles.container}>
             <View style={styles.container2}>
-                    <Header title="List Food" goBack={true} />
-                    <FlatListFoodManage />
+                <Header title="Danh sách món ăn" goBack={true} />
+                <FlatListFoodManage />
             </View>
             <View style={styles.fixedbutton}>
                 <Button
-                    onPress={() => navigation.navigate("FormFood", { title: "Add New Food", type: 'ADD' })}
+                    onPress={() => navigation.navigate("FormFood", { title: "Thêm mới món ăn", type: 'ADD' })}
                     type="solid"
                     buttonStyle={styles.btnadd}
                     icon={<FontAwesome5 name="plus-circle" size={35} color="#FFF" />}
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
         height: 250,
     },
     content: {
-        flex:1
+        flex: 1
     },
     fab: {
         position: 'absolute',

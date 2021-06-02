@@ -12,7 +12,7 @@ import { AuthContext } from '../navigation/AuthProvider';
 import db from '@react-native-firebase/database';
 import { Dropdown } from 'react-native-material-dropdown-v2';
 
-export default function FormFood({route, navigation}) {
+export default function FormFood({ route, navigation }) {
 
     const { title, foodlist, type } = route.params;
     const [selectedValue, setSelectedValue] = useState("category");
@@ -71,18 +71,18 @@ export default function FormFood({route, navigation}) {
                 height: 300,
             }}
         >
-            <Text style={styles.labelsheet}>Add Image</Text>
+            <Text style={styles.labelsheet}>Thêm hình ảnh</Text>
             <Button full rounded style={styles.btn}
                 onPress={selectCamera}
             >
-                <Text style={styles.textbtn}><FontAwesome5 name="camera" size={40} color="#FFF" /> Open Camera</Text>
+                <Text style={styles.textbtn}><FontAwesome5 name="camera" size={40} color="#FFF" /> Mở máy ảnh</Text>
             </Button>
             <Button full rounded style={styles.btn}
                 onPress={selectFile}
             >
-                <Text style={styles.textbtn}><FontAwesome5 name="photo-video" size={40} color="#FFF" /> Select in library</Text>
+                <Text style={styles.textbtn}><FontAwesome5 name="photo-video" size={40} color="#FFF" /> Chọn trong thư viện</Text>
             </Button>
-            <Text style={styles.labelclose}>Swipe down to close</Text>
+            <Text style={styles.labelclose}>Kéo xuống để đóng</Text>
         </View>
     );
 
@@ -92,7 +92,7 @@ export default function FormFood({route, navigation}) {
             if (!selectedImage || !name || !des || !ingre || !price) {
                 Toast.show({
                     type: 'error',
-                    text1: 'Something went wrong  👋',
+                    text1: 'Đã xảy ra lỗi rồi !!!  👋',
                     autoHide: true,
                 });
                 return;
@@ -100,7 +100,7 @@ export default function FormFood({route, navigation}) {
             setDone(true);
             const curTime = new Date().getTime();
             let photoURL;
-            if(type === 'ADD'){
+            if (type === 'ADD') {
                 await secondaryApp.storage().ref(`foods/${uid}/${curTime}.png`).putFile(selectedImage);
                 let imageRef = await secondaryApp.storage().ref(`foods/${uid}/${curTime}.png`);
                 photoURL = await imageRef.getDownloadURL();
@@ -118,11 +118,11 @@ export default function FormFood({route, navigation}) {
                 id: `${uid}|${curTime}`,
                 notes: 'nothing'
             }
-            if(type === 'ADD'){
+            if (type === 'ADD') {
                 await db().ref(`foods/${uid}|${curTime}`).set(foodObj);
                 setDone(false);
-            }else{
-                await db().ref(`foods/${foodlist.key}`).update({...foodObj,photoURL:foodlist.photoURL, id: foodlist.id});
+            } else {
+                await db().ref(`foods/${foodlist.key}`).update({ ...foodObj, photoURL: foodlist.photoURL, id: foodlist.id });
                 setDone(false);
             }
             navigation.navigate('Food');
@@ -150,22 +150,22 @@ export default function FormFood({route, navigation}) {
                 </View>
                 <Form style={styles.form}>
                     <Item floatingLabel rounded style={styles.item}>
-                        <Label style={styles.label}><FontAwesome5 name="pizza-slice" size={32} color="#FFC75F" /> Name Food</Label>
+                        <Label style={styles.label}><FontAwesome5 name="pizza-slice" size={32} color="#FFC75F" /> Tên món ăn</Label>
                         <Input style={styles.input} value={name} onChangeText={name => setName(name)} />
                     </Item>
                     <Item floatingLabel rounded style={styles.item}>
-                        <Label style={styles.label}><FontAwesome5 name="file-alt" solid size={32} color="#FFC75F" /> Description</Label>
+                        <Label style={styles.label}><FontAwesome5 name="file-alt" solid size={32} color="#FFC75F" /> Mô tả</Label>
                         <Input style={styles.input} value={des} onChangeText={des => setDes(des)} />
                     </Item>
                     <Item floatingLabel rounded style={styles.item}>
-                        <Label style={styles.label}><FontAwesome5 name="book-open" solid size={32} color="#FFC75F" /> Ingredient</Label>
+                        <Label style={styles.label}><FontAwesome5 name="book-open" solid size={32} color="#FFC75F" /> Nguyên liệu</Label>
                         <Input style={styles.input} value={ingre} onChangeText={ingre => setIngre(ingre)} />
                     </Item>
                     <Item floatingLabel rounded style={styles.item}>
-                        <Label style={styles.label}><FontAwesome5 name="dollar-sign" solid size={32} color="#FFC75F" /> Price</Label>
+                        <Label style={styles.label}><FontAwesome5 name="dollar-sign" solid size={32} color="#FFC75F" /> Giá tiên</Label>
                         <Input keyboardType='numeric' style={styles.input} value={price} onChangeText={price => setPrice(price)} />
                     </Item>
-                    <Label style={styles.label2}><FontAwesome5 name="tags" solid size={32} color="#FFC75F" /> Category</Label>
+                    <Label style={styles.label2}><FontAwesome5 name="tags" solid size={32} color="#FFC75F" /> Danh mục</Label>
                     <Dropdown
                         containerStyle={{ width: '90%', alignSelf: 'center' }}
                         key="d"
@@ -173,7 +173,7 @@ export default function FormFood({route, navigation}) {
                         label={category ? category : 'Favorite Fruit'}
                         data={catelist}
                     />
-                    <Label style={styles.label2}><FontAwesome5 name="image" size={32} color="#FFC75F" /> Images</Label>
+                    <Label style={styles.label2}><FontAwesome5 name="image" size={32} color="#FFC75F" /> Hình ảnh</Label>
                     <View style={styles.viewImage}>
 
                         <TouchableOpacity onPress={() => sheetRef.current.snapTo(0)}>
@@ -195,7 +195,7 @@ export default function FormFood({route, navigation}) {
                         style={styles.btn}
                         onPress={initNew}
                     >
-                        <Text style={styles.textbtn}><FontAwesome5 name="download" size={32} color="#FFF" /> Comfirm</Text>
+                        <Text style={styles.textbtn}><FontAwesome5 name="download" size={32} color="#FFF" /> Xác nhận</Text>
                     </Button>
                 </Form>
             </Content>

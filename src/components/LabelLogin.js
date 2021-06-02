@@ -9,10 +9,10 @@ function LabelLogin(props) {
     return (
         <View style={styles.container}>
             <Text style={styles.label}>
-                Login
+                Đăng nhập
             </Text>
             <Text style={styles.labelDes}>
-                Please sign in to continue
+                Vui lòng đăng nhập để tiếp tục
             </Text>
         </View>
     );

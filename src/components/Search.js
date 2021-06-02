@@ -16,7 +16,7 @@ function Search(props) {
             </View>
             <TextInput style={styles.inputSearch}
                 placeholderStyle={styles.placeholder}
-                placeholder="Search here" />
+                placeholder="Tìm kiếm ở đây" />
         </View>
     );
 }

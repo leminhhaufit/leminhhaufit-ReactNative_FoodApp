@@ -1,4 +1,4 @@
-import React, { useState,useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import staff from '../assets/managestafftrans.png';
@@ -17,8 +17,8 @@ export default function FlatListAdmin() {
 
                     <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('Staff')}>
                         <View style={styles.container2}>
-                            <Text style={styles.title}>Manage Staff</Text>
-                            <Text style={styles.content}>Add, delete, update staff </Text>
+                            <Text style={styles.title}>Quản lý nhân viên</Text>
+                            <Text style={styles.content}>Thêm, xóa, sửa thông tin nhân viên </Text>
                             <Image style={styles.image} source={staff} />
                             <View style={styles.btnadd}>
                                 <FontAwesome5Icon name="users-cog" size={36} color="#FFF" style={{ alignSelf: 'center', paddingTop: 5, }} />
@@ -27,8 +27,8 @@ export default function FlatListAdmin() {
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('Category')}>
                         <View style={styles.container2}>
-                            <Text style={styles.title}>Manage Category</Text>
-                            <Text style={styles.content}>Add, delete, update category </Text>
+                            <Text style={styles.title}>Quản lý danh mục</Text>
+                            <Text style={styles.content}>Thêm, xóa, sửa thông tin danh mục </Text>
                             <Image style={styles.image} source={category} />
                             <View style={styles.btnadd}>
                                 <FontAwesome5Icon name="swatchbook" size={36} color="#FFF" style={{ alignSelf: 'center', paddingTop: 5, }} />
@@ -37,8 +37,8 @@ export default function FlatListAdmin() {
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('Food')}>
                         <View style={styles.container2}>
-                            <Text style={styles.title}>Manage Food</Text>
-                            <Text style={styles.content}>Add, delete, update food</Text>
+                            <Text style={styles.title}>Quản lý món ăn</Text>
+                            <Text style={styles.content}>Thêm, xóa, sửa thông tin món ăn</Text>
                             <Image style={styles.image} source={food} />
                             <View style={styles.btnadd}>
                                 <FontAwesome5Icon name="pizza-slice" size={36} color="#FFF" style={{ alignSelf: 'center', paddingTop: 5, }} />
@@ -47,8 +47,8 @@ export default function FlatListAdmin() {
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('Statistical')}>
                         <View style={styles.container2}>
-                            <Text style={styles.title}>Statistical</Text>
-                            <Text style={styles.content}>View revenue, profit </Text>
+                            <Text style={styles.title}>Thống kê</Text>
+                            <Text style={styles.content}>Xem lợi nhuận, doanh thu của nhà hàng</Text>
                             <Image style={styles.image} source={chart} />
                             <View style={styles.btnadd}>
                                 <FontAwesome5Icon name="chart-line" size={36} color="#FFF" style={{ alignSelf: 'center', paddingTop: 5, }} />
@@ -57,8 +57,8 @@ export default function FlatListAdmin() {
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('Orders')}>
                         <View style={styles.container2}>
-                            <Text style={styles.title}>Orders Details</Text>
-                            <Text style={styles.content}>View information of food purchased by customers </Text>
+                            <Text style={styles.title}>Chi tiết hóa đơn</Text>
+                            <Text style={styles.content}>Xem thông tin hóa đơn khách hàng đã mua</Text>
                             <Image style={styles.image} source={orderdetail} />
                             <View style={styles.btnadd}>
                                 <FontAwesome5Icon name="info-circle" size={36} color="#FFF" style={{ alignSelf: 'center', paddingTop: 5, }} />

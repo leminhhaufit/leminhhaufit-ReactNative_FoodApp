@@ -58,15 +58,15 @@ const ProfileStack = ({ navigation }) => (
                 headerShown: false,
             }}
         />
-        
+
         <Stack.Screen
-                name="FormStaff1"
-                component={FormStaff}
-                options={{
-                    headerShown: true,
-                    title : 'Update Profile'
-                }}
-            />
+            name="FormStaff1"
+            component={FormStaff}
+            options={{
+                headerShown: true,
+                title: 'Update Profile'
+            }}
+        />
     </Stack.Navigator>
 );
 const KitchenStack = () => {
@@ -74,19 +74,19 @@ const KitchenStack = () => {
         <Tab.Navigator
             tabBarOptions={{
                 activeTintColor: '#FFC75F',
-                labelStyle : {
+                labelStyle: {
                     fontSize: 12,
-                    paddingBottom:5
+                    paddingBottom: 5
                 },
-                iconStyle : {
-                    marginTop:3
+                iconStyle: {
+                    marginTop: 3
                 }
             }}>
             <Tab.Screen
                 name="Home"
                 component={HomeStack}
                 options={({ route }) => ({
-                    tabBarLabel: 'Home',
+                    tabBarLabel: 'Trang chủ',
 
                     tabBarIcon: ({ color, size }) => (
                         <FontAwesome5 name="home" color={color} size={18} />
@@ -97,7 +97,7 @@ const KitchenStack = () => {
                 name="Order"
                 component={HomeKitchenStack}
                 options={({ route }) => ({
-                    tabBarLabel: 'List Orders',
+                    tabBarLabel: 'Danh sách yêu cầu',
 
                     tabBarIcon: ({ color, size }) => (
                         <FontAwesome5 name="list-ol" color={color} size={18} />
@@ -108,7 +108,7 @@ const KitchenStack = () => {
                 name="Profile"
                 component={ProfileStack}
                 options={({ route }) => ({
-                    tabBarLabel: 'Profile',
+                    tabBarLabel: 'Thông tin',
 
                     tabBarIcon: ({ color, size }) => (
                         <FontAwesome5 name="user-alt" color={color} size={18} />

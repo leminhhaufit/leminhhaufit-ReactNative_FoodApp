@@ -1,4 +1,4 @@
-import React, { useState,useRef} from 'react';
+import React, { useState, useRef } from 'react';
 import { View, Image, StyleSheet, TextInput, TouchableOpacity, Text, SafeAreaView, Button } from 'react-native';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
@@ -18,14 +18,14 @@ import searchIMG from '../assets/loupe.png';
 import Filters from './Filters';
 
 function Header(props) {
-    const { title, goBack,onSearch } = props;
+    const { title, goBack, onSearch } = props;
     const carouselRef = useRef(null);
     const [activeIndex, setActiveIndex] = useState(0);
     const [carouselItems, setCarouselItems] = useState(
         [
             {
-                title: 'Beautiful and dramatic Antelope Canyon',
-                subtitle: 'Don’t forget the flavors - sweet, salty, tart, pleasantly bitter.',
+                title: 'Salad rất tốt cho sức khỏe - món mới của nhà hàng',
+                subtitle: 'Món được khuyến mãi cho 100 khách hàng đầu tiền!',
                 illustration: header1IMG
             },
             {
@@ -55,20 +55,20 @@ function Header(props) {
             }
         ]);
 
-    function renderItemWithParallax ({item, index}, parallaxProps) {
+    function renderItemWithParallax({ item, index }, parallaxProps) {
         return (
             <SliderEntry
-              data={item}
-              even={(index + 1) % 2 === 0}
-              parallax={true}
-              parallaxProps={parallaxProps}
+                data={item}
+                even={(index + 1) % 2 === 0}
+                parallax={true}
+                parallaxProps={parallaxProps}
             />
         );
     }
 
     return (
-        <SafeAreaView style={{ paddingTop: 5}}>
-            <View style={{flexDirection: 'column', justifyContent: 'center'}}>
+        <SafeAreaView style={{ paddingTop: 5 }}>
+            <View style={{ flexDirection: 'column', justifyContent: 'center' }}>
                 {/* <View style={{ flex: 1, flexDirection: 'row',justifyContent: 'center'}}>
                     <Carousel
                         ref={carouselRef}
@@ -105,23 +105,23 @@ function Header(props) {
 
                 <View>
                     <View style={styles.container1}>
-                            <View style={styles.img}>
-                                <Image source={foodImg} style={styles.icon} />
+                        <View style={styles.img}>
+                            <Image source={foodImg} style={styles.icon} />
+                        </View>
+                        <TextInput style={styles.inputSearch}
+                            onChangeText={val => onSearch(val)}
+                            placeholderStyle={styles.placeholdercustom}
+                            placeholder="Tìm kiếm ở đây" />
+                        <TouchableOpacity style={styles.btnsearch} activeOpacity={1} onPress={() => console.log('hihi')}>
+                            <View style={styles.imgsearch}>
+                                <Image source={searchIMG} style={styles.iconsearch} />
                             </View>
-                            <TextInput style={styles.inputSearch}
-                                onChangeText={val => onSearch(val)}
-                                placeholderStyle={styles.placeholdercustom}
-                                placeholder="Search here" />
-                            <TouchableOpacity style={styles.btnsearch} activeOpacity={1} onPress={() => console.log('hihi')}>
-                                <View style={styles.imgsearch}>
-                                    <Image source={searchIMG} style={styles.iconsearch} />
-                                </View>
-                            </TouchableOpacity>
+                        </TouchableOpacity>
                     </View>
 
                     <View style={styles.labelList}>
 
-                        <Text style={styles.textlist}>{title}</Text>
+                        <Text style={styles.textlist}>Danh sách món ăn</Text>
                         {
                             title === "Food List" && <Filters onSearch={onSearch} />
                         }
@@ -158,9 +158,9 @@ const styles = StyleSheet.create({
     },
     labelList: {
         flexDirection: "row",
-        width:'80%',
+        width: '80%',
         alignSelf: 'center',
-        justifyContent:'space-between',
+        justifyContent: 'space-between',
         minHeight: 30,
         marginBottom: 5,
         marginLeft: 0,
@@ -220,10 +220,10 @@ const styles = StyleSheet.create({
         margin: 5,
     },
     container1: {
-        marginTop:10,
+        marginTop: 10,
         flexDirection: 'row',
         alignSelf: 'center',
-        width:'80%',
+        width: '80%',
         alignItems: 'stretch',
         borderRadius: 25,
         shadowColor: "#000",
@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
         paddingLeft: 5,
         paddingRight: 5,
         height: 50,
-        width:'63%',
+        width: '63%',
         borderStyle: 'solid',
         borderColor: '#FFC75F',
         backgroundColor: '#FFC75F',

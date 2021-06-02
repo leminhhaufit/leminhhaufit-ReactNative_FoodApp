@@ -74,8 +74,8 @@ function FlatListItemFood(props) {
 
     return (
         <>
-            <Text style={styles.hello}>Hello, {name}</Text>
-            <Text style={styles.title}>Fast & Delicious Food!</Text>
+            <Text style={styles.hello}>Xin chào, {name}</Text>
+            <Text style={styles.title}>Đồ ăn nhanh & ngon!</Text>
             <Header title="Food List" onSearch={setSearch} />
             <FlatList data={filter}
                 numColumns={1}

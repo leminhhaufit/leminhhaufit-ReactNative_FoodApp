@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Text, Linking, ImageBackground, TouchableOpacity,Alert } from 'react-native';
+import { View, StyleSheet, Text, Linking, ImageBackground, TouchableOpacity, Alert } from 'react-native';
 import AnimatedLoader from "react-native-animated-loader";
 import auth, { firebase } from '@react-native-firebase/auth';
 import Toast from 'react-native-toast-message';
@@ -14,9 +14,9 @@ import ImageBackgroundURL from '../assets/angryimg.png';
 //     statusCodes
 //   } from '@react-native-community/google-signin';
 
-  
 
-  
+
+
 function Login({ navigation }) {
     const [isLoad, setIsload] = useState(false);
     const [email, setEmail] = useState('');
@@ -25,11 +25,11 @@ function Login({ navigation }) {
     const [type, setType] = useState('success');
     useEffect(() => {
         Toast.show({
-          type: type,
-          text1: errorMessage ? errorMessage + '👋' : 'Welcome, you back! 👋'  ,
-          autoHide: true,
+            type: type,
+            text1: errorMessage ? errorMessage + '👋' : 'Chào mừng bạn đã trở lại! 👋',
+            autoHide: true,
         });
-      },[errorMessage]);
+    }, [errorMessage]);
 
     //   useEffect(() => {
     //       console.log('da vo day')
@@ -43,16 +43,16 @@ function Login({ navigation }) {
             setType('success')
             let response = await auth()
                 .signInWithEmailAndPassword(txtemail, txtpassword)
-            
+
             const userLogin = await (await db().ref(`/users/${response.user.uid}`).once('value')).toJSON();
-            
-            if(!userLogin.active){
+
+            if (!userLogin.active) {
                 setType('error');
                 setErrorMessage("Fail!");
                 setIsload(false);
                 return;
             }
-            if (response && response.user ) {
+            if (response && response.user) {
                 setErrorMessage("Success!");
             }
 
@@ -72,7 +72,7 @@ function Login({ navigation }) {
             if (err.code === "auth/too-many-requests") {
                 setErrorMessage("Too many requests");
             }
-            console.log("State:",errorMessage );
+            console.log("State:", errorMessage);
         }
     }
 
@@ -140,7 +140,7 @@ function Login({ navigation }) {
                 >
                     <View style={styles.btnlogin}>
                         <Text style={styles.textbtn}>
-                            Login  ➜
+                            Đăng nhập  ➜
                     </Text>
                     </View>
                 </TouchableOpacity>
@@ -153,11 +153,11 @@ function Login({ navigation }) {
                         animationStyle={styles.lottie}
                         speed={0.7}
                     >
-                        <Text style={styles.textload}>Waiting food...</Text>
+                        <Text style={styles.textload}>Vui lòng đợi món ăn...</Text>
                     </AnimatedLoader>
                 }
 
-            {/* <GoogleSigninButton
+                {/* <GoogleSigninButton
                 style={styles.signInButton}
                 size={GoogleSigninButton.Size.Wide}
                 color={GoogleSigninButton.Color.Dark}
@@ -165,7 +165,7 @@ function Login({ navigation }) {
                 onPress={() => signIn()}
         /> */}
                 <Text style={styles.footer} onPress={() => Linking.openURL('http://google.com')} >
-                 Forgotten password?
+                    Quên mật khẩu?
                 </Text>
             </ImageBackground>
         </View >
@@ -174,7 +174,7 @@ function Login({ navigation }) {
 }
 const styles = StyleSheet.create({
     container: {
-        
+
     },
     btnlogin: {
         backgroundColor: "#FFC75F",
@@ -185,34 +185,34 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.2,
         shadowRadius: 10,
         padding: 6,
-        width:'90%',
-        alignItems:'center',
-        alignSelf:'center'
+        width: '90%',
+        alignItems: 'center',
+        alignSelf: 'center'
 
     },
     signInButton: {
-        alignItems:'center',
-        alignSelf:'center',
+        alignItems: 'center',
+        alignSelf: 'center',
         width: '90%',
-        marginTop:10,
+        marginTop: 10,
         height: 48
     },
     footer: {
         color: "#458",
         borderRadius: 5,
         fontWeight: '600',
-        alignSelf:'center',
-        position:'relative',
-        fontSize:14,
-        top:10,
-        padding:10
-        
+        alignSelf: 'center',
+        position: 'relative',
+        fontSize: 14,
+        top: 10,
+        padding: 10
+
 
     },
     image: {
         height: '100%',
         width: '100%',
-        
+
     },
     errorMessage: {
         color: 'red',
@@ -225,7 +225,7 @@ const styles = StyleSheet.create({
         height: 250
     },
     textbtn: { color: '#fff', fontWeight: '600', fontSize: 21, padding: 5, paddingLeft: 15, paddingRight: 15, }
-    
+
     ,
     textload: {
         fontSize: 20,

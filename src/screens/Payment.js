@@ -32,36 +32,36 @@ export default function Payment({ navigation }) {
         setDone(true);
         const timeId = new Date().getTime();
         const objFood = {
-            id : timeId,
-            numberTable : table,
+            id: timeId,
+            numberTable: table,
             uid,
             people,
-            status:'new',
-            total : total + 5000 + tax,
-            createDate : timeId
+            status: 'new',
+            total: total + 5000 + tax,
+            createDate: timeId
         }
 
         // Add orders
         await db().ref(`orders/${uid}|${timeId}`).set(objFood);
 
         // Add order details
-        for(let i = 0; i < foodlist.length; i++ ){
+        for (let i = 0; i < foodlist.length; i++) {
             const objItems = {
                 idOrders: timeId,
                 idFood: foodlist[i]['id'],
                 quantity: foodlist[i]['quantity'],
                 price: foodlist[i]['price'],
-                size:  foodlist[i]['size'],
-                notes : notess,
-                status : 'new'
+                size: foodlist[i]['size'],
+                notes: notess,
+                status: 'new'
             }
-          await db().ref(`order-details/${timeId}|${i}`).set(objItems);
-          await db().ref(`order-temp/${uid}|${foodlist[i]['id']}`).remove();
-            
+            await db().ref(`order-details/${timeId}|${i}`).set(objItems);
+            await db().ref(`order-temp/${uid}|${foodlist[i]['id']}`).remove();
+
         }
         setDone(false);
         const curIdOrder = `${uid}|${timeId}`;
-        navigation.navigate('StatusPayment',{curIdOrder});
+        navigation.navigate('StatusPayment', { curIdOrder });
     }
 
 
@@ -75,9 +75,9 @@ export default function Payment({ navigation }) {
                 if (itemsJson) {
                     for (const [key, value] of Object.entries(itemsJson)) {
                         const id = key.split('|')[0];
-                        const quantity = _.get(value,'quantity');
+                        const quantity = _.get(value, 'quantity');
                         console.log(quantity);
-                        const price = _.get(value,'price');
+                        const price = _.get(value, 'price');
                         total += quantity * price;
                         tax += 0.1 * (quantity * price);
                         if (uid == id) {
@@ -93,20 +93,20 @@ export default function Payment({ navigation }) {
         } catch (error) {
             console.log(error);
         }
-    },[])
+    }, [])
 
     if (foodlist.length > 0) {
         return (
             <View style={styles.container}>
                 <View style={styles.cartview}>
-                    <Text style={styles.title2}>Food Cart</Text>
+                    <Text style={styles.title2}>Giỏ hàng món ăn</Text>
                 </View>
                 <ScrollView>
                     <FlatListItemCart setNote={setNotess} />
                     <View style={[styles.infor, { minHeight: 90 }]}>
-                        <Text style={styles.title}>Table Details:</Text>
+                        <Text style={styles.title}>Danh sách món ăn:</Text>
                         <View style={styles.details}>
-                            <Text style={styles.content}>At the restaurant: </Text>
+                            <Text style={styles.content}>Ăn tại nhà hàng: </Text>
                             <Switch
                                 trackColor={{ false: "#E3E9ED", true: "#FFC75F" }}
                                 thumbColor={isEnabled ? "#FFF" : "#FFF"}
@@ -124,29 +124,29 @@ export default function Payment({ navigation }) {
                     </View>
 
                     <View style={styles.infor}>
-                        <Text style={styles.title}>Price Details:</Text>
+                        <Text style={styles.title}>Giá chi tiết:</Text>
                         <View style={styles.details}>
 
-                            <Text style={styles.content}>Sub total:</Text>
+                            <Text style={styles.content}>Tổng giá tiền:</Text>
 
                             <Text style={styles.price}>{formatter.format(total)}</Text>
 
                         </View>
                         <View style={styles.details}>
 
-                            <Text style={styles.content}>Service fee:</Text>
+                            <Text style={styles.content}>Phí dịch vụ:</Text>
 
                             <Text style={styles.price}>{formatter.format(5000)}</Text>
 
                         </View>
                         <View style={styles.details}>
 
-                            <Text style={styles.content}>Tax:</Text>
+                            <Text style={styles.content}>Thuế:</Text>
 
                             <Text style={styles.price}>{formatter.format(tax)}</Text>
                         </View>
 
-                        <Text style={styles.promotion}>Have a promocode?</Text>
+                        <Text style={styles.promotion}>Có mã giảm giá?</Text>
                     </View>
                     <View style={styles.payment}>
                         <View style={styles.details}>
@@ -159,25 +159,25 @@ export default function Payment({ navigation }) {
                     </View>
                 </ScrollView>
                 <ProgressLoader
-                            visible={done}
-                            isModal={true} isHUD={true}
-                            hudColor={"#FFFFFF"}
-                            color={"#000000"} />
+                    visible={done}
+                    isModal={true} isHUD={true}
+                    hudColor={"#FFFFFF"}
+                    color={"#000000"} />
             </View>
         )
     } else {
         return (
-                <View style={styles.containerCard}>
-                    <Card title="Local Modules">
-                        {/*react-native-elements Card*/}
-                        <Text style={styles.paragraph}>
-                            No items here yet!!!
+            <View style={styles.containerCard}>
+                <Card title="Local Modules">
+                    {/*react-native-elements Card*/}
+                    <Text style={styles.paragraph}>
+                        Chưa có món ăn nào hết!!!
                         </Text>
-                        <Text style={styles.paragraph}>
+                    <Text style={styles.paragraph}>
                         🛒🛒🛒🛒🛒🛒🛒
                         </Text>
-                    </Card>
-                </View>
+                </Card>
+            </View>
         )
     }
 
@@ -268,10 +268,10 @@ const styles = StyleSheet.create({
         padding: 5,
     },
     containerCard: {
-        display:'flex',
+        display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        flex:.3,
+        flex: .3,
         paddingTop: 40,
         backgroundColor: '#ecf0f1',
     },

@@ -1,21 +1,21 @@
-import React,{useContext} from 'react'
+import React, { useContext } from 'react'
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity } from 'react-native'
 import foodImg from '../assets/food.png';
 import searchIMG from '../assets/loupe.png';
 import { AuthContext } from '../navigation/AuthProvider';
 export default function HeaderKitchen() {
-    const {user:{uid,name}} = useContext(AuthContext);
+    const { user: { uid, name } } = useContext(AuthContext);
     return (
         <View style={styles.container}>
-            <Text style={styles.hello}>Hello, {name}</Text>
-            <Text style={styles.title}>Fast & Delicious Food!</Text>
+            <Text style={styles.hello}>Xin chào, {name}</Text>
+            <Text style={styles.title}>Đồ ăn nhanh & ngon!</Text>
             <View style={styles.container1}>
                 <View style={styles.img}>
                     <Image source={foodImg} style={styles.icon} />
                 </View>
                 <TextInput style={styles.inputSearch}
                     placeholderStyle={styles.placeholdercustom}
-                    placeholder="Search here" />
+                    placeholder="Tìm kiếm ở đây" />
                 <TouchableOpacity style={styles.btnsearch}>
                     <View style={styles.imgsearch}>
                         <Image source={searchIMG} style={styles.iconsearch} />

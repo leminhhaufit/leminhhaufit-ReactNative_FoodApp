@@ -68,8 +68,8 @@ const HomeAdminStack = ({ navigation }) => (
                 options={{
                     title: 'Manage Staff',
                     headerShown: true,
-                    headerStyle:{
-                        elevation:0
+                    headerStyle: {
+                        elevation: 0
                     }
                 }}
             />
@@ -94,7 +94,7 @@ const HomeAdminStack = ({ navigation }) => (
                 component={Statistical}
                 options={{
                     headerShown: true,
-                    title:'Analytics and Statistics'
+                    title: 'Analytics and Statistics'
                 }}
             />
             <Stack.Screen
@@ -150,7 +150,7 @@ const HomeAdminStack = ({ navigation }) => (
                 component={ChefAna}
                 options={{
                     headerShown: true,
-                    title : 'Active log'
+                    title: 'Active log'
                 }}
             />
 
@@ -168,35 +168,35 @@ const ProfileStack = ({ navigation }) => (
             }}
         />
 
-            <Stack.Screen
-                name="FormStaff1"
-                component={FormStaff}
-                options={{
-                    headerShown: true,
-                    title : 'Update Profile'
-                }}
-            />
+        <Stack.Screen
+            name="FormStaff1"
+            component={FormStaff}
+            options={{
+                headerShown: true,
+                title: 'Update Profile'
+            }}
+        />
     </Stack.Navigator>
 );
 
 const AdminStack = () => {
     return (
-        <Tab.Navigator 
+        <Tab.Navigator
             tabBarOptions={{
                 activeTintColor: '#FFC75F',
-                labelStyle : {
+                labelStyle: {
                     fontSize: 12,
-                    paddingBottom:5
+                    paddingBottom: 5
                 },
-                iconStyle : {
-                    marginTop:3
+                iconStyle: {
+                    marginTop: 3
                 }
             }}>
             <Tab.Screen
                 name="Home"
                 component={HomeStack}
                 options={({ route }) => ({
-                    tabBarLabel: 'Home',
+                    tabBarLabel: 'Trang chủ',
 
                     tabBarIcon: ({ color, size }) => (
                         <FontAwesome5 name="home" color={color} size={18} />
@@ -207,7 +207,7 @@ const AdminStack = () => {
                 name="HomeAdmin"
                 component={HomeAdminStack}
                 options={({ route }) => ({
-                    tabBarLabel: 'List Manage',
+                    tabBarLabel: 'Danh sách quản lý',
 
                     tabBarIcon: ({ color, size }) => (
                         <FontAwesome5 name="tasks" color={color} size={18} />
@@ -218,7 +218,7 @@ const AdminStack = () => {
                 name="Profile"
                 component={ProfileStack}
                 options={({ route }) => ({
-                    tabBarLabel: 'Profile',
+                    tabBarLabel: 'Thông tin',
 
                     tabBarIcon: ({ color, size }) => (
                         <FontAwesome5 name="user-alt" color={color} size={18} />

@@ -4,34 +4,34 @@ import { Button } from 'react-native-elements';
 import FlatListStaffManage from '../components/FlatListStaffManage';
 import Header from '../components/Header';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-export default function ManageStaff({ navigation}) {
+export default function ManageStaff({ navigation }) {
     return (
         <View style={styles.container}>
             <ScrollView keyboardShouldPersistTaps='always'>
                 <View style={styles.container2}>
-                        <FlatListStaffManage navigation={navigation} />
+                    <FlatListStaffManage navigation={navigation} />
                 </View>
             </ScrollView>
             <View style={styles.fixedbutton}>
                 <Button
-                    onPress={() => navigation.navigate("FormStaff", { title: "Add New Staff", type:"ADD" })}
+                    onPress={() => navigation.navigate("FormStaff", { title: "Thêm mới nhân viên", type: "ADD" })}
                     type="solid"
                     buttonStyle={styles.btnadd}
                     icon={<FontAwesome5 name="plus-circle" size={35} color="#FFF" />}
                     titleStyle={{ fontSize: 23 }} />
             </View>
         </View>
-       
+
     )
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        
+
     },
     container2: {
-        minHeight:200
+        minHeight: 200
     },
     imgtop: {
         alignSelf: 'stretch',
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
         height: 250,
     },
     content: {
-        flex:1
+        flex: 1
     },
     fab: {
         position: 'absolute',

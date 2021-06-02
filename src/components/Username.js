@@ -16,13 +16,13 @@ function Username({ setEmail }) {
 
 
             <Text style={styles.label}>
-                Username:
+                Email:
             </Text>
             <View style={styles.boxinput}>
 
                 <Image style={styles.emailURL} source={emailURL}>
                 </Image>
-                <TextInput onChangeText={(text) => setEmail(text)} style={styles.username} keyboardType="email-address" placeholder="Username" />
+                <TextInput onChangeText={(text) => setEmail(text)} style={styles.username} keyboardType="email-address" placeholder="Email" />
             </View>
 
         </View>

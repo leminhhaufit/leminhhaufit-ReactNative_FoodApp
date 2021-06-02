@@ -12,12 +12,12 @@ import Toast from 'react-native-toast-message';
 import { NavContext } from '../navigation/AppStack';
 export default function ItemPopular(props) {
     const { foodlist } = props;
-    const { id, name, price,photoURL,description } = foodlist;
+    const { id, name, price, photoURL, description } = foodlist;
     const [visible, setVisible] = useState(false);
     const [quantity, setQuantity] = useState(1);
     const [loading, setLoading] = useState(false);
     const [size, setSize] = useState('small');
-    const { user:{uid} } = useContext(AuthContext);
+    const { user: { uid } } = useContext(AuthContext);
     const toggleOverlay = () => {
         setVisible(!visible);
     };
@@ -62,18 +62,18 @@ export default function ItemPopular(props) {
 
     return (
         <View style={styles.container}>
-             <NavContext.Consumer>
-            {({ navigation }) =>
-            <TouchableOpacity style={styles.container2} onPress={() => navigation.navigate("Order",{screen:'FoodDetail2',params: { foodlist }})}>
-                <Text style={styles.award}><FontAwesome5Icon name="pizza-slice" size={16} color="#F59507" /> Top 1 week</Text>
-                <Text style={styles.title}>{name}</Text>
-                <Text style={styles.content}>{description} </Text>
-                <Image style={styles.image} source={{uri:photoURL}} />
-                <View style={styles.price}>
-                    <Text style={styles.txtprice}>{formatter.format(price)} </Text>
-                </View>
-            </TouchableOpacity>
-            }
+            <NavContext.Consumer>
+                {({ navigation }) =>
+                    <TouchableOpacity style={styles.container2} onPress={() => navigation.navigate("Order", { screen: 'FoodDetail2', params: { foodlist } })}>
+                        <Text style={styles.award}><FontAwesome5Icon name="pizza-slice" size={16} color="#F59507" /> Phổ biến nhất tuần</Text>
+                        <Text style={styles.title}>{name}</Text>
+                        <Text style={styles.content}>{description} </Text>
+                        <Image style={styles.image} source={{ uri: photoURL }} />
+                        <View style={styles.price}>
+                            <Text style={styles.txtprice}>{formatter.format(price)} </Text>
+                        </View>
+                    </TouchableOpacity>
+                }
             </NavContext.Consumer>
             <TouchableOpacity style={styles.btnadd} onPress={() => toggleOverlay()}>
                 <FontAwesome5Icon name="plus" size={16} color="black" style={styles.iconplus} />
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
         height: 125,
         right: -30,
         top: 7,
-        borderRadius:100
+        borderRadius: 100
     },
     title: {
         fontSize: 20,
@@ -206,8 +206,8 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end',
         paddingTop: 13,
         fontSize: 17,
-        fontWeight:'bold'
-        
+        fontWeight: 'bold'
+
     },
     overlay: {
         backgroundColor: '#fff',

@@ -9,14 +9,14 @@ export default function ManageCategory({ navigation }) {
         <View style={styles.container}>
             <View style={styles.container2}>
                 <View style={styles.top}>
-                    <Header title="List Food" />
+                    <Header title="Danh sách danh mục" />
                 </View>
                 <View style={styles.content}>
                     <FlatListCategoryManage />
                 </View>
             </View>
             <View style={styles.fixedbutton}>
-                <Button onPress={() => navigation.navigate("FormCategory", { title: "Add New Category",type: 'ADD',catelist : {name:'',description:''} })} icon={<FontAwesome5 name="plus-circle" size={50} color="#FFF" style={styles.iconadd} />} buttonStyle={styles.btnadd} />
+                <Button onPress={() => navigation.navigate("FormCategory", { title: "Thêm mới danh mục", type: 'ADD', catelist: { name: '', description: '' } })} icon={<FontAwesome5 name="plus-circle" size={50} color="#FFF" style={styles.iconadd} />} buttonStyle={styles.btnadd} />
             </View>
         </View>
     )
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         height: 250,
     },
-    content: {  
+    content: {
         flex: 1
     },
     fab: {
