@@ -1,107 +1,42 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import ItemStaffManage from './ItemStaffManage';
 import staff from '../assets/managestafftrans.png';
 import { FlatList } from 'react-native';
-export default function FlatListFoodManage() {
-    const [stafflist, setStafflist] = useState(
-        [
-            {
-                id: 1,
-                name: "Minh Hau",
-                address: "HCM",
-                phone: "0123456789",
-                status: true,
-                avatar: staff,
-            },
-            {
-                id: 2,
-                name: "Minh Hau",
-                address: "HCM",
-                phone: "0123456789",
-                status: true,
-                avatar: staff,
-            },
-            {
-                id: 3,
-                name: "Minh Hau",
-                address: "HCM",
-                phone: "0123456789",
-                status: true,
-                avatar: staff,
-            },
-            {
-                id: 4,
-                name: "Minh Hau",
-                address: "HCM",
-                phone: "0123456789",
-                status: true,
-                avatar: staff,
-            },
-            {
-                id: 5,
-                name: "Minh Hau",
-                address: "HCM",
-                phone: "0123456789",
-                status: true,
-                avatar: staff,
-            },
-            {
-                id: 6,
-                name: "Minh Hau",
-                address: "HCM",
-                phone: "0123456789",
-                status: true,
-                avatar: staff,
-            },
-            {
-                id: 7,
-                name: "Minh Hau",
-                address: "HCM",
-                phone: "0123456789",
-                status: true,
-                avatar: staff,
-            },
-            {
-                id: 8,
-                name: "Minh Hau",
-                address: "HCM",
-                phone: "0123456789",
-                status: true,
-                avatar: staff,
-            },
-            {
-                id: 9,
-                name: "Minh Hau",
-                address: "HCM",
-                phone: "0123456789",
-                status: true,
-                avatar: staff,
-            },
-            {
-                id: 10,
-                name: "Minh Hau",
-                address: "HCM",
-                phone: "0123456789",
-                status: true,
-                avatar: staff,
-            },
-        ]
+import db from '@react-native-firebase/database';
+import Header from '../components/Header';
+function FlatListStaffManage({navigation}) {
+    const [stafflist, setStafflist] = useState([])
+    const [search, setSearch] = useState('');
+    const [filter, setFilter] = useState([])
+    useEffect(() => {
+        db().ref('/users').on('value',async (data) => {
+            const usersJson = await data.toJSON();
+            const users = [];
+            for (const [key, value] of Object.entries(usersJson)) {
+                users.push(value);
+              }
+              setStafflist(users);
+        })
+    },[])
 
-    )
+    useEffect(() => {
+        setFilter(stafflist.filter(user => {
+            return  user.name.toLowerCase().includes(search.toLowerCase());
+        }));
+    },[search,stafflist])
+
     return (
-        <FlatList data={stafflist}
-            numColumns={1}
-            renderItem={({ item }) => <ItemStaffManage stafflist={item} />}
-            keyExtractor={item => item.id}
-            style={styles.flatlist}
-
-        />
+        <>
+            <Header onSearch={setSearch} title="Manage Staff"/>
+            <FlatList data={filter}
+                numColumns={1}
+                renderItem={({ item }) => <ItemStaffManage stafflist={item} navigation={navigation} />}
+                keyExtractor={item => item.uid}
+                scrollEnabled={true}
+            />
+        </>
+        
     )
 }
-
-const styles = StyleSheet.create({
-    flatlist: {
-        flex: 1,
-    },
-})
+export default FlatListStaffManage

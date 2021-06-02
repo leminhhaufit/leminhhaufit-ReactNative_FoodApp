@@ -2,11 +2,13 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-
+import { Button } from 'react-native-elements';
+import { AuthContext } from '../navigation/AuthProvider';
 import HomeScreen from '../screens/HomeUser';
 import OrderFood from '../screens/OrderFood';
 import FoodDetail from '../screens/FoodDetail';
 import Payment from '../screens/Payment';
+import Status from '../screens/Status';
 import Profile from '../screens/Profile'
 import HomeKitchen from '../screens/HomeKitchen';
 import Information from '../screens/Information';
@@ -32,13 +34,13 @@ const FeedStack = ({ navigation }) => (
                     headerShown: false,
                 }}
             />
-            <Stack.Screen
+            {/* <Stack.Screen
                 name="FoodDetail"
                 component={FoodDetail}
                 options={{
                     headerShown: false,
                 }}
-            />
+            /> */}
         </Stack.Navigator>
     </NavContext.Provider>
 );
@@ -49,7 +51,7 @@ const OrderFoodStack = ({ navigation }) => (
     >
         <Stack.Navigator >
             <Stack.Screen
-                name="Order Food"
+                name="OrderFood"
                 component={OrderFood}
                 options={{
                     headerShown: false,
@@ -59,7 +61,16 @@ const OrderFoodStack = ({ navigation }) => (
                 name="FoodDetail2"
                 component={FoodDetail}
                 options={{
-                    headerShown: false,
+                    headerShown: true,
+                    headerLeft: () => (<Button 
+                                    icon={<FontAwesome5 
+                                        name="chevron-left" 
+                                        size={15} 
+                                        color="#BBC0C4" 
+                                        style={{margin:4}} />} 
+                                    buttonStyle={{margin:4,backgroundColor:'#FFF'}}
+                                    onPress={() => navigation.navigate('OrderFood')} />),
+                    title:'Food Details'
                 }}
             />
         </Stack.Navigator>
@@ -82,6 +93,16 @@ const PaymentStack = ({ navigation }) => (
                 // )
             }}
         />
+
+            <Stack.Screen
+                name="StatusPayment"
+                component={Status}
+                options={{
+                    headerShown: true,
+                    title:'Your Orders',
+                    headerLeft: null
+                }}
+            />
     </Stack.Navigator>
 );
 const ProfileStack = ({ navigation }) => (
@@ -104,6 +125,15 @@ const ProfileStack = ({ navigation }) => (
                     headerShown: false,
                 }}
             />
+
+        <Stack.Screen
+                name="FormStaff1"
+                component={FormStaff}
+                options={{
+                    headerShown: true,
+                    title : 'Update Profile'
+                }}
+            />
         </Stack.Navigator>
     </NavContext.Provider>
 );
@@ -112,13 +142,13 @@ const AppStack = () => {
     return (
         <Tab.Navigator
             tabBarOptions={{
-                activeTintColor: '#FFC75F',
+                activeTintColor: '#5bc1ef',
                 labelStyle : {
                     fontSize: 12,
                     paddingBottom:5
                 },
                 iconStyle : {
-                    marginTop:3
+                    marginTop:3,
                 }
             }}
         >
@@ -127,9 +157,8 @@ const AppStack = () => {
                 component={FeedStack}
                 options={({ route }) => ({
                     tabBarLabel: 'Home',
-
                     tabBarIcon: ({ color, size }) => (
-                        <FontAwesome5 name="home" color={color} size={24} />
+                        <FontAwesome5 name="home" color={color} size={18} />
                     ),
                 })}
             />
@@ -140,7 +169,7 @@ const AppStack = () => {
                     tabBarLabel: 'Food',
 
                     tabBarIcon: ({ color, size }) => (
-                        <FontAwesome5 name="utensils" color={color} size={24} />
+                        <FontAwesome5 name="utensils" color={color} size={18} />
                     ),
                 })}
             />
@@ -151,7 +180,7 @@ const AppStack = () => {
                     tabBarLabel: 'Payment',
 
                     tabBarIcon: ({ color, size }) => (
-                        <FontAwesome5 name="shopping-basket" color={color} size={24} />
+                        <FontAwesome5 name="shopping-basket" color={color} size={18} />
                     ),
                 })}
             />
@@ -162,7 +191,7 @@ const AppStack = () => {
                     tabBarLabel: 'Profile',
 
                     tabBarIcon: ({ color, size }) => (
-                        <FontAwesome5 name="user-alt" color={color} size={24} />
+                        <FontAwesome5 name="user-alt" color={color} size={18} />
                     ),
                 })}
             />

@@ -3,16 +3,34 @@ import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import { NavContextAdmin } from '../navigation/AdminStack';
+import db from '@react-native-firebase/database';
+import Toast from 'react-native-toast-message';
 export default function ItemCategoryManage(props) {
     const { catelist } = props;
     //#375A45 green #E35929 red
-    const { id, name, description, status } = catelist;
-    let icon = "#375A45";
-    if (status == true) {
-        icon = "#E35929";
+    const { key, name, description, create,active } = catelist;
+    let icon = "#E35929";
+    if (active == true) {
+        icon = "#375A45";
+    }
+
+
+    const updateActiveCategory = async () => {
+        try {
+            await db().ref(`category/${key}`).update({
+                active: !active
+            });
+            Toast.show({
+                type: 'success',
+                text1: `Update Active Successfully`,
+                autoHide: true,
+            });
+        } catch (error) {
+            console.log(error)
+        }
     }
     return (
-        <View style={styles.container} key={id}>
+        <View style={styles.container} key={key}>
             <View style={styles.container2}>
                 <Text style={styles.title}>{name}</Text>
                 <Text style={styles.content}>{description} </Text>
@@ -23,12 +41,12 @@ export default function ItemCategoryManage(props) {
                 </TouchableOpacity>
                 <NavContextAdmin.Consumer>
                     {({ navigation }) =>
-                        <TouchableOpacity onPress={() => navigation.navigate("FormCategory", { title: "Update Category" })}
+                        <TouchableOpacity onPress={() => navigation.navigate("FormCategory", { title: "Update Category",catelist })}
                             style={styles.btndel}>
                             <FontAwesome5Icon name="pen-alt" size={32} color="#FFF" style={styles.iconplus} />
                         </TouchableOpacity>}
                 </NavContextAdmin.Consumer>
-                <TouchableOpacity style={styles.btndel}>
+                <TouchableOpacity style={styles.btndel} onPress={updateActiveCategory}>
                     <FontAwesome5Icon name="power-off" size={32} color={icon} style={styles.iconplus} />
                 </TouchableOpacity>
             </View>
@@ -40,7 +58,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         alignSelf: 'stretch',
         marginLeft: 20,
-        marginTop: 40,
         marginRight: 40,
         borderRadius: 25,
         height: 140,

@@ -1,4 +1,4 @@
-import React, { useState,useRef } from 'react';
+import React, { useState,useRef} from 'react';
 import { View, Image, StyleSheet, TextInput, TouchableOpacity, Text, SafeAreaView, Button } from 'react-native';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
@@ -18,65 +18,39 @@ import searchIMG from '../assets/loupe.png';
 import Filters from './Filters';
 
 function Header(props) {
-    const { title, goBack } = props;
+    const { title, goBack,onSearch } = props;
     const carouselRef = useRef(null);
     const [activeIndex, setActiveIndex] = useState(0);
     const [carouselItems, setCarouselItems] = useState(
         [
-            // {
-            //     title: "Item 1",
-            //     text: "Text 1",
-            //     url: header1IMG,
-            // },
-            // {
-            //     title: "Item 2",
-            //     text: "Text 2",
-            //     url: header2IMG,
-            // },
-            // {
-            //     title: "Item 3",
-            //     text: "Text 3",
-            //     url: header3IMG,
-            // },
-            // {
-            //     title: "Item 4",
-            //     text: "Text 4",
-            //     url: header4IMG,
-            // },
-            // {
-            //     title: "Item 5",
-            //     text: "Text 5",
-            //     url: header5IMG,
-            // },
-
             {
                 title: 'Beautiful and dramatic Antelope Canyon',
-                subtitle: 'Lorem ipsum dolor sit amet et nuncat mergitur',
+                subtitle: 'Don’t forget the flavors - sweet, salty, tart, pleasantly bitter.',
                 illustration: header1IMG
             },
             {
                 title: 'Earlier this morning, NYC',
-                subtitle: 'Lorem ipsum dolor sit amet',
+                subtitle: 'Mention the cooking method - Steamed, char-grilled, pan-fried, stir-fried, or slow-cooked',
                 illustration: header2IMG
             },
             {
                 title: 'White Pocket Sunset',
-                subtitle: 'Lorem ipsum dolor sit amet et nuncat ',
+                subtitle: 'Soft textures - smooth, silky, unctuous, coating, tender, and juicy.',
                 illustration: header3IMG
             },
             {
                 title: 'Acrocorinth, Greece',
-                subtitle: 'Lorem ipsum dolor sit amet et nuncat mergitur',
+                subtitle: 'Talk about the overall feel - smoky, spicy, fresh, oily, etc.',
                 illustration: header4IMG
             },
             {
                 title: 'The lone tree, majestic landscape of New Zealand',
-                subtitle: 'Lorem ipsum dolor sit amet',
+                subtitle: 'Soft textures - smooth, silky, unctuous, coating, tender, and juicy.',
                 illustration: header5IMG
             },
             {
                 title: 'Middle Earth, Germany',
-                subtitle: 'Lorem ipsum dolor sit amet',
+                subtitle: 'Soft textures - smooth, silky, unctuous, coating, tender, and juicy.',
                 illustration: header3IMG
             }
         ]);
@@ -93,9 +67,9 @@ function Header(props) {
     }
 
     return (
-        <SafeAreaView style={{ flex: 1, paddingTop: 5}}>
-            <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center'}}>
-                <View style={{ flex: 1, flexDirection: 'row',justifyContent: 'center'}}>
+        <SafeAreaView style={{ paddingTop: 5}}>
+            <View style={{flexDirection: 'column', justifyContent: 'center'}}>
+                {/* <View style={{ flex: 1, flexDirection: 'row',justifyContent: 'center'}}>
                     <Carousel
                         ref={carouselRef}
                         data={carouselItems}
@@ -127,7 +101,7 @@ function Header(props) {
                       
                     />
 
-                </View>
+                </View> */}
 
                 <View>
                     <View style={styles.container1}>
@@ -135,6 +109,7 @@ function Header(props) {
                                 <Image source={foodImg} style={styles.icon} />
                             </View>
                             <TextInput style={styles.inputSearch}
+                                onChangeText={val => onSearch(val)}
                                 placeholderStyle={styles.placeholdercustom}
                                 placeholder="Search here" />
                             <TouchableOpacity style={styles.btnsearch} activeOpacity={1} onPress={() => console.log('hihi')}>
@@ -148,7 +123,7 @@ function Header(props) {
 
                         <Text style={styles.textlist}>{title}</Text>
                         {
-                            title === "Food List" && <Filters />
+                            title === "Food List" && <Filters onSearch={onSearch} />
                         }
                     </View>
                 </View>
@@ -186,7 +161,7 @@ const styles = StyleSheet.create({
         width:'80%',
         alignSelf: 'center',
         justifyContent:'space-between',
-        height: 40,
+        minHeight: 30,
         marginBottom: 5,
         marginLeft: 0,
         marginTop: 10,
@@ -245,12 +220,12 @@ const styles = StyleSheet.create({
         margin: 5,
     },
     container1: {
+        marginTop:10,
         flexDirection: 'row',
         alignSelf: 'center',
         width:'80%',
         alignItems: 'stretch',
         borderRadius: 25,
-        height: 50,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,

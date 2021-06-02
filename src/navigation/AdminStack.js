@@ -15,6 +15,9 @@ import HomeAdmin from '../screens/HomeAdmin';
 import ManageFood from '../screens/ManageFood';
 import ManageStaff from '../screens/ManageStaff';
 import ManageCategory from '../screens/ManageCategory';
+import OrderDetailImage from '../components/OrderDetailImage';
+import TopFood from '../components/TopFood';
+import ChefAna from '../components/ChefAna';
 import ManageOrders from '../screens/ManageOrders';
 import FormFood from '../screens/FormFood';
 import FormStaff from '../screens/FormStaff';
@@ -63,61 +66,98 @@ const HomeAdminStack = ({ navigation }) => (
                 name="Staff"
                 component={ManageStaff}
                 options={{
-                    headerShown: false,
+                    title: 'Manage Staff',
+                    headerShown: true,
+                    headerStyle:{
+                        elevation:0
+                    }
                 }}
             />
-            <Stack.Screen
-                name="Food"
-                component={ManageFood}
-                options={{
-                    headerShown: false,
-                }}
-            />
+
             <Stack.Screen
                 name="Category"
                 component={ManageCategory}
                 options={{
-                    headerShown: false,
+                    headerShown: true,
+                }}
+            />
+
+            <Stack.Screen
+                name="Food"
+                component={ManageFood}
+                options={{
+                    headerShown: true,
                 }}
             />
             <Stack.Screen
                 name="Statistical"
                 component={Statistical}
                 options={{
-                    headerShown: false,
+                    headerShown: true,
+                    title:'Analytics and Statistics'
                 }}
             />
             <Stack.Screen
                 name="Orders"
                 component={ManageOrders}
                 options={{
-                    headerShown: false,
+                    headerShown: true,
                 }}
             />
+
+            <Stack.Screen
+                name="or-dt"
+                component={OrderDetailImage}
+                options={{
+                    headerShown: true,
+                    title: 'Order Detail'
+                }}
+            />
+
             <Stack.Screen
                 name="FormCategory"
                 component={FormCategory}
                 options={{
-                    headerShown: false,
+                    headerShown: true,
                 }}
             />
             <Stack.Screen
                 name="FormStaff"
                 component={FormStaff}
                 options={{
-                    headerShown: false,
+                    headerShown: true,
                 }}
             />
             <Stack.Screen
                 name="FormFood"
                 component={FormFood}
                 options={{
-                    headerShown: false,
+                    headerShown: true,
                 }}
             />
+
+            <Stack.Screen
+                name="TopFood"
+                component={TopFood}
+                options={{
+                    headerShown: true,
+                    title: 'Revenue'
+                }}
+            />
+
+            <Stack.Screen
+                name="ChefAna"
+                component={ChefAna}
+                options={{
+                    headerShown: true,
+                    title : 'Active log'
+                }}
+            />
+
         </Stack.Navigator>
     </NavContextAdmin.Provider>
 );
+
 const ProfileStack = ({ navigation }) => (
     <Stack.Navigator>
         <Stack.Screen
@@ -127,12 +167,21 @@ const ProfileStack = ({ navigation }) => (
                 headerShown: false,
             }}
         />
+
+            <Stack.Screen
+                name="FormStaff1"
+                component={FormStaff}
+                options={{
+                    headerShown: true,
+                    title : 'Update Profile'
+                }}
+            />
     </Stack.Navigator>
 );
 
 const AdminStack = () => {
     return (
-        <Tab.Navigator
+        <Tab.Navigator 
             tabBarOptions={{
                 activeTintColor: '#FFC75F',
                 labelStyle : {
@@ -150,7 +199,7 @@ const AdminStack = () => {
                     tabBarLabel: 'Home',
 
                     tabBarIcon: ({ color, size }) => (
-                        <FontAwesome5 name="home" color={color} size={24} />
+                        <FontAwesome5 name="home" color={color} size={18} />
                     ),
                 })}
             />
@@ -161,7 +210,7 @@ const AdminStack = () => {
                     tabBarLabel: 'List Manage',
 
                     tabBarIcon: ({ color, size }) => (
-                        <FontAwesome5 name="tasks" color={color} size={24} />
+                        <FontAwesome5 name="tasks" color={color} size={18} />
                     ),
                 })}
             />
@@ -172,7 +221,7 @@ const AdminStack = () => {
                     tabBarLabel: 'Profile',
 
                     tabBarIcon: ({ color, size }) => (
-                        <FontAwesome5 name="user-alt" color={color} size={24} />
+                        <FontAwesome5 name="user-alt" color={color} size={18} />
                     ),
                 })}
             />

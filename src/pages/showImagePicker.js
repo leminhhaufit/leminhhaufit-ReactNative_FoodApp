@@ -27,7 +27,7 @@ const DEFAULT_OPTIONS = {
     chooseFromLibraryButtonTitle: chooseExisting,
     cancelButtonTitle: cancel,
     allowsEditing: true,
-    quality: 1.0,
+    quality: 0.2,
     storageOptions: {
         skipBackup: true,
         path: 'images',

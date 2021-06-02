@@ -1,21 +1,23 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
-
-export default function ItemFilterFood(props) {
-    const { filter } = props;
-
-    const { id, title } = filter;
+function ItemFilterFood(props) {
+    const { filter,onSearch,setSelect, select } = props;
+    const {key : keys} = select;
+    const { key, name } = filter;
     return (
-        <TouchableOpacity >
-
-            <View style={styles.container} key={id}>
-                <Text style={styles.title}>{title}</Text>
+        <TouchableOpacity onPress={() => {onSearch("000|" + name); setSelect({key})}} >
+            <View style={styles.container} key={key}>
+               {key === keys ? <FontAwesome5 name="check" size={13} color="#FFC75F" style={{marginRight:5}} />  : null}
+                <Text style={styles.title}>{name}</Text>
             </View>
 
         </TouchableOpacity>
     )
 }
+
+export default React.memo(ItemFilterFood);
 
 const styles = StyleSheet.create({
     container: {
@@ -26,7 +28,9 @@ const styles = StyleSheet.create({
         marginTop: 5,
         alignSelf: 'stretch',
         borderRadius: 35,
+        flexDirection:'row',
         alignItems: 'center',
+        justifyContent:'center',
         backgroundColor: '#ffe5e3',
         shadowColor: "#000",
         shadowOffset: {

@@ -2,28 +2,45 @@ import React from 'react'
 
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
-
+import formatter from '../config/Currency';
+import moment from "moment";
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { Button } from 'react-native-elements';
+import { NavContextAdmin } from '../navigation/AdminStack';
 export default function ItemOrdersManage(props) {
     const { orderslist } = props;
     //#375A45 green #E35929 red
-    const { id, ordersid, nameStaff, createDate, price } = orderslist;
+    const { id, total, createDate,status,key } = orderslist;
+    let defineStatus;
+    if(status === 'completed'){
+        defineStatus = 'check|green';
+    }else if(status === 'progress'){
+        defineStatus = 'spinner|#d6c31a';
+    }else{
+        defineStatus = 'cart-plus|red'
+    }
+
+    const apply = defineStatus.split('|');
 
     return (
-        <TouchableOpacity style={styles.container} key={id}>
-            <View style={styles.container2}>
-                <Text style={styles.title}>{ordersid}</Text>
-                <Text style={styles.content}>{nameStaff} </Text>
-                <Text style={styles.content}>{createDate} </Text>
-                <View style={styles.price}>
-                    <Text style={styles.txtprice}>{price} <FontAwesome5Icon name="dollar-sign" size={20} color="black" /> </Text>
+        <NavContextAdmin.Consumer>
+            {({ navigation }) =>
+            <TouchableOpacity style={styles.container} key={id} onPress={() => navigation.navigate('or-dt',{key})}>
+                <View style={styles.container2}>
+                    <Text style={styles.title}>#{id}</Text>
+                    <Text style={styles.content}>{moment(createDate).format('MMM D, HH:mmA')}</Text>
+                    <Text style={styles.content}>Status: <FontAwesome5 name={apply[0]} size={17} color={apply[1]} />  </Text>
+                    <View style={styles.price}>
+                        <Text style={styles.txtprice}>{formatter.format(total)}</Text>
+                    </View>
                 </View>
-            </View>
-            <View style={styles.btn}>
-                <View style={styles.btndel}>
-                    <FontAwesome5Icon name="eye" solid size={32} color="#FFF" style={styles.iconplus} />
+                <View style={styles.btn}>
+                    <View style={styles.btndel}>
+                        <FontAwesome5Icon name="eye" solid size={32} color="#FFF" style={styles.iconplus} />
+                    </View>
                 </View>
-            </View>
-        </TouchableOpacity >
+            </TouchableOpacity > }
+        </NavContextAdmin.Consumer>
     )
 }
 const styles = StyleSheet.create({
@@ -31,8 +48,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         alignSelf: 'stretch',
         marginLeft: 20,
-        marginTop: 40,
-        marginRight: 40,
+        marginRight: 20,
         borderRadius: 25,
         height: 140,
         backgroundColor: "#FFF",
@@ -69,12 +85,12 @@ const styles = StyleSheet.create({
         top: 5,
     },
     title: {
-        fontSize: 26,
-        fontWeight: 'bold',
+        fontSize: 24,
         alignItems: 'flex-start',
         alignSelf: 'stretch',
         paddingLeft: 20,
         paddingTop: 5,
+        color:'#5e819d'
     },
     content: {
         fontSize: 16,
@@ -114,7 +130,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     },
     txtprice: {
-        alignSelf: 'flex-start',
+        alignSelf: 'center',
         paddingTop: 10,
         paddingLeft: 10,
         fontSize: 22,

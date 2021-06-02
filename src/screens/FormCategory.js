@@ -1,29 +1,100 @@
-import React from 'react'
+import React, { useState, useContext } from 'react'
 import { StyleSheet, Text, View, } from 'react-native'
 import { Container, Content, Form, Item, Input, Label, Button, Textarea } from 'native-base';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import db from '@react-native-firebase/database';
+import ProgressLoader from 'rn-progress-loader';
+import { AuthContext } from '../navigation/AuthProvider';
+import Toast from 'react-native-toast-message';
+
+
 export default function FormCategory(props) {
-    const { title, route } = props;
+    const {  route } = props;
+    const {title, type, catelist } = route.params;
+    const [category, setCategory] = useState(catelist);
+    const [loading, setLoading] = useState(false);
+    const { user : {uid} } = useContext(AuthContext);
+    console.log(category);
+    const addCategory = async () => {
+        setLoading(true);
+        if (!category?.name || !category?.description) {
+            Toast.show({
+                type: 'error',
+                text1: `Something went wrong`,
+                autoHide: true,
+            });
+            setLoading(false);
+            return;
+        }
+        const createTime = new Date().getTime();
+        const objChef = {
+            name: category.name,
+            description: category.description,
+            create: createTime,
+            active: true,
+            uid
+        }
+        if (type === 'ADD') {
+            try {
+                await db().ref(`category/${encodeURIComponent(category.name.toLowerCase().trim())}`).set(objChef);
+                Toast.show({
+                    type: 'success',
+                    text1: `Add Category Successfully`,
+                    autoHide: true,
+                });
+                setLoading(false);
+            } catch (error) {
+                setLoading(false);
+                console.log(error)
+                Toast.show({
+                    type: 'error',
+                    text1: `Something went wrong`,
+                    autoHide: true,
+                });
+            }
+            
+        }else{
+            try {
+                await db().ref(`category/${category.key}`).set(objChef);
+                Toast.show({
+                    type: 'success',
+                    text1: `Update Category Successfully`,
+                    autoHide: true,
+                });
+                setLoading(false);
+            } catch (error) {
+                setLoading(false);
+            }
+            
+        }
+
+    }
+
     return (
         <Container >
             <Content style={{ backgroundColor: "#F4F4F4" }} >
                 <View style={styles.header}>
-                    <Text style={styles.labelheader}>{route.params.title}</Text>
+                    <Text style={styles.labelheader}>{title}</Text>
                 </View>
                 <Form style={styles.form}>
                     <Item floatingLabel rounded style={styles.item}>
                         <Label style={styles.label}><FontAwesome5 name="tags" solid size={32} color="#FFC75F" /> Name Category</Label>
-                        <Input style={styles.input} />
+                        <Input style={styles.input} onChangeText={val => setCategory({...category,name: val})} value={category.name} />
                     </Item>
                     <Label style={styles.label2}><FontAwesome5 name="file-alt" solid size={32} color="#FFC75F" /> Description</Label>
-                    <Textarea rowSpan={7} bordered placeholder="Description..." style={styles.textarea} />
+                    <Textarea value={category.description} rowSpan={7} bordered placeholder="Description..." style={styles.textarea} onChangeText={val => setCategory({...category,description: val})} />
 
-                    <Button full rounded style={styles.btn}
-                    >
+                    <Button full rounded style={styles.btn} onPress={addCategory}>
                         <Text style={styles.textbtn}><FontAwesome5 name="download" size={32} color="#FFF" /> Comfirm</Text>
                     </Button>
                 </Form>
             </Content>
+
+            <ProgressLoader
+                visible={loading}
+                isModal={true} isHUD={true}
+                hudColor={"#FFFFFF"}
+                color={"#000000"} />
         </Container >
     )
 }
