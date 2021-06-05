@@ -13,7 +13,7 @@ const height = Dimensions.get('window').height;
 export default function FoodDetail({ route, navigation }) {
     const [loading, setLoading] = useState(false);
     const [quantity, setQuantity] = useState(1);
-    const [size, setSize] = useState('small');
+    const [size, setSize] = useState('Nhỏ');
     const { user, setUser } = useContext(AuthContext);
     const { uid } = user;
     const { foodlist } = route.params;
@@ -101,9 +101,9 @@ export default function FoodDetail({ route, navigation }) {
                     borderWidth={1.5}
                     hasPadding
                     options={[
-                        { label: "Nhỏ", value: "small", },
-                        { label: "Vừa", value: "medium", },
-                        { label: "Lớn", value: "large", },
+                        { label: "Nhỏ", value: "Nhỏ", },
+                        { label: "Vừa", value: "Vừa", },
+                        { label: "Lớn", value: "Lớn", },
                     ]}
                     testID="gender-switch-selector"
                     accessibilityLabel="gender-switch-selector"

@@ -66,7 +66,7 @@ const HomeAdminStack = ({ navigation }) => (
                 name="Staff"
                 component={ManageStaff}
                 options={{
-                    title: 'Manage Staff',
+                    title: 'Quản lý nhân viên',
                     headerShown: true,
                     headerStyle: {
                         elevation: 0
@@ -94,7 +94,7 @@ const HomeAdminStack = ({ navigation }) => (
                 component={Statistical}
                 options={{
                     headerShown: true,
-                    title: 'Analytics and Statistics'
+                    title: 'Thống kê'
                 }}
             />
             <Stack.Screen
@@ -110,7 +110,7 @@ const HomeAdminStack = ({ navigation }) => (
                 component={OrderDetailImage}
                 options={{
                     headerShown: true,
-                    title: 'Order Detail'
+                    title: 'Chi tiết hóa đơn'
                 }}
             />
 
@@ -141,7 +141,7 @@ const HomeAdminStack = ({ navigation }) => (
                 component={TopFood}
                 options={{
                     headerShown: true,
-                    title: 'Revenue'
+                    title: 'Doanh thu'
                 }}
             />
 
@@ -150,7 +150,7 @@ const HomeAdminStack = ({ navigation }) => (
                 component={ChefAna}
                 options={{
                     headerShown: true,
-                    title: 'Active log'
+                    title: 'Lịch sử kích hoạt'
                 }}
             />
 
@@ -173,7 +173,7 @@ const ProfileStack = ({ navigation }) => (
             component={FormStaff}
             options={{
                 headerShown: true,
-                title: 'Update Profile'
+                title: 'Cập nhật thông tin'
             }}
         />
     </Stack.Navigator>

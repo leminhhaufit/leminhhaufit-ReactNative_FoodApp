@@ -99,7 +99,7 @@ const PaymentStack = ({ navigation }) => (
             component={Status}
             options={{
                 headerShown: true,
-                title: 'Your Orders',
+                title: 'Đơn đặt của bạn',
                 headerLeft: null
             }}
         />
@@ -131,7 +131,7 @@ const ProfileStack = ({ navigation }) => (
                 component={FormStaff}
                 options={{
                     headerShown: true,
-                    title: 'Update Profile'
+                    title: 'cập nhật thông tin'
                 }}
             />
         </Stack.Navigator>

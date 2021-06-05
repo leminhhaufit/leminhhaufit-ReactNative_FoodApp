@@ -53,7 +53,7 @@ function Login({ navigation }) {
                 return;
             }
             if (response && response.user) {
-                setErrorMessage("Success!");
+                setErrorMessage("Thành công!");
             }
 
         } catch (err) {
@@ -107,11 +107,11 @@ function Login({ navigation }) {
     const handlePress = () => {
         setType('error');
         if (!email) {
-            setErrorMessage('Email field is required.');
+            setErrorMessage('Email không được để trống.');
         }
         else if (!password) {
 
-            setErrorMessage('Password field is required.');
+            setErrorMessage('Mật khẩu không được để trống.');
         }
         //kiem tra password
         // else if (!validateEmail(email)) {

@@ -117,8 +117,8 @@ export default function Payment({ navigation }) {
                         </View>
                         {isEnabled &&
                             <View>
-                                <InputForm name='People' quantity={people} action={setPeople} />
-                                <InputForm name='Table' quantity={table} action={setTable} />
+                                <InputForm name='Số người' quantity={people} action={setPeople} />
+                                <InputForm name='Số bàn' quantity={table} action={setTable} />
                             </View>
                         }
                     </View>
@@ -152,7 +152,7 @@ export default function Payment({ navigation }) {
                         <View style={styles.details}>
                             <Text style={styles.titletotal}>{formatter.format(total + 5000 + tax)}</Text>
                             <Button buttonStyle={styles.pay} icon={<FontAwesome5 name="amazon-pay" size={25} color="#FFF" />} titleStyle={styles.titleadd}
-                                title="Payment"
+                                title="Thanh toán"
                                 onPress={() => payCash()}
                             />
                         </View>

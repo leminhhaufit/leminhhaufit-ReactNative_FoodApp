@@ -1,25 +1,25 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableHighlight, TouchableOpacity, TextInput, Dimensions } from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import formatter from '../config/Currency';
 import { Textarea, Form } from "native-base";
 const width = Dimensions.get('window').width;
 function ItemCart(props) {
-    const { foodlist, onChangeQuantityPlus, onChangeQuantityMinus, deleteItem,setNote } = props;
-    const { id, name,size, price, quantity,photoURL } = foodlist;
+    const { foodlist, onChangeQuantityPlus, onChangeQuantityMinus, deleteItem, setNote } = props;
+    const { id, name, size, price, quantity, photoURL } = foodlist;
     const [note, setNoteLocal] = useState();
 
     return (
         <View style={styles.container} key={id}>
             <View>
-                <Image source={{uri:photoURL}}
+                <Image source={{ uri: photoURL }}
                     style={styles.imgcart} />
             </View>
             <View style={styles.infor}>
                 <Text style={styles.title}>{name}</Text>
-                <Text style={{fontSize: 12,fontWeight: '400',marginTop:10}}>{size}</Text>
+                <Text style={{ fontSize: 12, fontWeight: '400', marginTop: 10 }}>{size}</Text>
                 <Form>
-                    <TextInput  placeholder="Notes" style={styles.note} value={note} onChangeText={val => {setNoteLocal(val);setNote(val)}} />
+                    <TextInput placeholder="Ghi chú" style={styles.note} value={note} onChangeText={val => { setNoteLocal(val); setNote(val) }} />
                 </Form>
             </View>
             <View style={styles.quantity}>
@@ -45,9 +45,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         height: 100,
         marginBottom: 15,
-        width:'90%',
+        width: '90%',
         alignSelf: 'center',
-        justifyContent:'center',
+        justifyContent: 'center',
         borderRadius: 15,
         backgroundColor: '#F4F4F4',
 
@@ -102,15 +102,15 @@ const styles = StyleSheet.create({
         paddingLeft: 15,
     },
     delete: {
-        display:'flex',
+        display: 'flex',
         backgroundColor: "#FFC75F",
         width: 55,
         height: 100,
         borderTopRightRadius: 15,
         borderBottomRightRadius: 15,
-        flexDirection:'column',
-        alignItems:'center',
-        justifyContent:'center'
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 })
 export default ItemCart;

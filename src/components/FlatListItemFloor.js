@@ -18,43 +18,43 @@ function FlatListItemFloor(props) {
                 id: 1,
                 title: "🍔",
                 status: true,
-                des: 'All'
+                des: 'Tất cả'
             },
             {
                 id: 2,
                 title: "🥘",
                 status: false,
-                des: 'Streetfood'
+                des: 'Đặc biệt'
             },
             {
                 id: 3,
                 title: "🍹",
                 status: false,
-                des: 'Drink'
+                des: 'Nước'
             },
             {
                 id: 4,
                 title: "🥗",
                 status: false,
-                des: 'Vege'
+                des: 'Món chay'
             },
             {
                 id: 5,
                 title: "🍜",
                 status: false,
-                des: 'Noodles'
+                des: 'Mì cay'
             },
             {
                 id: 6,
                 title: "🍱",
                 status: false,
-                des: 'Rice box'
+                des: 'Cơm cuộn'
             },
             {
                 id: 7,
                 title: "🍕",
                 status: false,
-                des: 'Pizza/Burger'
+                des: 'Bánh mì'
             }
 
         ]

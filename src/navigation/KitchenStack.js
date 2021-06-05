@@ -64,7 +64,7 @@ const ProfileStack = ({ navigation }) => (
             component={FormStaff}
             options={{
                 headerShown: true,
-                title: 'Update Profile'
+                title: 'Cập nhật thông tin'
             }}
         />
     </Stack.Navigator>

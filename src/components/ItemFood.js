@@ -22,7 +22,7 @@ function ItemFood(props) {
     const [order, setOrders] = useState([]);
     const [size, setSize] = useState('small');
     const { foodlist, reserve } = props;
-    const { id, name, description, price, material, active, photoURL,category } = foodlist;
+    const { id, name, description, price, material, active, photoURL, category } = foodlist;
     const { user, setUser } = useContext(AuthContext);
     const { uid } = user;
 
@@ -63,7 +63,7 @@ function ItemFood(props) {
             setLoading(false);
             Toast.show({
                 type: 'success',
-                text1: 'Item added successfully 👋',
+                text1: 'Thêm thành công món ăn và giỏ hàng 👋',
                 autoHide: true,
             });
 
@@ -73,31 +73,31 @@ function ItemFood(props) {
     }
 
     return (
-      
-             
+
+
         <View style={styles.container}>
-         <NavContext.Consumer>
-        {({ navigation }) =>
-            <>
-                <TouchableOpacity style={styles.container2} onPress={() => navigation.navigate("FoodDetail2",{foodlist})}>
-                    <Text style={styles.award}><FontAwesome5Icon name="pizza-slice" size={16} color="#F59507" /> {category}</Text>
-                    <Text style={styles.title}>{name}</Text>
-                    <Text style={styles.content}>{description} </Text>
-                    <Image style={styles.image} source={{uri:photoURL}} />
-                    <View style={styles.price}>
-                        <Text style={styles.txtprice}>{formatter.format(price)}</Text>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.btnadd} onPress={() => toggleOverlay()}>
-                    <FontAwesome5Icon name="plus" size={16} color="black" style={styles.iconplus} />
-                </TouchableOpacity>
-            </>
-        }
-         </NavContext.Consumer> 
-            
+            <NavContext.Consumer>
+                {({ navigation }) =>
+                    <>
+                        <TouchableOpacity style={styles.container2} onPress={() => navigation.navigate("FoodDetail2", { foodlist })}>
+                            <Text style={styles.award}><FontAwesome5Icon name="pizza-slice" size={16} color="#F59507" /> {category}</Text>
+                            <Text style={styles.title}>{name}</Text>
+                            <Text style={styles.content}>{description} </Text>
+                            <Image style={styles.image} source={{ uri: photoURL }} />
+                            <View style={styles.price}>
+                                <Text style={styles.txtprice}>{formatter.format(price)}</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.btnadd} onPress={() => toggleOverlay()}>
+                            <FontAwesome5Icon name="plus" size={16} color="black" style={styles.iconplus} />
+                        </TouchableOpacity>
+                    </>
+                }
+            </NavContext.Consumer>
+
             <Overlay isVisible={visible} overlayStyle={styles.overlay} onBackdropPress={toggleOverlay}>
                 <View style={styles.labelfilter}>
-                    <Text style={styles.textfilteroverlay}>Add items:</Text>
+                    <Text style={styles.textfilteroverlay}>Thêm món ăn:</Text>
                     <TouchableOpacity onPress={toggleOverlay} style={styles.iconoverlay}>
                         <FontAwesome5Icon size={26} name="times" color="#FFC75F" />
                     </TouchableOpacity>
@@ -122,9 +122,9 @@ function ItemFood(props) {
                     borderWidth={1.5}
                     hasPadding
                     options={[
-                        { label: "Small", value: "small", },
-                        { label: "Medium", value: "medium", },
-                        { label: "Large", value: "large", },
+                        { label: "Nhỏ", value: "Nhỏ", },
+                        { label: "Vừa", value: "Vừa", },
+                        { label: "Lớn", value: "Lớn", },
                     ]}
                     testID="gender-switch-selector"
                     accessibilityLabel="gender-switch-selector"
@@ -133,7 +133,7 @@ function ItemFood(props) {
                     textStyle={styles.switchtext}
                     imageStyle={styles.switchimg}
                 />
-                <Button icon={<FontAwesome5Icon name="shopping-cart" size={22} color="#FFF" />} buttonStyle={styles.add} titleStyle={styles.titleadd} title="Add to cart" loading={loading} onPress={addOrderTemp}></Button>
+                <Button icon={<FontAwesome5Icon name="shopping-cart" size={22} color="#FFF" />} buttonStyle={styles.add} titleStyle={styles.titleadd} title="Thêm vào giỏ hàng" loading={loading} onPress={addOrderTemp}></Button>
             </Overlay>
         </View >
     );
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
         marginLeft: 25,
         marginRight: 25,
         borderRadius: 25,
-        marginBottom:5,
+        marginBottom: 5,
         height: 140,
         backgroundColor: "#FFF",
         shadowColor: "#000",
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
         height: 130,
         right: -20,
         top: 5,
-        borderRadius:100
+        borderRadius: 100
     },
     title: {
         fontSize: 20,

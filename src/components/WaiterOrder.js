@@ -37,11 +37,11 @@ const WaiterOrder = ({ foodlist: { id, createDate, total, status, key }, show })
         <View style={styles.container}>
             <View style={styles.header}>
                 <View style={styles.orderID}>
-                    <Text style={{ fontWeight: 'bold', color: '#458' }}>Food </Text>
+                    <Text style={{ fontWeight: 'bold', color: '#458' }}>Món ăn </Text>
                     <Text style={styles.textTitle}>#{id}</Text>
                     {status === 'completed' ? <Button disabled={true} icon={<FontAwesome5 name="check" size={10} color="#FFF" style={styles.iconadd} />} buttonStyle={styles.btnadd} /> :
-                        status === 'new' ? <Text style={styles.status}>Make it</Text> :
-                        <Button disabled={true} icon={<FontAwesome5 name="spinner" size={10} color="#FFF" style={styles.iconadd} />} buttonStyle={styles.btnadd} /> }
+                        status === 'new' ? <Text style={styles.status}>Đã làm</Text> :
+                            <Button disabled={true} icon={<FontAwesome5 name="spinner" size={10} color="#FFF" style={styles.iconadd} />} buttonStyle={styles.btnadd} />}
 
                 </View>
                 <Text style={styles.textTitle}>{moment(createDate).format('MMM D, HH:mmA')}</Text>

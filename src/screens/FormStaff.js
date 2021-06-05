@@ -17,7 +17,7 @@ export default function FormStaff({ route, navigation }) {
     const [name, setName] = useState(stafflist?.name);
     const [phone, setPhone] = useState(stafflist?.phone);
     const [address, setAddress] = useState(stafflist?.address);
-    const [gender, setGender] = useState('Female');
+    const [gender, setGender] = useState('Nữ');
     const [role, setRole] = useState(stafflist?.type ? stafflist?.type : 0);
     const [email, setEmail] = useState(stafflist?.email);
     const [password, setPassword] = useState(null);
