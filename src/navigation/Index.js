@@ -8,6 +8,7 @@ const Providers = () => {
     return (
         <Root>
             <AuthProvider>
+                
                 <Routes />
                 <Toast ref={(ref) => Toast.setRef(ref)} />
             </AuthProvider>
